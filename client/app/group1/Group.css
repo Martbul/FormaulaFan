@@ -1,0 +1,133 @@
+.discord-server {
+  display: flex;
+  height: 100vh;
+}
+ .left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+        background-color: rgb(14, 14, 14);
+    width: 12%;
+    padding: 20px;
+    overflow: hidden;
+    border-right: 1px solid #3a3a3a;
+  }
+.server-list {
+  width: 60px;
+  background-color: #2f3136;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10px;
+}
+
+.server {
+  width: 40px;
+  height: 40px;
+  background-color: #36393f;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+}
+
+.channel-list {
+  width: 240px;
+  background-color: #2f3136;
+  padding: 10px;
+}
+
+.channel {
+  padding: 5px;
+  color: #b9bbbe;
+  cursor: pointer;
+}
+
+.channel:hover {
+  background-color: #3a3c43;
+  border-radius: 5px;
+}
+
+.chat-area {
+  flex-grow: 1;
+  background-color: #36393f;
+  display: flex;
+  flex-direction: column;
+}
+
+.messages {
+  flex-grow: 1;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.message-input {
+  height: 40px;
+  border: none;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.members-list {
+  width: 200px;
+  background-color: #212121;
+  padding: 10px;
+}
+
+.member {
+  padding: 5px;
+  color: #b9bbbe;
+  cursor: pointer;
+}
+
+.member:hover {
+  background-color: #3a3c43;
+  border-radius: 5px;
+}
+
+
+
+.chat-area {
+  flex-grow: 1;
+  background-color: #36393f;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.other-groups {
+  display: flex;
+  align-items: center;
+  background-color: #2f3136;
+  padding: 10px;
+  margin-bottom: 10px;
+  overflow-x: auto; /* Allow horizontal scrolling if needed */
+}
+
+.other-groups p {
+  color: #b9bbbe;
+  margin-right: 10px;
+}
+
+.group-logo {
+  width: 40px;
+  height: 40px;
+  background-color: #36393f; /* Background color of the circle */
+  border-radius: 50%;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.group-logo span {
+  display: none; /* Hide the text inside the group logos */
+}
+
+.group-logo:hover {
+  background-color: #3a3c43;
+}

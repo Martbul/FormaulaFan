@@ -1,0 +1,100 @@
+
+@media (min-width: 1200px) {
+   .postContainer {
+   width: 22em;
+  margin-left: 1em;
+  padding: 4px;
+  margin-bottom: 1em;
+  margin-top: 1em;
+  border-bottom: 1px solid #e1e8ed;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: #14171a;
+}
+
+.postLayout {
+  display: flex;
+  align-items: flex-start;
+}
+
+.profilePicture {
+  margin-right: 10px;
+}
+
+.profilePicture img {
+  width: 120px;
+  height: 36px;
+  border-radius: 50%;
+}
+
+.postMain {
+  flex-grow: 1;
+}
+
+.pstCreatorData {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.2em;
+}
+
+.creatorName {
+  font-weight: bold;
+  margin-right: 0.4em;
+}
+
+.creatorUsername {
+  color: #657786;
+  margin-right: 0.4em;
+}
+
+.postTime {
+  color: #657786;
+}
+
+.postText p {
+  margin: 0;
+  margin-bottom: 0.8em;
+  line-height: 1.5;
+}
+
+.postPublicityDaya {
+  display: flex;
+  justify-content: space-between;
+  color: #657786;
+}
+
+.data {
+  display: flex;
+}
+
+.data > div {
+  display: flex;
+  align-items: center;
+  margin-right: 1em;
+}
+
+.data img {
+  width: 18px;
+  height: 18px;
+  margin-right: 5px;
+}
+
+.data p {
+  margin: 0;
+}
+
+.postShareings {
+  display: flex;
+}
+
+.saved, .share {
+  margin-left: px;
+}
+
+.saved img, .share img {
+  width: 18px;
+  height: 18px;
+}
+
+
+}

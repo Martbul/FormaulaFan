@@ -1,0 +1,122 @@
+.menu {
+   flex-grow: 1;
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    align-items: flex-end; /* Align menu items to the right */
+    background-color: rgb(14, 14, 14);
+  }
+
+
+  .menuItem {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin: 5px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    margin-bottom: 1em;
+  }
+
+  /* .menuItem:hover {
+    background-color: #ddd;
+  } */
+
+  .menu .menuAllItems .menuItem .media{
+   margin: 0 auto;
+  }
+  .logoImage {
+    width: 100px;
+    height: 74px;
+    margin-right: 10px;
+    
+  }
+
+  .menuItemImage img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+  }
+
+  .menuItemText p {
+    margin: 0;
+    font-size: 20px;
+    font-weight: bold;
+    color: gray;
+  }
+
+  
+
+  .menuItem, .profile {
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #14171a;
+  cursor: pointer;
+}
+
+
+
+.menuItemImage, .profileOptions {
+  margin-right: 15px;
+}
+
+.menuItemImage img, .profile img {
+  width: 30px;
+  height: 30px;
+}
+
+
+.profile-bottom {
+  width: 100%;
+  margin-top: auto; /* Pushes the profile to the bottom */
+}
+.profile {
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  display: flex;
+}
+
+.profile img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.profile div {
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  font-weight: bold;
+}
+
+.username {
+  color: #657786;
+}
+
+.profileOptions img {
+  width: 20px;
+  height: 20px;
+}
+
+
+.loginButton {
+  background-color: #fe1801;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  outline: none;
+}
+
+.loginButton:hover {
+  background-color: #e21401;
+}

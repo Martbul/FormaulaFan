@@ -1,0 +1,41 @@
+@media (min-width: 1200px) {
+  body,
+  html {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-color: #212121;
+    overflow: hidden;
+  }
+  .layout {
+    display: flex;
+    height: 100vh;
+  }
+
+  .left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+        background-color: rgb(14, 14, 14);
+    width: 12%;
+    padding: 20px;
+    overflow: hidden;
+    border-right: 1px solid #3a3a3a;
+  }
+
+  .main {
+    flex: 2;
+    padding: 20px;
+    overflow-y: scroll;
+    scrollbar-width: none;
+  }
+
+  .feed {
+    width: 18%;
+    scrollbar-width: none;
+    padding-top: 1em;
+    overflow-y: auto;
+    max-height: 100vh;
+      border-left: 1px solid #3a3a3a;
+  }
+}

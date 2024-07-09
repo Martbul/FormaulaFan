@@ -1,0 +1,136 @@
+@media (min-width: 1200px) {
+  body,
+  html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: #212121;
+    overflow: hidden;
+  }
+
+  .layout {
+    display: flex;
+    height: 100vh;
+  }
+
+  .left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: rgb(14, 14, 14);
+    width: 12%;
+    padding: 20px;
+    overflow: hidden;
+    border-right: 1px solid #3a3a3a;
+  }
+
+  .posts {
+    flex: 2;
+    padding: 20px;
+    overflow-y: scroll;
+    scrollbar-width: none;
+  }
+
+  .news {
+    width: 18%;
+    scrollbar-width: none;
+    padding-top: 1em;
+    overflow-y: auto;
+    max-height: 100vh;
+    border-left: 1px solid #3a3a3a;
+  }
+
+  .postContent {
+    margin-top: 10px;
+  }
+
+  .postActions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+
+  .data {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+  }
+
+  .data > div {
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+  }
+
+  .data img {
+    width: 18px;
+    height: 18px;
+    margin-right: 5px;
+  }
+
+  .sharings {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .postShareings {
+    gap: 1.4em;
+  }
+
+  .postShareings img {
+    width: 18px;
+    height: 18px;
+  }
+
+  .action {
+    color: #a1a1a1;
+    cursor: pointer;
+  }
+
+  .action:hover {
+    color: #1da1f2;
+  }
+
+  .searchContainer .newsItem {
+    position: relative;
+    margin-bottom: 15px;
+  }
+
+  .newsImage img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+
+  .newsTextOverlay {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  .newsTitle {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  .newsTimestamp,
+  .newsCreator {
+    font-size: 0.9em;
+    margin: 0;
+  }
+
+  .newsTimestamp {
+    margin-top: 5px;
+  }
+
+  .newsCreator {
+    margin-top: 5px;
+    font-style: italic;
+  }
+}

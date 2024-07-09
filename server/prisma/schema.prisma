@@ -1,0 +1,110 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+
+datasource db {
+   provider = "postgresql"
+   url      = env("DATABASE_URL")
+}
+
+model User {
+   id       String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+   username String  @db.VarChar(255)
+   password String  @db.VarChar(1000)
+   email    String  @unique @db.VarChar(255)
+   picture  String? @db.VarChar(255)
+   hashedRefreshToken String?
+
+   // followers User[]
+   // following User[]
+   // friends User[]
+   // posts Post[]
+   // settings Settings
+   // bookmarks Post[]
+
+   createdGroups Group[]
+   members       Member[]
+   channels      Channel[]
+
+   createdAt DateTime  @default(now())
+   updatedAt DateTime  @updatedAt
+   // Post      Post[]
+   // Comment   Comment[]
+}
+
+// model Post {
+//    id       String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//    authorId String    @db.Uuid
+//    author   User      @relation(fields: [authorId], references: [id])
+//    text     String
+//    likes    Int       @default(0)
+//    comments Comment[]
+//    shares   Int       @default(0)
+//    views    Int       @default(0)
+//    saves    Int       @default(0)
+// }
+
+// model Comment {
+//    id       String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//    authorId String  @db.Uuid
+//    author   User    @relation(fields: [authorId], references: [id])
+//    text     String  @db.VarChar(1000)
+//    Post     Post?   @relation(fields: [postId], references: [id])
+//    postId   String? @db.Uuid
+// }
+
+model Group {
+   id         String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+   name       String    @db.VarChar(100)
+   imageUrl   String
+   inviteCode String
+   creatorId  String    @db.Uuid
+   creator    User      @relation(fields: [creatorId], references: [id])
+   members    Member[]
+   channels   Channel[]
+   createdAt  DateTime  @default(now())
+   updatedAt  DateTime  @updatedAt
+}
+
+enum MemberRole {
+   ADMIN
+   MODERATOR
+   MEMBER
+}
+
+model Member {
+   id        String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+   userId    String     @db.Uuid
+   user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+   groupId   String     @db.Uuid
+   group     Group      @relation(fields: [groupId], references: [id], onDelete: Cascade)
+   role      MemberRole @default(MEMBER)
+   createdAt DateTime   @default(now())
+   updatedAt DateTime   @updatedAt
+}
+
+enum ChannelType {
+   TEXT
+   AUDIO
+   VIDEO
+}
+
+model Channel {
+   id        String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+   name      String
+   type      ChannelType @default(TEXT)
+
+   userId    String      @db.Uuid
+   user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+   groupId   String      @db.Uuid
+   group     Group       @relation(fields: [groupId], references: [id], onDelete: Cascade)
+
+   createdAt DateTime    @default(now())
+   updatedAt DateTime    @updatedAt
+}
+
+// model Settings {
+//    //! work in progress
+// }
