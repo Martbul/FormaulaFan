@@ -4,8 +4,8 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { AuthModule } from './auth/auth.module';
 import { PrismaService } from './prisma/prisma.service';
-import { UserModule } from './user/user.module';
 import { ConfigModule } from '@nestjs/config';
+import { GroupModule } from './group/group.module';
 @Module({
   imports: [
     ConfigModule.forRoot({isGlobal: true}),
@@ -15,7 +15,7 @@ import { ConfigModule } from '@nestjs/config';
       sortSchema: true,
     }),
     AuthModule,
-    UserModule,
+    GroupModule,
   ],
   controllers: [],
   providers: [PrismaService],

@@ -1,5 +1,5 @@
 import { Field, ObjectType } from "@nestjs/graphql";
-import { User } from "src/user/user.entity";
+import { User } from "../entities/user.entity";
 
 @ObjectType()
 export class SignResponse {
@@ -9,9 +9,6 @@ export class SignResponse {
    @Field()
    refreshToken: string;
    
-   @Field()
-   expiresIn: number;
-
    @Field(() => User)
    user: User;
 }

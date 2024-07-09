@@ -1,10 +1,11 @@
-import { Injectable } from '@nestjs/common';
+import { ForbiddenException, Injectable } from '@nestjs/common';
 import { UpdateAuthInput } from './dto/update-auth.input';
 import { SignUpInput } from './dto/signup-input';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import * as argon from 'argon2';
+import { SignInInput } from './dto/signin-input';
 
 
 @Injectable()
@@ -14,6 +15,7 @@ export class AuthService {
     private jwtService: JwtService,
     private configService: ConfigService,
   ) {}
+
   async signUp(signUpInput: SignUpInput) {
     const hashedPassword = await argon.hash(signUpInput.password);
     const newUser = await this.prisma.user.create({
@@ -23,16 +25,38 @@ export class AuthService {
         password: hashedPassword,
       },
     });
-    const { accessToken, refreshToken } = await this.createTokens(newUser.id, newUser.email);
+    const { accessToken, refreshToken } = await this.createTokens(
+      newUser.id,
+      newUser.email,
+    );
     await this.updateRefreshToken(newUser.id, refreshToken);
-    return {accessToken, refreshToken, user: newUser};
+    return { accessToken, refreshToken, user: newUser };
   }
 
-  findAll() {
-    return `This adaduth`;
+  async signIn(signInInput: SignInInput) {
+    const user = await this.prisma.user.findUnique({
+      where: { email: signInInput.email },
+    });
+    if (!user) {
+      throw new ForbiddenException('Wrong email or password');
+    }
+
+    const doPasswordsMatch = await argon.verify(
+      user.password,
+      signInInput.password,
+    );
+    if (!doPasswordsMatch) {
+      throw new ForbiddenException('Wrong email or password');
+    }
+
+    const { accessToken, refreshToken } = await this.createTokens(
+      user.id,
+      user.email,
+    );
+    await this.updateRefreshToken(user.id, refreshToken);
+    return { accessToken, refreshToken, user };
   }
 
-  
   findOne(id: number) {
     return `This action returns a #${id} auth`;
   }
@@ -46,10 +70,15 @@ export class AuthService {
   }
 
   async createTokens(userId: string, email: string) {
-    const accessToken = this.jwtService.sign({ userId, email },{expiresIn:'3000s', secret: this.configService.get('JWT_SECRET')});
-    const refreshToken = this.jwtService.sign({ userId, email, accessToken }, { expiresIn: '7d', secret: this.configService.get('JWT_SECRET') });
+    const accessToken = this.jwtService.sign(
+      { userId, email },
+      { expiresIn: '3000s', secret: this.configService.get('JWT_SECRET') },
+    );
+    const refreshToken = this.jwtService.sign(
+      { userId, email, accessToken },
+      { expiresIn: '7d', secret: this.configService.get('JWT_SECRET') },
+    );
     return { accessToken, refreshToken };
-    
   }
 
   async updateRefreshToken(userId: string, refreshToken: string) {
