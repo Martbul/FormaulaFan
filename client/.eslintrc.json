@@ -11,5 +11,13 @@
     "eslint:recommended",
     "plugin:@next/next/recommended"
     // Add other plugins or configurations as needed
-  ]
+  ],
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2021": true
+  },
+  "rules": {
+    "no-console": "off" // Disable 'no-console' rule to allow console usage
+  }
 }

@@ -48,12 +48,14 @@ export class AuthService {
     if (!doPasswordsMatch) {
       throw new ForbiddenException('Wrong email or password');
     }
+    
 
     const { accessToken, refreshToken } = await this.createTokens(
       user.id,
       user.email,
     );
     await this.updateRefreshToken(user.id, refreshToken);
+    
     return { accessToken, refreshToken, user };
   }
 

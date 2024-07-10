@@ -7,15 +7,29 @@ type Auth {
   exampleField: Int!
 }
 
+input CreateGroupInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+type Group {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
 type Mutation {
+  createGroup(createGroupInput: CreateGroupInput!): Group!
   removeAuth(id: Int!): Auth!
+  removeGroup(id: Int!): Group!
   signIn(signInInput: SignInInput!): SignResponse!
   signUp(signUpInput: SignUpInput!): SignResponse!
   updateAuth(updateAuthInput: UpdateAuthInput!): Auth!
+  updateGroup(updateGroupInput: UpdateGroupInput!): Group!
 }
 
 type Query {
   auth(id: Int!): Auth!
+  group(id: Int!): Group!
 }
 
 input SignInInput {
@@ -40,6 +54,12 @@ input UpdateAuthInput {
   id: Int!
   password: String
   username: String
+}
+
+input UpdateGroupInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
 }
 
 type User {
