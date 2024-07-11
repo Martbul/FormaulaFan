@@ -6,9 +6,11 @@ import { ChangeEvent, FormEvent, useState, useTransition } from "react";
 import { Button } from "@/components/ui/button"
 import { useAuthContext } from "@/contexts/AuthContext2";
 import { signIn } from '../../../services/auth/auth.service';
-
+import { useRouter } from 'next/navigation'
+import Link from "next/link";
 const Login = () => {
-   const { user,setUser } = useAuthContext();
+    const router = useRouter()
+   const { setUser } = useAuthContext();
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [isPending, startTransition] = useTransition();
@@ -30,20 +32,15 @@ const handleChange = (
 
   const handleSubmit = async(e:FormEvent<HTMLFormElement>) => {
      e.preventDefault();
-     const result = await signIn(form.email, form.password,setUser)
-     console.log(result)
-    console.log("Form submitted:", form);
+    const result = await signIn(form.email, form.password, setUser)
+    if (result) {
+      router.replace('/home')
+    }
   };
 
 
   return (
     <section className="login-layout">
-        {user && (
-        <div>
-          <p>Username: {user.username}</p>
-          <p>Email: {user.email}</p>
-        </div>
-      )}
       <div className="login-container">
         <form onSubmit={handleSubmit}>
           <div className="grid w-full max-w-sm items-center gap-1.5">
@@ -68,8 +65,10 @@ const handleChange = (
             />
               </div>
               
-          <Button variant="outline">Button</Button>
-
+          <Button variant="outline">Sign In</Button>
+      <Link href="signup">
+        <p> SignUp</p>
+      </Link>
         </form>
       </div>
     </section>

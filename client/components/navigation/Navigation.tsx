@@ -1,8 +1,10 @@
+"use client";
+
 import "./Navigation.css";
 import icons from "../../constants/icons";
 import images from "../../constants/images";
 import Link from "next/link";
-import Image from 'next/image';
+import Image from "next/image";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,10 +12,12 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-
+} from "@/components/ui/dropdown-menu";
+import { useAuthContext } from "@/contexts/AuthContext2";
+import { logout } from "@/services/auth/auth.service";
 
 const Navigation = () => {
+  const { user,setUser } = useAuthContext();
   return (
     <div className="menu">
       <div className="menuAllItems">
@@ -85,30 +89,48 @@ const Navigation = () => {
           </div>
         </Link>
       </div>
-      <div className="profile-bottom">
-        <DropdownMenu>
-          <DropdownMenuTrigger>
+
+      {!user && (
+        <div className="profile-bottom">
+          <Link href="/login">
             <div className="profile">
               <Image src={icons.profile} alt="" />
               <div>
-                <div className="name">Martin</div>
-                <div className="username">Kovachki</div>
+                <div className="username">Guest</div>
               </div>
             </div>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem><Link href="/profile">Profile</Link></DropdownMenuItem>
-            <DropdownMenuItem><Link href="/login">Login</Link></DropdownMenuItem>
-            <DropdownMenuItem>Team</DropdownMenuItem>
-            <DropdownMenuItem>Subscription</DropdownMenuItem>
-            
-            <DropdownMenuItem>Log Out</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-        <DropdownMenu></DropdownMenu>
-      </div>
+          </Link>
+        </div>
+      )}
+    
+
+      {user && (
+        <div className="profile-bottom">
+          <DropdownMenu>
+            <DropdownMenuTrigger>
+              <div className="profile">
+                <Image src={icons.profile} alt="" />
+                <div>
+                  <div className="username">{ user.username}</div>
+                </div>
+              </div>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+
+              <DropdownMenuItem>
+                <Link href="/profile">Profile</Link>
+              </DropdownMenuItem>
+
+              <DropdownMenuItem>Team</DropdownMenuItem>
+              <DropdownMenuItem>Subscription</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => logout(setUser)}>Log Out</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <DropdownMenu></DropdownMenu>
+        </div>
+      )}
     </div>
   );
 };
