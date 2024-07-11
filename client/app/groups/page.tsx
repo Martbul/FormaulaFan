@@ -1,3 +1,4 @@
+'use client'
 import "./Groups.css";
 import Navigation from "../../components/navigation/Navigation";
 
@@ -6,7 +7,28 @@ import images from "../../constants/images";
 import MiniPost from "../../components/miniPost/MiniPost";
 import Link from "next/link";
 import Image from "next/image";
+import { createGroup } from "@/services/group/group.service";
+import { useAuthContext } from "@/contexts/AuthContext2";
+import { useRouter } from 'next/navigation'
+import { useState } from "react";
+
 const Groups = () => {
+
+const { user } = useAuthContext();
+const router = useRouter()
+
+const [error, setError] = useState(null);
+
+  const handleCreateGroup = async () => {
+    const result = await createGroup(user.username, user.email)
+    if(!result) {
+      setError(result)
+    }
+
+  
+       router.push(`/chat/group/${result.id}`)
+  }
+
   return (
     <>
       <div className="layout">
@@ -25,7 +47,7 @@ const Groups = () => {
                   <button className="groupBtn addBtn">Add</button>
                 </div>
                 <div className="createGroup">
-                  <button className="groupBtn createBtn"> Create</button>
+                  <button className="groupBtn createBtn" onClick={handleCreateGroup}> Create</button>
                 </div>
               </div>
             </div>

@@ -3,16 +3,21 @@ import { GroupService } from './group.service';
 import { Group } from './entities/group.entity';
 import { CreateGroupInput } from './dto/createGroup/create-group.input';
 import { UpdateGroupInput } from './dto/updateGroup/update-group.input';
+import { CreateGroupResponse } from './dto/createGroup/createGroup-response';
 
 
 @Resolver(() => Group)
 export class GroupResolver {
   constructor(private readonly groupService: GroupService) {}
 
-  @Mutation(() => Group)
+  @Mutation(() => CreateGroupResponse)
   createGroup(@Args('createGroupInput') createGroupInput: CreateGroupInput) {
-    return this.groupService.create(createGroupInput);
+    console.log(createGroupInput);
+
+    return this.groupService.createGroup(createGroupInput);
   }
+
+ 
 
   @Query(() => [Group], { name: 'group' })
   findAll() {

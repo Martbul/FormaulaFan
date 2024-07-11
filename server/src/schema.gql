@@ -7,18 +7,58 @@ type Auth {
   exampleField: Int!
 }
 
-input CreateGroupInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+type Channel {
+  createdAt: DateTime!
+  group: Group!
+  id: String!
+  name: String!
+  type: String!
+  updatedAt: DateTime!
+  user: User!
 }
 
+input CreateGroupInput {
+  email: String!
+  username: String!
+}
+
+type CreateGroupResponse {
+  channels: [Channel!]!
+  creator: User!
+  id: String!
+  imageUrl: String!
+  members: [Member!]!
+  name: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type Group {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  channels: [Channel!]!
+  createdAt: DateTime!
+  creator: User!
+  id: String!
+  imageUrl: String!
+  inviteCode: String!
+  members: [Member!]!
+  name: String!
+  updatedAt: DateTime!
+}
+
+type Member {
+  createdAt: DateTime!
+  group: Group!
+  id: String!
+  role: String!
+  updatedAt: DateTime!
+  user: User!
 }
 
 type Mutation {
-  createGroup(createGroupInput: CreateGroupInput!): Group!
+  createGroup(createGroupInput: CreateGroupInput!): CreateGroupResponse!
   removeAuth(id: Int!): Auth!
   removeGroup(id: Int!): Group!
   signIn(signInInput: SignInInput!): SignResponse!
@@ -57,9 +97,9 @@ input UpdateAuthInput {
 }
 
 input UpdateGroupInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  email: String
   id: Int!
+  username: String
 }
 
 type User {

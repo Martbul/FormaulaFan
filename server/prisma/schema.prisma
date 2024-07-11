@@ -57,11 +57,12 @@ model User {
 model Group {
    id         String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
    name       String    @db.VarChar(100)
-   imageUrl   String
+   imageUrl   String       
    inviteCode String
+
    creatorId  String    @db.Uuid
-   
    creator    User      @relation(fields: [creatorId], references: [id])
+
    members    Member[]
    channels   Channel[]
 
