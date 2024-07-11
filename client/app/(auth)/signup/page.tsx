@@ -15,6 +15,8 @@ import { useAuthContext } from "@/contexts/AuthContext2";
 import { ChangeEvent, FormEvent, useState, useTransition } from "react";
 import { signUp } from "@/services/auth/auth.service";
 import './Signup.css'
+import Link from "next/link";
+
 const SignUp = () => {
   
     const router = useRouter();
@@ -57,7 +59,7 @@ const SignUp = () => {
       <div className="signup-container"><form onSubmit={handleSubmit}>
       <Card className="mx-auto max-w-sm">
         <CardHeader>
-          <CardTitle className="text-3xl">Register</CardTitle>
+          <CardTitle className="text-3xl">Sign Up</CardTitle>
           <CardDescription>
             Enter your information to create an account
           </CardDescription>
@@ -98,6 +100,12 @@ const SignUp = () => {
           </div>
 
           <Button className="w-full">Sign Up</Button>
+            <Link href="/signin">
+              
+              <div>
+                <p>Alredy have an account? Sing In</p>
+              </div>
+              </Link>
         </CardContent>
       </Card>
     </form></div></section>

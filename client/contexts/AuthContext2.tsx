@@ -1,25 +1,18 @@
 'use client'
 
+import { AuthContextType, User } from '@/services/auth/auth.interface';
 import { createContext, useContext, useEffect, useState } from 'react'
 
-interface User {
-  username: string;
-  email: string;
-}
 
-interface AuthContextType {
-  user: User | string;
-  setUser: (user: User | null) => void;
-}
 
 const AuthContext = createContext<AuthContextType>({
-  user: 'Guest',
+  user: {username:"Guest", email:undefined},
   setUser: () => {},
 });
 
 
 export function AppWrapper({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User>({username:'Guest', email:undefined});
 
   useEffect(() => {
     const user = localStorage.getItem("user");

@@ -90,9 +90,9 @@ const Navigation = () => {
         </Link>
       </div>
 
-      {!user && (
+      {user && user.username =='Guest' && (
         <div className="profile-bottom">
-          <Link href="/login">
+          <Link href="/signin">
             <div className="profile">
               <Image src={icons.profile} alt="" />
               <div>
@@ -104,7 +104,7 @@ const Navigation = () => {
       )}
     
 
-      {user && (
+      {user && user.username !== 'Guest' && (
         <div className="profile-bottom">
           <DropdownMenu>
             <DropdownMenuTrigger>

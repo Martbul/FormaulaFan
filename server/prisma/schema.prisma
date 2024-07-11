@@ -60,9 +60,11 @@ model Group {
    imageUrl   String
    inviteCode String
    creatorId  String    @db.Uuid
+   
    creator    User      @relation(fields: [creatorId], references: [id])
    members    Member[]
    channels   Channel[]
+
    createdAt  DateTime  @default(now())
    updatedAt  DateTime  @updatedAt
 }
@@ -75,11 +77,15 @@ enum MemberRole {
 
 model Member {
    id        String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+
    userId    String     @db.Uuid
    user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
    groupId   String     @db.Uuid
    group     Group      @relation(fields: [groupId], references: [id], onDelete: Cascade)
+
    role      MemberRole @default(MEMBER)
+
    createdAt DateTime   @default(now())
    updatedAt DateTime   @updatedAt
 }
@@ -107,4 +113,9 @@ model Channel {
 
 // model Settings {
 //    //! work in progress
+// }
+
+
+// model GroupSettings {
+
 // }

@@ -1,8 +1,9 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { GroupService } from './group.service';
 import { Group } from './entities/group.entity';
-import { CreateGroupInput } from './dto/create-group.input';
-import { UpdateGroupInput } from './dto/update-group.input';
+import { CreateGroupInput } from './dto/createGroup/create-group.input';
+import { UpdateGroupInput } from './dto/updateGroup/update-group.input';
+
 
 @Resolver(() => Group)
 export class GroupResolver {

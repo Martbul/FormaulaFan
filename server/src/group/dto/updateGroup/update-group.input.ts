@@ -1,4 +1,4 @@
-import { CreateGroupInput } from './create-group.input';
+import { CreateGroupInput } from './createGroup/create-group.input';
 import { InputType, Field, Int, PartialType } from '@nestjs/graphql';
 
 @InputType()

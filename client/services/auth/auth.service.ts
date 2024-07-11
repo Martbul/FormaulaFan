@@ -1,5 +1,7 @@
 import { gql, ApolloError } from "@apollo/client";
 import createApolloClient from "../../apollo-client";
+import { Dispatch, SetStateAction } from "react";
+import { User } from "./auth.interface";
 
 const client = createApolloClient();
 
@@ -33,7 +35,7 @@ const SIGN_UP_MUTATION = gql`
 export async function signIn(
   email: string,
   password: string,
-  setUser
+  setUser:Dispatch<SetStateAction<User>>
 ) {
   try {
     const { data } = await client.mutate({
@@ -63,7 +65,7 @@ export async function signUp(
   username: string,
   email: string,
   password: string,
-  setUser
+  setUser: Dispatch<SetStateAction<User>>
 ) {
   try {
     const { data } = await client.mutate({
@@ -90,7 +92,7 @@ export async function signUp(
   }
 }
 
-export function logout(setUser) {
+export function logout(setUser:Dispatch<SetStateAction<User>>) {
   localStorage.clear();
-  setUser({username:"Guest"});
+  setUser({ username: "Guest", email: undefined });
 }
