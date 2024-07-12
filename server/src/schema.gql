@@ -23,7 +23,7 @@ input CreateGroupInput {
 }
 
 type CreateGroupResponse {
-  channels: [Channel!]!
+  channels: [Channel!]
   creator: User!
   id: String!
   imageUrl: String!
@@ -37,7 +37,7 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 scalar DateTime
 
 type Group {
-  channels: [Channel!]!
+  channels: [Channel!]
   createdAt: DateTime!
   creator: User!
   id: String!
@@ -68,8 +68,9 @@ type Mutation {
 }
 
 type Query {
+  allGroups: [Group!]!
   auth(id: Int!): Auth!
-  group(id: Int!): Group!
+  singleGroup(id: String!): Group!
 }
 
 input SignInInput {
@@ -103,7 +104,8 @@ input UpdateGroupInput {
 }
 
 type User {
+  createdGroups: [Group!]!
   email: String!
-  id: Int!
+  id: String!
   username: String!
 }

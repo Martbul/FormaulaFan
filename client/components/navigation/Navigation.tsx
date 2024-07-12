@@ -62,7 +62,7 @@ const Navigation = () => {
           </div>
         </Link>
 
-        <Link className="menuItem" href="/group1">
+        <Link className="menuItem" href="/chat/mygroups">
           <div className="menuItemImage">
             <Image src={icons.group} alt="" />
           </div>
@@ -71,7 +71,7 @@ const Navigation = () => {
           </div>
         </Link>
 
-        <Link className="menuItem" href="/bookmarks">
+        <Link className="menuItem" href="/group1">
           <div className="menuItemImage">
             <Image src={icons.bookmark} alt="" />
           </div>
@@ -90,7 +90,7 @@ const Navigation = () => {
         </Link>
       </div>
 
-      {user && user.username =='Guest' && (
+      {user && user.username == "Guest" && (
         <div className="profile-bottom">
           <Link href="/signin">
             <div className="profile">
@@ -102,16 +102,15 @@ const Navigation = () => {
           </Link>
         </div>
       )}
-    
 
-      {user && user.username !== 'Guest' && (
+      {user && user.username !== "Guest" && (
         <div className="profile-bottom">
           <DropdownMenu>
             <DropdownMenuTrigger>
               <div className="profile">
                 <Image src={icons.profile} alt="" />
                 <div>
-                  <div className="username">{ user.username}</div>
+                  <div className="username">{user.username}</div>
                 </div>
               </div>
             </DropdownMenuTrigger>
@@ -125,7 +124,9 @@ const Navigation = () => {
 
               <DropdownMenuItem>Team</DropdownMenuItem>
               <DropdownMenuItem>Subscription</DropdownMenuItem>
-              <DropdownMenuItem onClick={() => logout(setUser)}>Log Out</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => logout(setUser)}>
+                Log Out
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
           <DropdownMenu></DropdownMenu>

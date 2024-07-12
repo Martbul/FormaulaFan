@@ -1,6 +1,6 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 import { User } from 'src/auth/entities/user.entity';
-import { Group } from './group.entity'; // Adjust the import path accordingly
+import { Group } from './group.entity'; 
 
 @ObjectType()
 export class Member {

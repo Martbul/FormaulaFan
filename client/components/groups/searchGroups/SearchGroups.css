@@ -1,0 +1,10 @@
+
+.searchChatResults {
+  padding: 20px; /* Adding padding for spacing */
+}
+
+.searchChatResults .resultContainer {
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap into multiple rows */
+  gap: 20px; /* Gap between columns */
+}

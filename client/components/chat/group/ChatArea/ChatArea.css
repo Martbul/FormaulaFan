@@ -1,0 +1,78 @@
+.chat-area {
+  flex-grow: 1;
+  background-color: #323338;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-area {
+  flex-grow: 1;
+  background-color: #323338;
+  display: flex;
+  flex-direction: column;
+}
+
+.other-groups {
+  display: flex;
+  align-items: center;
+  background-color: #2f3136;
+  padding: 10px;
+  margin-bottom: 10px;
+  overflow-x: auto;
+}
+
+.other-groups p {
+  color: #a5a1a1;
+  margin-right: 10px;
+}
+
+.group-logo {
+  width: 40px;
+  height: 40px;
+  background-color: #36393f;
+  border-radius: 50%;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.group-logo span {
+  display: none;
+}
+
+.group-logo:hover {
+  background-color: #3a3c43;
+}
+
+.messages {
+  flex-grow: 1;
+  padding: 10px;
+  overflow-y: auto;
+  background-color: #323338;
+}
+
+.message-input {
+  height: 40px;
+  border: none;
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: #393a3f;
+}
+
+.chat-input-layout {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0.8em;
+  padding: 0.08em 0.8em;
+  background-color: #1e1f22;
+  border-radius: 0.6em;
+
+}
+.chat-input-layout .plus-icon{
+  width: 27px;
+  height: 27px;
+}
+

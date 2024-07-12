@@ -19,6 +19,7 @@ export class GroupService {
   if (!user) {
     throw new NotFoundException('User not found');
   }
+    console.log('USER', user.id);
     
     const group = await this.prisma.group.create({
       data: {
@@ -45,22 +46,43 @@ export class GroupService {
         },
       },
       include: {
+        creator:true,
         members: true,
         channels: true,
       },
     });
-console.log(group);
 
     return group
 
   }
 
-  findAll() {
-    return `This action returns all group`;
+  async findAll() {
+    const allGroups = await this.prisma.group.findMany({
+      include: {
+        creator: true,
+        members: {
+          include: {
+            user: true,
+            group: true
+          },
+        },
+        channels: true,
+      },
+    });
+    return allGroups
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} group`;
+  async findOne(id: string) {
+    const group = await this.prisma.group.findUnique({
+      where: {
+      id
+      }
+    })
+    if (!group) {
+      throw new NotFoundException("Group dosnt exist")
+    }
+
+    return group
   }
 
   update(id: number, updateGroupInput: UpdateGroupInput) {

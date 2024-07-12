@@ -1,0 +1,70 @@
+.discord-server {
+  display: flex;
+  height: 100vh;
+}
+.left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: rgb(14, 14, 14);
+    width: 12%;
+    padding: 20px;
+    overflow: hidden;
+    border-right: 1px solid #3a3a3a;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+.server-list {
+  width: 60px;
+  background-color: #2f3136;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10px;
+}
+
+.server {
+  width: 40px;
+  height: 40px;
+  background-color: #36393f;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+}
+
+.channel-list {
+  width: 240px;
+  background-color: #2f3136;
+  padding: 10px;
+}
+
+.channel {
+  padding: 5px;
+  color: #b9bbbe;
+  cursor: pointer;
+}
+   
+.chan nel:hover {
+  background-color: #3a3c43;
+  border-radius: 5px;
+}
+
+
+

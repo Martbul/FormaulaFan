@@ -23,8 +23,8 @@ export class Group {
   @Field(() => [Member])
   members: Member[];
 
-  @Field(() => [Channel])
-  channels: Channel[];
+  @Field(() => [Channel],{nullable:true})
+  channels?: Channel[];
 
   @Field()
   createdAt: Date;

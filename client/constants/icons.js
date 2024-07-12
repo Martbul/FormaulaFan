@@ -25,6 +25,7 @@ import blog from "../public/assets/icons/blog.png";
 import unlock from "../public/assets/icons/unlock.png";
 import security from "../public/assets/icons/security.png";
 import option from "../public/assets/icons/option.png";
+import plus from "../public/assets/icons/plus.png";
 
 export default {
   f1Logo,
@@ -54,4 +55,5 @@ export default {
   unlock,
   security,
   option,
+  plus
 };

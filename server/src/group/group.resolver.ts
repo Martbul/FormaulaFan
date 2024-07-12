@@ -17,15 +17,13 @@ export class GroupResolver {
     return this.groupService.createGroup(createGroupInput);
   }
 
- 
-
-  @Query(() => [Group], { name: 'group' })
-  findAll() {
+  @Query(() => [Group])
+  allGroups() {
     return this.groupService.findAll();
   }
 
-  @Query(() => Group, { name: 'group' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
+  @Query(() => Group)
+  singleGroup(@Args('id') id: string) {
     return this.groupService.findOne(id);
   }
 

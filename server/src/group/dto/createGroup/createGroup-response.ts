@@ -21,6 +21,6 @@ export class CreateGroupResponse {
   @Field(() => [Member])
   members: Member[];
 
-  @Field(() => [Channel])
-  channels: Channel[];
+  @Field(() => [Channel], {nullable:true})
+  channels?: Channel[];
 }

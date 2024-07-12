@@ -1,26 +1,8 @@
-import { gql, ApolloError } from "@apollo/client";
+import { ApolloError } from "@apollo/client";
 import createApolloClient from "../../apollo-client";
+import { CREATE_GROUP_MUTATION,QUERY_GROUP_BY_ID, QUERY_ALL_GROUPS } from "./group.gql";
 
 const client = createApolloClient();
-
-const CREATE_GROUP_MUTATION = gql`
-  mutation createGroup($username: String!, $email: String!) {
-    createGroup(createGroupInput:  {username: $username, email: $email }) {
-      id
-      name
-      imageUrl
-      # creator{
-      #   username
-      # }
-       members{
-        role
-       }
-       channels{
-        name
-       }
-    }
-  }
-`;
 
 
 export async function createGroup(
@@ -28,19 +10,58 @@ export async function createGroup(
  email:string | undefined
 ) {
    try {
-     console.log('usernameAndEmail',username, email);
-     
     const { data } = await client.mutate({
       mutation: CREATE_GROUP_MUTATION,
       variables: { username, email },
     });
      
-     
-
     const {id, name, imageUrl, creator, members, channels} = data.createGroup;
 
-
     return { id, name, imageUrl, creator, members, channels };
+  } catch (error) {
+    if (error instanceof ApolloError) {
+      console.error("GraphQL error details:", error.graphQLErrors);
+      console.error("Network error details:", error.networkError);
+    } else {
+      console.error("Unknown error:", error);
+    }
+    throw error;
+  }
+}
+
+
+
+export async function getGroupById(id: string) {
+  try {
+    const { data } = await client.query({
+      query: QUERY_GROUP_BY_ID,
+      variables: { id },
+    });
+
+    const group = data.singleGroup;
+  
+    return group;
+  } catch (error) {
+    if (error instanceof ApolloError) {
+      console.error("GraphQL error details:", error.graphQLErrors);
+      console.error("Network error details:", error.networkError);
+    } else {
+      console.error("Unknown error:", error);
+    }
+    throw error;
+  }
+
+}
+
+export async function getAllGroups() {
+  try{
+    const {data} = await client.query({
+      query: QUERY_ALL_GROUPS
+    })
+
+    const groups = data.allGroups;
+
+    return groups;
   } catch (error) {
     if (error instanceof ApolloError) {
       console.error("GraphQL error details:", error.graphQLErrors);

@@ -1,15 +1,19 @@
 import { Field, Int, ObjectType } from "@nestjs/graphql";
+import { Group } from "src/group/entities/group.entity";
 
 
-//this represents the user object that the server will return when user signs(up and in)
+
 @ObjectType()
 export class User {
-   @Field(() => Int)
-   id: number;
+  @Field()
+  id: string;
 
-   @Field()
-   username: string;
+  @Field()
+  username: string;
 
-   @Field()
-   email: string; 
- }
+  @Field()
+  email: string;
+
+  @Field(() => [Group])
+  createdGroups: Group[];
+}

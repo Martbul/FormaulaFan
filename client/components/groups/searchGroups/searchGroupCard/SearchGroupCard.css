@@ -1,0 +1,43 @@
+
+.searchChatResults .resultContainer .chatView {
+  flex: 1 1 300px; /* Flexbox to ensure each column has equal width */
+  background-color: #181818;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+}
+
+.searchChatResults .resultContainer .chatView .media {
+  width: 80px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.searchChatResults .resultContainer .chatView .media img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.searchChatResults .resultContainer .chatView .text {
+  margin-left: 10px; /* Spacing between image and text */
+}
+
+.searchChatResults .resultContainer .chatView .text .chatName p {
+  margin: 0; /* Remove default margin */
+  font-weight: bold;
+  color: #fff; /* Text color */
+}
+
+ .participats{
+  margin: 0; /* Remove default margin */
+  color: #000000;
+}

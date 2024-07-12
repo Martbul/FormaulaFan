@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import "./Groups.css";
 import Navigation from "../../components/navigation/Navigation";
 
@@ -9,25 +9,24 @@ import Link from "next/link";
 import Image from "next/image";
 import { createGroup } from "@/services/group/group.service";
 import { useAuthContext } from "@/contexts/AuthContext2";
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import SearchGroups from "@/components/groups/searchGroups/SearchGroups";
 
 const Groups = () => {
+  const { user } = useAuthContext();
+  const router = useRouter();
 
-const { user } = useAuthContext();
-const router = useRouter()
-
-const [error, setError] = useState(null);
+  const [error, setError] = useState(null);
 
   const handleCreateGroup = async () => {
-    const result = await createGroup(user.username, user.email)
-    if(!result) {
-      setError(result)
+    const result = await createGroup(user.username, user.email);
+    if (!result) {
+      setError(result);
     }
 
-  
-       router.push(`/chat/group/${result.id}`)
-  }
+    router.push(`/chat/group/${result.id}`);
+  };
 
   return (
     <>
@@ -47,7 +46,13 @@ const [error, setError] = useState(null);
                   <button className="groupBtn addBtn">Add</button>
                 </div>
                 <div className="createGroup">
-                  <button className="groupBtn createBtn" onClick={handleCreateGroup}> Create</button>
+                  <button
+                    className="groupBtn createBtn"
+                    onClick={handleCreateGroup}
+                  >
+                    {" "}
+                    Create
+                  </button>
                 </div>
               </div>
             </div>
@@ -83,63 +88,7 @@ const [error, setError] = useState(null);
               </div>
             </div>
 
-            <div className="searchChatResults">
-              <div className="resultContainer">
-                <Link className="chatView" href="/group1">
-                  <div className="media">
-                    <Image src={images.redBull} alt="" />
-                  </div>
-                  <div className="text">
-                    <div className="chatName">
-                      <p>Redbull 1</p>
-                    </div>
-                    <div className="participats">
-                      <p>Participants: 234</p>
-                    </div>
-                  </div>
-                </Link>
-
-                <div className="chatView">
-                  <div className="media">
-                    <Image src={images.redBull} alt="" />
-                  </div>
-                  <div className="text">
-                    <div className="chatName">
-                      <p>Redbull 1</p>
-                    </div>
-                    <div className="participats">
-                      <p>Participants: 234</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="chatView">
-                  <div className="media">
-                    <Image src={images.redBull} alt="" />
-                  </div>
-                  <div className="text">
-                    <div className="chatName">
-                      <p>Redbull 1</p>
-                    </div>
-                    <div className="participats">
-                      <p>Participants: 234</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="chatView">
-                  <div className="media">
-                    <Image src={images.redBull} alt="" />
-                  </div>
-                  <div className="text">
-                    <div className="chatName">
-                      <p>Redbull 1</p>
-                    </div>
-                    <div className="participats">
-                      <p>Participants: 234</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+           <SearchGroups/>
           </div>
         </div>
 

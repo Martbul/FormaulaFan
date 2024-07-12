@@ -89,6 +89,10 @@ model Member {
 
    createdAt DateTime   @default(now())
    updatedAt DateTime   @updatedAt
+
+
+  @@index([userId], name: "userId")
+  @@index([groupId], name: "groupId")
 }
 
 enum ChannelType {

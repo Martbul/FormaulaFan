@@ -1,0 +1,22 @@
+.sidebar-layout{
+  background-color: #212121;
+}
+
+.chatName-layout{
+ width: 200px;
+  background-color: #1a1b1d;
+  padding: 10px;
+  border-bottom: 2px solid #000000;
+}
+.chatName-layout:hover{
+ width: 200px;
+  background-color: #3a3c43;
+  padding: 10px;
+  border-bottom: 2px solid #000000;
+}
+.chatName{
+ padding: 5px;
+  color: #b9bbbe;
+  cursor: pointer;
+
+}
