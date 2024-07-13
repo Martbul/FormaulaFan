@@ -15,44 +15,57 @@ export class GroupService {
     
   const user = await this.prisma.user.findUnique({
     where: { email: createGroupInput.email },
+    include: {
+      createdGroups: true,
+    },
   });
   if (!user) {
     throw new NotFoundException('User not found');
   }
-    console.log('USER', user.id);
+  
     
-    const group = await this.prisma.group.create({
-      data: {
-        //name: `${user.username}'s Group${user.createdGroups.length}`,
-        name: `${user.username}'s Group`,
-        imageUrl:
-          'https://t3.ftcdn.net/jpg/05/28/78/00/360_F_528780055_eQ2UYVU0YYh9bFJTLk9q2orIAkbCkSUg.jpg',
-        inviteCode: "WORKING ON IT",
-        creatorId: user.id,
-        members: {
-          create: {
-            userId: user.id,
-            role: 'ADMIN', 
+  const group = await this.prisma.group.create({
+    data: {
+      name: `${user.username}'s Group ${user.createdGroups.length + 1}`,
+      imageUrl: 'https://example.com/default-image.jpg',
+      inviteCode: 'WORKING ON IT',
+      creator: {
+        connect: { id: user.id },
+      },
+      members: {
+        create: {
+          userId: user.id,
+          role: 'ADMIN',
+        },
+      },
+      channels: {
+        create: [
+          {
+            name: 'General',
+            type: 'TEXT',
+            user: {
+              connect: { id: user.id },
+            },
           },
-        },
-        channels: {
-          create: [
-            {
-              name: 'General',
-              type: 'TEXT', 
-              userId: user.id,
-            }
-          ],
+        ],
+      },
+      settings: {
+        // Correct placement of settings inside data object
+        create: {
+          allowComments: true,
+          isPrivate: false,
         },
       },
-      include: {
-        creator:true,
-        members: true,
-        channels: true,
-      },
-    });
+    },
+    include: {
+      creator: true,
+      members: true,
+      channels: true,
+      settings: true,
+    },
+  });
 
-    return group
+  return group;
 
   }
 

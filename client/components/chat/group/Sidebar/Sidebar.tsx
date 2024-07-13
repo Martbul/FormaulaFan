@@ -1,3 +1,4 @@
+import { ChannelsList } from "../channelsList/ChannelsList";
 import { MembersList } from "../MembersList/MembersList";
 import './Sidebar.css'
 export const Sidebar = ({ name }: any) => {
@@ -8,7 +9,10 @@ export const Sidebar = ({ name }: any) => {
            <p>{name}</p>
          </div>
        </div>
+         <div className="rigthSide">
+        <ChannelsList/>
        <MembersList />
+       </div>
      </div>
    );
   

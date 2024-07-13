@@ -1,6 +1,11 @@
-1. Opravi createGroup graphql-a, trqbva ti samo id na grupata
-2. Opravi members[], now a user can be member of only one group witch is false(user can be member of mulyple groups)
-3. Razberi kak da vzemesh membarite na grupa
-4. fix group images
-5. when creating a new group then going to /groups the group is not showing
-6. Napravi taka che findAllGroups i searchGroups da e edna funkciq i suchto funkciqta za vzimane na grupite v koit user e member(/chat/mygroups) moje da polzva sushtata funkciq s search queri negovoto id
+- Opravi createGroup graphql-a, trqbva ti samo id na grupata
+- Opravi members[], now a user can be member of only one group witch is false(user can be member of mulyple groups)
+- fix group images
+- when creating a new group then going to /groups the group is not showing
+- Napravi taka che findAllGroups i searchGroups da e edna funkciq i suchto funkciqta za vzimane na grupite v koit user e member(/chat/mygroups) moje da polzva sushtata funkciq s search queri negovoto id
+- stop acshing the data in when getting all groups
+- add model Profile in prisma schema(1-to-1)
+- implement validation for creating user, creating group and creating new channels
+- make better error handlig
+- make better UX with loader and other UI elements
+- find how to change state based on the shadcn's switch

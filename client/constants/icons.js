@@ -26,6 +26,11 @@ import unlock from "../public/assets/icons/unlock.png";
 import security from "../public/assets/icons/security.png";
 import option from "../public/assets/icons/option.png";
 import plus from "../public/assets/icons/plus.png";
+import plusSmall from "../public/assets/icons/plusSmall.png";
+import nextArrow from "../public/assets/icons/nextArrow.png";
+import arrowDown from "../public/assets/icons/arrowDown.png";
+import padlock from "../public/assets/icons/padlock.png";
+
 
 export default {
   f1Logo,
@@ -55,5 +60,9 @@ export default {
   unlock,
   security,
   option,
-  plus
+  plus,
+  plusSmall,
+  nextArrow,
+  arrowDown,
+  padlock
 };

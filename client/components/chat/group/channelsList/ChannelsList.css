@@ -1,0 +1,112 @@
+.text-channels{
+  width: 200px;
+  background-color: #212121;
+  padding: 10px;
+}
+
+.textChannel {
+   padding: 5px;
+  color: #b9bbbe;
+  cursor: pointer;
+}
+
+.textChannel:hover {
+  background-color: #3a3c43;
+  border-radius: 5px;
+}
+
+.text-channels-header{
+   display: flex;
+  padding: 5px;
+  color: #87898b;
+  cursor: pointer;
+  font-size: 0.8em;
+  align-items:center;
+
+}
+.channel-header-leftSide{
+   display: flex;
+   flex:1
+}
+
+.voice-channels{
+  width: 200px;
+  background-color: #212121;
+  padding: 10px;
+}
+
+.voiceChannel {
+  padding: 5px;
+  color: #b9bbbe;
+  cursor: pointer;
+}
+
+.voiceChannel:hover {
+  background-color: #3a3c43;
+  border-radius: 5px;
+}
+
+.voice-channels-header{
+     display: flex;
+  padding: 5px;
+  color: #87898b;
+  cursor: pointer;
+  font-size: 0.8em;
+   align-items:center;
+}
+.arrows{
+   display: flex;
+     align-items:center;
+
+}
+.channel-image{
+   width:14px;
+   height:14px;
+   color:#87898b
+}
+.channel-arrow-down{
+   width:12px;
+   height:12px;
+   color:#87898b
+}
+.channel-plus{
+   width:13px;
+   height:13px
+}
+.p-r-image{
+   width:15px;
+   height:15px
+}
+
+.remove-selecting-text{
+    -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
+.wrapper{
+  /* border-bottom: 2px solid #000000; */
+}
+
+.private-channel-layout{
+   display: flex;
+   align-items:center;
+   margin: 1em 0em;
+}
+
+.private-channel-text{
+   display:flex;
+   flex-direction:column;
+}
+
+.private-channel-header{
+   display:flex;
+   gap:0.4em;
+      align-items:center;
+
+}
+
+
+.white-title-color{
+   color:#ebedf0
+}

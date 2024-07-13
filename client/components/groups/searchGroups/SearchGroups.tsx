@@ -42,7 +42,10 @@ const [loading, setLoading] = useState(true);
 
     useEffect(()=>{
       getGroups()
-  }, [])
+      console.log('getting all groups from DB');
+      
+    }, [])
+  
     useEffect(() => {
       console.log(searchResult);
     }, [searchResult]);

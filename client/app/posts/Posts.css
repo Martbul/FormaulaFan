@@ -29,6 +29,7 @@
     padding: 20px;
     overflow-y: scroll;
     scrollbar-width: none;
+    
   }
 
   .news {
@@ -38,6 +39,7 @@
     overflow-y: auto;
     max-height: 100vh;
     border-left: 1px solid #3a3a3a;
+    
   }
 
   .postContent {

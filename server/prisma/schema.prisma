@@ -1,7 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
+   provider = "prisma-client-js"
 }
-
 
 datasource db {
    provider = "postgresql"
@@ -9,65 +8,103 @@ datasource db {
 }
 
 model User {
-   id       String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-   username String  @db.VarChar(255)
-   password String  @db.VarChar(1000)
-   email    String  @unique @db.VarChar(255)
-   picture  String? @db.VarChar(255)
+   id                 String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+   username           String   @db.VarChar(255)
+   password           String   @db.VarChar(1000)
+   email              String   @unique @db.VarChar(255)
+   picture            String?  @db.VarChar(255)
    hashedRefreshToken String?
+   createdAt          DateTime @default(now())
+   updatedAt          DateTime @updatedAt
 
-   // followers User[]
+   posts    Post[]
+   comments Comment[]
+
+   settings UserSettings?
+
+   // followers User[] @relation("Followers", references: [id])
    // following User[]
    // friends User[]
-   // posts Post[]
    // settings Settings
    // bookmarks Post[]
 
-   createdGroups Group[]
-   members       Member[]
-   channels      Channel[]
-
-   createdAt DateTime  @default(now())
-   updatedAt DateTime  @updatedAt
-   // Post      Post[]
-   // Comment   Comment[]
+   createdGroups  Group[]
+   members        Member[]
+   channels       Channel[]
 }
 
-// model Post {
-//    id       String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-//    authorId String    @db.Uuid
-//    author   User      @relation(fields: [authorId], references: [id])
-//    text     String
-//    likes    Int       @default(0)
-//    comments Comment[]
-//    shares   Int       @default(0)
-//    views    Int       @default(0)
-//    saves    Int       @default(0)
-// }
+model UserSettings {
+   id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
 
-// model Comment {
-//    id       String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-//    authorId String  @db.Uuid
-//    author   User    @relation(fields: [authorId], references: [id])
-//    text     String  @db.VarChar(1000)
-//    Post     Post?   @relation(fields: [postId], references: [id])
-//    postId   String? @db.Uuid
-// }
+   theme         String  @db.VarChar(50) @default("NORMAL")
+   notifications Boolean @default(false)
+
+   userId        String    @unique @db.Uuid
+   user          User      @relation(fields: [userId], references: [id])
+}
+
+model Post {
+   id           String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+   title        String   @db.VarChar(200)
+   textContent  String?  @db.VarChar(1000)
+   imageContent String?  @db.VarChar(1000)
+   videoContent String?  @db.VarChar(1000)
+   createdAt    DateTime @default(now())
+   updatedAt    DateTime @updatedAt
+
+   authorId String @db.Uuid
+   author   User   @relation(fields: [authorId], references: [id])
+
+   likes    Int       @default(0)
+   comments Comment[] @relation("PostComments")
+   shares   Int       @default(0)
+   views    Int       @default(0)
+   saves    Int       @default(0)
+}
+
+model Comment {
+   id           String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+   textContent  String?  @db.VarChar(1000)
+   imageContent String?  @db.VarChar(1000)
+   videoContent String?  @db.VarChar(1000)
+   createdAt    DateTime @default(now())
+   updatedAt    DateTime @updatedAt
+
+   authorId String @db.Uuid
+   author   User   @relation(fields: [authorId], references: [id])
+
+   postId String @db.Uuid
+   post   Post   @relation(fields: [postId], references: [id], name: "PostComments")
+}
 
 model Group {
-   id         String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-   name       String    @db.VarChar(100)
-   imageUrl   String       
+   id         String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+   name       String @db.VarChar(100)
+   imageUrl   String
    inviteCode String
 
-   creatorId  String    @db.Uuid
-   creator    User      @relation(fields: [creatorId], references: [id])
+   creatorId String @db.Uuid
+   creator   User   @relation(fields: [creatorId], references: [id])
 
-   members    Member[]
-   channels   Channel[]
+   settings       GroupSettings?
+  
 
-   createdAt  DateTime  @default(now())
-   updatedAt  DateTime  @updatedAt
+   members  Member[]
+   channels Channel[]
+
+   createdAt       DateTime @default(now())
+   updatedAt       DateTime @updatedAt
+ 
+}
+
+model GroupSettings {
+  id             String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+
+  allowComments  Boolean        @default(true)
+  isPrivate      Boolean        @default(false)
+
+  group          Group          @relation(fields: [groupId], references: [id])
+  groupId        String         @unique @db.Uuid
 }
 
 enum MemberRole {
@@ -77,22 +114,21 @@ enum MemberRole {
 }
 
 model Member {
-   id        String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+   id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
 
-   userId    String     @db.Uuid
-   user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+   userId String @db.Uuid
+   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-   groupId   String     @db.Uuid
-   group     Group      @relation(fields: [groupId], references: [id], onDelete: Cascade)
+   groupId String @db.Uuid
+   group   Group  @relation(fields: [groupId], references: [id], onDelete: Cascade)
 
-   role      MemberRole @default(MEMBER)
+   role MemberRole @default(MEMBER)
 
-   createdAt DateTime   @default(now())
-   updatedAt DateTime   @updatedAt
+   createdAt DateTime @default(now())
+   updatedAt DateTime @updatedAt
 
-
-  @@index([userId], name: "userId")
-  @@index([groupId], name: "groupId")
+   @@index([userId], name: "userId")
+   @@index([groupId], name: "groupId")
 }
 
 enum ChannelType {
@@ -102,25 +138,16 @@ enum ChannelType {
 }
 
 model Channel {
-   id        String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-   name      String
-   type      ChannelType @default(TEXT)
+   id   String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+   name String
+   type ChannelType @default(TEXT)
 
-   userId    String      @db.Uuid
-   user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+   userId String @db.Uuid
+   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-   groupId   String      @db.Uuid
-   group     Group       @relation(fields: [groupId], references: [id], onDelete: Cascade)
+   groupId String @db.Uuid
+   group   Group  @relation(fields: [groupId], references: [id], onDelete: Cascade)
 
-   createdAt DateTime    @default(now())
-   updatedAt DateTime    @updatedAt
+   createdAt DateTime @default(now())
+   updatedAt DateTime @updatedAt
 }
-
-// model Settings {
-//    //! work in progress
-// }
-
-
-// model GroupSettings {
-
-// }

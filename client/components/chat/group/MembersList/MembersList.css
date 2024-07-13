@@ -12,53 +12,7 @@
    background-color: #3a3c43;
   border-radius: 5px;
 }
-.text-channels{
-  width: 200px;
-  background-color: #212121;
-  padding: 10px;
-}
 
-.textChannel {
-   padding: 5px;
-  color: #b9bbbe;
-  cursor: pointer;
-}
-
-.textChannel:hover {
-  background-color: #3a3c43;
-  border-radius: 5px;
-}
-
-.text-channels-header{
-  padding: 5px;
-  color: #87898b;
-  cursor: pointer;
-  font-size: 0.8em;
-}
-
-.voice-channels{
-  width: 200px;
-  background-color: #212121;
-  padding: 10px;
-}
-
-.voiceChannel {
-  padding: 5px;
-  color: #b9bbbe;
-  cursor: pointer;
-}
-
-.voiceChannel:hover {
-  background-color: #3a3c43;
-  border-radius: 5px;
-}
-
-.voice-channels-header{
-  padding: 5px;
-  color: #87898b;
-  cursor: pointer;
-  font-size: 0.8em;
-}
 
 
 .members-list {

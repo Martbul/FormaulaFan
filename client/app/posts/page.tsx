@@ -14,6 +14,16 @@ const Posts = () => {
          </div>
 
          <div className="posts">
+           <div className="other-groups">
+             <p>Your Other Groups:</p>
+             <div className="group-logo">
+               <span>Group 1</span>
+             </div>
+             <div className="group-logo">
+               <span>Group 2</span>
+             </div>
+            //! buttins for wrinting a post, search and so on
+           </div>
            <div className="feedContainer">
              <Post />
              <Post />
