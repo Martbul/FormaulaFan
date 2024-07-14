@@ -89,7 +89,7 @@ if(newChannel.type =="TEXT"){
 
   return (
     <AlertDialog>
-      <div className="wrapper">
+      <div className="wrapper remove-selecting-text">
         <div className="text-channels">
           <div className="text-channels-header">
             <div className="channel-header-leftSide">
@@ -138,11 +138,15 @@ if(newChannel.type =="TEXT"){
               </div>
             </AlertDialogTrigger>
           </div>
-          {textChannelsVisible === true && <>{textChannels.map((channel, index)=>(
-              <div className="textChannel" key={index}>
-                <p>{channel.name}</p>
-              </div>
-          ))}</>}
+          {textChannelsVisible === true && (
+            <>
+              {textChannels.map((channel, index) => (
+                <div className="textChannel" key={index}>
+                  <p>{channel.name}</p>
+                </div>
+              ))}
+            </>
+          )}
         </div>
 
         <div className="voice-channels">
@@ -196,11 +200,11 @@ if(newChannel.type =="TEXT"){
 
           {voiceChannelsVisible === true && (
             <>
-              {voiceChannels.map((channel, index)=>(
-              <div className="voiceChannel" key={index}>
-                <p>{channel.name}</p>
-              </div>
-          ))}
+              {voiceChannels.map((channel, index) => (
+                <div className="voiceChannel" key={index}>
+                  <p>{channel.name}</p>
+                </div>
+              ))}
             </>
           )}
         </div>

@@ -4,7 +4,7 @@ import "./SearchGroupCard.css";
 
 export default function SearchGroupCard({id, imageUrl,groupName,members}){
    return (
-     <Link className="chatView" href={`/chat/group/${id}`}>
+     <Link className="chatView" href={`/chat/mygroup/${id}`}>
        <div className="media">
          {/* <Image
            src={imageUrl}

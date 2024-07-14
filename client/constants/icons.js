@@ -30,6 +30,8 @@ import plusSmall from "../public/assets/icons/plusSmall.png";
 import nextArrow from "../public/assets/icons/nextArrow.png";
 import arrowDown from "../public/assets/icons/arrowDown.png";
 import padlock from "../public/assets/icons/padlock.png";
+import writePost from "../public/assets/icons/writePost.png";
+import searchWhite from "../public/assets/icons/searchWhite.png";
 
 
 export default {
@@ -64,5 +66,7 @@ export default {
   plusSmall,
   nextArrow,
   arrowDown,
-  padlock
+  padlock,
+  writePost,
+  searchWhite,
 };

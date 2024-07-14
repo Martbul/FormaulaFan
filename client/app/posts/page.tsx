@@ -1,11 +1,15 @@
+
 import Navigation from '../../components/navigation/Navigation';
 
 import './Posts.css'
 import Post from '../../components/post/Post';
 import images from '../../constants/images';
 import Image from 'next/image';
+import { PostsMenu } from '@/components/posts/postsMenu/PostsMenu';
+import { useAuthContext } from '@/contexts/AuthContext2';
 
 const Posts = () => {
+    
    return (
      <>
        <div className="layout">
@@ -14,16 +18,7 @@ const Posts = () => {
          </div>
 
          <div className="posts">
-           <div className="other-groups">
-             <p>Your Other Groups:</p>
-             <div className="group-logo">
-               <span>Group 1</span>
-             </div>
-             <div className="group-logo">
-               <span>Group 2</span>
-             </div>
-            //! buttins for wrinting a post, search and so on
-           </div>
+           <PostsMenu  />
            <div className="feedContainer">
              <Post />
              <Post />

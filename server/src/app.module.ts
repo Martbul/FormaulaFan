@@ -7,6 +7,7 @@ import { PrismaService } from './prisma/prisma.service';
 import { ConfigModule } from '@nestjs/config';
 import { GroupModule } from './group/group.module';
 import { ChannelModule } from './channel/channel.module';
+import { PostModule } from './post/post.module';
 @Module({
   imports: [
     ConfigModule.forRoot({isGlobal: true}),
@@ -18,6 +19,7 @@ import { ChannelModule } from './channel/channel.module';
     AuthModule,
     GroupModule,
     ChannelModule,
+    PostModule,
   ],
   controllers: [],
   providers: [PrismaService],

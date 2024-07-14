@@ -38,6 +38,11 @@ type CreateGroupResponse {
   name: String!
 }
 
+input CreatePostInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
@@ -66,21 +71,30 @@ type Member {
 
 type Mutation {
   createGroup(createGroupInput: CreateGroupInput!): CreateGroupResponse!
+  createPost(createPostInput: CreatePostInput!): Post!
   newChannel(createChannelInput: CreateChannelInput!): Channel!
   removeAuth(id: Int!): Auth!
   removeChannel(id: Int!): Channel!
   removeGroup(id: Int!): Group!
+  removePost(id: Int!): Post!
   signIn(signInInput: SignInInput!): SignResponse!
   signUp(signUpInput: SignUpInput!): SignResponse!
   updateAuth(updateAuthInput: UpdateAuthInput!): Auth!
   updateChannel(updateChannelInput: UpdateChannelInput!): Channel!
   updateGroup(updateGroupInput: UpdateGroupInput!): Group!
+  updatePost(updatePostInput: UpdatePostInput!): Post!
+}
+
+type Post {
+  """Example field (placeholder)"""
+  exampleField: Int!
 }
 
 type Query {
   allGroups: [Group!]!
   auth(id: Int!): Auth!
   channel(id: Int!): Channel!
+  post(id: Int!): Post!
   singleGroup(id: String!): Group!
 }
 
@@ -120,6 +134,12 @@ input UpdateGroupInput {
   email: String
   id: Int!
   username: String
+}
+
+input UpdatePostInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
 }
 
 type User {

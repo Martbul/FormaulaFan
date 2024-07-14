@@ -5,6 +5,7 @@ import icons from "../../constants/icons";
 import images from "../../constants/images";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,7 +18,18 @@ import { useAuthContext } from "@/contexts/AuthContext2";
 import { logout } from "@/services/auth/auth.service";
 
 const Navigation = () => {
-  const { user,setUser } = useAuthContext();
+  const { user, setUser } = useAuthContext();
+  const pathname = usePathname();
+
+  const getMenuItemClass = (path) => {
+    if(pathname.includes(path)) {
+      return "menuItemText isMenuItemActive"
+    }else{
+      return "menuItemText"
+    }
+
+  };
+
   return (
     <div className="menu remove-selecting-text">
       <div className="menuAllItems">
@@ -27,11 +39,11 @@ const Navigation = () => {
           </Link>
         </div>
 
-        <Link className="menuItem" href="/">
-          <div className="menuItemImage">
-            <Image src={icons.home} alt="" />
+        <Link className="menuItem" href="/posts">
+          <div className="menuItemImage ">
+            <Image src={icons.blog} alt="" />
           </div>
-          <div className="menuItemText">
+          <div className={getMenuItemClass("/posts")}>
             <p>Home</p>
           </div>
         </Link>
@@ -40,33 +52,31 @@ const Navigation = () => {
           <div className="menuItemImage">
             <Image src={icons.glass} alt="" />
           </div>
-          <div className="menuItemText">
+          <div className={getMenuItemClass("/groups")}>
             <p>Groups</p>
           </div>
         </Link>
 
-        <Link className="menuItem" href="/posts">
-          <div className="menuItemImage">
-            <Image src={icons.blog} alt="" />
-          </div>
-          <div className="menuItemText">
-            <p>Posts</p>
-          </div>
-        </Link>
-        <Link className="menuItem" href="/notifications">
+        <Link
+          className="menuItem"
+          href="/notifications"
+        >
           <div className="menuItemImage">
             <Image src={icons.bell} alt="" />
           </div>
-          <div className="menuItemText">
+          <div className={getMenuItemClass("/notifications")}>
             <p>Notifications</p>
           </div>
         </Link>
 
-        <Link className="menuItem" href="/chat/mygroups">
+        <Link
+          className="menuItem"
+          href="/chat/mygroups"
+        >
           <div className="menuItemImage">
             <Image src={icons.group} alt="" />
           </div>
-          <div className="menuItemText">
+          <div  className={getMenuItemClass("/chat/mygroup")}>
             <p>Chat</p>
           </div>
         </Link>
@@ -75,7 +85,7 @@ const Navigation = () => {
           <div className="menuItemImage">
             <Image src={icons.bookmark} alt="" />
           </div>
-          <div className="menuItemText">
+          <div className={getMenuItemClass("/group1")}>
             <p>Bookmarks</p>
           </div>
         </Link>
@@ -84,13 +94,13 @@ const Navigation = () => {
           <div className="menuItemImage">
             <Image src={icons.settings} alt="" />
           </div>
-          <div className="menuItemText">
+          <div className={getMenuItemClass("/settings")}>
             <p>Settings</p>
           </div>
         </Link>
       </div>
 
-      {user && user.username == "Guest" && (
+      {user && user.username === "Guest" && (
         <div className="profile-bottom">
           <Link href="/signin">
             <div className="profile">
@@ -129,7 +139,6 @@ const Navigation = () => {
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-          <DropdownMenu></DropdownMenu>
         </div>
       )}
     </div>

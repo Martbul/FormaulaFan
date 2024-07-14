@@ -44,8 +44,7 @@ model UserSettings {
 
 model Post {
    id           String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-   title        String   @db.VarChar(200)
-   textContent  String?  @db.VarChar(1000)
+   textContent  String  @db.VarChar(1000)
    imageContent String?  @db.VarChar(1000)
    videoContent String?  @db.VarChar(1000)
    createdAt    DateTime @default(now())

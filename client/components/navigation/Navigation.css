@@ -46,6 +46,18 @@
     color: gray;
   }
 
+  .menuItemText p:hover {
+    margin: 0;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+  }
+
+  .isMenuItemActive p{
+        color: white;
+
+  }
+
   
 
   .menuItem, .profile {
