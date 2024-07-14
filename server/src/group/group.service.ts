@@ -43,14 +43,11 @@ export class GroupService {
           {
             name: 'General',
             type: 'TEXT',
-            user: {
-              connect: { id: user.id },
-            },
+            isPrivate: false,
           },
         ],
       },
       settings: {
-        // Correct placement of settings inside data object
         create: {
           allowComments: true,
           isPrivate: false,
@@ -88,9 +85,12 @@ export class GroupService {
   async findOne(id: string) {
     const group = await this.prisma.group.findUnique({
       where: {
-      id
-      }
-    })
+        id,
+      },
+      include: {
+        channels: true,
+      },
+    });
     if (!group) {
       throw new NotFoundException("Group dosnt exist")
     }

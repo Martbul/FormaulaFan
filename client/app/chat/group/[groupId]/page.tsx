@@ -58,8 +58,10 @@ export default function Group ({ params }:any)  {
       
       <ChatArea />
       
-      <Sidebar 
+      <Sidebar
+      groupId={groupData?.id}
       name={groupData?.name} 
+      channels={groupData?.channels} 
       />
 
     </div>

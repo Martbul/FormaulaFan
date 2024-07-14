@@ -19,7 +19,7 @@ import { logout } from "@/services/auth/auth.service";
 const Navigation = () => {
   const { user,setUser } = useAuthContext();
   return (
-    <div className="menu">
+    <div className="menu remove-selecting-text">
       <div className="menuAllItems">
         <div className="menuItem">
           <Link className="media" href="/">

@@ -30,7 +30,6 @@ model User {
 
    createdGroups  Group[]
    members        Member[]
-   channels       Channel[]
 }
 
 model UserSettings {
@@ -133,17 +132,14 @@ model Member {
 
 enum ChannelType {
    TEXT
-   AUDIO
-   VIDEO
+   VOICE
 }
 
 model Channel {
    id   String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
    name String
    type ChannelType @default(TEXT)
-
-   userId String @db.Uuid
-   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+   isPrivate Boolean @default(false)
 
    groupId String @db.Uuid
    group   Group  @relation(fields: [groupId], references: [id], onDelete: Cascade)

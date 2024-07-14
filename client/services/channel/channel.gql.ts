@@ -1,42 +1,11 @@
 import { gql } from "@apollo/client";
 
-export const CREATE_GROUP_MUTATION = gql`
-  mutation createGroup($username: String!, $email: String!) {
-    createGroup(createGroupInput: { username: $username, email: $email }) {
-      id
-      name
-      imageUrl
-      # creator{
-      #   username
-      # }
-      members {
-        role
-      }
-      channels {
-        name
-      }
-    }
+export const CREATE_CHANNEL_MUTATION = gql`
+mutation createChannel($channelType: String!, $channelName:String!, $isPrivate:Boolean!,$groupId:String!){
+  newChannel(createChannelInput:{channelType :$channelType,channelName:$channelName,isPrivate:$isPrivate, groupId:$groupId }){
+    name
+    type
+    isPrivate
   }
-`;
-
-
-export const QUERY_GROUP_BY_ID = gql`
-  query getGroupById($id: String!) {
-    singleGroup(id: $id) {
-      name
-    }
-  }
-`;
-
-export const QUERY_ALL_GROUPS = gql`
-  query getAllGroups {
-    allGroups {
-      id
-      name
-      imageUrl
-      members{
-        id
-      }
-    }
-  }
-`;
+}
+`

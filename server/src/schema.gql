@@ -11,10 +11,17 @@ type Channel {
   createdAt: DateTime!
   group: Group!
   id: String!
+  isPrivate: Boolean!
   name: String!
   type: String!
   updatedAt: DateTime!
-  user: User!
+}
+
+input CreateChannelInput {
+  channelName: String!
+  channelType: String!
+  groupId: String!
+  isPrivate: Boolean!
 }
 
 input CreateGroupInput {
@@ -59,17 +66,21 @@ type Member {
 
 type Mutation {
   createGroup(createGroupInput: CreateGroupInput!): CreateGroupResponse!
+  newChannel(createChannelInput: CreateChannelInput!): Channel!
   removeAuth(id: Int!): Auth!
+  removeChannel(id: Int!): Channel!
   removeGroup(id: Int!): Group!
   signIn(signInInput: SignInInput!): SignResponse!
   signUp(signUpInput: SignUpInput!): SignResponse!
   updateAuth(updateAuthInput: UpdateAuthInput!): Auth!
+  updateChannel(updateChannelInput: UpdateChannelInput!): Channel!
   updateGroup(updateGroupInput: UpdateGroupInput!): Group!
 }
 
 type Query {
   allGroups: [Group!]!
   auth(id: Int!): Auth!
+  channel(id: Int!): Channel!
   singleGroup(id: String!): Group!
 }
 
@@ -95,6 +106,14 @@ input UpdateAuthInput {
   id: Int!
   password: String
   username: String
+}
+
+input UpdateChannelInput {
+  channelName: String
+  channelType: String
+  groupId: String
+  id: Int!
+  isPrivate: Boolean
 }
 
 input UpdateGroupInput {

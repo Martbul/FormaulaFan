@@ -30,7 +30,7 @@ const Groups = () => {
 
   return (
     <>
-      <div className="layout">
+      <div className="layout remove-selecting-text">
         <div className="left">
           <Navigation />
         </div>

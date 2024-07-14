@@ -6,6 +6,7 @@ import { AuthModule } from './auth/auth.module';
 import { PrismaService } from './prisma/prisma.service';
 import { ConfigModule } from '@nestjs/config';
 import { GroupModule } from './group/group.module';
+import { ChannelModule } from './channel/channel.module';
 @Module({
   imports: [
     ConfigModule.forRoot({isGlobal: true}),
@@ -16,6 +17,7 @@ import { GroupModule } from './group/group.module';
     }),
     AuthModule,
     GroupModule,
+    ChannelModule,
   ],
   controllers: [],
   providers: [PrismaService],

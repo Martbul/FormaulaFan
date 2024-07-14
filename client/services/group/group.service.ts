@@ -38,7 +38,12 @@ export async function getGroupById(id: string) {
       variables: { id },
     });
 
-    const group = data.singleGroup;
+    const result = data.singleGroup;
+    const group = {
+      id,
+      ...result
+    }
+ 
   
     return group;
   } catch (error) {

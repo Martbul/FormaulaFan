@@ -3,7 +3,7 @@ import icons from "../../constants/icons";
 import './Post.css'
 const Post = () => {
    return (
-     <div className="post">
+     <div className="post remove-selecting-text">
        <div className="postHeader">
          <Image src={icons.postCreator} alt="Profile" className="profilePic" />
          <div className="postInfo">

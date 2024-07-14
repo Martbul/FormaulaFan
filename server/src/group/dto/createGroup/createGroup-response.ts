@@ -1,6 +1,7 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 import { User } from 'src/auth/entities/user.entity';
-import { Channel } from 'src/group/entities/channel.entity';
+import { Channel } from 'src/channel/entities/channel.entity';
+
 import { Member } from 'src/group/entities/members.entity';
 
 

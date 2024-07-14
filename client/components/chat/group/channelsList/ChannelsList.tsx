@@ -1,7 +1,7 @@
 import icons from "@/constants/icons";
 import Image from "next/image";
 import "./ChannelsList.css";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -16,43 +16,76 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 
-import { Switch } from "@/components/ui/switch"
+import { Switch } from "@/components/ui/switch";
 import { createChannel } from "@/services/channel/channel.service";
 
-export const ChannelsList = () => {
+export const ChannelsList = ({ channels, groupId }: any) => {
+  const [textChannels, setTextChannels] = useState([]);
+  const [voiceChannels, setVoiceChannels] = useState([]);
+
   const [textChannelsVisible, setTextChannelsVisible] = useState(true);
-   const [voiceChannelsVisible, setVoiceChannelsVisible] = useState(true);
-   const [selectedChannel, setSelectedChannel] = useState("text");
-   const [newChannelName, setNewChannelName] = useState("");
-   const [isPrivateChannel, setIsPrivateChannel] = useState(false);
-    const [error, setError] = useState(null);
-   
-      const handleSelection = (event:any) => {
-        setSelectedChannel(event.target.value);
-   };
-   
+  const [voiceChannelsVisible, setVoiceChannelsVisible] = useState(true);
+  const [selectedChannel, setSelectedChannel] = useState("TEXT");
+  const [newChannelName, setNewChannelName] = useState({
+    name: "",
+  });
+  const [isPrivateChannel, setIsPrivateChannel] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-   const handleChange = (
-     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-   ) => {
-     const { id, value } = e.target;
-     setNewChannelName(() => ({
-       [id]: value,
-     }));
-   };
+  const handleSelection = (event: any) => {
+    setSelectedChannel(event.target.value);
+  };
 
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { value } = e.target;
+    setNewChannelName((prevForm) => ({
+      ...prevForm,
+      name: value,
+    }));
+  };
 
-      //! implement better error handling and validation
-      //! also validation in the server is needed
-      const handleChannelCreation = async() =>{
-         if(!selectedChannel || !newChannelName || !isPrivateChannel) {
-            setError("Error while creating a channel!!!")
-            console.log("Error while creating a channel!!!")
-            return
-         } 
-         const newChannel = await createChannel(selectedChannel, newChannelName,isPrivateChannel)
-
+  //! implement better error handling and validation
+  //! also validation in the server is needed
+  const handleChannelCreation = async () => {
+    if (!newChannelName) {
+      setError("Give your new channel a name");
+      console.log("Give your new channel a name");
+      return;
+    }
+    const newChannel = await createChannel(
+      selectedChannel,
+      newChannelName.name,
+      isPrivateChannel,
+      groupId
+    );
+if(newChannel){
+if(newChannel.type =="TEXT"){
+      setTextChannels(prevTextChannels => [...prevTextChannels, newChannel]);
+    }
+      else if(newChannel.type =="VOICE"){
+          setVoiceChannels(prevVoiceChannels => [...prevVoiceChannels, newChannel]);
       }
+    }
+}
+    
+   
+ 
+  useEffect(() => {
+    if (channels && channels.length > 0) {
+      console.log(channels);
+      
+      const newTextChannels = channels.filter(
+        (channel) => channel.type === "TEXT"
+      );
+      const newVoiceChannels = channels.filter(
+        (channel) => channel.type === "VOICE"
+      );
+      setTextChannels(newTextChannels);
+      setVoiceChannels(newVoiceChannels);
+    }
+  }, [channels]); 
 
   return (
     <AlertDialog>
@@ -69,7 +102,7 @@ export const ChannelsList = () => {
                     <Image
                       src={icons.nextArrow}
                       alt=""
-                      className="channel-arrow-down"
+                      className="channel-arrow-down remove-selecting-text"
                     />
                   )}
                 </div>
@@ -81,7 +114,7 @@ export const ChannelsList = () => {
                     <Image
                       src={icons.arrowDown}
                       alt=""
-                      className="channel-image"
+                      className="channel-image remove-selecting-text"
                     />
                   )}
                 </div>
@@ -97,23 +130,19 @@ export const ChannelsList = () => {
 
             <AlertDialogTrigger>
               <div className="channel-header-rightSide">
-                <Image src={icons.plusSmall} alt="" className="channel-plus" />
+                <Image
+                  src={icons.plusSmall}
+                  alt=""
+                  className="channel-plus remove-selecting-text"
+                />
               </div>
             </AlertDialogTrigger>
           </div>
-          {textChannelsVisible === true && (
-            <>
-              <div className="textChannel">
-                <p>TextChannel1</p>
+          {textChannelsVisible === true && <>{textChannels.map((channel, index)=>(
+              <div className="textChannel" key={index}>
+                <p>{channel.name}</p>
               </div>
-              <div className="textChannel">
-                <p>TextChannel2</p>
-              </div>
-              <div className="textChannel">
-                <p>TextChannel3</p>
-              </div>
-            </>
-          )}
+          ))}</>}
         </div>
 
         <div className="voice-channels">
@@ -128,7 +157,7 @@ export const ChannelsList = () => {
                     <Image
                       src={icons.nextArrow}
                       alt=""
-                      className="channel-arrow-down"
+                      className="channel-arrow-down remove-selecting-text"
                     />
                   )}
                 </div>
@@ -140,7 +169,7 @@ export const ChannelsList = () => {
                     <Image
                       src={icons.arrowDown}
                       alt=""
-                      className="channel-image"
+                      className="channel-image remove-selecting-text"
                     />
                   )}
                 </div>
@@ -156,22 +185,22 @@ export const ChannelsList = () => {
 
             <AlertDialogTrigger>
               <div className="channel-header-rightSide">
-                <Image src={icons.plusSmall} alt="" className="channel-plus" />
+                <Image
+                  src={icons.plusSmall}
+                  alt=""
+                  className="channel-plus remove-selecting-text"
+                />
               </div>
             </AlertDialogTrigger>
           </div>
 
           {voiceChannelsVisible === true && (
             <>
-              <div className="voiceChannel">
-                <p>voiceChannel1</p>
+              {voiceChannels.map((channel, index)=>(
+              <div className="voiceChannel" key={index}>
+                <p>{channel.name}</p>
               </div>
-              <div className="voiceChannel">
-                <p>voiceChannel2</p>
-              </div>
-              <div className="voiceChannel">
-                <p>voiceChannel3</p>
-              </div>
+          ))}
             </>
           )}
         </div>
@@ -191,11 +220,11 @@ export const ChannelsList = () => {
 
         <div className="flex flex-col space-y-2">
           <div
-            onClick={() => setSelectedChannel("text")}
+            onClick={() => setSelectedChannel("TEXT")}
             className={`p-4 rounded-lg`}
             style={{
               backgroundColor:
-                selectedChannel === "text" ? "#43434b" : "#2c2d30",
+                selectedChannel === "TEXT" ? "#43434b" : "#2c2d30",
             }}
           >
             <label
@@ -207,7 +236,7 @@ export const ChannelsList = () => {
                 id="text"
                 name="channel"
                 value="text"
-                checked={selectedChannel === "text"}
+                checked={selectedChannel === "TEXT"}
                 onChange={handleSelection}
                 className="form-radio h-4 w-4 text-blue-600"
               />
@@ -219,11 +248,11 @@ export const ChannelsList = () => {
             </p>
           </div>
           <div
-            onClick={() => setSelectedChannel("voice")}
+            onClick={() => setSelectedChannel("VOICE")}
             className={`p-4 rounded-lg`}
             style={{
               backgroundColor:
-                selectedChannel === "voice" ? "#43434b" : "#2c2d30",
+                selectedChannel === "VOICE" ? "#43434b" : "#2c2d30",
             }}
           >
             <label
@@ -235,7 +264,7 @@ export const ChannelsList = () => {
                 id="voice"
                 name="channel"
                 value="voice"
-                checked={selectedChannel === "voice"}
+                checked={selectedChannel === "VOICE"}
                 onChange={handleSelection}
                 className="form-radio h-4 w-4 text-blue-600"
               />
@@ -268,7 +297,7 @@ export const ChannelsList = () => {
               backgroundColor: "#1e1f22",
               color: "#ebedf0",
             }}
-            value={newChannelName}
+            value={newChannelName.name}
             onChange={handleChange}
           />
         </div>
@@ -290,7 +319,11 @@ export const ChannelsList = () => {
             </div>
           </div>
           <div className="private-channel-switch">
-            <Switch />
+            <Switch
+              checked={isPrivateChannel}
+              onCheckedChange={() => setIsPrivateChannel(!isPrivateChannel)}
+              aria-readonly
+            />
           </div>
         </div>
 

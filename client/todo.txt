@@ -9,3 +9,5 @@
 - make better error handlig
 - make better UX with loader and other UI elements
 - find how to change state based on the shadcn's switch
+- add reoute guards
+- add lazy loading and other optimizations

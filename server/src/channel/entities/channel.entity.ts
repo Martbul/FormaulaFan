@@ -1,6 +1,6 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 import { User } from 'src/auth/entities/user.entity';
-import { Group } from './group.entity'; 
+import { Group } from 'src/group/entities/group.entity';
 
 @ObjectType()
 export class Channel {
@@ -11,10 +11,13 @@ export class Channel {
   name: string;
 
   @Field()
-  type: string;
+  type: 'TEXT' | 'VOICE';
 
-  @Field(() => User)
-  user: User;
+  @Field()
+  isPrivate: boolean;
+
+  // @Field(() => User)
+  // user: User;
 
   @Field(() => Group)
   group: Group;
