@@ -3,67 +3,66 @@ import { CreateGroupInput } from './dto/createGroup/create-group.input';
 import { UpdateGroupInput } from './dto/updateGroup/update-group.input';
 import { PrismaService } from 'src/prisma/prisma.service';
 
-
 @Injectable()
 export class GroupService {
-  constructor(
-    private prisma: PrismaService,
-  ) { }
-  
+  constructor(private prisma: PrismaService) {}
+
   async createGroup(createGroupInput: CreateGroupInput) {
     console.log(createGroupInput);
-    
-  const user = await this.prisma.user.findUnique({
-    where: { email: createGroupInput.email },
-    include: {
-      createdGroups: true,
-    },
-  });
-  if (!user) {
-    throw new NotFoundException('User not found');
-  }
-  
-    
-  const group = await this.prisma.group.create({
-    data: {
-      name: `${user.username}'s Group ${user.createdGroups.length + 1}`,
-      imageUrl: 'https://example.com/default-image.jpg',
-      inviteCode: 'WORKING ON IT',
-      creator: {
-        connect: { id: user.id },
+
+    const user = await this.prisma.user.findUnique({
+      where: { email: createGroupInput.email },
+      include: {
+        createdGroups: true,
       },
-      members: {
-        create: {
-          userId: user.id,
-          role: 'ADMIN',
+    });
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+
+    const group = await this.prisma.group.create({
+      data: {
+        name: `${user.username}'s Group ${user.createdGroups.length + 1}`,
+        imageUrl: 'https://example.com/default-image.jpg',
+        inviteCode: 'WORKING ON IT',
+        creator: {
+          connect: { id: user.id },
         },
-      },
-      channels: {
-        create: [
-          {
-            name: 'General',
-            type: 'TEXT',
+        members: {
+          create: {
+            userId: user.id,
+            role: 'ADMIN',
+          },
+        },
+        channels: {
+          create: [
+            {
+              name: 'General',
+              type: 'TEXT',
+              isPrivate: false,
+            },
+          ],
+        },
+        settings: {
+          create: {
+            allowComments: true,
             isPrivate: false,
           },
-        ],
-      },
-      settings: {
-        create: {
-          allowComments: true,
-          isPrivate: false,
         },
       },
-    },
-    include: {
-      creator: true,
-      members: true,
-      channels: true,
-      settings: true,
-    },
-  });
+      include: {
+        creator: true,
+        members: {
+          include: {
+            user: true,
+          },
+        },
+        channels: true,
+        settings: true,
+      },
+    });
 
-  return group;
-
+    return group;
   }
 
   async findAll() {
@@ -73,13 +72,13 @@ export class GroupService {
         members: {
           include: {
             user: true,
-            group: true
+            group: true,
           },
         },
         channels: true,
       },
     });
-    return allGroups
+    return allGroups;
   }
 
   async findOne(id: string) {
@@ -88,14 +87,19 @@ export class GroupService {
         id,
       },
       include: {
+        members: {
+          include: {
+            user: true,
+          },
+        },
         channels: true,
       },
     });
     if (!group) {
-      throw new NotFoundException("Group dosnt exist")
+      throw new NotFoundException('Group dosnt exist');
     }
 
-    return group
+    return group;
   }
 
   update(id: number, updateGroupInput: UpdateGroupInput) {

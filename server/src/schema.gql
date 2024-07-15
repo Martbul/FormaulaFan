@@ -17,6 +17,12 @@ type Channel {
   updatedAt: DateTime!
 }
 
+type Conversation {
+  id: String!
+  userOne: User!
+  userTwo: User!
+}
+
 input CreateChannelInput {
   channelName: String!
   channelType: String!
@@ -75,12 +81,15 @@ type Mutation {
   newChannel(createChannelInput: CreateChannelInput!): Channel!
   removeAuth(id: Int!): Auth!
   removeChannel(id: Int!): Channel!
+  removeConversation(id: Int!): Conversation!
   removeGroup(id: Int!): Group!
   removePost(id: Int!): Post!
   signIn(signInInput: SignInInput!): SignResponse!
   signUp(signUpInput: SignUpInput!): SignResponse!
+  startDirectConversation(startConversationInput: StartConversationInput!): Conversation!
   updateAuth(updateAuthInput: UpdateAuthInput!): Auth!
   updateChannel(updateChannelInput: UpdateChannelInput!): Channel!
+  updateConversation(updateConversationInput: UpdateConversationInput!): Conversation!
   updateGroup(updateGroupInput: UpdateGroupInput!): Group!
   updatePost(updatePostInput: UpdatePostInput!): Post!
 }
@@ -94,6 +103,7 @@ type Query {
   allGroups: [Group!]!
   auth(id: Int!): Auth!
   channel(id: Int!): Channel!
+  conversation(id: Int!): Conversation!
   post(id: Int!): Post!
   singleGroup(id: String!): Group!
 }
@@ -115,6 +125,11 @@ input SignUpInput {
   username: String!
 }
 
+input StartConversationInput {
+  userOneEmail: String!
+  userTwoId: String!
+}
+
 input UpdateAuthInput {
   email: String
   id: Int!
@@ -128,6 +143,12 @@ input UpdateChannelInput {
   groupId: String
   id: Int!
   isPrivate: Boolean
+}
+
+input UpdateConversationInput {
+  id: Int!
+  userOneEmail: String
+  userTwoId: String
 }
 
 input UpdateGroupInput {

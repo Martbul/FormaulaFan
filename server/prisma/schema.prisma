@@ -20,31 +20,30 @@ model User {
    posts    Post[]
    comments Comment[]
 
+   conversationsInitiated Conversation[] @relation("UserOne")
+   conversationsReceived  Conversation[] @relation("UserTwo")
+
+   direcetMessages DirectMessage[]
+
    settings UserSettings?
 
-   // followers User[] @relation("Followers", references: [id])
-   // following User[]
-   // friends User[]
-   // settings Settings
-   // bookmarks Post[]
-
-   createdGroups  Group[]
-   members        Member[]
+   createdGroups Group[]
+   members       Member[]
 }
 
 model UserSettings {
    id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
 
-   theme         String  @db.VarChar(50) @default("NORMAL")
+   theme         String  @default("NORMAL") @db.VarChar(50)
    notifications Boolean @default(false)
 
-   userId        String    @unique @db.Uuid
-   user          User      @relation(fields: [userId], references: [id])
+   userId String @unique @db.Uuid
+   user   User   @relation(fields: [userId], references: [id])
 }
 
 model Post {
    id           String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-   textContent  String  @db.VarChar(1000)
+   textContent  String   @db.VarChar(1000)
    imageContent String?  @db.VarChar(1000)
    videoContent String?  @db.VarChar(1000)
    createdAt    DateTime @default(now())
@@ -84,25 +83,23 @@ model Group {
    creatorId String @db.Uuid
    creator   User   @relation(fields: [creatorId], references: [id])
 
-   settings       GroupSettings?
-  
+   settings GroupSettings?
 
    members  Member[]
    channels Channel[]
 
-   createdAt       DateTime @default(now())
-   updatedAt       DateTime @updatedAt
- 
+   createdAt DateTime @default(now())
+   updatedAt DateTime @updatedAt
 }
 
 model GroupSettings {
-  id             String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+   id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
 
-  allowComments  Boolean        @default(true)
-  isPrivate      Boolean        @default(false)
+   allowComments Boolean @default(true)
+   isPrivate     Boolean @default(false)
 
-  group          Group          @relation(fields: [groupId], references: [id])
-  groupId        String         @unique @db.Uuid
+   groupId String @unique @db.Uuid
+   group   Group  @relation(fields: [groupId], references: [id])
 }
 
 enum MemberRole {
@@ -120,6 +117,8 @@ model Member {
    groupId String @db.Uuid
    group   Group  @relation(fields: [groupId], references: [id], onDelete: Cascade)
 
+   messages Message[]
+
    role MemberRole @default(MEMBER)
 
    createdAt DateTime @default(now())
@@ -135,14 +134,74 @@ enum ChannelType {
 }
 
 model Channel {
-   id   String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-   name String
-   type ChannelType @default(TEXT)
-   isPrivate Boolean @default(false)
+   id        String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+   name      String
+   type      ChannelType @default(TEXT)
+   isPrivate Boolean     @default(false)
 
    groupId String @db.Uuid
    group   Group  @relation(fields: [groupId], references: [id], onDelete: Cascade)
 
+   messages Message[]
+
    createdAt DateTime @default(now())
    updatedAt DateTime @updatedAt
+}
+
+model Message {
+   id      String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+   content String @db.Text
+
+   fileUrl String? @db.Text
+
+   memberId String @db.Uuid
+   member   Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
+
+   channelId String  @db.Uuid
+   channel   Channel @relation(fields: [channelId], references: [id], onDelete: Cascade)
+
+   deleted Boolean @default(false)
+
+   createdAt DateTime @default(now())
+   updatedAt DateTime @updatedAt
+
+   @@index([channelId])
+   @@index([memberId])
+}
+
+model Conversation {
+   id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+
+   userOneId String @db.Uuid
+   userOne   User   @relation("UserOne", fields: [userOneId], references: [id], onDelete: Cascade)
+
+   userTwoId String @db.Uuid
+   userTwo   User   @relation("UserTwo", fields: [userTwoId], references: [id], onDelete: Cascade)
+
+   directMessages DirectMessage[]
+
+   @@unique([userOneId, userTwoId])
+   @@index([userOneId])
+   @@index([userTwoId])
+}
+
+model DirectMessage {
+   id      String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+   content String @db.Text
+
+   fileUrl String? @db.Text
+
+   userId String @db.Uuid
+   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+   conversationId String       @db.Uuid
+   conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+   createdAt DateTime @default(now())
+   updatedAt DateTime @updatedAt
+
+   deleted Boolean @default(false)
+
+   @@index([userId])
+   @@index([conversationId])
 }

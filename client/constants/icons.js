@@ -32,6 +32,10 @@ import arrowDown from "../public/assets/icons/arrowDown.png";
 import padlock from "../public/assets/icons/padlock.png";
 import writePost from "../public/assets/icons/writePost.png";
 import searchWhite from "../public/assets/icons/searchWhite.png";
+import invitation from "../public/assets/icons/invitation.png";
+import groupImage from "../public/assets/icons/groupImage.png";
+import groupMembers from "../public/assets/icons/groupMembers.png";
+import greenOnlineCircle from "../public/assets/icons/greenOnlineCircle.png";
 
 
 export default {
@@ -69,4 +73,8 @@ export default {
   padlock,
   writePost,
   searchWhite,
+  invitation,
+  groupImage,
+  groupMembers,
+  greenOnlineCircle,
 };

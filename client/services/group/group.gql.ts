@@ -9,9 +9,14 @@ export const CREATE_GROUP_MUTATION = gql`
       # creator{
       #   username
       # }
-      members {
-        role
-      }
+     members{
+      role
+      id
+  user{
+    id
+    username
+  }
+}
       channels {
         name
       }
@@ -28,6 +33,13 @@ export const QUERY_GROUP_BY_ID = gql`
         name
         type
         isPrivate
+      }
+      members {
+        id
+        user {
+          id
+          username
+        }
       }
     }
   }

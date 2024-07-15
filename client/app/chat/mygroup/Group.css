@@ -13,19 +13,6 @@
     border-right: 1px solid #3a3a3a;
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
   
 .server-list {
   width: 60px;
@@ -61,7 +48,7 @@
   cursor: pointer;
 }
    
-.chan nel:hover {
+.channel:hover {
   background-color: #3a3c43;
   border-radius: 5px;
 }

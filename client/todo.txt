@@ -13,3 +13,4 @@
 - add lazy loading and other optimizations
 - dont allow creating of channels with the same name
 - uploding to firebase strage from the client is not secure(make it secure or upload from the server)
+- must place navifgation in the layuot.tsx caouse now every component has <Navigation/> (optimization)

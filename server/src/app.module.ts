@@ -8,6 +8,7 @@ import { ConfigModule } from '@nestjs/config';
 import { GroupModule } from './group/group.module';
 import { ChannelModule } from './channel/channel.module';
 import { PostModule } from './post/post.module';
+import { ConversationModule } from './conversation/conversation.module';
 @Module({
   imports: [
     ConfigModule.forRoot({isGlobal: true}),
@@ -20,6 +21,7 @@ import { PostModule } from './post/post.module';
     GroupModule,
     ChannelModule,
     PostModule,
+    ConversationModule,
   ],
   controllers: [],
   providers: [PrismaService],

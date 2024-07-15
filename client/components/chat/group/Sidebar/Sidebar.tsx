@@ -1,7 +1,7 @@
 import { ChannelsList } from "../channelsList/ChannelsList";
 import { MembersList } from "../MembersList/MembersList";
 import './Sidebar.css'
-export const Sidebar = ({groupId, name,channels,  }: any) => {
+export const Sidebar = ({groupId, name,channels,members  }: any) => {
    return (
      <div className="sidebar-layout">
        <div className="chatName-layout">
@@ -11,9 +11,7 @@ export const Sidebar = ({groupId, name,channels,  }: any) => {
        </div>
        <div className="rigthSide">
          <ChannelsList channels={channels} groupId={groupId} />
-         {/* //! za da vzemesh channel list na daden grupa ti trqbva neinoto id
-         //! ili vmesto da vzima id-to na grupata movesh ot grphql-a da vzemesh direktno servarite na grupata(spestqva[ 1 zaqvka kym bazata danni]) */}
-         <MembersList />
+         <MembersList members={members} />
        </div>
      </div>
    );

@@ -62,6 +62,7 @@ export default function Group ({ params }:any)  {
       groupId={groupData?.id}
       name={groupData?.name} 
       channels={groupData?.channels} 
+      members={groupData?.members} 
       />
 
     </div>
