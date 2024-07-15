@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateGroupInput } from './dto/createGroup/create-group.input';
 import { UpdateGroupInput } from './dto/updateGroup/update-group.input';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { AddUserToGroupInput } from './dto/updateGroup/add-user-to-group';
 
 @Injectable()
 export class GroupService {
@@ -100,6 +101,62 @@ export class GroupService {
     }
 
     return group;
+  }
+
+  
+  async findgroupsUserIsMember(email: string) {
+    const user = await this.prisma.user.findUnique({
+      where: { email: email },
+      include: {
+        members: true,
+      },
+    });
+    return user
+  }
+
+  async addUserToGroup(addUserToGroupInput: AddUserToGroupInput) {
+     const user = await this.prisma.user.findUnique({
+       where: { email: addUserToGroupInput.email },
+     }); 
+      if (!user) {
+        throw new Error(
+          `User with email ${addUserToGroupInput.email} not found.`,
+        );
+      }
+    
+    const group = await this.prisma.group.findUnique({
+      where: {
+        id: addUserToGroupInput.groupId
+      },
+    });
+
+      if (!group) {
+        throw new Error(
+          `Group with ID ${addUserToGroupInput.groupId} not found.`,
+        );
+    }
+    
+      const existingMember = await this.prisma.member.findFirst({
+        where: {
+          userId: user.id,
+          groupId: group.id,
+        },
+      });
+
+      if (existingMember) {
+        throw new Error(`User is already a member of the group.`);
+    }
+    
+     const newMember = await this.prisma.member.create({
+       data: {
+         userId: user.id,
+         groupId: group.id,
+         role: 'MEMBER'
+       },
+     });
+
+     return newMember;
+
   }
 
   update(id: number, updateGroupInput: UpdateGroupInput) {

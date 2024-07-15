@@ -1,5 +1,4 @@
 - Opravi createGroup graphql-a, trqbva ti samo id na grupata
-- Opravi members[], now a user can be member of only one group witch is false(user can be member of mulyple groups)
 - fix group images
 - when creating a new group then going to /groups the group is not showing
 - Napravi taka che findAllGroups i searchGroups da e edna funkciq i suchto funkciqta za vzimane na grupite v koit user e member(/chat/mygroups) moje da polzva sushtata funkciq s search queri negovoto id
@@ -14,3 +13,4 @@
 - dont allow creating of channels with the same name
 - uploding to firebase strage from the client is not secure(make it secure or upload from the server)
 - must place navifgation in the layuot.tsx caouse now every component has <Navigation/> (optimization)
+- when user logouts redirect to login and clear all states

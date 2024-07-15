@@ -4,6 +4,9 @@ import { Group } from './entities/group.entity';
 import { CreateGroupInput } from './dto/createGroup/create-group.input';
 import { UpdateGroupInput } from './dto/updateGroup/update-group.input';
 import { CreateGroupResponse } from './dto/createGroup/createGroup-response';
+import { AddUserToGroupInput } from './dto/updateGroup/add-user-to-group';
+import { Member } from './entities/members.entity';
+import { User } from 'src/auth/entities/user.entity';
 
 
 @Resolver(() => Group)
@@ -25,6 +28,20 @@ export class GroupResolver {
   @Query(() => Group)
   singleGroup(@Args('id') id: string) {
     return this.groupService.findOne(id);
+  }
+
+  @Query(() => User)
+  groupsUserIsMember(@Args('email') email: string) {
+    return this.groupService.findgroupsUserIsMember(email);
+  }
+
+  @Mutation(() => Member)
+  addedUserToGroup(
+    @Args('addUserToGroupInput') addUserToGroupInput: AddUserToGroupInput,
+  ) {
+    console.log(addUserToGroupInput);
+
+    return this.groupService.addUserToGroup(addUserToGroupInput);
   }
 
   @Mutation(() => Group)

@@ -53,7 +53,33 @@ export const QUERY_ALL_GROUPS = gql`
       imageUrl
       members{
         id
+        user{
+          email
+        }
       }
+    }
+  }
+`;
+
+//! working here
+export const QUERY_GROUPS_BY_USER_EMAIL = gql`
+query getGroupsByUserEmail($email:String!){
+  groupsUserIsMember(email:$email){
+    name
+    image
+    members{
+      name
+    }
+  }
+}
+`
+
+export const ADD_USER_TO_GROUP_MUTATION = gql`
+  mutation addUserAsMemberOfGroup($email: String!, $groupId: String!) {
+    addedUserToGroup(
+      addUserToGroupInput: { email: $email, groupId: $groupId }
+    ) {
+      id
     }
   }
 `;

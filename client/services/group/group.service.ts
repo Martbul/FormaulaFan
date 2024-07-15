@@ -1,6 +1,6 @@
 import { ApolloError } from "@apollo/client";
 import createApolloClient from "../../apollo-client";
-import { CREATE_GROUP_MUTATION,QUERY_GROUP_BY_ID, QUERY_ALL_GROUPS } from "./group.gql";
+import { CREATE_GROUP_MUTATION,QUERY_GROUP_BY_ID, QUERY_ALL_GROUPS,QUERY_GROUPS_BY_USER_EMAIL, ADD_USER_TO_GROUP_MUTATION} from "./group.gql";
 
 const client = createApolloClient();
 
@@ -67,6 +67,56 @@ export async function getAllGroups() {
     const groups = data.allGroups;
 
     return groups;
+  } catch (error) {
+    if (error instanceof ApolloError) {
+      console.error("GraphQL error details:", error.graphQLErrors);
+      console.error("Network error details:", error.networkError);
+    } else {
+      console.error("Unknown error:", error);
+    }
+    throw error;
+  }
+}
+
+
+export async function getGroupByUserEmail(email: string) {
+  console.log(email);
+  
+   try {
+    const { data } = await client.query({
+      query: QUERY_GROUPS_BY_USER_EMAIL,
+      variables: { email },
+    });
+
+    const groups = data.groupsUserIsMember;
+   
+ 
+  
+    return groups;
+  } catch (error) {
+    if (error instanceof ApolloError) {
+      console.error("GraphQL error details:", error.graphQLErrors);
+      console.error("Network error details:", error.networkError);
+    } else {
+      console.error("Unknown error:", error);
+    }
+    throw error;
+  }
+}
+
+
+export async function addUserAsAMember(email: string, groupId: string) {
+
+  
+   try {
+    const { data } = await client.mutate({
+      mutation: ADD_USER_TO_GROUP_MUTATION,
+      variables: {  email ,groupId},
+    });
+     
+    const result = data.addedUserToGroup;
+
+    return result;
   } catch (error) {
     if (error instanceof ApolloError) {
       console.error("GraphQL error details:", error.graphQLErrors);
