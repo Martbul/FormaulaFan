@@ -12,14 +12,25 @@ export const START_DIRECT_CONVERATION = gql`
       }
     ) {
       id
-      userOne{
-        id
-        username
-      }
-      userTwo{
-        id
-        username
-      }
     }
   }
 `;
+
+
+export const GET_CONVERSATION_USERS_DATA=gql`
+query getConversationData($conversationId:String!, $currUserEmail:String!){
+  conversationData(id:$conversationId, email:$currUserEmail){
+    conversation{
+      id
+    }
+    currentUser{
+      id
+      username
+    }
+    conversationUser{
+      id
+      username
+    }
+  }
+}
+`

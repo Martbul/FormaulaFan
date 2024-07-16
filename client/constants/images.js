@@ -7,6 +7,7 @@ import logo from "../public/assets/images/logo.png";
 import madridNews from "../public/assets/images/madridNews.jpg";
 import f1RaceCalendar from "../public/assets/images/f1RaceCalendar.jpg";
 import crashLanceStroll from "../public/assets/images/crashLanceStroll.jpg";
+import backgroundImage from "../public/assets/images/backgroundImage.webp";
 
 export default {
   redBull,
@@ -18,4 +19,5 @@ export default {
   madridNews,
   f1RaceCalendar,
   crashLanceStroll,
+  backgroundImage,
 };

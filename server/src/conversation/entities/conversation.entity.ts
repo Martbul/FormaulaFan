@@ -13,3 +13,4 @@ export class Conversation {
   @Field(() => User)
   userTwo: User;
 }
+

@@ -32,6 +32,8 @@ export class GroupResolver {
 
   @Query(() => User)
   groupsUserIsMember(@Args('email') email: string) {
+    console.log(email);
+    
     return this.groupService.findgroupsUserIsMember(email);
   }
 

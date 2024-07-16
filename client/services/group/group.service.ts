@@ -85,14 +85,20 @@ export async function getGroupByUserEmail(email: string) {
    try {
     const { data } = await client.query({
       query: QUERY_GROUPS_BY_USER_EMAIL,
-      variables: { email },
+   variables:{email}
     });
 
-    const groups = data.groupsUserIsMember;
+     const result = data.groupsUserIsMember;
+     console.log('result',result);
+     
+     const userGroups = []
+     result.members.map((member) => {
+       userGroups.push(member.group)
+     })
    
  
   
-    return groups;
+    return userGroups;
   } catch (error) {
     if (error instanceof ApolloError) {
       console.error("GraphQL error details:", error.graphQLErrors);

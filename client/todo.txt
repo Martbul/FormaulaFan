@@ -14,3 +14,6 @@
 - uploding to firebase strage from the client is not secure(make it secure or upload from the server)
 - must place navifgation in the layuot.tsx caouse now every component has <Navigation/> (optimization)
 - when user logouts redirect to login and clear all states
+- fix images of groups(also uploding to cloud )
+- add way creator of group to interact with settings
+- disply people a user has chatted with(conversations in /chat/mygroups -> <Sidebar/>)

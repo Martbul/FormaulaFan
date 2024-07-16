@@ -1,36 +1,48 @@
 'use client'
 
 import Navigation from '@/components/navigation/Navigation';
-import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { ChatArea } from '@/components/chat/group/ChatArea/ChatArea';
 import { Sidebar } from '@/components/chat/group/Sidebar/Sidebar'
 import "./DirectConversation.css";
-const ChatPage = () => {
+import { getConversationUsersByConvIdAndEmail } from '@/services/conversation/conversation.service';
+import { useAuthContext } from "@/contexts/AuthContext2";
+import { DirectChatArea } from '@/components/chat/directChat/directChatArea/DirectChatArea';
 
-   const searchParams = useSearchParams()
- 
-  const userOne = searchParams.get('userOne')
-  const userTwo = searchParams.get('userTwo')
-  const [userOneObject, setUserOneObject] = useState(null);
-  const [userTwoObject, setUserTwoObject] = useState(null);
 
-   useEffect(() => {
-    
+const ChatPage = ({ params }:any) => {
+  const { user } = useAuthContext();
+  const [conversationData, setConversationData] = useState(null)
+  const [conversationUser, setConversationUser] = useState(null)
+  const [currentUser, setCurrentUser] = useState(null)
+   const [loading, setLoading] = useState(true); 
+
+  useEffect(() =>{
+    const getConversationUsers = async () => {
       try {
-        const parsedUserOne = JSON.parse(decodeURIComponent(userOne));
-        const parsedUserTwo = JSON.parse(decodeURIComponent(userTwo));
-        setUserOneObject(parsedUserOne);
-        setUserTwoObject(parsedUserTwo);
-      } catch (error) {
-        console.error('Error parsing user data:', error);
+          if (!user || !user.email) {
+             console.log("User or user email is not defined");
+             return;
+           }
+           const {conversation,conversationUser,currentUser} = await getConversationUsersByConvIdAndEmail(params.conversationId, user.email)
+      if (!conversation || !conversationUser || !currentUser) {
+        console.error("Something went wrong with conversation details");
+        return;
       }
-    
-  },[]);
 
-  if ( !userOneObject || !userTwoObject) {
-    return <div>Loading...</div>;
-  }
+      setConversationData(conversation)
+setConversationUser(conversationUser)
+setCurrentUser(currentUser)
+
+    } catch (error) {
+            console.error("Error fetching user groups:", error);
+         } finally {
+           setLoading(false);
+         }
+   
+    } 
+    getConversationUsers()
+
+  },[user])
 
   return (
 
@@ -40,7 +52,7 @@ const ChatPage = () => {
         <Navigation/>
       </div>
       
-      <ChatArea />
+      <DirectChatArea  conversationData={conversationData} conversationUser={conversationUser} currentUser={currentUser}/>
       
       {/* <Sidebar
       // groupId={groupData?.id}

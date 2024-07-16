@@ -20,3 +20,7 @@
   flex-direction: column;
 }
 
+.group-cards-layout{
+  display: flex;
+  flex-direction: row;
+}

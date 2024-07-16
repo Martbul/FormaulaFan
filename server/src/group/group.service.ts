@@ -108,7 +108,31 @@ export class GroupService {
     const user = await this.prisma.user.findUnique({
       where: { email: email },
       include: {
-        members: true,
+        members: {
+          include: {
+            group: {
+              include: {
+                members: true,
+              },
+            },
+          },
+        },
+        // conversationsInitiated: {
+        //   include: {
+        //     userOne: {
+
+        //     }
+        //     userTwo: true
+        //   }
+        // },
+        // conversationsReceived: {
+        //   include: {
+        //     userOne: true,
+        //     userTwo: true
+        //   }
+        // }
+        conversationsInitiated: true,
+        conversationsReceived:true
       },
     });
     return user

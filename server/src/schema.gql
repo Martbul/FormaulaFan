@@ -28,6 +28,12 @@ type Conversation {
   userTwo: User!
 }
 
+type ConversationData {
+  conversation: Conversation!
+  conversationUser: User!
+  currentUser: User!
+}
+
 input CreateChannelInput {
   channelName: String!
   channelType: String!
@@ -109,7 +115,8 @@ type Query {
   allGroups: [Group!]!
   auth(id: Int!): Auth!
   channel(id: Int!): Channel!
-  conversation(id: Int!): Conversation!
+  conversation: [Conversation!]!
+  conversationData(email: String!, id: String!): ConversationData!
   groupsUserIsMember(email: String!): User!
   post(id: Int!): Post!
   singleGroup(id: String!): Group!
@@ -171,8 +178,11 @@ input UpdatePostInput {
 }
 
 type User {
+  conversationsInitiated: [Conversation!]!
+  conversationsReceived: [Conversation!]!
   createdGroups: [Group!]!
   email: String!
   id: String!
+  members: [Member!]!
   username: String!
 }

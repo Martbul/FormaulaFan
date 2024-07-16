@@ -31,20 +31,21 @@ export const MembersList = ({ members }: any) => {
 
   const handleStartConversation = async (memberTwoId: string) => {
     const memberOneEmail = user.email;
-    console.log(memberOneEmail, memberTwoId);
+   
     const result = await startDirectConversation(memberOneEmail, memberTwoId);
     const conversationId = result.id;
-    const userOne = result.userOne;
-    const userTwo = result.userTwo;
+    // const userOne = result.userOne;
+    // const userTwo = result.userTwo;
     if (!result) {
       console.log("Error starting a conversation");
     }
-    console.log(result);
+   
        
-      const queryString = `?userOne=${encodeURIComponent(
-        JSON.stringify(userOne)
-      )}&userTwo=${encodeURIComponent(JSON.stringify(userTwo))}`;
-      router.push(`/chat/direct/${conversationId}${queryString}`);
+      // const queryString = `?userOne=${encodeURIComponent(
+      //   JSON.stringify(userOne)
+      // )}&userTwo=${encodeURIComponent(JSON.stringify(userTwo))}`;
+      // router.push(`/chat/direct/${conversationId}${queryString}`);
+      router.push(`/chat/direct/${conversationId}`);
   };
 
   const handleCopy = () => {
@@ -55,7 +56,6 @@ export const MembersList = ({ members }: any) => {
   };
   return (
     <>
-    
       <Dialog>
         <div className="members-list remove-selecting-text">
           <div className="text-channels-header">
@@ -110,12 +110,20 @@ export const MembersList = ({ members }: any) => {
             <>
               {members &&
                 members.map((member, index) => (
-                  <div
-                    key={index}
-                    className="member"
-                    onClick={() => handleStartConversation(member.user.id)}
-                  >
-                    {member.user.username}
+                  <div className="flex  items-center">
+                    <Image
+                      className="w-7 h-7"
+                      src={icons.chatUserImage}
+                      alt=""
+                    />
+
+                    <div
+                      key={index}
+                      className="member"
+                      onClick={() => handleStartConversation(member.user.id)}
+                    >
+                      {member.user.username}
+                    </div>
                   </div>
                 ))}
             </>

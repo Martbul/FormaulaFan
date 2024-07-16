@@ -1,61 +1,4 @@
 
-  // async startCoversation(startConversationInput: StartConversationInput) {
-  //   const memberOne = await this.prisma.member.findFirst({
-  //     where: {
-  //       user: {
-  //         email: startConversationInput.memberOneEmail,
-  //       },
-  //     },
-  //     include: {
-  //       user: true,
-  //     },
-  //   });
-
-  //   if (!memberOne) {
-  //     throw new NotFoundException('member one was not found');
-  //   }
-
-  //   if (memberOne.id === startConversationInput.memberTwoId) {
-  //     throw new BadRequestException('cannot message yourself')
-  //   }
-
-  //   const existingConversation = await this.prisma.conversation.findUnique({
-  //     where: {
-  //       memberOneId_memberTwoId: {
-  //         memberOneId: memberOne.id,
-  //         memberTwoId: startConversationInput.memberTwoId,
-  //       },
-  //     },
-  //     include: {
-  //       memberOne: true,
-  //       memberTwo: true,
-  //     },
-  //   });
-    
-  //   if (existingConversation) {
-  //       console.log(existingConversation);
-  //     console.log('Conversation already exists');
-  //     return existingConversation
-      
-  //   }
-
-  //   const createConversation = await this.prisma.conversation.create({
-  //     data: {
-  //       memberOneId: memberOne.id,
-  //       memberTwoId: startConversationInput.memberTwoId,
-  //     },
-  //     include: {
-  //       memberOne: true,
-  //       memberTwo: true,
-  //     },
-  //   });
-
-  //   console.log(createConversation);
-    
-
-  //   return createConversation;
-  // } 
-
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { StartConversationInput } from './dto/start-conversation.input';
 import { UpdateConversationInput } from './dto/update-conversation.input';
@@ -114,13 +57,11 @@ export class ConversationService {
       },
     });
 
-    console.log(createConversation);
+    console.log('createConversation',createConversation);
     
 
     return createConversation;
   } 
-  //! DATA I WILL NEED: ...
-  //! when returning the converation must include user names, id and all data neede to cojntinue in the directMessags
 
 
 
@@ -128,8 +69,32 @@ export class ConversationService {
     return `This action returns all conversation`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} conversation`;
+  async findConversationAndCurrentUser(id: string, email: string) {
+     const currentUser = await this.prisma.user.findUnique({
+       where: { email: email },
+     });
+    
+    const conversation = await this.prisma.conversation.findUnique({
+      where: {
+        id: id,
+      },
+      include: {
+        userOne: true,
+        userTwo: true,
+      },
+    });
+    
+      let conversationUser;
+
+      
+      if (conversation.userOne.id !== currentUser.id) {
+        conversationUser = conversation.userOne;
+      } else if (conversation.userTwo.id !== currentUser.id) {
+        conversationUser = conversation.userTwo;
+      }
+
+
+    return { conversation, currentUser, conversationUser };
   }
 
   update(id: number, updateConversationInput: UpdateConversationInput) {

@@ -43,7 +43,7 @@
     margin: 0;
     font-size: 20px;
     font-weight: bold;
-    color: gray;
+    color: #808080;
   }
 
   .menuItemText p:hover {

@@ -36,6 +36,13 @@ import invitation from "../public/assets/icons/invitation.png";
 import groupImage from "../public/assets/icons/groupImage.png";
 import groupMembers from "../public/assets/icons/groupMembers.png";
 import greenOnlineCircle from "../public/assets/icons/greenOnlineCircle.png";
+import homeActive from "../public/assets/icons/homeActive.png";
+import searchActive from "../public/assets/icons/searchActive.png";
+import bellActive from "../public/assets/icons/bellActive.png";
+import groupActive from "../public/assets/icons/groupActive.png";
+import bookmarkActive from "../public/assets/icons/bookmarkActive.png";
+import settingsActive from "../public/assets/icons/settingsActive.png";
+import chatUserImage from "../public/assets/icons/chatUserImage.png";
 
 
 export default {
@@ -77,4 +84,11 @@ export default {
   groupImage,
   groupMembers,
   greenOnlineCircle,
+  homeActive,
+  searchActive,
+  bellActive,
+  groupActive,
+  bookmarkActive,
+  settingsActive,
+  chatUserImage
 };

@@ -9,9 +9,10 @@ import { GroupModule } from './group/group.module';
 import { ChannelModule } from './channel/channel.module';
 import { PostModule } from './post/post.module';
 import { ConversationModule } from './conversation/conversation.module';
+import { WebsocketGateway } from './websocket/websocket.gateway';
 @Module({
   imports: [
-    ConfigModule.forRoot({isGlobal: true}),
+    ConfigModule.forRoot({ isGlobal: true }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), './src/schema.gql'),
@@ -24,6 +25,6 @@ import { ConversationModule } from './conversation/conversation.module';
     ConversationModule,
   ],
   controllers: [],
-  providers: [PrismaService],
+  providers: [PrismaService, WebsocketGateway],
 })
 export class AppModule {}

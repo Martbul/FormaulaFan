@@ -27,8 +27,11 @@ const Navigation = () => {
     }else{
       return "menuItemText"
     }
-
   };
+
+  const getMenuItemActiveImage = (path) => pathname.includes(path);
+
+
 
   return (
     <div className="menu remove-selecting-text">
@@ -41,7 +44,12 @@ const Navigation = () => {
 
         <Link className="menuItem" href="/posts">
           <div className="menuItemImage ">
-            <Image src={icons.blog} alt="" />
+            <Image
+              src={
+                getMenuItemActiveImage("/posts") ? icons.homeActive : icons.home
+              }
+              alt=""
+            />
           </div>
           <div className={getMenuItemClass("/posts")}>
             <p>Home</p>
@@ -50,40 +58,62 @@ const Navigation = () => {
 
         <Link className="menuItem" href="/groups">
           <div className="menuItemImage">
-            <Image src={icons.glass} alt="" />
+            <Image
+              src={
+                getMenuItemActiveImage("/groups")
+                  ? icons.searchActive
+                  : icons.search
+              }
+              alt=""
+            />
           </div>
           <div className={getMenuItemClass("/groups")}>
             <p>Groups</p>
           </div>
         </Link>
 
-        <Link
-          className="menuItem"
-          href="/notifications"
-        >
+        <Link className="menuItem" href="/alerts">
           <div className="menuItemImage">
-            <Image src={icons.bell} alt="" />
+            <Image
+              src={
+                getMenuItemActiveImage("/alerts")
+                  ? icons.bellActive
+                  : icons.bell
+              }
+              alt=""
+            />
           </div>
-          <div className={getMenuItemClass("/notifications")}>
-            <p>Notifications</p>
+          <div className={getMenuItemClass("/alerts")}>
+            <p>Alerts</p>
           </div>
         </Link>
 
-        <Link
-          className="menuItem"
-          href="/chat/mygroups"
-        >
+        <Link className="menuItem" href="/chat/mygroups">
           <div className="menuItemImage">
-            <Image src={icons.group} alt="" />
+              <Image
+              src={
+                getMenuItemActiveImage("/chat/mygroups")
+                  ? icons.groupActive
+                  : icons.group
+              }
+              alt=""
+            />
           </div>
-          <div  className={getMenuItemClass("/chat/mygroup")}>
+          <div className={getMenuItemClass("/chat/mygroup")}>
             <p>Chat</p>
           </div>
         </Link>
 
         <Link className="menuItem" href="/group1">
           <div className="menuItemImage">
-            <Image src={icons.bookmark} alt="" />
+          <Image
+              src={
+                getMenuItemActiveImage("/group1")
+                  ? icons.bookmarkActive
+                  : icons.bookmark
+              }
+              alt=""
+            />
           </div>
           <div className={getMenuItemClass("/group1")}>
             <p>Bookmarks</p>
@@ -92,7 +122,14 @@ const Navigation = () => {
 
         <Link className="menuItem" href="/settings">
           <div className="menuItemImage">
-            <Image src={icons.settings} alt="" />
+            <Image
+              src={
+                getMenuItemActiveImage("/settings")
+                  ? icons.settingsActive
+                  : icons.settings
+              }
+              alt=""
+            />
           </div>
           <div className={getMenuItemClass("/settings")}>
             <p>Settings</p>
