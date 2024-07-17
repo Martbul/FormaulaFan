@@ -9,3 +9,19 @@ mutation createChannel($channelType: String!, $channelName:String!, $isPrivate:B
   }
 }
 `
+
+export const QUERY_ALL_CHANNEL_MESSAGES=gql`
+query getAllChannelMessages($channelId:String!){
+  allChannelMessages(id:$channelId){
+    id
+    content
+    member{
+      id
+      user{
+        id
+        username
+      }
+    }
+  }
+}
+`

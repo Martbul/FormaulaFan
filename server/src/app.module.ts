@@ -9,7 +9,7 @@ import { GroupModule } from './group/group.module';
 import { ChannelModule } from './channel/channel.module';
 import { PostModule } from './post/post.module';
 import { ConversationModule } from './conversation/conversation.module';
-import { WebsocketGateway } from './websocket/websocket.gateway';
+import { GatewayModule } from './gateway/gateway.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -23,8 +23,9 @@ import { WebsocketGateway } from './websocket/websocket.gateway';
     ChannelModule,
     PostModule,
     ConversationModule,
+    GatewayModule,
   ],
   controllers: [],
-  providers: [PrismaService, WebsocketGateway],
+  providers: [PrismaService],
 })
 export class AppModule {}

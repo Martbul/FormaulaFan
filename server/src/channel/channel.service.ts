@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CreateChannelInput } from './dto/create-channel.input';
+import { CreateChannelInput } from './dto/create-message.input';
 import { UpdateChannelInput } from './dto/update-channel.input';
 import { PrismaService } from 'src/prisma/prisma.service';
 
@@ -16,12 +16,12 @@ export class ChannelService {
         groupId: createChannelInput.groupId,
       },
       include: {
-        group:true
+        group: true,
       },
     });
-  
-  return channel
-}
+
+    return channel;
+  }
 
   findAll() {
     return `This action returns all channel`;

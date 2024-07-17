@@ -1,6 +1,6 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { ChannelService } from './channel.service';
-import { CreateChannelInput } from './dto/create-channel.input';
+import { CreateChannelInput } from './dto/create-message.input';
 import { UpdateChannelInput } from './dto/update-channel.input';
 import { Channel } from './entities/channel.entity';
 
@@ -13,7 +13,7 @@ export class ChannelResolver {
     @Args('createChannelInput') createChannelInput: CreateChannelInput,
   ) {
     console.log(createChannelInput);
-    
+
     return this.channelService.create(createChannelInput);
   }
 

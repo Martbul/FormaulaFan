@@ -1,4 +1,4 @@
-import { CreateChannelInput } from './create-channel.input';
+import { CreateChannelInput } from './create-message.input';
 import { InputType, Field, Int, PartialType } from '@nestjs/graphql';
 
 @InputType()

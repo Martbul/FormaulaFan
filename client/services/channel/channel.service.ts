@@ -1,6 +1,6 @@
 import { ApolloError } from "@apollo/client";
 import createApolloClient from "../../apollo-client";
-import { CREATE_CHANNEL_MUTATION } from "./channel.gql";
+import { CREATE_CHANNEL_MUTATION ,QUERY_ALL_CHANNEL_MESSAGES} from "./channel.gql";
 
 const client = createApolloClient();
 
@@ -18,6 +18,28 @@ export async function createChannel(
 
     const channel = data.newChannel;
     return channel;
+  } catch (error) {
+    if (error instanceof ApolloError) {
+      console.error("GraphQL error details:", error.graphQLErrors);
+      console.error("Network error details:", error.networkError);
+    } else {
+      console.error("Unknown error:", error);
+    }
+    throw error;
+  }
+}
+
+
+export async function getAllTextChannelMessagesByChannelId(channelId:string){
+  try {
+    const { data } = await client.query({
+      query: QUERY_ALL_CHANNEL_MESSAGES,
+      variables: { channelId },
+    });
+
+    const result = data.allChannelMessages;
+  
+    return result;
   } catch (error) {
     if (error instanceof ApolloError) {
       console.error("GraphQL error details:", error.graphQLErrors);

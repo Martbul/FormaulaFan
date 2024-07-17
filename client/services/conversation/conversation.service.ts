@@ -1,9 +1,11 @@
 import { ApolloError } from "@apollo/client";
 import createApolloClient from "../../apollo-client";
-import { START_DIRECT_CONVERATION,GET_CONVERSATION_USERS_DATA } from "./conversation.gql";
+import {
+  START_DIRECT_CONVERATION,
+  GET_CONVERSATION_USERS_DATA,
+} from "./conversation.gql";
 
 const client = createApolloClient();
-
 
 export async function startDirectConversation(
   userOneEmail: string,
@@ -29,18 +31,20 @@ export async function startDirectConversation(
   }
 }
 
-
-export async function getConversationUsersByConvIdAndEmail(conversationId: string, currUserEmail: string) {
+export async function getConversationUsersByConvIdAndEmail(
+  conversationId: string,
+  currUserEmail: string
+) {
   console.log(currUserEmail);
-  
-   try {
+
+  try {
     const { data } = await client.query({
       query: GET_CONVERSATION_USERS_DATA,
-      variables: { conversationId ,currUserEmail},
+      variables: { conversationId, currUserEmail },
     });
 
     const result = data.conversationData;
-    console.log(result)
+    console.log(result);
 
     return result;
   } catch (error) {

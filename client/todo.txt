@@ -17,3 +17,6 @@
 - fix images of groups(also uploding to cloud )
 - add way creator of group to interact with settings
 - disply people a user has chatted with(conversations in /chat/mygroups -> <Sidebar/>)
+- if user has no group display some text of cool image
+- when 4 people chat(2 seperate groups of 2 people) ther messages mesh up
+- add pagination to querying(displaying) channel messages

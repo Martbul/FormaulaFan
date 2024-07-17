@@ -22,12 +22,14 @@ export default function Group ({ params }:any)  {
   
   const [groupData, setGroupData] = useState<Group | null>(null)
   const [error, setError] = useState(null)
+  const [selectedChatChannelId, setSelectedChatChannelId] = useState(null); //! change useState to group > channels > [0].id
 
   const getGroupData = async () => {
     try {
       const group = await getGroupById(params.groupId);
       console.log('GROUP', group);
       setGroupData(group);
+      setSelectedChatChannelId(group?.channels[0].id)
     } catch (error) {
       console.log(error);
       setError(error);
@@ -51,20 +53,19 @@ export default function Group ({ params }:any)  {
 
   return (
     <div className="discord-server">
-
       <div className="left">
-        <Navigation/>
+        <Navigation />
       </div>
-      
-      <ChatArea />
-      
-      <Sidebar
-      groupId={groupData?.id}
-      name={groupData?.name} 
-      channels={groupData?.channels} 
-      members={groupData?.members} 
-      />
 
+      <ChatArea selectedChatChannelId={selectedChatChannelId}  groupId={groupData?.id} />
+
+      <Sidebar
+        groupId={groupData?.id}
+        name={groupData?.name}
+        channels={groupData?.channels}
+        members={groupData?.members}
+        seSelectedChatChannelId={setSelectedChatChannelId} //! contifnue implementig functionality
+      />
     </div>
   );
 };

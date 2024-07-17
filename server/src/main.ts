@@ -7,7 +7,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
 
-  app.useWebSocketAdapter(new IoAdapter(app)); // Set up the IoAdapter for Socket.IO
+  // app.useWebSocketAdapter(new IoAdapter(app)); // Set up the IoAdapter for Socket.IO
 
   // Enable CORS
   app.enableCors();

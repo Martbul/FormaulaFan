@@ -30,6 +30,7 @@ export const QUERY_GROUP_BY_ID = gql`
     singleGroup(id: $id) {
       name
       channels {
+        id
         name
         type
         isPrivate

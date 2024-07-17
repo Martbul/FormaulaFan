@@ -19,19 +19,21 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useRouter } from 'next/navigation';
+import { useWebsocketContext } from "@/contexts/WebsocketContext";
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useAuthContext } from "@/contexts/AuthContext2";
 import { startDirectConversation } from "@/services/conversation/conversation.service";
 export const MembersList = ({ members }: any) => {
+    const socket = useWebsocketContext()
+
   const { user } = useAuthContext();
     const router = useRouter();
   const [membersListVisible, setMembersListVisible] = useState(true);
 
   const handleStartConversation = async (memberTwoId: string) => {
     const memberOneEmail = user.email;
-   
     const result = await startDirectConversation(memberOneEmail, memberTwoId);
     const conversationId = result.id;
     // const userOne = result.userOne;
@@ -124,6 +126,7 @@ export const MembersList = ({ members }: any) => {
                     >
                       {member.user.username}
                     </div>
+                    {/* {onlineUsers && (<p>{onlineUsers[0]}</p>)} */}
                   </div>
                 ))}
             </>
