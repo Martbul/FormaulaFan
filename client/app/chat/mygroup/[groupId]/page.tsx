@@ -57,14 +57,18 @@ export default function Group ({ params }:any)  {
         <Navigation />
       </div>
 
-      <ChatArea selectedChatChannelId={selectedChatChannelId}  groupId={groupData?.id} />
+      <ChatArea
+        selectedChatChannelId={selectedChatChannelId}
+        groupId={groupData?.id}
+      />
 
       <Sidebar
         groupId={groupData?.id}
         name={groupData?.name}
         channels={groupData?.channels}
         members={groupData?.members}
-        seSelectedChatChannelId={setSelectedChatChannelId} //! contifnue implementig functionality
+        setSelectedChatChannelId={setSelectedChatChannelId}
+        selectedChatChannelId={selectedChatChannelId}
       />
     </div>
   );

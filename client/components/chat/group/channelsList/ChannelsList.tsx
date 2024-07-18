@@ -19,7 +19,7 @@ import {
 import { Switch } from "@/components/ui/switch";
 import { createChannel } from "@/services/channel/channel.service";
 
-export const ChannelsList = ({ channels, groupId }: any) => {
+export const ChannelsList = ({ channels, groupId, setSelectedChatChannelId,selectedChatChannelId }: any) => {
   const [textChannels, setTextChannels] = useState([]);
   const [voiceChannels, setVoiceChannels] = useState([]);
 
@@ -60,22 +60,25 @@ export const ChannelsList = ({ channels, groupId }: any) => {
       isPrivateChannel,
       groupId
     );
-if(newChannel){
-if(newChannel.type =="TEXT"){
-      setTextChannels(prevTextChannels => [...prevTextChannels, newChannel]);
-    }
-      else if(newChannel.type =="VOICE"){
-          setVoiceChannels(prevVoiceChannels => [...prevVoiceChannels, newChannel]);
+    if (newChannel) {
+      if (newChannel.type == "TEXT") {
+        setTextChannels((prevTextChannels) => [
+          ...prevTextChannels,
+          newChannel,
+        ]);
+      } else if (newChannel.type == "VOICE") {
+        setVoiceChannels((prevVoiceChannels) => [
+          ...prevVoiceChannels,
+          newChannel,
+        ]);
       }
     }
-}
-    
-   
- 
+  };
+
   useEffect(() => {
     if (channels && channels.length > 0) {
       // console.log(channels);
-      
+
       const newTextChannels = channels.filter(
         (channel) => channel.type === "TEXT"
       );
@@ -85,7 +88,7 @@ if(newChannel.type =="TEXT"){
       setTextChannels(newTextChannels);
       setVoiceChannels(newVoiceChannels);
     }
-  }, [channels]); 
+  }, [channels]);
 
   return (
     <AlertDialog>
@@ -141,7 +144,11 @@ if(newChannel.type =="TEXT"){
           {textChannelsVisible === true && (
             <>
               {textChannels.map((channel, index) => (
-                <div className="textChannel" key={index}>
+                <div
+              className={channel.id === selectedChatChannelId ? "textChannel textChannelSelected":"textChannel"}
+                  key={index}
+                  onClick={() => setSelectedChatChannelId(channel.id)}
+                >
                   <p>{channel.name}</p>
                 </div>
               ))}

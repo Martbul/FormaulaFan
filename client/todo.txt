@@ -1,8 +1,8 @@
 - Opravi createGroup graphql-a, trqbva ti samo id na grupata
 - fix group images
-- when creating a new group then going to /groups the group is not showing
+
 - Napravi taka che findAllGroups i searchGroups da e edna funkciq i suchto funkciqta za vzimane na grupite v koit user e member(/chat/mygroups) moje da polzva sushtata funkciq s search queri negovoto id
-- stop cashing the data in when getting all groups
+
 - add model Profile in prisma schema(1-to-1)
 - implement validation for creating user, creating group and creating new channels
 - make better error handlig

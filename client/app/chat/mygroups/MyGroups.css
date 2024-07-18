@@ -14,13 +14,15 @@
   }
 
 .my-groups-area {
-  flex-grow: 1;
+   display: flex;
   background-color: #323338;
-  display: flex;
+
   flex-direction: column;
 }
 
 .group-cards-layout{
   display: flex;
   flex-direction: row;
+    flex-wrap:wrap;
+ justify-content: center;
 }

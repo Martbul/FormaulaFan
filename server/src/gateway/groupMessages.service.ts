@@ -37,6 +37,12 @@ export class GroupMessagesService {
       },
     });
 
-    return newMessage;
+    let messageWithUserData = {
+      ...newMessage,
+      senderId:senderUser.id,
+     senderUsername: senderUser.username,
+    };
+
+    return messageWithUserData;
   }
 }

@@ -15,6 +15,12 @@
   border-radius: 5px;
 }
 
+
+.textChannelSelected {
+  background-color: #3a3c43;
+  border-radius: 5px;
+}
+
 .text-channels-header{
    display: flex;
   padding: 5px;

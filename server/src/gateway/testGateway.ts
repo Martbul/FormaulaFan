@@ -165,6 +165,9 @@ export class SocketGateway implements OnGatewayConnection, OnGatewayDisconnect {
        //! move the saving of new message below the emit, that way it will appear faster the messages to the screen but if error -> bad
       const newMessage =
         await this.groupMessagesService.create(createMessageDto);
+      
+      console.log('newMessage', newMessage);
+      
      
 
       // Emit the new message to all clients in the channel
