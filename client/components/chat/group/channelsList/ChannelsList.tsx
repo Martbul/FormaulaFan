@@ -74,7 +74,7 @@ if(newChannel.type =="TEXT"){
  
   useEffect(() => {
     if (channels && channels.length > 0) {
-      console.log(channels);
+      // console.log(channels);
       
       const newTextChannels = channels.filter(
         (channel) => channel.type === "TEXT"

@@ -17,6 +17,8 @@ type Channel {
   group: Group!
   id: String!
   isPrivate: Boolean!
+  member: Member!
+  messages: [Message!]
   name: String!
   type: String!
   updatedAt: DateTime!
@@ -86,6 +88,17 @@ type Member {
   user: User!
 }
 
+type Message {
+  channel: Channel!
+  content: String!
+  createdAt: DateTime!
+  deleted: Boolean!
+  fileUrl: String
+  id: String!
+  member: Member!
+  updatedAt: DateTime!
+}
+
 type Mutation {
   addedUserToGroup(addUserToGroupInput: AddUserToGroupInput!): Member!
   createGroup(createGroupInput: CreateGroupInput!): CreateGroupResponse!
@@ -114,11 +127,12 @@ type Post {
 type Query {
   allGroups: [Group!]!
   auth(id: Int!): Auth!
-  channel(id: Int!): Channel!
+  channel: [Channel!]!
   conversation: [Conversation!]!
   conversationData(email: String!, id: String!): ConversationData!
   groupsUserIsMember(email: String!): User!
   post(id: Int!): Post!
+  singleChannel(id: String!): Channel!
   singleGroup(id: String!): Group!
 }
 

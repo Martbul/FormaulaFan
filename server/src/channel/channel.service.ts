@@ -27,8 +27,26 @@ export class ChannelService {
     return `This action returns all channel`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} channel`;
+  async findOne(id: string) {
+    const channel = await this.prisma.channel.findUnique({
+      where: {
+       id:id
+      },
+      include: {
+        messages:{
+          include: {
+            member: {
+              include: {
+                user:true
+              }
+            }
+          }
+        }
+      }
+    })
+    console.log(channel);
+    
+   return channel
   }
 
   update(id: number, updateChannelInput: UpdateChannelInput) {

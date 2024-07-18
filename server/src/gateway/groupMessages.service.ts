@@ -5,10 +5,6 @@ import { PrismaService } from 'src/prisma/prisma.service';
 @Injectable()
 export class GroupMessagesService {
   constructor(private prisma: PrismaService) { }
-  
-  // getClientName(clientId: string) {
-  //   return this.cli
-  // }
 
   async create(createMessageDto: CreateMessageDto) {
     // Find the sender user by email

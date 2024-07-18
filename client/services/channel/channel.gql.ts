@@ -12,16 +12,20 @@ mutation createChannel($channelType: String!, $channelName:String!, $isPrivate:B
 
 export const QUERY_ALL_CHANNEL_MESSAGES=gql`
 query getAllChannelMessages($channelId:String!){
-  allChannelMessages(id:$channelId){
+  singleChannel(id:$channelId){
     id
-    content
-    member{
+    messages{
       id
-      user{
-        id
-        username
+      content
+      member{
+        user{
+          id
+          username
+        }
       }
     }
+    isPrivate
+    
   }
 }
 `

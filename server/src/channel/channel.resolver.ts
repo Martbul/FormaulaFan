@@ -22,8 +22,12 @@ export class ChannelResolver {
     return this.channelService.findAll();
   }
 
-  @Query(() => Channel, { name: 'channel' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
+  
+
+  @Query(() => Channel)
+  singleChannel(@Args('id') id: string) {
+    console.log(id);
+    
     return this.channelService.findOne(id);
   }
 

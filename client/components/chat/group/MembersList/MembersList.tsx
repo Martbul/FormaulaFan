@@ -112,15 +112,16 @@ export const MembersList = ({ members }: any) => {
             <>
               {members &&
                 members.map((member, index) => (
-                  <div className="flex  items-center">
+                  <div  key={index} className="flex  items-center">
                     <Image
+                   
                       className="w-7 h-7"
                       src={icons.chatUserImage}
                       alt=""
                     />
 
                     <div
-                      key={index}
+                     
                       className="member"
                       onClick={() => handleStartConversation(member.user.id)}
                     >

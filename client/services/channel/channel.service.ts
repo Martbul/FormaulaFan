@@ -37,7 +37,9 @@ export async function getAllTextChannelMessagesByChannelId(channelId:string){
       variables: { channelId },
     });
 
-    const result = data.allChannelMessages;
+    const result = data.singleChannel;
+    console.log("singleChannel", result);
+    
   
     return result;
   } catch (error) {

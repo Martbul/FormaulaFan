@@ -20,3 +20,4 @@
 - if user has no group display some text of cool image
 - when 4 people chat(2 seperate groups of 2 people) ther messages mesh up
 - add pagination to querying(displaying) channel messages
+- diplay timestamp(created at) for the messages
