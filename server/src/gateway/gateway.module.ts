@@ -1,11 +1,17 @@
 import { Module } from '@nestjs/common';
-import { WebsocketGateway } from './gateway';
-import { GroupMessagesGateWay } from './groupMessages.gateway';
 import { GroupMessagesService } from './groupMessages.service';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { SocketGateway } from './testGateway';
+import { GroupMessagesGateWay } from './groupMessages.gateway';
+import { DirectMessagesGateway } from './directMessages.gateway';
+import { DirectMessagesService } from './directMessages.service';
 
 @Module({
-  providers: [SocketGateway, PrismaService, GroupMessagesService],
+  providers: [
+    GroupMessagesGateWay,
+    DirectMessagesGateway,
+    GroupMessagesService,
+    DirectMessagesService,
+    PrismaService,
+  ],
 })
 export class GatewayModule {}

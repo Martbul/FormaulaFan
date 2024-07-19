@@ -17,20 +17,31 @@ export const START_DIRECT_CONVERATION = gql`
 `;
 
 
-export const GET_CONVERSATION_USERS_DATA=gql`
-query getConversationData($conversationId:String!, $currUserEmail:String!){
-  conversationData(id:$conversationId, email:$currUserEmail){
-    conversation{
-      id
-    }
-    currentUser{
-      id
-      username
-    }
-    conversationUser{
-      id
-      username
+export const GET_CONVERSATION_USERS_DATA = gql`
+  query getConversationData($conversationId: String!, $currUserEmail: String!) {
+    conversationData(id: $conversationId, email: $currUserEmail) {
+      conversation {
+        id
+        directMessages {
+          content
+          user {
+            id
+            username
+          }
+          createdAt
+          updatedAt
+        }
+      }
+      currentUser {
+        id
+        username
+        email
+      }
+      conversationUser {
+        id
+        username
+        email
+      }
     }
   }
-}
-`
+`;

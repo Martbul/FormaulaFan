@@ -21,3 +21,12 @@
 - when 4 people chat(2 seperate groups of 2 people) ther messages mesh up
 - add pagination to querying(displaying) channel messages
 - diplay timestamp(created at) for the messages
+
+
+PERFORMANCE:
+   - .ong to .svg icons
+   - rafactor functions -> se less sapce but more complex
+   - refactor css -> use classes for more then 1 component
+   - implement lazy loading
+   - deleted unused jsx
+   - socket io -> learn about redis and scaling

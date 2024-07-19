@@ -1,69 +1,110 @@
-import {
-  WebSocketGateway,
-  WebSocketServer,
-  SubscribeMessage,
-  MessageBody,
-  ConnectedSocket,
-  OnGatewayConnection,
-  OnGatewayDisconnect,
-} from '@nestjs/websockets';
+import { WebSocketGateway, WebSocketServer, SubscribeMessage, OnGatewayConnection, OnGatewayDisconnect } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
-interface Message {
-  sender: string;
-  content: string;
-  room?: string;
-  recipient?: string;
-}
+
+import { DirectMessagesService } from './directMessages.service';
+
 @WebSocketGateway({
   cors: {
-    origin: '*', // Allow all origins, you can specify specific origins instead of '*'
+    origin: '*',
   },
 })
-export class DirectGateway implements OnGatewayConnection, OnGatewayDisconnect {
+export class DirectMessagesGateway
+  implements OnGatewayConnection, OnGatewayDisconnect
+{
   @WebSocketServer()
   server: Server;
 
-  // Map to store user IDs and their corresponding socket IDs
-  private userSocketMap = new Map<string, string>();
+  private directConversationClients: Map<string, Set<string>> = new Map();
+  private directsConversationMessages: Map<
+    string,
+    { content: string; sender: string }[]
+  > = new Map();
+
+  constructor(private readonly directMessagesService: DirectMessagesService) {}
 
   handleConnection(client: Socket) {
-    const userId = client.handshake.query.userId as string;
-    this.userSocketMap.set(userId, client.id);
-    console.log(`Client connected: ${client.id} (User ID: ${userId})`);
+    console.log(`Client connected: ${client}`);
   }
 
   handleDisconnect(client: Socket) {
-    const userId = Array.from(this.userSocketMap.entries()).find(
-      ([_, socketId]) => socketId === client.id,
-    )?.[0];
-    if (userId) {
-      this.userSocketMap.delete(userId);
-    }
-    console.log(`Client disconnected: ${client.id} (User ID: ${userId})`);
+    console.log(`Client disconnected: ${client.id}`);
+    this.removeClientFromChannels(client);
   }
 
-  @SubscribeMessage('directMessage')
-  handleDirectMessage(
-    @MessageBody() data: Message,
-    @ConnectedSocket() client: Socket,
-  ): void {
-    const { recipient, content, sender } = data;
-    const message = { sender, content };
-
-    if (recipient) {
-      // Get recipient's socket ID from the map
-      const recipientSocketId = this.userSocketMap.get(recipient);
-      console.log(`Recipient Socket ID: ${recipientSocketId}`);
-
-      if (recipientSocketId) {
-        // Send direct message to the specific recipient
-        this.server.to(recipientSocketId).emit('message', message);
-        // Also emit the message back to the sender
-        client.emit('message', message);
-        console.log(
-          `Client ${client.id} (User ID: ${sender}) sent direct message to ${recipientSocketId} (User ID: ${recipient})`,
-        );
+  private removeClientFromChannels(client: Socket) {
+    this.directConversationClients.forEach((clients, channel) => {
+      if (clients.has(client.id)) {
+        clients.delete(client.id);
+        // Optionally emit to clients in the channel that a user has left
+        this.server.to(channel).emit('userLeft', client.id);
       }
+      if (clients.size === 0) {
+        this.directConversationClients.delete(channel);
+        this.directConversationClients.delete(channel); // Remove message history when no clients in channel
+      }
+    });
+  }
+
+  @SubscribeMessage('joinDirectChat')
+  handleJoinChannel(client: Socket, directConversatinoId: string) {
+    client.join(directConversatinoId);
+    if (!this.directConversationClients.has(directConversatinoId)) {
+      this.directConversationClients.set(directConversatinoId, new Set());
+      this.directsConversationMessages.set(directConversatinoId, []);
+    }
+    this.directConversationClients.get(directConversatinoId).add(client.id);
+
+    // Send message history to the client joining the channel
+    const messages = this.directsConversationMessages.get(directConversatinoId);
+    client.emit('messageHistory', messages);
+
+    console.log(`Client ${client.id} joined channel ${directConversatinoId}`);
+  }
+
+  @SubscribeMessage('sendDirectChatMessage')
+  async handleSendMessage(
+    client: Socket,
+    message: {
+      senderUsername: string;
+      senderEmail: string;
+      content: string;
+      directConversatinoId: string;
+      recipientId: string;
+    },
+  ) {
+    const {
+      senderUsername,
+      senderEmail,
+      directConversatinoId,
+      content,
+      recipientId,
+    } = message;
+
+    console.log('MESSAGE', message);
+    // console.log('CLIENT', client);
+
+    try {
+      const createMessageDto = {
+        senderUsername,
+        content,
+        directConversatinoId,
+        senderEmail,
+        recipientId,
+      };
+
+      //! move the saving of new message below the emit, that way it will appear faster the messages to the screen but if error -> bad
+      //! and use Redis
+      const newDirectChatMessage =
+        await this.directMessagesService.create(createMessageDto);
+
+      console.log('newMessage', newDirectChatMessage);
+
+      // Emit the new message to all clients in the channel
+      this.server
+        .to(directConversatinoId)
+        .emit('directMessage', newDirectChatMessage);
+    } catch (error) {
+      console.error('Error handling directMessage:', error);
     }
   }
 }

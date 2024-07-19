@@ -26,7 +26,7 @@ export class ConversationService {
 
     console.log(memberOne.id, startConversationInput.userTwoId);
 
-    const existingConversation = await this.prisma.conversation.findUnique({
+    let existingConversation = await this.prisma.conversation.findUnique({
       where: {
         userOneId_userTwoId: {
           userOneId: memberOne.id,
@@ -38,13 +38,26 @@ export class ConversationService {
         userTwo: true,
       },
     });
-    
-    if (existingConversation) {
-        console.log(existingConversation);
-      console.log('Conversation already exists');
-      return existingConversation
-      
+
+    if (!existingConversation) {
+      existingConversation = await this.prisma.conversation.findUnique({
+        where: {
+          userOneId_userTwoId: {
+            userOneId: startConversationInput.userTwoId,
+            userTwoId: memberOne.id,
+          },
+        },
+        include: {
+          userOne: true,
+          userTwo: true,
+        },
+      });
     }
+      if (existingConversation) {
+        console.log(existingConversation);
+        console.log('Conversation already exists');
+        return existingConversation;
+      }
 
     const createConversation = await this.prisma.conversation.create({
       data: {
@@ -81,6 +94,11 @@ export class ConversationService {
       include: {
         userOne: true,
         userTwo: true,
+        directMessages: {
+          include: {
+            user:true
+          }
+        }
       },
     });
     

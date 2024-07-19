@@ -10,38 +10,71 @@ import React, { useEffect, useState } from "react";
 
 export const DirectChatArea = ({
   conversationData,
-  conversationUser,
+  recipientUser,
   currentUser,
 }: any) => {
   const socket = useWebsocketContext()
   const [messages, setMessages] = useState<string[]>([]);
   const [newMessage, setNewMessage] = useState<string>("");
 
-  //! useeffect to get messages from db to pupulate messages on component mount
+ 
   
 
-  useEffect(() =>{
-    socket.on("connect", () => {
-      console.log("Connected!!")
-    });
+ useEffect(() =>{
+  if(!recipientUser) return;
+  if(!conversationData) return;
+   if (!currentUser) return;
+   
+   console.log('conversationData', conversationData);
+   setMessages(conversationData.directMessages)
 
-    socket.on("onMessage", (data) =>{
-      console.log("onMessage data recieved!!!")
-      console.log(data)
-    });
+   if(socket){
+    //! emit means sending data
+    socket.emit("joinDirectChat", conversationData.id);
 
-    return () => {
-      console.log("Unregistering events")
-      socket.off("connect")
-      socket.off("onMessage")
+    //! .on is an event listenter
+    socket.on("directMessage", (message) => {
+        setMessages((prevMessages) => [...prevMessages, message]);
+      })
+
+      socket.on("directMessageHistory", (history) =>{
+        setMessages(history)
+      })
+
+        return () => {
+        socket.off("directMessage");
+        socket.off("directMessageHistory");
+      }
+   }
+  }, [socket, conversationData,recipientUser])
+  
+
+  
+
+
+   const handleMessageSent = () => {
+    if (!newMessage) return;
+    if (socket && newMessage.trim() !== "") {
+      socket.emit("sendDirectChatMessage", {
+        senderUsername: currentUser.username,
+        senderEmail: currentUser.email,
+        content: newMessage,
+        directConversatinoId: conversationData.id,
+        recipientId: recipientUser.id,
+      });
+      setNewMessage("");
     }
-  },[])
+  };
 
-  const handleMessageSent = () =>{
-    socket.emit("newMessage", newMessage)
-   setMessages((prevMessages) => [...prevMessages, newMessage]);
-    setNewMessage("")
-  }
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleMessageSent();
+    }
+  };
+
+  // if (!Array.isArray(messages)) {
+  //   return null;
+  // }
 
   return (
     <div className="chat-area">
@@ -56,19 +89,39 @@ export const DirectChatArea = ({
       >
         {/* {conversationUser && (<Image src={conversationUser.imageUrl} alt="profileImage"/>)} */}
         <Image className="w-10 h-10" src={icons.chatUserImage} alt="" />
-        {conversationUser && (
+        {recipientUser && (
           <p className="font-semibold text-xl text-white dark:text-white">
-            {conversationUser.username}
+            {recipientUser.username}
           </p>
         )}
-        
       </div>
       <div className="messages">{/* Messages will go here */}</div>
 
       <div>
-        {messages.map((msg, index) => (
-          <div key={index}>{msg}</div>
-        ))}
+      
+        {messages.map((msg, index) => {
+          const isCurrentUser =
+            msg.user?.username === currentUser.username 
+     
+
+          return (
+            <div
+              key={index}
+              className={`message`}
+              // style={{ backgroundColor: isCurrentUser ? "white" : "initial" }}
+            >
+              <div className="user-profile-pic">
+                <Image src={icons.chatUserImage} alt="" className="w-10 h-10" />
+              </div>
+              <div className="message-content">
+                <div className="message-sender">
+                  {msg?.user?.username ?? msg.senderUsername}
+                </div>
+                <div className="message-text">{msg.content}</div>
+              </div>
+            </div>
+          );
+        })}
       </div>
 
       <div className="chat-input-layout">
@@ -79,6 +132,7 @@ export const DirectChatArea = ({
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
           placeholder="Type your message..."
+          onKeyDown={handleKeyDown}
           style={{
             backgroundColor: "#1e1f22",
             borderColor: "#1e1f22",

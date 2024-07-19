@@ -1,14 +1,21 @@
+  .layout {
+    display: flex;
+    height: 100vh;
+  }
+
 .settings {
-  padding: 20px;
-  color: #fff;
-  background-color: rgb(14, 14, 14);
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  
+  overflow-y: scroll;
+    scrollbar-width: none;
+  background-color:"#43434b"
 }
 
+.nav-settings{
+  color:"#ebedf0"
+}
+/* 
 .settings h1 {
   font-size: 2.5em;
   margin-bottom: 20px;
@@ -75,4 +82,4 @@
 
 .settings-button:hover {
   background-color: #0056b3;
-}
+} */

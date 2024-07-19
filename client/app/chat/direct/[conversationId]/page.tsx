@@ -45,31 +45,31 @@ setCurrentUser(currentUser)
   },[user])
 
   return (
-
     <div className="discord-server">
-
       <div className="left">
-        <Navigation/>
+        <Navigation />
       </div>
-      
-      <DirectChatArea  conversationData={conversationData} conversationUser={conversationUser} currentUser={currentUser}/>
-      
+
+      <DirectChatArea
+        conversationData={conversationData}
+        recipientUser={conversationUser}
+        currentUser={currentUser}
+      />
+
       {/* <Sidebar
       // groupId={groupData?.id}
       // name={groupData?.name} 
       // channels={groupData?.channels} 
       // members={groupData?.members} 
       /> */}
-      <Sidebar/>
-
+      <Sidebar />
     </div>
 
-    
-   //  <div>
-     
-   //    <p>User One: {userOneObject.username}</p>
-   //    <p>User Two: {userTwoObject.username}</p>
-   //  </div>
+    //  <div>
+
+    //    <p>User One: {userOneObject.username}</p>
+    //    <p>User Two: {userTwoObject.username}</p>
+    //  </div>
   );
 };
 

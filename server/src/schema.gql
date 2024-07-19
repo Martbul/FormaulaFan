@@ -25,6 +25,7 @@ type Channel {
 }
 
 type Conversation {
+  directMessages: [DirectMessage!]!
   id: String!
   userOne: User!
   userTwo: User!
@@ -66,6 +67,17 @@ input CreatePostInput {
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
 scalar DateTime
+
+type DirectMessage {
+  content: String!
+  conversation: Conversation!
+  createdAt: DateTime!
+  deleted: Boolean!
+  fileUrl: String
+  id: String!
+  updatedAt: DateTime!
+  user: User!
+}
 
 type Group {
   channels: [Channel!]
