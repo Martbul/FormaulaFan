@@ -16,7 +16,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useAuthContext } from "@/contexts/AuthContext2";
 import { logout } from "@/services/auth/auth.service";
-
 const Navigation = () => {
   const { user, setUser } = useAuthContext();
   const pathname = usePathname();
@@ -155,8 +154,14 @@ const Navigation = () => {
           <DropdownMenu>
             <DropdownMenuTrigger>
               <div className="profile">
-                <Image src={icons.profile} alt="" />
-                <div>
+   <Image
+                
+                  src={user.picture}
+                  alt="pic"
+                  className="w-12 h-12"
+                  width={50} 
+                  height={50} 
+                />                <div>
                   <div className="username">{user.username}</div>
                 </div>
               </div>

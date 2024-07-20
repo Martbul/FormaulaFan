@@ -1,12 +1,14 @@
 
-import Navigation from '../../components/navigation/Navigation';
+
 
 import './Posts.css'
-import Post from '../../components/post/Post';
-import images from '../../constants/images';
+
 import Image from 'next/image';
 import { PostsMenu } from '@/components/posts/postsMenu/PostsMenu';
 import { useAuthContext } from '@/contexts/AuthContext2';
+import Navigation from '@/components/navigation/Navigation';
+import Post from '@/components/post/Post';
+import images from '@/constants/images';
 
 const Posts = () => {
     

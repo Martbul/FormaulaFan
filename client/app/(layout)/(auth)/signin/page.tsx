@@ -12,9 +12,9 @@ import { Button } from "@/components/ui/button";
 import "./Login.css";
 import { ChangeEvent, FormEvent, useState, useTransition } from "react";
 import { useAuthContext } from "@/contexts/AuthContext2";
-import { signIn } from '../../../services/auth/auth.service';
 import { useRouter } from 'next/navigation'
 import Link from "next/link";
+import { signIn } from "@/services/auth/auth.service";
 const Login = () => {
     const router = useRouter()
    const { setUser } = useAuthContext();

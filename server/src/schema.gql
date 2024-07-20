@@ -59,8 +59,9 @@ type CreateGroupResponse {
 }
 
 input CreatePostInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  imageContentUrl: String!
+  textContent: String!
+  userEmail: String!
 }
 
 """
@@ -120,7 +121,6 @@ type Mutation {
   removeChannel(id: Int!): Channel!
   removeConversation(id: Int!): Conversation!
   removeGroup(id: Int!): Group!
-  removePost(id: Int!): Post!
   signIn(signInInput: SignInInput!): SignResponse!
   signUp(signUpInput: SignUpInput!): SignResponse!
   startDirectConversation(startConversationInput: StartConversationInput!): Conversation!
@@ -128,7 +128,6 @@ type Mutation {
   updateChannel(updateChannelInput: UpdateChannelInput!): Channel!
   updateConversation(updateConversationInput: UpdateConversationInput!): Conversation!
   updateGroup(updateGroupInput: UpdateGroupInput!): Group!
-  updatePost(updatePostInput: UpdatePostInput!): Post!
 }
 
 type Post {
@@ -143,7 +142,6 @@ type Query {
   conversation: [Conversation!]!
   conversationData(email: String!, id: String!): ConversationData!
   groupsUserIsMember(email: String!): User!
-  post(id: Int!): Post!
   singleChannel(id: String!): Channel!
   singleGroup(id: String!): Group!
 }
@@ -197,12 +195,6 @@ input UpdateGroupInput {
   username: String
 }
 
-input UpdatePostInput {
-  """Example field (placeholder)"""
-  exampleField: Int
-  id: Int!
-}
-
 type User {
   conversationsInitiated: [Conversation!]!
   conversationsReceived: [Conversation!]!
@@ -210,5 +202,6 @@ type User {
   email: String!
   id: String!
   members: [Member!]!
+  picture: String!
   username: String!
 }

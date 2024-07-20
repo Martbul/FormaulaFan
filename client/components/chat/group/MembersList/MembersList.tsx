@@ -113,12 +113,14 @@ export const MembersList = ({ members }: any) => {
               {members &&
                 members.map((member, index) => (
                   <div  key={index} className="flex  items-center">
-                    <Image
-                   
-                      className="w-7 h-7"
-                      src={icons.chatUserImage}
-                      alt=""
-                    />
+                 <Image
+                
+                  src={user.picture}
+                  alt="pic"
+                  className="w-10 h-10"
+                  width={50} 
+                  height={50} 
+                />           
 
                     <div
                      

@@ -16,7 +16,7 @@
 .my-groups-area {
    display: flex;
   background-color: #323338;
-
+flex:1;
   flex-direction: column;
 }
 

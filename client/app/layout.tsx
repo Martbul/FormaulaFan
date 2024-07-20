@@ -5,6 +5,7 @@ import React from "react";
 import "../global.css";
 import { AppWrapper } from "@/contexts/AuthContext2";
 import { AppWebsocketWrapper } from "@/contexts/WebsocketContext";
+import Navigation from "@/components/navigation/Navigation"
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -20,13 +21,13 @@ export default function RootLayout({
   return (
     <AppWrapper>
       <AppWebsocketWrapper>
-         <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
+        <html lang="en">
+          <body className={inter.className}>
+            {/* <Navigation className="nav-layout"> </Navigation> */}
+            {children}
+          </body>
+        </html>
       </AppWebsocketWrapper>
-        
-      
     </AppWrapper>
-   
   );
 }

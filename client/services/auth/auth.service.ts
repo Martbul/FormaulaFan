@@ -13,6 +13,7 @@ const SIGN_IN_MUTATION = gql`
       user {
         username
         email
+        picture
       }
     }
   }
@@ -27,6 +28,7 @@ const SIGN_UP_MUTATION = gql`
       user {
         username
         email
+        picture
       }
     }
   }
@@ -94,5 +96,5 @@ export async function signUp(
 
 export function logout(setUser:Dispatch<SetStateAction<User>>) {
   localStorage.clear();
-  setUser({ username: "Guest", email: undefined });
+  setUser({ username: "Guest", email: undefined, picture:"" });
 }

@@ -15,6 +15,7 @@ export const CREATE_GROUP_MUTATION = gql`
   user{
     id
     username
+    picture
   }
 }
       channels {
@@ -40,6 +41,7 @@ export const QUERY_GROUP_BY_ID = gql`
         user {
           id
           username
+          picture
         }
       }
     }

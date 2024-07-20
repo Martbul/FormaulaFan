@@ -1,26 +1,26 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreatePostInput } from './dto/create-post.input';
-import { UpdatePostInput } from './dto/update-post.input';
+import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class PostService {
-  create(createPostInput: CreatePostInput) {
-    return 'This action adds a new post';
-  }
+  constructor(private prisma: PrismaService) {}
 
-  findAll() {
-    return `This action returns all post`;
-  }
+  async create(createPostInput: CreatePostInput) {
+    const user = await this.prisma.user.findUnique({
+      where: { email: createPostInput.userEmail },
+    });
 
-  findOne(id: number) {
-    return `This action returns a #${id} post`;
-  }
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
 
-  update(id: number, updatePostInput: UpdatePostInput) {
-    return `This action updates a #${id} post`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} post`;
+    //! imageContentUrl може да e null/undefined/"" - помисли как ще го направих(включително и за createPostInput както и за gql във фронтенда )
+    // const post = await this.prisma.post.create({
+    //   data: {
+    //     textContent: createPostInput.textContent,
+    //     imageContentUrl: createPostInput.textContent,
+    //   },
+    // });
   }
 }

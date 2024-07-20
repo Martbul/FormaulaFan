@@ -65,6 +65,8 @@ export async function getAllGroups() {
     })
 
     const groups = data.allGroups;
+    console.log('aaaaaaaaaa',groups);
+    
 
     return groups;
   } catch (error) {

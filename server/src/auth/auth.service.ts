@@ -24,7 +24,11 @@ export class AuthService {
         email: signUpInput.email,
         password: hashedPassword,
       },
+      
     });
+    console.log(newUser);
+    
+
     const { accessToken, refreshToken } = await this.createTokens(
       newUser.id,
       newUser.email,

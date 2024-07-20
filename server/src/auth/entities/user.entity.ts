@@ -15,6 +15,9 @@ export class User {
 
   @Field()
   email: string;
+ 
+  @Field()
+  picture: string;
 
   @Field(() => [Group])
   createdGroups: Group[];

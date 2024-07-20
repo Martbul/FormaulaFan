@@ -108,6 +108,9 @@ export const ChatArea = ({ selectedChatChannelId, groupId }: ChatAreaProps) => {
         </div>
         {/* Add more groups as needed */}
       </div>
+
+
+      
       <div className="messages">
         {messages.map((msg, index) => {
           const isCurrentUser =
@@ -117,11 +120,18 @@ export const ChatArea = ({ selectedChatChannelId, groupId }: ChatAreaProps) => {
           return (
             <div
               key={index}
-              className={`message`}
+              className="message"
               // style={{ backgroundColor: isCurrentUser ? "white" : "initial" }}
             >
-              <div className="user-profile-pic">
-                <Image src={icons.chatUserImage} alt="" className="w-10 h-10" />
+              <div className="user-profile-pic flex bg-gray-600 rounded-full p-1 align-items">
+                <Image
+                  // src="https://utfs.io/f/75130d0b-919d-48b4-95d3-0e0f744ae04e-k6wv4j.png"
+                  src={user.picture}
+                  alt="pic"
+                  className="w-10 h-10"
+                  width={40} // specify the width in pixels
+                  height={40} // specify the height in pixels
+                />
               </div>
               <div className="message-content">
                 <div className="message-sender">

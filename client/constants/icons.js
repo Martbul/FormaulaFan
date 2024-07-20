@@ -43,6 +43,7 @@ import groupActive from "../public/assets/icons/groupActive.png";
 import bookmarkActive from "../public/assets/icons/bookmarkActive.png";
 import settingsActive from "../public/assets/icons/settingsActive.png";
 import chatUserImage from "../public/assets/icons/chatUserImage.png";
+import x from "../public/assets/icons/x.png";
 
 
 export default {
@@ -90,5 +91,6 @@ export default {
   groupActive,
   bookmarkActive,
   settingsActive,
-  chatUserImage
+  chatUserImage,
+  x
 };

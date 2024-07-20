@@ -1,10 +1,7 @@
 "use client";
 import "./Groups.css";
-import Navigation from "../../components/navigation/Navigation";
 import { Button } from "@/components/ui/button";
-import CreatePost from "../../components/createPost/CreatePost";
-import images from "../../constants/images";
-import MiniPost from "../../components/miniPost/MiniPost";
+
 import Image from "next/image";
 import { createGroup } from "@/services/group/group.service";
 import { useAuthContext } from "@/contexts/AuthContext2";
@@ -13,6 +10,10 @@ import { useState } from "react";
 import SearchGroups from "@/components/groups/searchGroups/SearchGroups";
 import { Input } from "@/components/ui/input";
 import icons from "@/constants/icons";
+import Navigation from "@/components/navigation/Navigation";
+import images from "@/constants/images";
+import CreatePost from "@/components/createPost/CreatePost";
+import MiniPost from "@/components/miniPost/MiniPost";
 
 const Groups = () => {
   const { user } = useAuthContext();

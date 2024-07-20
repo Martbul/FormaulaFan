@@ -21,6 +21,11 @@
 - when 4 people chat(2 seperate groups of 2 people) ther messages mesh up
 - add pagination to querying(displaying) channel messages
 - diplay timestamp(created at) for the messages
+- add activty tab in user profile
+- kato user-a e ot mobile, skrivash lqvata navigaciq i i slagash hamburger menu icona
+- remove gif when typed
+- add emoji to text area(text state)
+- limitiraj tova koeto Guest move da vijda i pravi
 
 
 PERFORMANCE:

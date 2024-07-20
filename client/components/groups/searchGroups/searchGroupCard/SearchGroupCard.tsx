@@ -54,12 +54,7 @@ export default function SearchGroupCard({ id, imageUrl, groupName, members }) {
     <>
       <div className="chatView" onClick={handleGroupClick}>
         <div className="media">
-          {/* <Image
-            src={imageUrl}
-            alt=""
-            width={100} 
-            height={100}
-          /> */}
+          <Image src={imageUrl} alt="" width={100} height={100} />
         </div>
         <div className="text">
           <div className="chatName">

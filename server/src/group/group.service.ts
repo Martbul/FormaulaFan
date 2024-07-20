@@ -24,7 +24,6 @@ export class GroupService {
     const group = await this.prisma.group.create({
       data: {
         name: `${user.username}'s Group ${user.createdGroups.length + 1}`,
-        imageUrl: 'https://example.com/default-image.jpg',
         inviteCode: 'WORKING ON IT',
         creator: {
           connect: { id: user.id },

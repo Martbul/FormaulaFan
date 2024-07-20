@@ -6,7 +6,8 @@ import Image from "next/image";
 import icons from "@/constants/icons";
 import { useWebsocketContext } from "@/contexts/WebsocketContext";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+
 
 export const DirectChatArea = ({
   conversationData,
@@ -16,6 +17,7 @@ export const DirectChatArea = ({
   const socket = useWebsocketContext()
   const [messages, setMessages] = useState<string[]>([]);
   const [newMessage, setNewMessage] = useState<string>("");
+  const messagesEndRef = useRef<HTMLDivElement>(null); // Ref for the messages container
 
  
   
@@ -49,7 +51,12 @@ export const DirectChatArea = ({
   }, [socket, conversationData,recipientUser])
   
 
-  
+    useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages]);
+
 
 
    const handleMessageSent = () => {
@@ -95,9 +102,9 @@ export const DirectChatArea = ({
           </p>
         )}
       </div>
-      <div className="messages">{/* Messages will go here */}</div>
 
-      <div>
+
+      <div className="messages">
       
         {messages.map((msg, index) => {
           const isCurrentUser =
@@ -107,7 +114,7 @@ export const DirectChatArea = ({
           return (
             <div
               key={index}
-              className={`message`}
+              className='message'
               // style={{ backgroundColor: isCurrentUser ? "white" : "initial" }}
             >
               <div className="user-profile-pic">
@@ -122,6 +129,7 @@ export const DirectChatArea = ({
             </div>
           );
         })}
+          <div ref={messagesEndRef} />
       </div>
 
       <div className="chat-input-layout">

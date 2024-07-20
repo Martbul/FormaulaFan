@@ -12,7 +12,7 @@ model User {
    username           String   @db.VarChar(255)
    password           String   @db.VarChar(1000)
    email              String   @unique @db.VarChar(255)
-   picture            String?  @db.VarChar(255)
+   picture            String?  @db.VarChar(255) @default("https://firebasestorage.googleapis.com/v0/b/formulafan-38467.appspot.com/o/helmet.png?alt=media&token=67b3e8bc-66a5-4161-a89d-f1e5e2a14535")
    hashedRefreshToken String?
    createdAt          DateTime @default(now())
    updatedAt          DateTime @updatedAt
@@ -44,7 +44,7 @@ model UserSettings {
 model Post {
    id           String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
    textContent  String   @db.VarChar(1000)
-   imageContent String?  @db.VarChar(1000)
+   imageContentUrl String?  @db.VarChar(1000)
    videoContent String?  @db.VarChar(1000)
    createdAt    DateTime @default(now())
    updatedAt    DateTime @updatedAt
@@ -77,7 +77,7 @@ model Comment {
 model Group {
    id         String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
    name       String @db.VarChar(100)
-   imageUrl   String
+   imageUrl   String? @db.VarChar(1000) @default("https://firebasestorage.googleapis.com/v0/b/formulafan-38467.appspot.com/o/racing-car.png?alt=media&token=ed7bb8b3-370f-4521-9ccb-b8cf42955271")
    inviteCode String
 
    creatorId String @db.Uuid

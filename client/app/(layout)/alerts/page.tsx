@@ -1,3 +1,5 @@
+"use client";
+import { UploadButton } from "../utils/uplaodToFirebase";
 import Navigation from "@/components/navigation/Navigation";
 
 const Notifications = () => {
@@ -8,9 +10,14 @@ const Notifications = () => {
          </div>
 
          <div className="main">
-           <div className="feedContainer">
-                  <p>NOTIFICATIONS PAGE</p>           
-           </div>
+           
+ 
+
+ 
+    <div className="flex min-h-screen flex-col items-center justify-between p-24">
+      
+    </div>
+
          </div>
 
          <div className="feed">
