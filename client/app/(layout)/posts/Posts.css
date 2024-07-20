@@ -13,16 +13,7 @@
     height: 100vh;
   }
 
-  .left {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: rgb(14, 14, 14);
-    width: 12%;
-    padding: 20px;
-    overflow: hidden;
-    border-right: 1px solid #3a3a3a;
-  }
+ 
 
   .posts {
     flex: 2;
@@ -33,7 +24,7 @@
   }
 
   .news {
-    width: 18%;
+    width: 17%;
     scrollbar-width: none;
     padding-top: 1em;
     overflow-y: auto;

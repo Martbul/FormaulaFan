@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "../app/main.css";
 import React from "react";
-import "../global.css";
+import { Inter } from "next/font/google";
+
+import Navigation from "@/components/navigation/Navigation"
 import { AppWrapper } from "@/contexts/AuthContext2";
 import { AppWebsocketWrapper } from "@/contexts/WebsocketContext";
-import Navigation from "@/components/navigation/Navigation"
+
+import "../app/main.css";
+import "../global.css";
+
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {

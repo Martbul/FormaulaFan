@@ -30,12 +30,11 @@ const Groups = () => {
     router.push(`/chat/mygroup/${result.id}`);
   };
 
+  
   return (
     <>
       <div className="layout remove-selecting-text">
-        <div className="left">
-          <Navigation />
-        </div>
+  
 
         <div className="main">
           <div className="feedContainer">

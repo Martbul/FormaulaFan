@@ -1,9 +1,8 @@
 .menu {
-   flex-grow: 1;
     display: flex;
     height: 100vh;
     flex-direction: column;
-    align-items: flex-end; /* Align menu items to the right */
+    align-items: flex-end; 
     background-color: rgb(14, 14, 14);
   }
 
@@ -18,10 +17,6 @@
     text-decoration: none;
     margin-bottom: 1em;
   }
-
-  /* .menuItem:hover {
-    background-color: #ddd;
-  } */
 
   .menu .menuAllItems .menuItem .media{
    margin: 0 auto;
@@ -58,7 +53,6 @@
 
   }
 
-  
 
   .menuItem, .profile {
   padding: 10px 15px;
@@ -68,7 +62,6 @@
   color: #14171a;
   cursor: pointer;
 }
-
 
 
 .menuItemImage, .profileOptions {
@@ -83,13 +76,13 @@
 
 .profile-bottom {
   width: 100%;
-  margin-top: auto; /* Pushes the profile to the bottom */
+  margin-top: auto;
 }
 .profile {
   padding: 15px;
   display: flex;
   align-items: center;
-  display: flex;
+  
 }
 
 .profile img {
@@ -109,26 +102,10 @@
 }
 
 .username {
-  color: #657786;
+  color: #ebedf0;
 }
 
 .profileOptions img {
   width: 20px;
   height: 20px;
-}
-
-
-.loginButton {
-  background-color: #fe1801;
-  color: #fff;
-  border: none;
-  border-radius: 20px;
-  padding: 10px 20px;
-  font-weight: bold;
-  cursor: pointer;
-  outline: none;
-}
-
-.loginButton:hover {
-  background-color: #e21401;
 }

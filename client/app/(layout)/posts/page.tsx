@@ -15,9 +15,7 @@ const Posts = () => {
    return (
      <>
        <div className="layout">
-         <div className="left">
-           <Navigation />
-         </div>
+        
 
          <div className="posts">
            <PostsMenu  />

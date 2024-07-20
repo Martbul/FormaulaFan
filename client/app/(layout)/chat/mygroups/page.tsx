@@ -1,21 +1,20 @@
-"use client" 
+"use client"
 
-import { Sidebar } from "@/components/chat/group/Sidebar/Sidebar";
-import Navigation from "@/components/navigation/Navigation";
+import { useEffect,useState} from "react"; 
 import { useAuthContext } from "@/contexts/AuthContext2";
-import "./MyGroups.css"
+import { Sidebar } from "@/components/chat/group/Sidebar/Sidebar";
 import MyGroupCard from "@/components/chat/myGroups/MyGroupsCard";
-import { useEffect,useState} from "react";
+
 import { getGroupByUserEmail } from "@/services/group/group.service";
 
+import "./MyGroups.css"
 
-//! working here
-//! possible problem with user.email
+
  const MyGroups = () =>{
  const FAKEONLINEMEMBERS = 69
    const { user } = useAuthContext();
    const [userGroups, setUserGroups] = useState([]);
-   const [loading, setLoading] = useState(true); // To handle loading state
+   const [loading, setLoading] = useState(true); 
 
    useEffect(() => {
        //! явно компонента зарежда няколко пъти и първия път user е undefined  и затова не бацаше
@@ -55,9 +54,7 @@ import { getGroupByUserEmail } from "@/services/group/group.service";
 
    return (
      <div className="discord-server">
-       <div className="left">
-         <Navigation />
-       </div>
+    
 
       
 

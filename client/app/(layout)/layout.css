@@ -1,0 +1,23 @@
+
+
+.layout {
+  display: flex;
+  height: 100vh;
+  overflow: hidden; /* Ensure no overflow in the main layout */
+}
+
+.navigation-layout {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: rgb(14, 14, 14);
+  width: 40em;
+  padding: 20px;
+  border-right: 1px solid #3a3a3a;
+  overflow: hidden; /* Ensure no overflow in the navigation */
+}
+
+.content-layout {
+  flex-grow: 1; /* Allow the content layout to take the remaining space */
+  overflow: auto; /* Allow scrolling if content overflows */
+}

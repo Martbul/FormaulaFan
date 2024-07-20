@@ -21,16 +21,14 @@ const Navigation = () => {
   const pathname = usePathname();
 
   const getMenuItemClass = (path) => {
-    if(pathname.includes(path)) {
-      return "menuItemText isMenuItemActive"
-    }else{
-      return "menuItemText"
+    if (pathname.includes(path)) {
+      return "menuItemText isMenuItemActive";
+    } else {
+      return "menuItemText";
     }
   };
 
   const getMenuItemActiveImage = (path) => pathname.includes(path);
-
-
 
   return (
     <div className="menu remove-selecting-text">
@@ -89,7 +87,7 @@ const Navigation = () => {
 
         <Link className="menuItem" href="/chat/mygroups">
           <div className="menuItemImage">
-              <Image
+            <Image
               src={
                 getMenuItemActiveImage("/chat/mygroups")
                   ? icons.groupActive
@@ -105,7 +103,7 @@ const Navigation = () => {
 
         <Link className="menuItem" href="/group1">
           <div className="menuItemImage">
-          <Image
+            <Image
               src={
                 getMenuItemActiveImage("/group1")
                   ? icons.bookmarkActive
@@ -154,14 +152,14 @@ const Navigation = () => {
           <DropdownMenu>
             <DropdownMenuTrigger>
               <div className="profile">
-   <Image
-                
+                <Image
                   src={user.picture}
                   alt="pic"
                   className="w-12 h-12"
-                  width={50} 
-                  height={50} 
-                />                <div>
+                  width={50}
+                  height={50}
+                />{" "}
+                <div>
                   <div className="username">{user.username}</div>
                 </div>
               </div>

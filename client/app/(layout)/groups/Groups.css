@@ -12,17 +12,7 @@
     height: 100vh;
   }
 
-  .left {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-        background-color: rgb(14, 14, 14);
-    width: 12%;
-    padding: 20px;
-    overflow: hidden;
-    border-right: 1px solid #3a3a3a;
-  }
-
+ 
   .main {
     flex: 2;
     padding: 20px;
@@ -41,7 +31,7 @@
 
   .feedContainer,
   .searchContainer {
-    height: 150vh; /* More than the viewport height to allow scrolling */
+    height: 150vh;
   }
 
   .test {
