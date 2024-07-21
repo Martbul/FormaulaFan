@@ -1,6 +1,6 @@
 import { ApolloError } from "@apollo/client";
 import createApolloClient from "../../apollo-client";
-import { CREATE_POST_MUTATION,QUERY_ALL_POSTS } from "./post.gql";
+import { CREATE_POST_MUTATION,QUERY_ALL_POSTS ,QUERY_POSTS_PAGGINATION } from "./post.gql";
 
 const client = createApolloClient();
 
@@ -33,16 +33,39 @@ export async function createPost(textContent:string, userEmail:string, imageCont
   }
 }
 
-export async function getAllPosts(){
-  try{
-  const {data} = await client.query({
-    query: QUERY_ALL_POSTS
-  })
+// export async function getAllPosts(){
+//   try{
+//   const {data} = await client.query({
+//     query: QUERY_ALL_POSTS
+//   })
 
-  const posts = data.allPosts;
+//   const posts = data.allPosts;
   
-  return posts
-   } catch (error) {
+//   return posts
+//    } catch (error) {
+//     if (error instanceof ApolloError) {
+//       console.error("GraphQL error details:", error.graphQLErrors);
+//       console.error("Network error details:", error.networkError);
+//     } else {
+//       console.error("Unknown error:", error);
+//     }
+//     throw error;
+//   }
+// }
+
+export async function getPaginatedPosts(lastPostId?:string) {
+  console.log(lastPostId);
+  
+  try{
+    const {data} = await client.query({
+      query: QUERY_POSTS_PAGGINATION,
+      variables: {lastPostId}
+    })
+
+    const posts = data.paginatedPosts
+    console.log(posts)
+    return posts
+} catch (error) {
     if (error instanceof ApolloError) {
       console.error("GraphQL error details:", error.graphQLErrors);
       console.error("Network error details:", error.networkError);
@@ -50,5 +73,6 @@ export async function getAllPosts(){
       console.error("Unknown error:", error);
     }
     throw error;
+  
   }
 }

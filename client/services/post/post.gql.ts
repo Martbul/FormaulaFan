@@ -25,9 +25,53 @@ export const CREATE_POST_MUTATION = gql`
   }
 `;
 
-export const QUERY_ALL_POSTS = gql`
-  query getAllPosts {
-    allPosts {
+// export const QUERY_ALL_POSTS = gql`
+//   query getAllPosts {
+//     allPosts {
+//       id
+//       textContent
+//       imageContentUrl
+//       videoContent
+//       createdAt
+//       author {
+//         username
+//         picture
+//       }
+//       likes
+//       comments {
+//         id
+//         textContent
+//         imageContentUrl
+//         videoContent
+//         createdAt
+//         author {
+//           username
+//           picture
+//         }
+//         post {
+//           id
+//         }
+//         likes
+//         shares
+//         views
+//         saves
+//       }
+//       shares
+//       views
+//       saves
+//     }
+//   }
+// `;
+
+
+export const QUERY_POSTS_PAGGINATION = gql`
+  query getPaginatedPosts($lastPostId: String) {
+    paginatedPosts(
+      paginationInput: {
+        cursor: $lastPostId
+        limit: 20
+      }
+    ) {
       id
       textContent
       imageContentUrl
@@ -62,3 +106,4 @@ export const QUERY_ALL_POSTS = gql`
     }
   }
 `;
+;

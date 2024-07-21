@@ -79,6 +79,11 @@ input CreatePostInput {
   userEmail: String!
 }
 
+input CursorPaginationInput {
+  cursor: String
+  limit: Int! = 10
+}
+
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
@@ -168,6 +173,7 @@ type Query {
   conversation: [Conversation!]!
   conversationData(email: String!, id: String!): ConversationData!
   groupsUserIsMember(email: String!): User!
+  paginatedPosts(paginationInput: CursorPaginationInput!): [Post!]!
   singleChannel(id: String!): Channel!
   singleGroup(id: String!): Group!
 }

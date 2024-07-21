@@ -8,7 +8,7 @@
 - make better error handlig
 - make better UX with loader and other UI elements
 - find how to change state based on the shadcn's switch
-- add reoute guards
+- add route guards
 - add lazy loading and other optimizations
 - dont allow creating of channels with the same name
 - uploding to firebase strage from the client is not secure(make it secure or upload from the server)
