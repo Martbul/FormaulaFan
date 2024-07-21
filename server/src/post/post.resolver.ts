@@ -8,7 +8,15 @@ export class PostResolver {
   constructor(private readonly postService: PostService) {}
 
   @Mutation(() => Post)
-  createPost(@Args('createPostInput') createPostInput: CreatePostInput) {
+  newPost(@Args('createPostInput') createPostInput: CreatePostInput) {
     return this.postService.create(createPostInput);
   }
+
+  @Query(() => [Post])
+  allPosts() {
+    return this.postService.findAll();
+  }
 }
+
+
+

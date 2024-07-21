@@ -1,10 +1,9 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { User } from 'src/auth/entities/user.entity';
-import { Comment } from './comment.entity';
-
+import { Post } from './post.entity';
 
 @ObjectType()
-export class Post {
+export class Comment {
   @Field()
   id: string;
 
@@ -20,11 +19,11 @@ export class Post {
   @Field(() => User)
   author: User;
 
+  @Field(() => Post)
+  post: Post;
+
   @Field(() => Int)
   likes: number;
-
-  @Field(() => [Comment], { nullable: true })
-  comments?: Comment[];
 
   @Field(() => Int)
   shares: number;

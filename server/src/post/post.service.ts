@@ -15,12 +15,35 @@ export class PostService {
       throw new NotFoundException('User not found');
     }
 
-    //! imageContentUrl може да e null/undefined/"" - помисли как ще го направих(включително и за createPostInput както и за gql във фронтенда )
-    // const post = await this.prisma.post.create({
-    //   data: {
-    //     textContent: createPostInput.textContent,
-    //     imageContentUrl: createPostInput.textContent,
-    //   },
-    // });
+    const post = await this.prisma.post.create({
+      data: {
+        textContent: createPostInput.textContent,
+        imageContentUrl: createPostInput.imageContentUrl || null,
+        authorId: user.id,
+      },
+      include:{
+        author:true
+      }
+    });
+
+    return post
+  }
+
+
+  async findAll() {
+    const allPosts = await this.prisma.post.findMany({
+      include: {
+        author: true,
+        comments: {
+          include: {
+            author: true,
+            post:true
+          },
+        },
+      },
+    });
+   
+    
+    return allPosts;
   }
 }

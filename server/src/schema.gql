@@ -24,6 +24,21 @@ type Channel {
   updatedAt: DateTime!
 }
 
+type Comment {
+  author: User!
+  createdAt: DateTime!
+  id: String!
+  imageContentUrl: String
+  likes: Int!
+  post: Post!
+  saves: Int!
+  shares: Int!
+  textContent: String!
+  updatedAt: DateTime!
+  videoContent: String
+  views: Int!
+}
+
 type Conversation {
   directMessages: [DirectMessage!]!
   id: String!
@@ -59,7 +74,7 @@ type CreateGroupResponse {
 }
 
 input CreatePostInput {
-  imageContentUrl: String!
+  imageContentUrl: String
   textContent: String!
   userEmail: String!
 }
@@ -115,8 +130,8 @@ type Message {
 type Mutation {
   addedUserToGroup(addUserToGroupInput: AddUserToGroupInput!): Member!
   createGroup(createGroupInput: CreateGroupInput!): CreateGroupResponse!
-  createPost(createPostInput: CreatePostInput!): Post!
   newChannel(createChannelInput: CreateChannelInput!): Channel!
+  newPost(createPostInput: CreatePostInput!): Post!
   removeAuth(id: Int!): Auth!
   removeChannel(id: Int!): Channel!
   removeConversation(id: Int!): Conversation!
@@ -131,12 +146,23 @@ type Mutation {
 }
 
 type Post {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  author: User!
+  comments: [Comment!]
+  createdAt: DateTime!
+  id: String!
+  imageContentUrl: String
+  likes: Int!
+  saves: Int!
+  shares: Int!
+  textContent: String!
+  updatedAt: DateTime!
+  videoContent: String
+  views: Int!
 }
 
 type Query {
   allGroups: [Group!]!
+  allPosts: [Post!]!
   auth(id: Int!): Auth!
   channel: [Channel!]!
   conversation: [Conversation!]!

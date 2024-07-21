@@ -6,25 +6,21 @@ export const CREATE_GROUP_MUTATION = gql`
       id
       name
       imageUrl
-      # creator{
-      #   username
-      # }
-     members{
-      role
-      id
-  user{
-    id
-    username
-    picture
-  }
-}
+      members {
+        role
+        id
+        user {
+          id
+          username
+          picture
+        }
+      }
       channels {
         name
       }
     }
   }
 `;
-
 
 export const QUERY_GROUP_BY_ID = gql`
   query getGroupById($id: String!) {
@@ -54,9 +50,9 @@ export const QUERY_ALL_GROUPS = gql`
       id
       name
       imageUrl
-      members{
+      members {
         id
-        user{
+        user {
           email
         }
       }
@@ -64,7 +60,7 @@ export const QUERY_ALL_GROUPS = gql`
   }
 `;
 
-//! working here
+
 export const QUERY_GROUPS_BY_USER_EMAIL = gql`
   query getGroupsByUserEmail($email: String!) {
     groupsUserIsMember(email: $email) {
@@ -79,12 +75,6 @@ export const QUERY_GROUPS_BY_USER_EMAIL = gql`
             id
           }
         }
-        # conversationsInitiated{
-        #   id
-        # }
-        # conversationsReceived{
-        #  id
-        # }
       }
     }
   }

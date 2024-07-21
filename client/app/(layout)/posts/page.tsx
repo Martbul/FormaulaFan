@@ -1,16 +1,29 @@
+'use client'
 
+import { useEffect, useState } from 'react';
+import { PostsMenu } from '@/components/posts/postsMenu/PostsMenu';
+import Post from '@/components/post/Post';
 
+import { getAllPosts } from '@/services/post/post.service';
+
+import Image from 'next/image';
+import images from '@/constants/images';
 
 import './Posts.css'
 
-import Image from 'next/image';
-import { PostsMenu } from '@/components/posts/postsMenu/PostsMenu';
-import { useAuthContext } from '@/contexts/AuthContext2';
-import Navigation from '@/components/navigation/Navigation';
-import Post from '@/components/post/Post';
-import images from '@/constants/images';
 
 const Posts = () => {
+  const [posts ,setPosts] = useState([])
+
+  useEffect(() =>{
+    const fetchAllPosts = async() => {
+      const allPost = await getAllPosts()
+      console.log('all',allPost);
+      
+      setPosts(allPost)
+    }
+    fetchAllPosts()
+  }, [])
     
    return (
      <>
@@ -20,11 +33,9 @@ const Posts = () => {
          <div className="posts">
            <PostsMenu  />
            <div className="feedContainer">
-             <Post />
-             <Post />
-             <Post />
-             <Post />
-             <Post />
+            {posts.map((post, index) =>(
+              <Post key={index} post={post}/>
+            ))}
            </div>
          </div>
 

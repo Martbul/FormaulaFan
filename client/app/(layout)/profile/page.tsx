@@ -1,7 +1,8 @@
 import Image from 'next/image';
-import icons from '../../constants/icons';
-import images from '../../constants/images';
+
 import './Profile.css'
+import icons from '@/constants/icons';
+import images from '@/constants/images';
 
 const Profile = () => {
     return (

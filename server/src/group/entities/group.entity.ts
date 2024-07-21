@@ -3,7 +3,6 @@ import { User } from 'src/auth/entities/user.entity';
 import { Member } from './members.entity';
 import { Channel } from 'src/channel/entities/channel.entity';
 
-
 @ObjectType()
 export class Group {
   @Field()

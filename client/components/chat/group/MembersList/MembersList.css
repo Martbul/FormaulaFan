@@ -14,14 +14,17 @@
 }
 
 
-
 .members-list {
+  display: flex;
+  flex-direction:column;
+  gap: 1em;
   width: 200px;
   background-color: #212121;
   padding: 10px;
 }
 
 .member {
+  
   padding: 5px;
   color: #b9bbbe;
   cursor: pointer;

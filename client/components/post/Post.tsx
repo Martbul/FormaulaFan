@@ -1,56 +1,68 @@
 import Image from "next/image";
 import icons from "../../constants/icons";
 import './Post.css'
-const Post = () => {
-   return (
-     <div className="post remove-selecting-text">
-       <div className="postHeader">
-         <Image src={icons.postCreator} alt="Profile" className="profilePic" />
-         <div className="postInfo">
-           <div className="userData">
-             <span className="username">Username</span>
-             <span className="handle">@handle</span>
-           </div>
-           <div className="time">
-             <span className="timestamp">· 2h</span>
-           </div>
-         </div>
-       </div>
-       <div className="postContent">
-         This is an example of a Twitter-like post.
-       </div>
-       <div className="postActions">
-         <div className="data">
-           <div className="comments">
-             <Image src={icons.comment} alt="comments" />
-             <p>184</p>
-           </div>
-           <div className="shares">
-             <Image src={icons.share} alt="shares" />
-             <p>13</p>
-           </div>
-           <div className="likes">
-             <Image src={icons.heart} alt="heart" />
-             <p>2k</p>
-           </div>
-           <div className="impressions">
-             <Image src={icons.eye} alt="eye" />
-             <p>111k</p>
-           </div>
-         </div>
-         <div className="sharings">
-           <div className="postShareings">
-             <div className="saved">
-               <Image src={icons.save} alt="save" />
-             </div>
-             <div className="share">
-               <Image src={icons.share2} alt="" />
-             </div>
-           </div>
-         </div>
-       </div>
-     </div>
-   );
-}
+
+
+const Post = ({ post }) => {
+  return (
+    <div className="post remove-selecting-text">
+      <div className="postHeader">
+        <Image
+          src={post.author.picture}
+          alt="pic"
+          className="w-12 h-12"
+          width={50}
+          height={50}
+        />{" "}
+        <div className="postInfo">
+          <div className="userData">
+            <span className="username">{post.author.username}</span>
+          </div>
+          <div className="time">
+            <span className="timestamp">· 2h</span>
+          </div>
+        </div>
+      </div>
+      <div className="postContent">
+        {post.textContent}
+        {post.imageContentUrl && (
+          <Image
+            src={post.imageContentUrl}
+            alt="pic"
+            className="w-36 h-36"
+            width={50}
+            height={50}
+          />
+        )}
+      </div>
+      <div className="postActions">
+        <div className="data">
+          <div className="likes">
+            <Image src={icons.heart} alt="heart" />
+            <p>{post.likes}</p>
+          </div>
+
+          <div className="comments">
+            <Image src={icons.comment} alt="comments" />
+            <p>{post.comments.length}</p>
+          </div>
+          <div className="shares">
+            <Image src={icons.share} alt="shares" />
+            <p>{post.shares}</p>
+          </div>
+
+          <div className="saved">
+            <Image src={icons.save} alt="save" />
+            <p>{post.saves}</p>
+          </div>
+          <div className="impressions">
+            <Image src={icons.eye} alt="eye" />
+            <p>{post.views}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
  
 export default Post;

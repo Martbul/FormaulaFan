@@ -53,9 +53,7 @@ export default function Group ({ params }:any)  {
 
   return (
     <div className="discord-server">
-      <div className="left">
-        <Navigation />
-      </div>
+      
 
       <ChatArea
         selectedChatChannelId={selectedChatChannelId}

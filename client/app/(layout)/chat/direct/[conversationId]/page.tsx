@@ -46,10 +46,7 @@ setCurrentUser(currentUser)
 
   return (
     <div className="discord-server">
-      <div className="left">
-        <Navigation />
-      </div>
-
+    
       <DirectChatArea
         conversationData={conversationData}
         recipientUser={conversationUser}
@@ -64,12 +61,6 @@ setCurrentUser(currentUser)
       /> */}
       <Sidebar />
     </div>
-
-    //  <div>
-
-    //    <p>User One: {userOneObject.username}</p>
-    //    <p>User Two: {userTwoObject.username}</p>
-    //  </div>
   );
 };
 
