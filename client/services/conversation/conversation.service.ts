@@ -3,6 +3,7 @@ import createApolloClient from "../../apollo-client";
 import {
   START_DIRECT_CONVERATION,
   GET_CONVERSATION_USERS_DATA,
+  QUERY_ALL_USER_CONVERSATIONS
 } from "./conversation.gql";
 
 const client = createApolloClient();
@@ -48,6 +49,31 @@ export async function getConversationUsersByConvIdAndEmail(
 
     return result;
   } catch (error) {
+    if (error instanceof ApolloError) {
+      console.error("GraphQL error details:", error.graphQLErrors);
+      console.error("Network error details:", error.networkError);
+    } else {
+      console.error("Unknown error:", error);
+    }
+    throw error;
+  }
+}
+
+
+export async function getConversationsByUserEmail(userEmail:string){
+  try{
+
+       const { data } = await client.query({
+         query: QUERY_ALL_USER_CONVERSATIONS,
+         variables: {userEmail },
+       });
+
+       const result = data.allUserConversations;
+       console.log(result);
+
+       return result;
+
+  }catch(error){
     if (error instanceof ApolloError) {
       console.error("GraphQL error details:", error.graphQLErrors);
       console.error("Network error details:", error.networkError);

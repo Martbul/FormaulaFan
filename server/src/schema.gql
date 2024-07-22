@@ -139,14 +139,12 @@ type Mutation {
   newPost(createPostInput: CreatePostInput!): Post!
   removeAuth(id: Int!): Auth!
   removeChannel(id: Int!): Channel!
-  removeConversation(id: Int!): Conversation!
   removeGroup(id: Int!): Group!
   signIn(signInInput: SignInInput!): SignResponse!
   signUp(signUpInput: SignUpInput!): SignResponse!
   startDirectConversation(startConversationInput: StartConversationInput!): Conversation!
   updateAuth(updateAuthInput: UpdateAuthInput!): Auth!
   updateChannel(updateChannelInput: UpdateChannelInput!): Channel!
-  updateConversation(updateConversationInput: UpdateConversationInput!): Conversation!
   updateGroup(updateGroupInput: UpdateGroupInput!): Group!
 }
 
@@ -168,6 +166,7 @@ type Post {
 type Query {
   allGroups: [Group!]!
   allPosts: [Post!]!
+  allUserConversations(email: String!): [Conversation!]!
   auth(id: Int!): Auth!
   channel: [Channel!]!
   conversation: [Conversation!]!
@@ -213,12 +212,6 @@ input UpdateChannelInput {
   groupId: String
   id: Int!
   isPrivate: Boolean
-}
-
-input UpdateConversationInput {
-  id: Int!
-  userOneEmail: String
-  userTwoId: String
 }
 
 input UpdateGroupInput {

@@ -27,19 +27,9 @@ export class ConversationResolver {
     return this.conversationService.findConversationAndCurrentUser(id, email);
   }
 
-  @Mutation(() => Conversation)
-  updateConversation(
-    @Args('updateConversationInput')
-    updateConversationInput: UpdateConversationInput,
-  ) {
-    return this.conversationService.update(
-      updateConversationInput.id,
-      updateConversationInput,
-    );
-  }
 
-  @Mutation(() => Conversation)
-  removeConversation(@Args('id', { type: () => Int }) id: number) {
-    return this.conversationService.remove(id);
+  @Query(() => [Conversation])
+  allUserConversations(@Args('email') email: string) {
+    return this.conversationService.findAllUserConversationsByEmail(email);
   }
 }

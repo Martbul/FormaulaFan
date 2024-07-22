@@ -1,23 +1,20 @@
-import FriendsList from "../../myGroups/FriendsList/FriendsList";
 import { ChannelsList } from "../channelsList/ChannelsList";
 import { MembersList } from "../MembersList/MembersList";
-import './Sidebar.css'
 
 export const Sidebar = ({
   groupId,
   name,
   channels,
   members,
-  friends,
   setSelectedChatChannelId,
-  selectedChatChannelId
+  selectedChatChannelId,
 }) => {
   return (
-    <div className="sidebar-layout">
-      <div className="chatName-layout">
-        <div className="chatName">
-          {name && <p className="remove-selecting-text">{name}</p>}
-          {friends && <p className="remove-selecting-text">Friends</p>}
+    <div className="bg-neutral-900">
+      <div className="w-52 bg-zinc-950 p-2.5 border-b-2 border-black hover:bg-gray-600">
+        <div className="p-1.5 text-gray-400 cursor-pointer">
+          {name && <p className="select-none">{name}</p>}
+          {/* {friends && <p className="select-none">Friends</p>} */}
         </div>
       </div>
       <div className="rigthSide">
@@ -30,7 +27,7 @@ export const Sidebar = ({
           />
         )}
         {members && <MembersList members={members} />}
-        {friends && <FriendsList friends={friends} />}
+        {/* {friends && <FriendsList friends={friends} />} */}
       </div>
     </div>
   );

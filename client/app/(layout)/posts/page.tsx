@@ -49,9 +49,9 @@ const Posts = () => {
   return (
     <>
       <div className="flex h-screen">
-        <div className="flex-grow p-5 overflow-y-auto custom-scrollbar">
+        <div className="flex-grow p-5 overflow-y-auto custom-scrollbar no-scrollbar">
           <PostsMenu />
-          <div className="feedContainer">
+          <div className="feedContainer no-scrollbar">
             {posts.map((post, index) => (
               <Post key={index} post={post} />
             ))}

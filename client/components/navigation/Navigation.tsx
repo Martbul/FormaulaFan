@@ -110,7 +110,7 @@ const Navigation = () => {
             )}
           </div>
           <div className={getMenuItemClass("/group1")}>
-            <p className="text-lg">Bookmarks</p>
+            <p className="text-lg">Saves</p>
           </div>
         </Link>
 

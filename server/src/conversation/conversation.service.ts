@@ -1,14 +1,10 @@
-
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { StartConversationInput } from './dto/start-conversation.input';
-import { UpdateConversationInput } from './dto/update-conversation.input';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class ConversationService {
-   constructor(
-    private prisma: PrismaService,
-  ) {}
+  constructor(private prisma: PrismaService) {}
   async startCoversation(startConversationInput: StartConversationInput) {
     const memberOne = await this.prisma.user.findUnique({
       where: {
@@ -21,7 +17,7 @@ export class ConversationService {
     }
 
     if (memberOne.id === startConversationInput.userTwoId) {
-      throw new BadRequestException('cannot message yourself')
+      throw new BadRequestException('cannot message yourself');
     }
 
     console.log(memberOne.id, startConversationInput.userTwoId);
@@ -53,11 +49,11 @@ export class ConversationService {
         },
       });
     }
-      if (existingConversation) {
-        console.log(existingConversation);
-        console.log('Conversation already exists');
-        return existingConversation;
-      }
+    if (existingConversation) {
+      console.log(existingConversation);
+      console.log('Conversation already exists');
+      return existingConversation;
+    }
 
     const createConversation = await this.prisma.conversation.create({
       data: {
@@ -65,28 +61,25 @@ export class ConversationService {
         userTwoId: startConversationInput.userTwoId,
       },
       include: {
-        userOne:true,
+        userOne: true,
         userTwo: true,
       },
     });
 
-    console.log('createConversation',createConversation);
-    
+    console.log('createConversation', createConversation);
 
     return createConversation;
-  } 
-
-
+  }
 
   findAll() {
     return `This action returns all conversation`;
   }
 
   async findConversationAndCurrentUser(id: string, email: string) {
-     const currentUser = await this.prisma.user.findUnique({
-       where: { email: email },
-     });
-    
+    const currentUser = await this.prisma.user.findUnique({
+      where: { email: email },
+    });
+
     const conversation = await this.prisma.conversation.findUnique({
       where: {
         id: id,
@@ -96,30 +89,56 @@ export class ConversationService {
         userTwo: true,
         directMessages: {
           include: {
-            user:true
-          }
-        }
+            user: true,
+          },
+        },
       },
     });
-    
-      let conversationUser;
 
-      
-      if (conversation.userOne.id !== currentUser.id) {
-        conversationUser = conversation.userOne;
-      } else if (conversation.userTwo.id !== currentUser.id) {
-        conversationUser = conversation.userTwo;
-      }
+    let conversationUser;
 
+    if (conversation.userOne.id !== currentUser.id) {
+      conversationUser = conversation.userOne;
+    } else if (conversation.userTwo.id !== currentUser.id) {
+      conversationUser = conversation.userTwo;
+    }
 
     return { conversation, currentUser, conversationUser };
   }
 
-  update(id: number, updateConversationInput: UpdateConversationInput) {
-    return `This action updates a #${id} conversation`;
-  }
+  async findAllUserConversationsByEmail(email: string,) {
+     const user = await this.prisma.user.findUnique({
+       where: { email: email },
+       include: {
+         conversationsInitiated: {
+           include: {
+             userOne: true,
+             userTwo:true,
+           }
+         },
+         conversationsReceived: {
+            include: {
+             userOne: true,
+             userTwo:true,
+           }
+         }
+       },
+     });
+    
+     if (!user) {
+       throw new NotFoundException('User not found');
+    }
+    const allUserConversations = []
+    user.conversationsInitiated.forEach(item => {
+      allUserConversations.push(item)
+    })
+    user.conversationsReceived.forEach(item => {
+      allUserConversations.push(item)
+    })
 
-  remove(id: number) {
-    return `This action removes a #${id} conversation`;
+
+    console.log(allUserConversations);
+    return allUserConversations;
+    
   }
 }

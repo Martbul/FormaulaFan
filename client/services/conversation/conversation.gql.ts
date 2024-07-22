@@ -47,3 +47,19 @@ export const GET_CONVERSATION_USERS_DATA = gql`
     }
   }
 `;
+
+export const QUERY_ALL_USER_CONVERSATIONS = gql`
+  query getAllUserConversations($userEmail: String!) {
+    allUserConversations(email: $userEmail) {
+      id
+      userOne{
+        id
+        username
+      }
+      userTwo{
+        id
+        username
+      }
+    }
+  }
+`;
