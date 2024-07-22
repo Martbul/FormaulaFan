@@ -1,188 +1,149 @@
 "use client";
 
-import "./Navigation.css";
-import icons from "../../constants/icons";
-import images from "../../constants/images";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { useAuthContext } from "@/contexts/AuthContext2";
-import { logout } from "@/services/auth/auth.service";
+import UserOptionsMenu from "./UserOptionsMenu/UserOptionsMenu";
+import {
+  HomeIcon,
+  HomeIconActive,
+  GroupsIcon,
+  GroupsIconActive,
+  AlertIcon,
+  AlertIconActive,
+  ChatIcon,
+  ChatIconActive,
+  BookmarksIcon,
+  BookmarksIconActive,
+  SettingsIcon,
+  SettingsIconActive,
+  GuestProfileIcon,
+} from "@/app/utils/svgIcons";
+
+import images from "../../constants/images";
+
 const Navigation = () => {
   const { user, setUser } = useAuthContext();
   const pathname = usePathname();
 
   const getMenuItemClass = (path) => {
     if (pathname.includes(path)) {
-      return "menuItemText isMenuItemActive";
+      return "font-bold text-white";
     } else {
-      return "menuItemText";
+      return "font-bold text-gray-400";
     }
   };
 
   const getMenuItemActiveImage = (path) => pathname.includes(path);
 
   return (
-    <div className="menu remove-selecting-text">
-      <div className="menuAllItems">
-        <div className="menuItem">
-          <Link className="media" href="/">
-            <Image src={images.logo} alt="logo" className="logoImage" />
+   
+    <div className="flex flex-col items-center h-screen bg-zinc-950">
+      <div className="flex flex-col items-center w-full">
+        <div className="flex items-center py-3 mb-5 cursor-pointer">
+          <Link href="/">
+            <Image src={images.logo} alt="logo" className="w-24 h-16 mr-2" />
           </Link>
         </div>
 
-        <Link className="menuItem" href="/posts">
-          <div className="menuItemImage ">
-            <Image
-              src={
-                getMenuItemActiveImage("/posts") ? icons.homeActive : icons.home
-              }
-              alt=""
-            />
+        <Link className="flex items-center p-4 mb-5 cursor-pointer transition-colors duration-300" href="/posts">
+          <div className="mr-5">
+            {getMenuItemActiveImage("/posts") ? (
+              <HomeIconActive className="w-10 h-10" />
+            ) : (
+              <HomeIcon className="w-10 h-10" />
+            )}
           </div>
           <div className={getMenuItemClass("/posts")}>
-            <p>Home</p>
+            <p className="text-lg">Home</p>
           </div>
         </Link>
 
-        <Link className="menuItem" href="/groups">
-          <div className="menuItemImage">
-            <Image
-              src={
-                getMenuItemActiveImage("/groups")
-                  ? icons.searchActive
-                  : icons.search
-              }
-              alt=""
-            />
+        <Link className="flex items-center p-3 mb-5 cursor-pointer transition-colors duration-300" href="/groups">
+          <div className="mr-4">
+            {getMenuItemActiveImage("/groups") ? (
+              <GroupsIconActive className="w-10 h-10" />
+            ) : (
+              <GroupsIcon className="w-10 h-10" />
+            )}
           </div>
           <div className={getMenuItemClass("/groups")}>
-            <p>Groups</p>
+            <p className="text-lg">Groups</p>
           </div>
         </Link>
 
-        <Link className="menuItem" href="/alerts">
-          <div className="menuItemImage">
-            <Image
-              src={
-                getMenuItemActiveImage("/alerts")
-                  ? icons.bellActive
-                  : icons.bell
-              }
-              alt=""
-            />
+        <Link className="flex items-center p-3 mb-5 cursor-pointer transition-colors duration-300" href="/alerts">
+          <div className="mr-4">
+            {getMenuItemActiveImage("/alerts") ? (
+              <AlertIconActive className="w-10 h-10" />
+            ) : (
+              <AlertIcon className="w-10 h-10" />
+            )}
           </div>
           <div className={getMenuItemClass("/alerts")}>
-            <p>Alerts</p>
+            <p className="text-lg">Alerts</p>
           </div>
         </Link>
 
-        <Link className="menuItem" href="/chat/mygroups">
-          <div className="menuItemImage">
-            <Image
-              src={
-                getMenuItemActiveImage("/chat/mygroups")
-                  ? icons.groupActive
-                  : icons.group
-              }
-              alt=""
-            />
+        <Link className="flex items-center p-3 mb-5 cursor-pointer transition-colors duration-300" href="/chat/mygroups">
+          <div className="mr-4">
+            {getMenuItemActiveImage("/chat/mygroups") ? (
+              <ChatIconActive className="w-10 h-10" />
+            ) : (
+              <ChatIcon className="w-10 h-10" />
+            )}
           </div>
-          <div className={getMenuItemClass("/chat/mygroup")}>
-            <p>Chat</p>
+          <div className={getMenuItemClass("/chat/mygroups")}>
+            <p className="text-lg">Chat</p>
           </div>
         </Link>
 
-        <Link className="menuItem" href="/group1">
-          <div className="menuItemImage">
-            <Image
-              src={
-                getMenuItemActiveImage("/group1")
-                  ? icons.bookmarkActive
-                  : icons.bookmark
-              }
-              alt=""
-            />
+        <Link className="flex items-center p-3 mb-5 cursor-pointer transition-colors duration-300" href="/group1">
+          <div className="mr-4">
+            {getMenuItemActiveImage("/group1") ? (
+              <BookmarksIconActive className="w-10 h-10" />
+            ) : (
+              <BookmarksIcon className="w-10 h-10" />
+            )}
           </div>
           <div className={getMenuItemClass("/group1")}>
-            <p>Bookmarks</p>
+            <p className="text-lg">Bookmarks</p>
           </div>
         </Link>
 
-        <Link className="menuItem" href="/settings">
-          <div className="menuItemImage">
-            <Image
-              src={
-                getMenuItemActiveImage("/settings")
-                  ? icons.settingsActive
-                  : icons.settings
-              }
-              alt=""
-            />
+        <Link className="flex items-center p-3 mb-5 cursor-pointer transition-colors duration-300" href="/settings">
+          <div className="mr-4">
+            {getMenuItemActiveImage("/settings") ? (
+              <SettingsIconActive className="w-10 h-10" />
+            ) : (
+              <SettingsIcon className="w-10 h-10" />
+            )}
           </div>
           <div className={getMenuItemClass("/settings")}>
-            <p>Settings</p>
+            <p className="text-lg">Settings</p>
           </div>
         </Link>
       </div>
 
       {user && user.username === "Guest" && (
-        <div className="profile-bottom">
+        <div className="w-full mt-auto">
           <Link href="/signin">
-            <div className="profile">
-              <Image src={icons.profile} alt="" />
-              <div>
-                <div className="username">Guest</div>
+            <div className="flex items-center p-4">
+              <GuestProfileIcon className="w-12 h-12" />
+              <div className="ml-3">
+                <div className="text-gray-500 text-lg">Guest</div>
               </div>
             </div>
           </Link>
         </div>
       )}
 
-      {user && user.username !== "Guest" && (
-        <div className="profile-bottom">
-          <DropdownMenu>
-            <DropdownMenuTrigger>
-              <div className="profile">
-                <Image
-                  src={user.picture}
-                  alt="pic"
-                  className="w-12 h-12"
-                  width={50}
-                  height={50}
-                />{" "}
-                <div>
-                  <div className="username">{user.username}</div>
-                </div>
-              </div>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-
-              <DropdownMenuItem>
-                <Link href="/profile">Profile</Link>
-              </DropdownMenuItem>
-
-              <DropdownMenuItem>Team</DropdownMenuItem>
-              <DropdownMenuItem>Subscription</DropdownMenuItem>
-              <DropdownMenuItem onClick={() => logout(setUser)}>
-                Log Out
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-      )}
+      {user && user.username !== "Guest" && <UserOptionsMenu user={user} setUser={setUser} />}
     </div>
   );
 };
 
+
 export default Navigation;
+

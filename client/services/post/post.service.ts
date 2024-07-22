@@ -33,26 +33,6 @@ export async function createPost(textContent:string, userEmail:string, imageCont
   }
 }
 
-// export async function getAllPosts(){
-//   try{
-//   const {data} = await client.query({
-//     query: QUERY_ALL_POSTS
-//   })
-
-//   const posts = data.allPosts;
-  
-//   return posts
-//    } catch (error) {
-//     if (error instanceof ApolloError) {
-//       console.error("GraphQL error details:", error.graphQLErrors);
-//       console.error("Network error details:", error.networkError);
-//     } else {
-//       console.error("Unknown error:", error);
-//     }
-//     throw error;
-//   }
-// }
-
 export async function getPaginatedPosts(lastPostId?:string) {
   console.log(lastPostId);
   

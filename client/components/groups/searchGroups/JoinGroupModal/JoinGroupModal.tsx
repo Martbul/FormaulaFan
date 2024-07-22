@@ -8,18 +8,20 @@ import {
 } from "@/components/ui/dialog";
 import { addUserAsAMember } from "@/services/group/group.service";
 import { useRouter } from "next/navigation";
-
-
-
-
+import {  useState } from "react";
+import { AnimatedCircleIcon } from "@/app/utils/svgIcons";
 
 
 const JoinGroupModal = ({groupName, user,id}) => {
   const router = useRouter();
-  
+    const [loading, setLoading] = useState(false);
+
     const handleUserJoinGroup = async() => {
+      setLoading(true)
      const result = await addUserAsAMember(user.email, id);
+   
        router.push(`/chat/mygroup/${id}`);
+         setLoading(false);
    };
    
 
@@ -38,17 +40,20 @@ const JoinGroupModal = ({groupName, user,id}) => {
               </DialogDescription>
             </DialogHeader>
             <DialogFooter>
-              {/* <Button type="button" onClick={handleCancel}>
-                Cancel
-              </Button> */}
+
             
+            
+
+              
               <Button
-                type="submit"
+             type="submit"
                 style={{ backgroundColor: "#43434b" }}
+                className=" bg-zinc-950 text-white hover:bg-zinc-700 border border-black"
                 onClick={handleUserJoinGroup}
               >
-                Join
+                {loading === false ? "Join":  <AnimatedCircleIcon className="h-9 w-9" />}
               </Button>
+           
             </DialogFooter>
           </DialogContent>
       )

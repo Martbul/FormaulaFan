@@ -84,14 +84,16 @@ export async function signUp(
 
     return { user, accessToken, refreshToken };
   } catch (error) {
-    if (error instanceof ApolloError) {
-      console.error("GraphQL error details:", error.graphQLErrors);
-      console.error("Network error details:", error.networkError);
-    } else {
-      console.error("Unknown error:", error);
+    console.log(error)
+      if (error instanceof ApolloError) {
+        console.error("GraphQL error details:", error.graphQLErrors);
+        console.error("Network error details:", error.networkError);
+      } else {
+        console.error("Unknown error:", error);
+      }
+      throw error;
     }
-    throw error;
-  }
+  
 }
 
 export function logout(setUser:Dispatch<SetStateAction<User>>) {

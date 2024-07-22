@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
+import { useInView } from "react-intersection-observer";
 import { PostsMenu } from "@/components/posts/postsMenu/PostsMenu";
 import Post from "@/components/post/Post";
 
@@ -8,9 +9,9 @@ import { getPaginatedPosts } from "@/services/post/post.service";
 
 import Image from "next/image";
 import images from "@/constants/images";
-import { useInView } from "react-intersection-observer";
 
 import "./Posts.css";
+
 
 const Posts = () => {
   const [posts, setPosts] = useState([]);
@@ -37,6 +38,8 @@ const Posts = () => {
   }, []);
 
   useEffect(() => {
+    console.log(inView);
+    
     if (inView && hasMore) {
       fetchMorePosts();
     }
@@ -53,7 +56,7 @@ const Posts = () => {
             ))}
             {hasMore && (
               <div ref={ref} className="loading">
-                Loading more posts...
+                Loading posts...
               </div>
             )}
           </div>

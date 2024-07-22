@@ -6,7 +6,7 @@ import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import * as argon from 'argon2';
 import { SignInInput } from './dto/signin-input';
-
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 
 @Injectable()
 export class AuthService {
@@ -18,23 +18,31 @@ export class AuthService {
 
   async signUp(signUpInput: SignUpInput) {
     const hashedPassword = await argon.hash(signUpInput.password);
-    const newUser = await this.prisma.user.create({
-      data: {
-        username: signUpInput.username,
-        email: signUpInput.email,
-        password: hashedPassword,
-      },
-      
-    });
-    console.log(newUser);
-    
+    try {
+      const newUser = await this.prisma.user.create({
+        data: {
+          username: signUpInput.username,
+          email: signUpInput.email,
+          password: hashedPassword,
+        },
+      });
 
-    const { accessToken, refreshToken } = await this.createTokens(
-      newUser.id,
-      newUser.email,
-    );
-    await this.updateRefreshToken(newUser.id, refreshToken);
-    return { accessToken, refreshToken, user: newUser };
+      const { accessToken, refreshToken } = await this.createTokens(
+        newUser.id,
+        newUser.email,
+      );
+      await this.updateRefreshToken(newUser.id, refreshToken);
+      return { accessToken, refreshToken, user: newUser };
+    } catch (error) {
+      //   if (error instanceof PrismaClientKnownRequestError) {
+      //     if (error.code === 'P2002' && error.meta.target.includes('email')) {
+      //       throw new Error('Email already exists');
+      //     }
+      //   }
+      //   throw new Error('Internal server error');
+      // }
+      throw new Error("suuuuuuuuu")
+    }
   }
 
   async signIn(signInInput: SignInInput) {
@@ -52,14 +60,13 @@ export class AuthService {
     if (!doPasswordsMatch) {
       throw new ForbiddenException('Wrong email or password');
     }
-    
 
     const { accessToken, refreshToken } = await this.createTokens(
       user.id,
       user.email,
     );
     await this.updateRefreshToken(user.id, refreshToken);
-    
+
     return { accessToken, refreshToken, user };
   }
 

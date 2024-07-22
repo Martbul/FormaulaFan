@@ -36,11 +36,13 @@ export const GET_CONVERSATION_USERS_DATA = gql`
         id
         username
         email
+        picture
       }
       conversationUser {
         id
         username
         email
+        picture
       }
     }
   }

@@ -36,17 +36,10 @@ export const MembersList = ({ members }: any) => {
     const memberOneEmail = user.email;
     const result = await startDirectConversation(memberOneEmail, memberTwoId);
     const conversationId = result.id;
-    // const userOne = result.userOne;
-    // const userTwo = result.userTwo;
     if (!result) {
       console.log("Error starting a conversation");
     }
-   
-       
-      // const queryString = `?userOne=${encodeURIComponent(
-      //   JSON.stringify(userOne)
-      // )}&userTwo=${encodeURIComponent(JSON.stringify(userTwo))}`;
-      // router.push(`/chat/direct/${conversationId}${queryString}`);
+
       router.push(`/chat/direct/${conversationId}`);
   };
 
@@ -112,7 +105,7 @@ export const MembersList = ({ members }: any) => {
             <>
               {members &&
                 members.map((member, index) => (
-                  <div  key={index} className="flex  items-center">
+                  <div  key={index} className="flex items-center">
                  <Image
                 
                   src={user.picture}

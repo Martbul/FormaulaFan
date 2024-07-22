@@ -19,9 +19,7 @@ const Settings = () => {
   return (
     <>
       <div className="layout flex">
-        <div className="left w-1/4">
-          <Navigation />
-        </div>
+      
         <div className="flex flex-col w-3/4 min-h-screen settings bg-gray-100 p-8 settings">
           <div className="flex w-full min-h-[calc(100vh_-_theme(spacing.16))] flex-1 flex-col gap-4">
             <div className=" md:grid-cols-[180px_1fr] lg:grid-cols-[250px_1fr] items-start gap-6 max-w-6xl w-full mx-auto">

@@ -1,12 +1,14 @@
 "use client";
 
+import React, { useEffect, useRef, useState } from "react";
 import { Input } from "@/components/ui/input";
-import "./DirectChatArea.css";
-import Image from "next/image";
-import icons from "@/constants/icons";
+
 import { useWebsocketContext } from "@/contexts/WebsocketContext";
 
-import React, { useEffect, useRef, useState } from "react";
+import icons from "@/constants/icons";
+import Image from "next/image";
+
+import "./DirectChatArea.css";
 
 
 export const DirectChatArea = ({
@@ -94,8 +96,14 @@ export const DirectChatArea = ({
           alignItems: "center",
         }}
       >
-        {/* {conversationUser && (<Image src={conversationUser.imageUrl} alt="profileImage"/>)} */}
-        <Image className="w-10 h-10" src={icons.chatUserImage} alt="" />
+        
+        <Image
+          src={recipientUser.picture}
+          alt="pic"
+          className="w-10 h-10"
+          width={50}
+          height={50}
+        />{" "}
         {recipientUser && (
           <p className="font-semibold text-xl text-white dark:text-white">
             {recipientUser.username}
@@ -103,18 +111,14 @@ export const DirectChatArea = ({
         )}
       </div>
 
-
       <div className="messages">
-      
         {messages.map((msg, index) => {
-          const isCurrentUser =
-            msg.user?.username === currentUser.username 
-     
+          const isCurrentUser = msg.user?.username === currentUser.username;
 
           return (
             <div
               key={index}
-              className='message'
+              className="message"
               // style={{ backgroundColor: isCurrentUser ? "white" : "initial" }}
             >
               <div className="user-profile-pic">
@@ -129,7 +133,7 @@ export const DirectChatArea = ({
             </div>
           );
         })}
-          <div ref={messagesEndRef} />
+        <div ref={messagesEndRef} />
       </div>
 
       <div className="chat-input-layout">
