@@ -9,8 +9,6 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import SearchGroups from "@/components/groups/searchGroups/SearchGroups";
 import { Input } from "@/components/ui/input";
-import icons from "@/constants/icons";
-import Navigation from "@/components/navigation/Navigation";
 import images from "@/constants/images";
 import CreatePost from "@/components/createPost/CreatePost";
 import MiniPost from "@/components/miniPost/MiniPost";
@@ -70,11 +68,11 @@ const Groups = () => {
                         size="icon"
                         className="absolute top-1/2 right-2 -translate-y-1/2 text-muted-foreground hover:bg-muted"
                       >
-                        <Image
+                        {/* <Image
                           src={icons.searchWhite}
                           alt="Search"
                           className="w-5 h-5"
-                        />
+                        /> */}
                       </Button>
                     </div>
                   </div>

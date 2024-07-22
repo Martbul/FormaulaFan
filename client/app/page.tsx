@@ -392,7 +392,7 @@ function MenuIcon(props) {
   );
 }
 
-function MountainIcon(props:any) {
+function MountainIcon(props) {
   return (
     <svg
       {...props}

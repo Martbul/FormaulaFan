@@ -18,8 +18,6 @@ export class Channel {
   @Field()
   isPrivate: boolean;
 
-  // @Field(() => User)
-  // user: User;
 
   @Field(() => [Message], { nullable: true })
   messages?: Message[];

@@ -9,9 +9,9 @@ interface Group {
   id: string;
   name: string;
   imageUrl: string;
-  creator: any;
-  members: any;
-  channels: any;
+  creator;
+  members;
+  channels;
 }
 
 export default function SearchGroups() {

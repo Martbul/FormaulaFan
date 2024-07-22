@@ -17,12 +17,12 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { signUp } from "@/services/auth/auth.service";
 
 import Link from "next/link";
-import { AnimatedCircleIcon, ChromeIcon, GithubIcon } from "@/app/utils/svgIcons";
+import { AnimatedCircleIcon, ChromeIcon, GithubIcon } from "@/utils/svgIcons";
 
 const SignUp = () => {
   const router = useRouter();
   const { setUser } = useAuthContext();
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
   const [form, setForm] = useState({
@@ -41,7 +41,7 @@ const SignUp = () => {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e:FormEvent) => {
     setLoading(true);
     e.preventDefault();
     const result = await signUp(

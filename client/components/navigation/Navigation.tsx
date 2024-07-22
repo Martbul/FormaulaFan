@@ -1,10 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useAuthContext } from "@/contexts/AuthContext2";
-import UserOptionsMenu from "./UserOptionsMenu/UserOptionsMenu";
 import {
   HomeIcon,
   HomeIconActive,
@@ -19,15 +15,21 @@ import {
   SettingsIcon,
   SettingsIconActive,
   GuestProfileIcon,
-} from "@/app/utils/svgIcons";
+} from "@/utils/svgIcons";
+import Link from "next/link";
+import Image from "next/image";
+import UserOptionsMenu from "./UserOptionsMenu/UserOptionsMenu";
+
+import { useAuthContext } from "@/contexts/AuthContext2";
 
 import images from "../../constants/images";
+
 
 const Navigation = () => {
   const { user, setUser } = useAuthContext();
   const pathname = usePathname();
 
-  const getMenuItemClass = (path) => {
+  const getMenuItemClass = (path:string) => {
     if (pathname.includes(path)) {
       return "font-bold text-white";
     } else {
@@ -35,11 +37,11 @@ const Navigation = () => {
     }
   };
 
-  const getMenuItemActiveImage = (path) => pathname.includes(path);
+  const getMenuItemActiveImage = (path:string) => pathname.includes(path);
 
   return (
    
-    <div className="flex flex-col items-center h-screen bg-zinc-950">
+    <div className="flex flex-col items-center h-screen bg-zinc-950 w-60">
       <div className="flex flex-col items-center w-full">
         <div className="flex items-center py-3 mb-5 cursor-pointer">
           <Link href="/">

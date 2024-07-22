@@ -8,20 +8,7 @@
     overflow: hidden;
   }
 
-  .layout {
-    display: flex;
-    height: 100vh;
-  }
 
- 
-
-  .posts {
-    flex: 2;
-    padding: 20px;
-    overflow-y: scroll;
-    scrollbar-width: none;
-    
-  }
 
   .news {
     width: 17%;

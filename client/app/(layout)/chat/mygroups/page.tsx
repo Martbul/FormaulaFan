@@ -7,13 +7,12 @@ import MyGroupCard from "@/components/chat/myGroups/MyGroupsCard";
 
 import { getGroupByUserEmail } from "@/services/group/group.service";
 
-import "./MyGroups.css"
-
+import type { Group } from "@/utils/interfaces";
 
  const MyGroups = () =>{
  const FAKEONLINEMEMBERS = 69
    const { user } = useAuthContext();
-   const [userGroups, setUserGroups] = useState([]);
+   const [userGroups, setUserGroups] = useState<Group[]>([]);
    const [loading, setLoading] = useState(true); 
 
    useEffect(() => {
@@ -53,21 +52,18 @@ import "./MyGroups.css"
 
 
    return (
-     <div className="discord-server">
+     <div className="flex h-screen">
     
-
-      
-
-<div className="my-groups-area">
+<div className="flex flex-col flex-1 bg-zinc-800">
   {userGroups && (
-    <div className="group-cards-layout">
+    <div className="flex justify-center flex-wrap">
       {userGroups.map((group, index) => (
         <MyGroupCard 
           key={index} 
           groupId={group.id}
           groupName={group.name} 
           groupImage={group.imageUrl} 
-          groupMembers={group.members.length} 
+          groupMembersCount={group.members.length} 
           groupOnlineMembers={FAKEONLINEMEMBERS} 
         />
       ))}

@@ -9,10 +9,12 @@ import {
 import { addUserAsAMember } from "@/services/group/group.service";
 import { useRouter } from "next/navigation";
 import {  useState } from "react";
-import { AnimatedCircleIcon } from "@/app/utils/svgIcons";
+import { AnimatedCircleIcon } from "@/utils/svgIcons";
+
+import type { User } from "@/utils/interfaces";
 
 
-const JoinGroupModal = ({groupName, user,id}) => {
+const JoinGroupModal:React.FC<{groupName:string, user:User, id:string}> = ({groupName, user, id}) => {
   const router = useRouter();
     const [loading, setLoading] = useState(false);
 

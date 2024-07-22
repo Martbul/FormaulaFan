@@ -19,16 +19,13 @@ interface Message {
   };
 }
 
-interface ChatAreaProps {
-  selectedChatChannelId: string;
-  groupId: string;
-}
 
-export const ChatArea = ({ selectedChatChannelId, groupId }: ChatAreaProps) => {
+
+export const ChatArea: React.FC<{ selectedChatChannelId: string, groupId: string }> = ({ selectedChatChannelId, groupId }) => {
   const socket = useWebsocketContext();
   const { user } = useAuthContext();
   const [messages, setMessages] = useState<Message[]>([]);
-  const messagesEndRef = useRef<HTMLDivElement>(null); // Ref for the messages container
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!selectedChatChannelId) return;

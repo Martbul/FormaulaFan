@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Navigation from "@/components/navigation/Navigation";
-// import "./layout.css";
+
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,7 +14,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
           className="md:hidden p-4"
           onClick={() => setIsOpen(!isOpen)}
         >
-          {/* Hamburger Icon */}
+         
           <svg
             className="w-6 h-6"
             fill="none"

@@ -13,17 +13,17 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, useState, FormEvent } from "react";
 import { useAuthContext } from "@/contexts/AuthContext2";
 import { useRouter } from 'next/navigation'
 import Link from "next/link";
 import { signIn } from "@/services/auth/auth.service";
-import { AnimatedCircleIcon, ChromeIcon, GithubIcon } from "@/app/utils/svgIcons";
+import { AnimatedCircleIcon, ChromeIcon, GithubIcon } from "@/utils/svgIcons";
 
 const Login = () => {
     const router = useRouter()
    const { setUser } = useAuthContext();
-  const [error, setError] = useState(null);
+   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
   const [form, setForm] = useState({
@@ -41,13 +41,14 @@ const handleChange = (
   }));
 };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async(e:FormEvent) => {
      setLoading(true);
      e.preventDefault();
     const result = await signIn(form.email, form.password, setUser)
     if (result) {
-       setLoading(false);
+  
       router.replace('/posts')  
+       setLoading(false);
     }
      setLoading(false);
     setError("some error");

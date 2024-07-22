@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { createPost } from "@/services/post/post.service";
 
-import { uploadFileToCloud } from "@/app/utils/uplaodToFirebase";
+import { uploadFileToCloud } from "@/utils/uplaodToFirebase";
 import { useAuthContext } from "@/contexts/AuthContext2";
 
 import EmojiPicker from "emoji-picker-react";
@@ -91,7 +91,7 @@ const CreatePostModal = () => {
 
       const newPost = await createPost(
         textContent,
-        user.email,
+        user.email as string,
         imageContentUrl
       );
       if (!newPost) return;

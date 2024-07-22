@@ -2,6 +2,7 @@ import FriendsList from "../../myGroups/FriendsList/FriendsList";
 import { ChannelsList } from "../channelsList/ChannelsList";
 import { MembersList } from "../MembersList/MembersList";
 import './Sidebar.css'
+
 export const Sidebar = ({
   groupId,
   name,
@@ -10,7 +11,7 @@ export const Sidebar = ({
   friends,
   setSelectedChatChannelId,
   selectedChatChannelId
-}: any) => {
+}) => {
   return (
     <div className="sidebar-layout">
       <div className="chatName-layout">

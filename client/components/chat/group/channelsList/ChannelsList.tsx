@@ -17,7 +17,7 @@ const DynamicCreateChannelModal = dynamic(
 );
 
 
-export const ChannelsList = ({ channels, groupId, setSelectedChatChannelId,selectedChatChannelId }: any) => {
+export const ChannelsList = ({ channels, groupId, setSelectedChatChannelId,selectedChatChannelId }) => {
   const [textChannels, setTextChannels] = useState([]);
   const [voiceChannels, setVoiceChannels] = useState([]);
 

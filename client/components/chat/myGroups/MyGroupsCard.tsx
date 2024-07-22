@@ -1,13 +1,14 @@
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card"
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import icons from "@/constants/icons";
 import Image  from 'next/image';
 import Link from "next/link";
 import './MyGroupsCard.css'
-const MyGroupCard = ({
+
+const MyGroupCard: React.FC<{groupId: string, groupName:string, groupImage:string, groupMembersCount:number, groupOnlineMembers:number}> = ({
   groupId,
   groupName,
   groupImage,
-  groupMembers,
+  groupMembersCount,
   groupOnlineMembers,
 }) => {
   return (
@@ -30,7 +31,7 @@ const MyGroupCard = ({
             <div className="flex items-center gap-2">
               <Image src={icons.groupMembers} alt="" className="w-5 h-5" />
               <span className="text-muted-foreground">
-                {groupMembers} members
+                {groupMembersCount} members
               </span>
             </div>
             <div className="flex items-center gap-2">

@@ -23,7 +23,7 @@ const CreateChannelModal = ({ groupId, setTextChannels, setVoiceChannels }) => {
   const [isPrivateChannel, setIsPrivateChannel] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleSelection = (event: any) => {
+  const handleSelection = (event) => {
     setSelectedChannel(event.target.value);
   };
 

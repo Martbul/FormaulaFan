@@ -6,16 +6,18 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { logout } from "@/services/auth/auth.service";
 import Image from "next/image";
 import Link from "next/link";
 
+import { logout } from "@/services/auth/auth.service";
+
+
 const UserOptionsMenu = ({ user , setUser}) => {
   return (
-    <div className="profile-bottom">
-      <DropdownMenu >
+    <div className="w-full mt-auto">
+      <DropdownMenu>
         <DropdownMenuTrigger>
-          <div className="profile">
+          <div className="flex items-center p-4">
             <Image
               src={user.picture}
               alt="pic"
@@ -23,8 +25,8 @@ const UserOptionsMenu = ({ user , setUser}) => {
               width={50}
               height={50}
             />{" "}
-            <div>
-              <div className="username">{user.username}</div>
+            <div className="ml-3">
+              <div className="text-gray-500 text-lg">{user.username}</div>
             </div>
           </div>
         </DropdownMenuTrigger>

@@ -1,14 +1,14 @@
 "use client";
 
-import Navigation from "@/components/navigation/Navigation";
 import { useEffect, useState } from "react";
 import { Sidebar } from "@/components/chat/group/Sidebar/Sidebar";
-import "./DirectConversation.css";
+
 import { getConversationUsersByConvIdAndEmail } from "@/services/conversation/conversation.service";
 import { useAuthContext } from "@/contexts/AuthContext2";
 import { DirectChatArea } from "@/components/chat/directChat/directChatArea/DirectChatArea";
+import type { ChatPageProps } from "@/utils/interfaces";
 
-const ChatPage = ({ params }: any) => {
+const ChatPage:React.FC<ChatPageProps> = ({ params }) => {
   const { user } = useAuthContext();
   const [conversationData, setConversationData] = useState(null);
   const [conversationUser, setConversationUser] = useState(null);
@@ -45,7 +45,7 @@ const ChatPage = ({ params }: any) => {
   }, [user]);
 
   return (
-    <div className="discord-server">
+    <div className="flex h-screen">
       <DirectChatArea
         conversationData={conversationData}
         recipientUser={conversationUser}

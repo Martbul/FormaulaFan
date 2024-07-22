@@ -12,9 +12,10 @@ import images from "@/constants/images";
 
 import "./Posts.css";
 
+import type { PostInterface } from "@/utils/interfaces";
 
 const Posts = () => {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState<PostInterface[]>([]);
   const [hasMore, setHasMore] = useState(true);
   const { ref, inView } = useInView();
 
@@ -47,8 +48,8 @@ const Posts = () => {
 
   return (
     <>
-      <div className="layout">
-        <div className="posts">
+      <div className="flex h-screen">
+        <div className="flex-grow p-5 overflow-y-auto custom-scrollbar">
           <PostsMenu />
           <div className="feedContainer">
             {posts.map((post, index) => (
