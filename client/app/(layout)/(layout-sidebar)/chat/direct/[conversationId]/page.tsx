@@ -1,12 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Sidebar } from "@/components/chat/group/Sidebar/Sidebar";
 
-import { getConversationUsersByConvIdAndEmail } from "@/services/conversation/conversation.service";
+import { getConversationsByUserEmail, getConversationUsersByConvIdAndEmail } from "@/services/conversation/conversation.service";
 import { useAuthContext } from "@/contexts/AuthContext2";
 import { DirectChatArea } from "@/components/chat/directChat/directChatArea/DirectChatArea";
-import type { ChatPageProps } from "@/utils/interfaces";
+import type { ChatPageProps, User } from "@/utils/interfaces";
 
 const ChatPage:React.FC<ChatPageProps> = ({ params }) => {
   const { user } = useAuthContext();
@@ -15,8 +14,10 @@ const ChatPage:React.FC<ChatPageProps> = ({ params }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+     
+
   useEffect(() => {
-    const getConversationUsers = async () => {
+    const getConversationData = async () => {
       try {
         if (!user || !user.email) {
           console.log("User or user email is not defined");
@@ -35,31 +36,24 @@ const ChatPage:React.FC<ChatPageProps> = ({ params }) => {
         setConversationData(conversation);
         setConversationUser(conversationUser);
         setCurrentUser(currentUser);
+
+
       } catch (error) {
         console.error("Error fetching user groups:", error);
       } finally {
         setLoading(false);
       }
     };
-    getConversationUsers();
+    getConversationData();
   }, [user]);
 
   return (
-    <div className="flex h-screen">
       <DirectChatArea
         conversationData={conversationData}
         recipientUser={conversationUser}
         currentUser={currentUser}
       />
 
-      {/* <Sidebar
-      // groupId={groupData?.id}
-      // name={groupData?.name} 
-      // channels={groupData?.channels} 
-      // members={groupData?.members} 
-      /> */}
-      <Sidebar />
-    </div>
   );
 };
 

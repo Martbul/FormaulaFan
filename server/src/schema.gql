@@ -166,7 +166,7 @@ type Post {
 type Query {
   allGroups: [Group!]!
   allPosts: [Post!]!
-  allUserConversations(email: String!): [Conversation!]!
+  allUserConversations(email: String!): [User!]!
   auth(id: Int!): Auth!
   channel: [Channel!]!
   conversation: [Conversation!]!

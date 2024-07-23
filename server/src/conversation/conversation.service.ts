@@ -128,17 +128,28 @@ export class ConversationService {
      if (!user) {
        throw new NotFoundException('User not found');
     }
-    const allUserConversations = []
+    const allConversationUsers = []
     user.conversationsInitiated.forEach(item => {
-      allUserConversations.push(item)
+      if (item.userOneId !== user.id) {
+        allConversationUsers.push(item.userOne);
+      } else if(  item.userTwoId !== user.id) {
+      
+        allConversationUsers.push(item.userTwo);
+      }
     })
     user.conversationsReceived.forEach(item => {
-      allUserConversations.push(item)
+      if (item.userOneId !== user.id) {
+        allConversationUsers.push(item.userOne);
+      } else if(  item.userTwoId !== user.id) {
+      
+        allConversationUsers.push(item.userTwo);
+      }
     })
+    
 
 
-    console.log(allUserConversations);
-    return allUserConversations;
+    console.log(allConversationUsers);
+    return allConversationUsers;
     
   }
 }

@@ -7,15 +7,13 @@ import MyGroupCard from "@/components/chat/myGroups/MyGroupsCard";
 
 import { getGroupByUserEmail } from "@/services/group/group.service";
 
-import type { Conversation, Group } from "@/utils/interfaces";
+import type { Group } from "@/utils/interfaces";
 import { getConversationsByUserEmail } from "@/services/conversation/conversation.service";
-import { ConversationsSidebar } from "@/components/chat/myGroups/ConversationsSidebar/ConversationSidebar";
 
  const MyGroups = () =>{
  const FAKEONLINEMEMBERS = 69
    const { user } = useAuthContext();
    const [userGroups, setUserGroups] = useState<Group[]>([]);
-   const [userConversatinos, setUserConversations] = useState<Conversation[]>([]);
    const [loading, setLoading] = useState(true); 
 
    useEffect(() => {
@@ -34,12 +32,7 @@ import { ConversationsSidebar } from "@/components/chat/myGroups/ConversationsSi
              setUserGroups(groups);
            }
 
-           const conversations = await getConversationsByUserEmail(user.email)
-           if (!conversations) {
-             console.log("The user has not started any conversations");
-           } else {
-             setUserConversations(conversations);
-           }
+         
          } catch (error) {
            console.error("Error fetching user groups:", error);
          } finally {
@@ -52,9 +45,6 @@ import { ConversationsSidebar } from "@/components/chat/myGroups/ConversationsSi
      //! компонента се рендърва като user-a е зареден
      }, [user]);
 
-     useEffect(()=>{
-        console.log(userGroups);
-     }, [userGroups])
 
      if (loading) {
        return <div>Loading...</div>;
@@ -62,7 +52,7 @@ import { ConversationsSidebar } from "@/components/chat/myGroups/ConversationsSi
 
 
    return (
-     <div className="flex h-screen">
+     
        <div className="flex flex-col flex-1 bg-zinc-800">
          {userGroups && (
            <div className="flex justify-center flex-wrap">
@@ -80,8 +70,8 @@ import { ConversationsSidebar } from "@/components/chat/myGroups/ConversationsSi
          )}
        </div>
 
-       <ConversationsSidebar userConversatinos={userConversatinos} />
-     </div>
+      
+     
    );
  }
 

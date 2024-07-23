@@ -78,7 +78,7 @@ export const DirectChatArea: React.FC<DirectChatAreaProps> = ({
   };
 
   return (
-    <div className="chat-area">
+    <div className="chat-area flex">
       <div
         className="text-md font-semibold px-3 items-center h-14 border-zinc-800 border-b-2"
         style={{

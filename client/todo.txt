@@ -29,6 +29,9 @@
 - auth error handling (user with this email already exists, wrong password or email, type longer password)
 - give every Guest id or some way to track them an their work
 - implement google and other sign in
+- make sidebar and conversationSidebar into 1 component
+- make conversationList and memberslsit into 1 compoennt
+- it is not okay to make new request every thime user come o chat for the conversation sidebar. Maybe put it in (conv-layout) or do some cashing or something like that
 
 
 PERFORMANCE:

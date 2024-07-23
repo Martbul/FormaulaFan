@@ -123,3 +123,8 @@ export interface SvgProps extends React.SVGProps<SVGSVGElement> {
   transformOrigin?: string; 
   
 }
+
+interface SidebarLayoutProps {
+  children: React.ReactNode;
+  params: { groupId: string };
+}
