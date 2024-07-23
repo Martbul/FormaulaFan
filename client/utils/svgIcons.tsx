@@ -19,7 +19,6 @@ export function AnimatedCircleIcon(props: SvgProps) {
         <stop offset="1" stopColor="#FFFFFF" stopOpacity="0"></stop>
       </radialGradient>
       <circle
-        
         transformOrigin="center"
         fill="none"
         stroke="url(#a9)"
@@ -57,7 +56,7 @@ export function AnimatedCircleIcon(props: SvgProps) {
   );
 }
 
-export function GithubIcon(props:SvgProps) {
+export function GithubIcon(props: SvgProps) {
   return (
     <svg
       {...props}
@@ -77,7 +76,7 @@ export function GithubIcon(props:SvgProps) {
   );
 }
 
-export function ChromeIcon(props:SvgProps) {
+export function ChromeIcon(props: SvgProps) {
   return (
     <svg
       {...props}
@@ -100,7 +99,7 @@ export function ChromeIcon(props:SvgProps) {
   );
 }
 
-export function HomeIcon(props:SvgProps) {
+export function HomeIcon(props: SvgProps) {
   return (
     <svg
       {...props}
@@ -123,7 +122,7 @@ export function HomeIcon(props:SvgProps) {
   );
 }
 
-export function HomeIconActive(props:SvgProps) {
+export function HomeIconActive(props: SvgProps) {
   return (
     <svg
       {...props}
@@ -145,7 +144,7 @@ export function HomeIconActive(props:SvgProps) {
     </svg>
   );
 }
-export function AlertIcon(props:SvgProps) {
+export function AlertIcon(props: SvgProps) {
   return (
     <svg
       {...props}
@@ -186,7 +185,7 @@ export function AlertIcon(props:SvgProps) {
   );
 }
 
-export function AlertIconActive(props:SvgProps) {
+export function AlertIconActive(props: SvgProps) {
   return (
     <svg
       {...props}
@@ -227,7 +226,7 @@ export function AlertIconActive(props:SvgProps) {
   );
 }
 
-export function GroupsIcon(props:SvgProps) {
+export function GroupsIcon(props: SvgProps) {
   return (
     <svg
       {...props}
@@ -278,7 +277,7 @@ export function GroupsIcon(props:SvgProps) {
   );
 }
 
-export function GroupsIconActive(props:SvgProps) {
+export function GroupsIconActive(props: SvgProps) {
   return (
     <svg
       {...props}
@@ -329,7 +328,7 @@ export function GroupsIconActive(props:SvgProps) {
   );
 }
 
-export function ChatIcon(props:SvgProps) {
+export function ChatIcon(props: SvgProps) {
   return (
     <svg
       {...props}
@@ -357,7 +356,7 @@ export function ChatIcon(props:SvgProps) {
     </svg>
   );
 }
-export function ChatIconActive(props:SvgProps) {
+export function ChatIconActive(props: SvgProps) {
   return (
     <svg
       {...props}
@@ -386,7 +385,7 @@ export function ChatIconActive(props:SvgProps) {
   );
 }
 
-export function BookmarksIcon(props:SvgProps) {
+export function BookmarksIcon(props: SvgProps) {
   return (
     <svg
       {...props}
@@ -412,7 +411,7 @@ export function BookmarksIcon(props:SvgProps) {
   );
 }
 
-export function BookmarksIconActive(props:SvgProps) {
+export function BookmarksIconActive(props: SvgProps) {
   return (
     <svg
       {...props}
@@ -438,7 +437,7 @@ export function BookmarksIconActive(props:SvgProps) {
   );
 }
 
-export function SettingsIcon(props:SvgProps) {
+export function SettingsIcon(props: SvgProps) {
   return (
     <svg
       {...props}
@@ -462,7 +461,7 @@ export function SettingsIcon(props:SvgProps) {
   );
 }
 
-export function SettingsIconActive(props:SvgProps) {
+export function SettingsIconActive(props: SvgProps) {
   return (
     <svg
       {...props}
@@ -486,10 +485,10 @@ export function SettingsIconActive(props:SvgProps) {
   );
 }
 
-export function GuestProfileIcon(props:SvgProps) {
+export function GuestProfileIcon(props: SvgProps) {
   return (
     <svg
-    {...props}
+      {...props}
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -523,6 +522,62 @@ export function GuestProfileIcon(props:SvgProps) {
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
+        ></path>{" "}
+      </g>
+    </svg>
+  );
+}
+
+export function Heart(props: SvgProps) {
+  return (
+    <svg
+      {...props}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      stroke="#ebedf0"
+    >
+      <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+      <g
+        id="SVGRepo_tracerCarrier"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      ></g>
+      <g id="SVGRepo_iconCarrier">
+        {" "}
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M12 6.00019C10.2006 3.90317 7.19377 3.2551 4.93923 5.17534C2.68468 7.09558 2.36727 10.3061 4.13778 12.5772C5.60984 14.4654 10.0648 18.4479 11.5249 19.7369C11.6882 19.8811 11.7699 19.9532 11.8652 19.9815C11.9483 20.0062 12.0393 20.0062 12.1225 19.9815C12.2178 19.9532 12.2994 19.8811 12.4628 19.7369C13.9229 18.4479 18.3778 14.4654 19.8499 12.5772C21.6204 10.3061 21.3417 7.07538 19.0484 5.17534C16.7551 3.2753 13.7994 3.90317 12 6.00019Z"
+          stroke="#ebedf0"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        ></path>{" "}
+      </g>
+    </svg>
+  );
+}
+
+export function HeartFilled(props: SvgProps) {
+  return (
+    <svg
+      {...props}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+      <g
+        id="SVGRepo_tracerCarrier"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      ></g>
+      <g id="SVGRepo_iconCarrier">
+        {" "}
+        <path
+          d="M2 9.1371C2 14 6.01943 16.5914 8.96173 18.9109C10 19.7294 11 20.5 12 20.5C13 20.5 14 19.7294 15.0383 18.9109C17.9806 16.5914 22 14 22 9.1371C22 4.27416 16.4998 0.825464 12 5.50063C7.50016 0.825464 2 4.27416 2 9.1371Z"
+          fill="#e40c0c"
         ></path>{" "}
       </g>
     </svg>

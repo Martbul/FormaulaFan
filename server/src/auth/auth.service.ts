@@ -1,4 +1,4 @@
-import { ForbiddenException, Injectable } from '@nestjs/common';
+import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
 import { UpdateAuthInput } from './dto/update-auth.input';
 import { SignUpInput } from './dto/signup-input';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -100,5 +100,19 @@ export class AuthService {
       where: { id: userId },
       data: { hashedRefreshToken: hashedRefreshToken },
     });
+  }
+
+  async getUserId(email: string) {
+     const user = await this.prisma.user.findUnique({
+       where: { email: email },
+       include: {
+         createdGroups: true,
+       },
+     });
+     if (!user) {
+       throw new NotFoundException('User not found');
+    }
+    
+    return user
   }
 }

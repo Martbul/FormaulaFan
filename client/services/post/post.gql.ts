@@ -43,7 +43,9 @@ export const QUERY_POSTS_PAGGINATION = gql`
         username
         picture
       }
-      likes
+      likedBy{
+        id
+      }
       comments {
         id
         textContent
@@ -62,10 +64,29 @@ export const QUERY_POSTS_PAGGINATION = gql`
         views
         saves
       }
-      shares
-      views
-      saves
+      sharedBy{
+        id
+      }
+      savedBy{
+        id
+      }
     }
   }
 `;
 ;
+
+export const LIKE_DISLIKE_POST = gql`
+  mutation likeDislikePost(
+    $postId: String!
+    $userId: String!
+    $isLiked: Boolean!
+  ) {
+    likeDislike(
+      likeDislikePostInput: {
+        postId: $postId
+        userId: $userId
+        isLiked: $isLiked
+      }
+    )
+  }
+`;

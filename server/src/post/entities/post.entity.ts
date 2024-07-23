@@ -20,20 +20,29 @@ export class Post {
   @Field(() => User)
   author: User;
 
-  @Field(() => Int)
-  likes: number;
+  // @Field(() => [User], { nullable: true })
+  // likedBy?: User[];
+
+  // @Field(() => [Comment], { nullable: true })
+  // comments?: Comment[];
+
+  // @Field(() => [User], { nullable: true })
+  // sharedBy?: User[];
+
+  // @Field(() => [User], { nullable: true })
+  // savedBy?: User[];
+
+  @Field(() => [User], { nullable: true })
+  likedBy?: User[];
 
   @Field(() => [Comment], { nullable: true })
   comments?: Comment[];
 
-  @Field(() => Int)
-  shares: number;
+  @Field(() => [User], { nullable: true })
+  sharedBy?: User[];
 
-  @Field(() => Int)
-  views: number;
-
-  @Field(() => Int)
-  saves: number;
+  @Field(() => [User], { nullable: true })
+  savedBy?: User[];
 
   @Field()
   createdAt: Date;

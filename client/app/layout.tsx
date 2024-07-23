@@ -24,7 +24,7 @@ export default function RootLayout({
       <AppWebsocketWrapper>
           <html lang="en">
             <body className={inter.className}>
-              {/* <Navigation className="nav-layout"> </Navigation> */}
+
               {children}
             </body>
           </html>

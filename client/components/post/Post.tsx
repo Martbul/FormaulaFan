@@ -1,9 +1,31 @@
 import Image from "next/image";
 import icons from "../../constants/icons";
 import './Post.css'
+import { Heart, HeartFilled } from "@/utils/svgIcons";
+import { clickOnLike } from "@/services/post/post.service";
+import { useState, useEffect } from "react";
 
 
-const Post = ({ post }) => {
+const Post = ({ post, userId }) => {
+  
+
+  const [isLiked, setIsLiked] = useState<boolean>(
+    post.likedBy.some(user => user.id === userId),
+  );
+  const [likeCount, setLikeCount] = useState<number>(post.likedBy.length);
+
+  const handleLike = async () => {
+    const result = await clickOnLike(post.id, userId, isLiked);
+    if (result.data.likeDislike == "Post was liked") {
+      setIsLiked(true);
+         setLikeCount(likeCount + 1);
+    } else if (result.data.likeDislike == "Post was disliked") {
+      setIsLiked(false)
+      setLikeCount(likeCount - 1);
+    }
+      console.log(result.data.likeDislike);
+    
+  };
   return (
     <div className="post remove-selecting-text">
       <div className="postHeader">
@@ -38,8 +60,12 @@ const Post = ({ post }) => {
       <div className="postActions">
         <div className="data">
           <div className="likes">
-            <Image src={icons.heart} alt="heart" />
-            <p>{post.likes}</p>
+            {isLiked && (
+              <HeartFilled className="w-6 h-6" onClick={handleLike} />
+            )}
+            {!isLiked && <Heart className="w-6 h-6" onClick={handleLike} />}
+
+            <p>{likeCount}</p>
           </div>
 
           <div className="comments">

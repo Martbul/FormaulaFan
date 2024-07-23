@@ -16,9 +16,12 @@ model User {
    hashedRefreshToken String?
    createdAt          DateTime @default(now())
    updatedAt          DateTime @updatedAt
-
    posts    Post[]
+   likedPosts Post[] @relation("UserLikedPosts")
    comments Comment[]
+   sharedPosts Post[] @relation("UserSharedPosts")
+   savedPosts Post[] @relation("UserSavedPosts")
+  
 
    conversationsInitiated Conversation[] @relation("UserOne")
    conversationsReceived  Conversation[] @relation("UserTwo")
@@ -52,11 +55,10 @@ model Post {
    authorId String @db.Uuid
    author   User   @relation(fields: [authorId], references: [id])
 
-   likes    Int       @default(0)
+   likedBy   User[] @relation("UserLikedPosts") 
    comments Comment[] @relation("PostComments")
-   shares   Int       @default(0)
-   views    Int       @default(0)
-   saves    Int       @default(0)
+   sharedBy    User[]        @relation("UserSharedPosts")
+   savedBy   User[]      @relation("UserSavedPosts")
 }
 
 model Comment {

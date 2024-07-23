@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreatePostInput } from './dto/create-post.input';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CursorPaginationInput } from './dto/cursorPaginatedPost-input';
+import { LikeDislikePostInput } from './dto/like-dislike-post.input';
 
 @Injectable()
 export class PostService {
@@ -30,22 +31,6 @@ export class PostService {
     return post;
   }
 
-  async findAll() {
-    const allPosts = await this.prisma.post.findMany({
-      include: {
-        author: true,
-        comments: {
-          include: {
-            author: true,
-            post: true,
-          },
-        },
-      },
-    });
-
-    return allPosts;
-  }
-
   async getPaginatedPosts(paginationInput: CursorPaginationInput) {
     const { cursor, limit } = paginationInput;
 
@@ -62,6 +47,9 @@ export class PostService {
         },
         include: {
           author: true,
+          likedBy: true,
+          savedBy: true,
+          sharedBy: true,
           comments: {
             include: {
               author: true,
@@ -80,6 +68,9 @@ export class PostService {
         },
         include: {
           author: true,
+          likedBy: true,
+          savedBy: true,
+          sharedBy: true,
           comments: {
             include: {
               author: true,
@@ -91,5 +82,34 @@ export class PostService {
     }
 
     return posts;
+  }
+
+  async likeDislike(likeDislikePostInput: LikeDislikePostInput) {
+    const { postId, userId, isLiked } = likeDislikePostInput;
+
+
+    if (isLiked) {
+     
+         await this.prisma.post.update({
+           where: { id: postId },
+           data: {
+             likedBy: {
+               disconnect: { id: userId },
+             },
+           },
+         });
+      
+      return "Post was disliked"
+    } else {
+      await this.prisma.post.update({
+        where: { id: postId },
+        data: {
+          likedBy: {
+            connect: { id: userId },
+          },
+        },
+      });
+       return 'Post was liked';
+    }
   }
 }

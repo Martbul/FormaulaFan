@@ -112,6 +112,12 @@ type Group {
   updatedAt: DateTime!
 }
 
+input LikeDislikePostInput {
+  isLiked: Boolean!
+  postId: String!
+  userId: String!
+}
+
 type Member {
   createdAt: DateTime!
   group: Group!
@@ -135,6 +141,7 @@ type Message {
 type Mutation {
   addedUserToGroup(addUserToGroupInput: AddUserToGroupInput!): Member!
   createGroup(createGroupInput: CreateGroupInput!): CreateGroupResponse!
+  likeDislike(likeDislikePostInput: LikeDislikePostInput!): String!
   newChannel(createChannelInput: CreateChannelInput!): Channel!
   newPost(createPostInput: CreatePostInput!): Post!
   removeAuth(id: Int!): Auth!
@@ -154,18 +161,16 @@ type Post {
   createdAt: DateTime!
   id: String!
   imageContentUrl: String
-  likes: Int!
-  saves: Int!
-  shares: Int!
+  likedBy: [User!]
+  savedBy: [User!]
+  sharedBy: [User!]
   textContent: String!
   updatedAt: DateTime!
   videoContent: String
-  views: Int!
 }
 
 type Query {
   allGroups: [Group!]!
-  allPosts: [Post!]!
   allUserConversations(email: String!): [User!]!
   auth(id: Int!): Auth!
   channel: [Channel!]!
@@ -175,6 +180,7 @@ type Query {
   paginatedPosts(paginationInput: CursorPaginationInput!): [Post!]!
   singleChannel(id: String!): Channel!
   singleGroup(id: String!): Group!
+  user(email: String!): User!
 }
 
 input SignInInput {
@@ -221,12 +227,31 @@ input UpdateGroupInput {
 }
 
 type User {
+  comments: [Comment!]!
   conversationsInitiated: [Conversation!]!
   conversationsReceived: [Conversation!]!
+  createdAt: DateTime!
   createdGroups: [Group!]!
+  directMessages: [DirectMessage!]!
   email: String!
+  hashedRefreshToken: String
   id: String!
+  likedPosts: [Post!]!
   members: [Member!]!
-  picture: String!
+  password: String!
+  picture: String
+  posts: [Post!]!
+  savedPosts: [Post!]!
+  settings: UserSettings
+  sharedPosts: [Post!]!
+  updatedAt: DateTime!
   username: String!
+}
+
+type UserSettings {
+  id: String!
+  notifications: Boolean!
+  theme: String!
+  user: User!
+  userId: String!
 }

@@ -34,6 +34,15 @@ const SIGN_UP_MUTATION = gql`
   }
 `;
 
+
+const QUERY_USER_ID = gql`
+  query getUserId($userEmail: String!) {
+    user(email: $userEmail){
+      id
+    }
+  }
+`;
+
 export async function signIn(
   email: string,
   password: string,
@@ -99,4 +108,27 @@ export async function signUp(
 export function logout(setUser:Dispatch<SetStateAction<User>>) {
   localStorage.clear();
   setUser({ username: "Guest", email: undefined, picture:"" });
+}
+
+
+export async function getUserId(userEmail: string) {
+  try {
+    const { data } = await client.query({
+      query: QUERY_USER_ID,
+      variables: { userEmail },
+    });
+
+    const result = data.user;
+
+    return result;
+  } catch (error) {
+    console.log(error);
+    if (error instanceof ApolloError) {
+      console.error("GraphQL error details:", error.graphQLErrors);
+      console.error("Network error details:", error.networkError);
+    } else {
+      console.error("Unknown error:", error);
+    }
+    throw error;
+  }
 }

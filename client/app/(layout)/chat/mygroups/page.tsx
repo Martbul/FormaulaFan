@@ -8,8 +8,8 @@ import MyGroupCard from "@/components/chat/myGroups/MyGroupsCard";
 import { getGroupByUserEmail } from "@/services/group/group.service";
 
 import type { User, Group } from "@/utils/interfaces";
-import { User } from "@/services/conversation/conversation.service";
 import { Sidebar } from "@/components/chat/group/Sidebar/Sidebar";
+import { getConversationsByUserEmail } from "@/services/conversation/conversation.service";
 
  const MyGroups = () =>{
  const FAKEONLINEMEMBERS = 69

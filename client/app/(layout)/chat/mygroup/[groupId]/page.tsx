@@ -14,6 +14,7 @@ const Group: React.FC<GroupProps> = ({ params }) => {
   const [groupData, setGroupData] = useState<Group | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [selectedChatChannelId, setSelectedChatChannelId] = useState(null); //! change useState to group > channels > [0].id
+   const [loading, setLoading] = useState(true); 
 
   const getGroupData = async () => {
     try {
@@ -24,13 +25,18 @@ const Group: React.FC<GroupProps> = ({ params }) => {
     } catch (error) {
       console.log(error);
       setError("some error");
-    }
+     } finally {
+         setLoading(false);
+       }
   };
 
   useEffect(() => {
     getGroupData();
   }, []);
 
+     if (loading) {
+       return <div>Loading...</div>;
+     }
   return (
     <div className="discord-server">
       <ChatArea

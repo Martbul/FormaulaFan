@@ -13,11 +13,26 @@ import images from "@/constants/images";
 import "./Posts.css";
 
 import type { PostInterface } from "@/utils/interfaces";
+import { useAuthContext } from "@/contexts/AuthContext2";
+import useUserIdUtil from "@/utils/getUserId";
 
 const Posts = () => {
   const [posts, setPosts] = useState<PostInterface[]>([]);
   const [hasMore, setHasMore] = useState(true);
   const { ref, inView } = useInView();
+    const { user } = useAuthContext();
+    const [userId, setUserId] = useState(null);
+
+  useEffect(() => {
+    if (!user.email) return;
+    
+      const getUser = async () => {
+        const result = await useUserIdUtil(user.email);
+        setUserId(result.id);
+      };
+
+      getUser();
+    }, [user]);
 
   const fetchMorePosts = useCallback(async () => {
     let paginatedPosts;
@@ -53,7 +68,7 @@ const Posts = () => {
           <PostsMenu />
           <div className="feedContainer no-scrollbar">
             {posts.map((post, index) => (
-              <Post key={index} post={post} />
+              <Post key={index} post={post} userId={userId} />
             ))}
             {hasMore && (
               <div ref={ref} className="loading">
@@ -68,7 +83,7 @@ const Posts = () => {
             {/* Example of a news item */}
             <div className="newsItem">
               <div className="newsImage">
-                <Image src={images.madridNews} alt="News" />
+                <Image src={images.f1RaceCalendar} alt="News" />
                 <div className="newsTextOverlay">
                   <h3 className="newsTitle">News Title</h3>
                   <p className="newsTimestamp">Timestamp</p>

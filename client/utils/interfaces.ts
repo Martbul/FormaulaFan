@@ -1,12 +1,23 @@
 export interface User {
-  id: string;
-  username: string;
-  email: string;
-  picture: string;
-  createdGroups: Group[];
-  members: Member[];
-  conversationsInitiated: Conversation[];
-  conversationsReceived: Conversation[];
+  id: string; // Unique identifier for the user
+  username: string; // Username of the user
+  password: string; // Password of the user (consider security implications of exposing this field)
+  email: string; // Email of the user
+  picture?: string; // Optional profile picture URL of the user
+  hashedRefreshToken?: string; // Optional hashed refresh token for session management
+  createdAt: Date; // Timestamp when the user was created
+  updatedAt: Date; // Timestamp when the user was last updated
+  posts: PostInterface[]; // List of posts created by the user
+  likedPosts: PostInterface[]; // List of posts liked by the user
+  comments: Comment[]; // List of comments made by the user
+  sharedPosts: PostInterface[]; // List of posts shared by the user
+  savedPosts: PostInterface[]; // List of posts saved by the user
+  conversationsInitiated: Conversation[]; // Conversations initiated by the user
+  conversationsReceived: Conversation[]; // Conversations received by the user
+  directMessages: DirectMessage[]; // Direct messages associated with the user
+  settings?: UserSettings; // Optional user settings
+  createdGroups: Group[]; // Groups created by the user
+  members: Member[]; // List of members associated with the user
 }
 
 export interface Conversation {
@@ -16,10 +27,18 @@ export interface Conversation {
   userTwo: User;
 }
 
+export interface UserSettings {
+  id: string; // Unique identifier for the user settings
+  theme: string; // User's theme preference (e.g., 'NORMAL')
+  notifications: boolean; // Whether notifications are enabled
+  userId: string; // Foreign key linking to the user
+  user: User; // The user associated with these settings
+}
+
 export interface DirectMessage {
   id: string;
   content: string;
-  fileUrl?: string; 
+  fileUrl?: string;
   deleted: boolean;
   user: User;
   conversation: Conversation;
@@ -39,7 +58,7 @@ export interface Member {
 export interface Channel {
   id: string;
   name: string;
-  type: 'TEXT' | 'VOICE';
+  type: "TEXT" | "VOICE";
   isPrivate: boolean;
   messages?: Message[];
   member: Member;
@@ -49,19 +68,17 @@ export interface Channel {
 }
 
 export interface Message {
-   id: string;
-   content: string;
-   fileUrl?: string;
-   deleted: boolean;
-   member: Member;
-   channel: Channel;
-   createdAt: Date;
-   updatedAt: Date;
+  id: string;
+  content: string;
+  fileUrl?: string;
+  deleted: boolean;
+  member: Member;
+  channel: Channel;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
-export interface Creator extends User{
-
-}
+export interface Creator extends User {}
 
 export interface Group {
   id: string;
@@ -78,11 +95,10 @@ export interface PostInterface {
   imageContentUrl?: string;
   videoContent?: string;
   author: User;
-  likes: number;
+  likedBy?: User[];
   comments?: Comment[];
-  shares: number;
-  views: number;
-  saves: number;
+  sharedBy?: User[];
+  savedBy?: User[];
   createdAt: Date;
   updatedAt: Date;
 }
@@ -112,16 +128,15 @@ export interface GroupProps {
   params: {
     groupId: string;
   };
-};
+}
 export interface ChatPageProps {
   params: {
     conversationId: string;
   };
-};
+}
 
 export interface SvgProps extends React.SVGProps<SVGSVGElement> {
-  transformOrigin?: string; 
-  
+  transformOrigin?: string;
 }
 
 interface SidebarLayoutProps {
