@@ -5,7 +5,7 @@ import { DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle} fr
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { createPost } from "@/services/post/post.service";
+import { createComment } from "@/services/post/post.service";
 
 import { uploadFileToCloud } from "@/utils/uplaodToFirebase";
 import { useAuthContext } from "@/contexts/AuthContext2";
@@ -13,10 +13,9 @@ import { useAuthContext } from "@/contexts/AuthContext2";
 import EmojiPicker from "emoji-picker-react";
 import GifPicker from "gif-picker-react";
 import Image from "next/image";
-
 import { AddEmojiIcon, AddGifIcon, AddImageIcon } from "@/utils/svgIcons";
 
-const CreateCommentModal = () => {
+const CreatePostModal = ({ postId }) => {
   const { user } = useAuthContext();
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [textContent, setTextContent] = useState<string>("");
@@ -25,7 +24,7 @@ const CreateCommentModal = () => {
   const [selectedGifs, setSelectedGifs] = useState([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handlePostTextChange = (
+  const handleCommentTextChange = (
     event: React.ChangeEvent<HTMLTextAreaElement>
   ) => {
     setTextContent(event.target.value);
@@ -84,18 +83,20 @@ const CreateCommentModal = () => {
     });
   };
 
-  const handlePostCreation = async () => {
+  const handleCommentCreation = async () => {
     try {
       console.log(selectedFiles);
 
       const imageContentUrl = await uploadFileToCloud(selectedFiles[0]);
 
-      const newPost = await createPost(
+      const newComment = await createComment(
         textContent,
         user.email as string,
-        imageContentUrl
+        postId,
+        imageContentUrl,
+        
       );
-      if (!newPost) return;
+      if (!newComment) return;
 
       setSelectedFiles([]);
       setTextContent("");
@@ -145,7 +146,7 @@ const CreateCommentModal = () => {
                 color: "#ebedf0",
               }}
               value={textContent}
-              onChange={handlePostTextChange}
+              onChange={handleCommentTextChange}
             />
 
             <div
@@ -173,7 +174,6 @@ const CreateCommentModal = () => {
                   multiple
                 />
               </div>
-
               <AddGifIcon
                 className="w-6 h-6"
                 onClick={() => {
@@ -212,7 +212,7 @@ const CreateCommentModal = () => {
       <DialogFooter>
         <DialogClose asChild>
           <Button
-            onClick={handlePostCreation}
+            onClick={handleCommentCreation}
             type="submit"
             variant="secondary"
             style={{
@@ -230,4 +230,4 @@ const CreateCommentModal = () => {
   );
 };
 
-export default CreateCommentModal;
+export default CreatePostModal;

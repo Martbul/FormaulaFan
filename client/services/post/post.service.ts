@@ -4,6 +4,8 @@ import {
   CREATE_POST_MUTATION,
   QUERY_POSTS_PAGGINATION,
   LIKE_DISLIKE_POST,
+  Add_CCOMMENT_TO_POST,
+  GET_SINGLE_POST
 } from "./post.gql";
 
 const client = createApolloClient();
@@ -70,6 +72,60 @@ export async function clickOnLike(postId: string, userId: string, isLiked: boole
         isLiked,
       },
     });
+    return result;
+  } catch (error) {
+    if (error instanceof ApolloError) {
+      console.error("GraphQL error details:", error.graphQLErrors);
+      console.error("Network error details:", error.networkError);
+    } else {
+      console.error("Unknown error:", error);
+    }
+    throw error;
+  }
+}
+
+export async function createComment(
+  textContent: string,
+  userEmail: string,
+  postId:string,
+  imageContentUrl?: string
+) {
+   try {
+    const result = await client.mutate({
+      mutation: Add_CCOMMENT_TO_POST,
+      variables: {
+        textContent,
+        userEmail,
+        postId,
+        imageContentUrl
+      },
+    });
+
+    console.log(result)
+    return result;
+  } catch (error) {
+    if (error instanceof ApolloError) {
+      console.error("GraphQL error details:", error.graphQLErrors);
+      console.error("Network error details:", error.networkError);
+    } else {
+      console.error("Unknown error:", error);
+    }
+    throw error;
+  }
+}
+
+
+export async function getSinglePost(postId:string){
+     try {
+    const {data} = await client.query({
+      query: GET_SINGLE_POST,
+      variables: {
+        postId,
+      },
+    });
+
+       const result = data.singlePost
+    console.log(result)
     return result;
   } catch (error) {
     if (error instanceof ApolloError) {

@@ -32,7 +32,9 @@
 - make sidebar and conversationSidebar into 1 component
 - make conversationList and memberslsit into 1 compoennt
 - it is not okay to make new request every thime user come o chat for the conversation sidebar. Maybe put it in (conv-layout) or do some cashing or something like that
-
+- postovete se fetchtat 3 pati(opravi go(3 pati paginirani 20 posta - edi i sashti))\
+- send emails on sign in
+- kato user clickne na post da se pokazvat detaili za posta
 
 PERFORMANCE:
    - .ong to .svg icons

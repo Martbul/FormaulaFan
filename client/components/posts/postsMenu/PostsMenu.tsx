@@ -4,9 +4,8 @@ import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import dynamic from 'next/dynamic'
+import { WriteIcon } from "@/utils/svgIcons";
 
-import icons from "@/constants/icons";
-import Image from "next/image";
 
 import "./PostsMenu.css";
 
@@ -21,7 +20,7 @@ export const PostsMenu = () => {
       <Dialog>
         <div className="create-post">
           <DialogTrigger asChild>
-            <Image src={icons.writePost} alt="Write Post" />
+            <WriteIcon className="w-8 h-8" />
           </DialogTrigger>
         </div>
         <div className="select-feed">
@@ -45,13 +44,7 @@ export const PostsMenu = () => {
                 variant="ghost"
                 size="icon"
                 className="absolute top-1/2 right-2 -translate-y-1/2 text-muted-foreground hover:bg-muted"
-              >
-                <Image
-                  src={icons.searchWhite}
-                  alt="Search"
-                  className="w-5 h-5"
-                />
-              </Button>
+              ></Button>
             </div>
           </div>
         </div>

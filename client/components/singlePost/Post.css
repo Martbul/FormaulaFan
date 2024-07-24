@@ -1,0 +1,40 @@
+.post {
+    background-color: #1c1c1c;
+    border: 1px solid #3a3a3a;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 15px;
+    color: #e1e1e1;
+  }
+
+  .postHeader {
+    display: flex;
+    align-items: center;
+  }
+
+  .profilePic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+
+  .postInfo {
+    display: flex;
+    flex-direction: row;
+    gap: 0.6em;
+  }
+
+  .userData {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .username {
+    font-weight: bold;
+  }
+
+  .handle, .timestamp {
+    color: #a1a1a1;
+    font-size: 0.9em;
+  }

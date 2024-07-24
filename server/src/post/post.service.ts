@@ -3,6 +3,7 @@ import { CreatePostInput } from './dto/create-post.input';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CursorPaginationInput } from './dto/cursorPaginatedPost-input';
 import { LikeDislikePostInput } from './dto/like-dislike-post.input';
+import { AddCommentToPostInput } from './dto/add-comment-to-post.input';
 
 @Injectable()
 export class PostService {
@@ -87,19 +88,17 @@ export class PostService {
   async likeDislike(likeDislikePostInput: LikeDislikePostInput) {
     const { postId, userId, isLiked } = likeDislikePostInput;
 
-
     if (isLiked) {
-     
-         await this.prisma.post.update({
-           where: { id: postId },
-           data: {
-             likedBy: {
-               disconnect: { id: userId },
-             },
-           },
-         });
-      
-      return "Post was disliked"
+      await this.prisma.post.update({
+        where: { id: postId },
+        data: {
+          likedBy: {
+            disconnect: { id: userId },
+          },
+        },
+      });
+
+      return 'Post was disliked';
     } else {
       await this.prisma.post.update({
         where: { id: postId },
@@ -109,7 +108,50 @@ export class PostService {
           },
         },
       });
-       return 'Post was liked';
+      return 'Post was liked';
     }
+  }
+
+  async addCommentToPost(addCommnetToPostInput: AddCommentToPostInput) {
+    const { textContent, userEmail, postId, imageContentUrl } = addCommnetToPostInput;
+    
+    const user = await this.prisma.user.findUnique({
+      where: { email: userEmail },
+    });
+
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+
+    const comment = await this.prisma.comment.create({
+      data: {
+        textContent,
+        imageContentUrl,
+        authorId: user.id,
+        postId,
+      }
+    })
+    return comment
+
+  };
+
+
+  async getSinglePost(id: string) {
+    const singlePost = await this.prisma.post.findUnique({
+      where: { id: id },
+      include: {
+        author: true,
+        likedBy: true,
+        savedBy: true,
+        sharedBy: true,
+        comments: {
+          include: {
+            author: true,
+            post: true,
+          },
+        },
+      },
+    });
+    return singlePost
   }
 }

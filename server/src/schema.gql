@@ -2,6 +2,13 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+input AddCommentToPostInput {
+  imageContentUrl: String
+  postId: String!
+  textContent: String!
+  userEmail: String!
+}
+
 input AddUserToGroupInput {
   email: String!
   groupId: String!
@@ -139,6 +146,7 @@ type Message {
 }
 
 type Mutation {
+  addedComment(addCommnetToPostInput: AddCommentToPostInput!): Comment!
   addedUserToGroup(addUserToGroupInput: AddUserToGroupInput!): Member!
   createGroup(createGroupInput: CreateGroupInput!): CreateGroupResponse!
   likeDislike(likeDislikePostInput: LikeDislikePostInput!): String!
@@ -180,6 +188,7 @@ type Query {
   paginatedPosts(paginationInput: CursorPaginationInput!): [Post!]!
   singleChannel(id: String!): Channel!
   singleGroup(id: String!): Group!
+  singlePost(id: String!): Post!
   user(email: String!): User!
 }
 
