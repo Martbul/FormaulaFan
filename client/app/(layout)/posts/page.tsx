@@ -35,6 +35,8 @@ const Posts = () => {
     }, [user]);
 
   const fetchMorePosts = useCallback(async () => {
+    console.log('HERE');
+    
     let paginatedPosts;
     if (posts.length !== 0) {
       paginatedPosts = await getPaginatedPosts(posts[posts.length - 1].id);
@@ -47,18 +49,36 @@ const Posts = () => {
     } else {
       setPosts((prevPosts) => [...prevPosts, ...paginatedPosts]);
     }
-  }, [posts]);
+  });
+
+
+//  const fetchMorePosts = async() =>{
+//     console.log('HERE');
+    
+//     let paginatedPosts;
+//     if (posts.length !== 0) {
+//       paginatedPosts = await getPaginatedPosts(posts[posts.length - 1].id);
+//     } else {
+//       paginatedPosts = await getPaginatedPosts();
+//     }
+
+//     if (paginatedPosts.length === 0) {
+//       setHasMore(false);
+//     } else {
+//       setPosts((prevPosts) => [...prevPosts, ...paginatedPosts]);
+//     }
+//  }
+  // useEffect(() => {
+    
+  //   fetchMorePosts();
+  // }, []);
 
   useEffect(() => {
     
-    fetchMorePosts();
-  }, []);
-
-  useEffect(() => {
     if (inView && hasMore) {
-      fetchMorePosts();
+      fetchMorePosts()
     }
-  }, [inView, hasMore, fetchMorePosts]);
+  }, [inView, hasMore]);
 
   return (
     <>

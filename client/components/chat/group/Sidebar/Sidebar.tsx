@@ -13,7 +13,7 @@ import {
 const DynamicGroupQuickOptionsPopover = dynamic(
   () => import("./GroupQuickOptionsPopover/GroupQuickOptionsPopover"),
   {
-    ssr: false,
+    ssr: true,
   }
 );
 
@@ -59,7 +59,7 @@ export const Sidebar = ({
           </div>
         </PopoverTrigger>
 
-        <DynamicGroupQuickOptionsPopover />
+        <DynamicGroupQuickOptionsPopover   />
       </Popover>
       <div className="rigthSide">
         {channels && (

@@ -9,7 +9,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
 import { Switch } from "@/components/ui/switch";
 import { useState, ChangeEvent } from "react";
 import { PadlockIcon } from "@/utils/svgIcons";
@@ -160,11 +159,11 @@ const CreateChannelModal = ({ groupId, setTextChannels, setVoiceChannels }) => {
         />
       </div>
 
-      <div className="private-channel-layout">
-        <div className="private-channel-text">
-          <div className="private-channel-header">
+      <div className=" flex items-center">
+        <div className="">
+          <div className="flex items-center gap-1">
             <div className="p-r-image remove-selecting-text">
-          <PadlockIcon className="w-3 h-3"/>
+          <PadlockIcon className="w-4 h-4"/>
             </div>
             <div className="p-r-title white-title-color remove-selecting-text">
               <p>Private Channel</p>
@@ -181,13 +180,14 @@ const CreateChannelModal = ({ groupId, setTextChannels, setVoiceChannels }) => {
             checked={isPrivateChannel}
             onCheckedChange={() => setIsPrivateChannel(!isPrivateChannel)}
             aria-readonly
+            className="bg-red-500"
           />
         </div>
       </div>
 
       <DialogFooter>
         <DialogClose asChild>
-          <Button onClick={handleChannelCreation}>Create Channel</Button>
+          <Button className="remove-selecting-text" onClick={handleChannelCreation}>Create Channel</Button>
         </DialogClose>
       </DialogFooter>
     </DialogContent>
