@@ -51,16 +51,14 @@ import { getConversationsByUserEmail } from "@/services/conversation/conversatio
    }, [user]);
 
 
-     if (loading) {
-       return <div>Loading...</div>;
-     }
-
-
  return (
-   <div className="flex h-screen">
+   <div className="flex h-screen remove-selecting-text">
      <div className="flex flex-col flex-1 bg-zinc-800">
        {userGroups && (
          <div className="flex justify-center flex-wrap">
+          {loading && ( <div className="flex items-center justify-center h-screen bg-zinc-800">
+        <div className="loader"></div>
+      </div>)}
            {userGroups.map((group, index) => (
              <MyGroupCard
                key={index}

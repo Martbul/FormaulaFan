@@ -49,7 +49,11 @@ export default function SearchGroups() {
     console.log(searchResult);
   }, [searchResult]);
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <div className="flex items-center justify-center h-2/6">
+        <div className="loader"></div>
+      </div>
+    );
   }
 
   if (error) {

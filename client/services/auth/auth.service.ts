@@ -43,6 +43,9 @@ const QUERY_USER_ID = gql`
   }
 `;
 
+
+
+
 export async function signIn(
   email: string,
   password: string,
@@ -132,3 +135,4 @@ export async function getUserId(userEmail: string) {
     throw error;
   }
 }
+

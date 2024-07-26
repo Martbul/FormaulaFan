@@ -10,6 +10,7 @@ import { ChannelModule } from './channel/channel.module';
 import { PostModule } from './post/post.module';
 import { ConversationModule } from './conversation/conversation.module';
 import { GatewayModule } from './gateway/gateway.module';
+import { ProfileModule } from './profile/profile.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -24,6 +25,7 @@ import { GatewayModule } from './gateway/gateway.module';
     PostModule,
     ConversationModule,
     GatewayModule,
+    ProfileModule,
   ],
   controllers: [],
   providers: [PrismaService],

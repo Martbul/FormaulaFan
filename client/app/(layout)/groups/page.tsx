@@ -28,12 +28,9 @@ const Groups = () => {
     router.push(`/chat/mygroup/${result.id}`);
   };
 
-  
   return (
     <>
       <div className="layout remove-selecting-text">
-  
-
         <div className="main">
           <div className="feedContainer">
             <div className="heading">
@@ -105,16 +102,6 @@ const Groups = () => {
             </div>
 
             <SearchGroups />
-          </div>
-        </div>
-
-        <div className="feed">
-          <div className="searchContainer">
-            <CreatePost />
-            <MiniPost />
-            <MiniPost />
-            <MiniPost />
-            <MiniPost />
           </div>
         </div>
       </div>

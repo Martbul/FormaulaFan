@@ -1,16 +1,16 @@
 import {
   DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Image from "next/image";
-import Link from "next/link";
+import dynamic from "next/dynamic";
 
-import { logout } from "@/services/auth/auth.service";
-
+const DynamicUserOptionsPopover = dynamic(
+  () => import("./UserOptionsPopover/UserOptionsPopover"),
+  {
+    ssr: false,
+  }
+);
 
 const UserOptionsMenu = ({ user , setUser}) => {
   return (
@@ -30,20 +30,10 @@ const UserOptionsMenu = ({ user , setUser}) => {
             </div>
           </div>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="bg-zinc-700">
-          <DropdownMenuLabel>My Account</DropdownMenuLabel>
-          <DropdownMenuSeparator />
+       
+<DynamicUserOptionsPopover setUser={setUser}/>
 
-          <DropdownMenuItem>
-            <Link href="/profile">Profile</Link>
-          </DropdownMenuItem>
 
-          <DropdownMenuItem>Team</DropdownMenuItem>
-          <DropdownMenuItem>Subscription</DropdownMenuItem>
-          <DropdownMenuItem onClick={() => logout(setUser)}>
-            Log Out
-          </DropdownMenuItem>
-        </DropdownMenuContent>
       </DropdownMenu>
     </div>
   );

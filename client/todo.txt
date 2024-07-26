@@ -35,7 +35,8 @@
 - postovete se fetchtat 3 pati(opravi go(3 pati paginirani 20 posta - edi i sashti))\
 - send emails on sign in
 - kato user clickne na post da se pokazvat detaili za posta
-
+- if channel is private display lock svg
+- add funcionality to the UI you made for server options
 PERFORMANCE:
    - .ong to .svg icons
    - rafactor functions -> se less sapce but more complex

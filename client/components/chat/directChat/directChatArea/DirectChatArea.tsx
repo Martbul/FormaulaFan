@@ -5,13 +5,24 @@ import { Input } from "@/components/ui/input";
 
 import { useWebsocketContext } from "@/contexts/WebsocketContext";
 
-import icons from "@/constants/icons";
-import Image from "next/image";
 
+import Image from "next/image";
+import { PlusCircleIcon } from "@/utils/svgIcons";
 import "./DirectChatArea.css";
+import {
+  Popover,
+  PopoverTrigger,
+} from "@/components/ui/popover"
 
 import { DirectChatAreaProps, DirectMessage } from "@/utils/interfaces";
+import dynamic from "next/dynamic";
 
+const DynamicUserInfoPopover = dynamic(
+  () => import("../../group/ChatArea/UserPopover/UserPopover"),
+  {
+    ssr: false,
+  }
+);
 
 export const DirectChatArea: React.FC<DirectChatAreaProps> = ({
   conversationData,
@@ -88,13 +99,6 @@ export const DirectChatArea: React.FC<DirectChatAreaProps> = ({
           alignItems: "center",
         }}
       >
-        {/* <Image
-          src={recipientUser.picture}
-          alt="pic"
-          className="w-10 h-10"
-          width={50}
-          height={50}
-        />{" "} */}
         {recipientUser && (
           <p className="font-semibold text-xl text-white dark:text-white">
             {recipientUser.username}
@@ -109,7 +113,20 @@ export const DirectChatArea: React.FC<DirectChatAreaProps> = ({
           return (
             <div key={index} className="message">
               <div className="user-profile-pic">
-                <Image src={icons.chatUserImage} alt="" className="w-10 h-10" />
+                <Popover>
+                  <PopoverTrigger>
+                    <Image
+                      src={msg.member?.user.picture || currentUser.picture}
+                      alt="chat user picture"
+                      className="w-10 h-10"
+                      width={50}
+                      height={50}
+                    />
+                  </PopoverTrigger>
+                  <DynamicUserInfoPopover
+                    chatUser={msg.member?.user || currentUser}
+                  />
+                </Popover>
               </div>
               <div className="message-content">
                 <div className="message-sender">
@@ -125,7 +142,7 @@ export const DirectChatArea: React.FC<DirectChatAreaProps> = ({
 
       <div className="chat-input-layout">
         <div className="plus-icon">
-          <Image src={icons.plus} alt="" className="plus-image" />
+          <PlusCircleIcon className="w-7 h-7" />
         </div>
         <Input
           value={newMessage}

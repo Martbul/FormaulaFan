@@ -177,6 +177,19 @@ type Post {
   videoContent: String
 }
 
+type Profile {
+  conversationsInitiated: [Conversation!]!
+  conversationsReceived: [Conversation!]!
+  createdAt: DateTime!
+  createdGroups: [Group!]!
+  email: String!
+  id: String!
+  members: [Member!]!
+  picture: String
+  posts: [Post!]!
+  username: String!
+}
+
 type Query {
   allGroups: [Group!]!
   allUserConversations(email: String!): [User!]!
@@ -190,6 +203,7 @@ type Query {
   singleGroup(id: String!): Group!
   singlePost(id: String!): Post!
   user(email: String!): User!
+  userProfileData(email: String!): Profile!
 }
 
 input SignInInput {

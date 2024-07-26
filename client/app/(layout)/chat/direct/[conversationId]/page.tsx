@@ -50,8 +50,11 @@ useEffect(() => {
     getConversationUsers();
   }, [user]);
   
-    if (loading) {
-       return <div>Loading...</div>;
+   
+      if (loading) {
+       return <div className="flex items-center justify-center h-screen bg-zinc-800">
+        <div className="loader"></div>
+      </div>
      }
   return (
     <div className="flex h-screen">

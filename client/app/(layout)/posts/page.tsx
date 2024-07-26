@@ -14,14 +14,14 @@ import "./Posts.css";
 
 import type { PostInterface } from "@/utils/interfaces";
 import { useAuthContext } from "@/contexts/AuthContext2";
-import useUserIdUtil from "@/utils/getUserId";
+import {useUserIdUtil} from "@/utils/getUserId";
 
 const Posts = () => {
   const [posts, setPosts] = useState<PostInterface[]>([]);
   const [hasMore, setHasMore] = useState(true);
   const { ref, inView } = useInView();
-    const { user } = useAuthContext();
-    const [userId, setUserId] = useState(null);
+  const { user } = useAuthContext();
+  const [userId, setUserId] = useState(null);
 
   useEffect(() => {
     if (!user.email) return;
@@ -50,12 +50,11 @@ const Posts = () => {
   }, [posts]);
 
   useEffect(() => {
+    
     fetchMorePosts();
   }, []);
 
   useEffect(() => {
-    console.log(inView);
-    
     if (inView && hasMore) {
       fetchMorePosts();
     }
@@ -72,7 +71,9 @@ const Posts = () => {
             ))}
             {hasMore && (
               <div ref={ref} className="loading">
-                Loading posts...
+                <div className="flex items-center justify-center h-screen">
+                  <div className="loader"></div>
+                </div>
               </div>
             )}
           </div>

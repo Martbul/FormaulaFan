@@ -1,12 +1,17 @@
 import { Input } from "@/components/ui/input";
 import "./ChatArea.css";
 import Image from "next/image";
-import icons from "@/constants/icons";
 import React, { useEffect, useRef, useState } from "react";
 import { useWebsocketContext } from "@/contexts/WebsocketContext";
 import { useAuthContext } from "@/contexts/AuthContext2";
 import { getAllTextChannelMessagesByChannelId } from "@/services/channel/channel.service";
+import {
+  Popover,
+  PopoverTrigger,
+} from "@/components/ui/popover"
 
+import dynamic from "next/dynamic";
+import { PlusCircleIcon } from "@/utils/svgIcons";
 interface Message {
   id: string;
   content: string;
@@ -18,6 +23,14 @@ interface Message {
     };
   };
 }
+
+
+const DynamicUserInfoPopover = dynamic(
+  () => import("./UserPopover/UserPopover"),
+  {
+    ssr: false,
+  }
+);
 
 
 
@@ -93,8 +106,10 @@ export const ChatArea: React.FC<{ selectedChatChannelId: string, groupId: string
     return null;
   }
 
+ 
+
   return (
-    <div className="chat-area">
+    <div className="chat-area remove-selecting-text">
       <div className="other-groups">
         <p>Your Other Groups:</p>
         <div className="group-logo">
@@ -106,8 +121,6 @@ export const ChatArea: React.FC<{ selectedChatChannelId: string, groupId: string
         {/* Add more groups as needed */}
       </div>
 
-
-      
       <div className="messages">
         {messages.map((msg, index) => {
           const isCurrentUser =
@@ -115,20 +128,21 @@ export const ChatArea: React.FC<{ selectedChatChannelId: string, groupId: string
             msg.senderUsername === user.username;
 
           return (
-            <div
-              key={index}
-              className="message"
-              // style={{ backgroundColor: isCurrentUser ? "white" : "initial" }}
-            >
+            <div key={index} className="message">
               <div className="user-profile-pic flex bg-gray-600 rounded-full p-1 align-items">
-                <Image
-                  // src="https://utfs.io/f/75130d0b-919d-48b4-95d3-0e0f744ae04e-k6wv4j.png"
-                  src={user.picture}
-                  alt="pic"
-                  className="w-10 h-10"
-                  width={40} // specify the width in pixels
-                  height={40} // specify the height in pixels
-                />
+                <Popover>
+                  <PopoverTrigger>
+                    <Image
+                      src={user.picture}
+                      alt="pic"
+                      className="w-10 h-10"
+                      width={40} // specify the width in pixels
+                      height={40} // specify the height in pixels
+                    />
+                  </PopoverTrigger>
+
+                  <DynamicUserInfoPopover chatUser={msg.member?.user || user} />
+                </Popover>
               </div>
               <div className="message-content">
                 <div className="message-sender">
@@ -142,9 +156,9 @@ export const ChatArea: React.FC<{ selectedChatChannelId: string, groupId: string
         <div ref={messagesEndRef} />
       </div>
 
-      <div className="chat-input-layout">
-        <div className="plus-icon">
-          <Image src={icons.plus} alt="" className="plus-image" />
+      <div className="chat-input-layout flex align-center">
+        <div className="plus-icon flex align-center">
+          <PlusCircleIcon  className="w-7 h-7"/>
         </div>
         <Input
           value={newMessage}

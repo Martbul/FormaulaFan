@@ -101,15 +101,15 @@ const Navigation = () => {
           </div>
         </Link>
 
-        <Link className="flex items-center p-3 mb-5 cursor-pointer transition-colors duration-300" href="/group1">
+        <Link className="flex items-center p-3 mb-5 cursor-pointer transition-colors duration-300" href="/saves">
           <div className="mr-4">
-            {getMenuItemActiveImage("/group1") ? (
+            {getMenuItemActiveImage("/saves") ? (
               <BookmarksIconActive className="w-10 h-10" />
             ) : (
               <BookmarksIcon className="w-10 h-10" />
             )}
           </div>
-          <div className={getMenuItemClass("/group1")}>
+          <div className={getMenuItemClass("/saves")}>
             <p className="text-lg">Saves</p>
           </div>
         </Link>

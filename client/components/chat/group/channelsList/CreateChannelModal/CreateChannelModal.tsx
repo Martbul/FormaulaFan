@@ -9,10 +9,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import icons from "@/constants/icons";
 import Image from "next/image";
 import { Switch } from "@/components/ui/switch";
 import { useState, ChangeEvent } from "react";
+import { PadlockIcon } from "@/utils/svgIcons";
 
 import { createChannel } from "@/services/channel/channel.service";
 const CreateChannelModal = ({ groupId, setTextChannels, setVoiceChannels }) => {
@@ -164,7 +164,7 @@ const CreateChannelModal = ({ groupId, setTextChannels, setVoiceChannels }) => {
         <div className="private-channel-text">
           <div className="private-channel-header">
             <div className="p-r-image remove-selecting-text">
-              <Image src={icons.padlock} alt="" />
+          <PadlockIcon className="w-3 h-3"/>
             </div>
             <div className="p-r-title white-title-color remove-selecting-text">
               <p>Private Channel</p>

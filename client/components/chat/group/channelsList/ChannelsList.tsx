@@ -1,13 +1,12 @@
-import icons from "@/constants/icons";
-import Image from "next/image";
-import "./ChannelsList.css";
 import { useState, useEffect } from "react";
-
-import {
-  Dialog,
-  DialogTrigger
-} from "@/components/ui/dialog";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import dynamic from "next/dynamic";
+import {
+  ArrowDownIcon,
+  ArrowRightIcon,
+  PlusIcon,
+  PadlockIcon,
+} from "@/utils/svgIcons";
 
 const DynamicCreateChannelModal = dynamic(
   () => import("./CreateChannelModal/CreateChannelModal"),
@@ -16,20 +15,20 @@ const DynamicCreateChannelModal = dynamic(
   }
 );
 
-
-export const ChannelsList = ({ channels, groupId, setSelectedChatChannelId,selectedChatChannelId }) => {
+export const ChannelsList = ({
+  channels,
+  groupId,
+  setSelectedChatChannelId,
+  selectedChatChannelId,
+}) => {
   const [textChannels, setTextChannels] = useState([]);
   const [voiceChannels, setVoiceChannels] = useState([]);
 
   const [textChannelsVisible, setTextChannelsVisible] = useState(true);
   const [voiceChannelsVisible, setVoiceChannelsVisible] = useState(true);
- 
-
 
   useEffect(() => {
     if (channels && channels.length > 0) {
-      // console.log(channels);
-
       const newTextChannels = channels.filter(
         (channel) => channel.type === "TEXT"
       );
@@ -43,21 +42,17 @@ export const ChannelsList = ({ channels, groupId, setSelectedChatChannelId,selec
 
   return (
     <Dialog>
-      <div className="wrapper remove-selecting-text">
-        <div className="text-channels">
-          <div className="text-channels-header">
-            <div className="channel-header-leftSide">
-              <div className="arrows">
+      <div className="wrapper select-none">
+        <div className="w-full bg-[#212121] p-2.5">
+          <div className="flex p-1.5 text-[#87898b] cursor-pointer text-xs items-center">
+            <div className="flex flex-1">
+              <div className="flex items-center">
                 <div
                   className="next-arrow"
                   onClick={() => setTextChannelsVisible(!textChannelsVisible)}
                 >
                   {textChannelsVisible === false && (
-                    <Image
-                      src={icons.nextArrow}
-                      alt=""
-                      className="channel-arrow-down remove-selecting-text"
-                    />
+                    <ArrowRightIcon className="w-3 h-3" />
                   )}
                 </div>
                 <div
@@ -65,30 +60,20 @@ export const ChannelsList = ({ channels, groupId, setSelectedChatChannelId,selec
                   onClick={() => setTextChannelsVisible(!textChannelsVisible)}
                 >
                   {textChannelsVisible === true && (
-                    <Image
-                      src={icons.arrowDown}
-                      alt=""
-                      className="channel-image remove-selecting-text"
-                    />
+                    <ArrowDownIcon className="w-3 h-3" />
                   )}
                 </div>
               </div>
-
               <p
-                className="remove-selecting-text"
+                className="select-none"
                 onClick={() => setTextChannelsVisible(!textChannelsVisible)}
               >
                 CHAT
               </p>
             </div>
-
             <DialogTrigger>
               <div className="channel-header-rightSide">
-                <Image
-                  src={icons.plusSmall}
-                  alt=""
-                  className="channel-plus remove-selecting-text"
-                />
+                <PlusIcon className="w-5 h-5" />
               </div>
             </DialogTrigger>
           </div>
@@ -96,35 +81,32 @@ export const ChannelsList = ({ channels, groupId, setSelectedChatChannelId,selec
             <>
               {textChannels.map((channel, index) => (
                 <div
-                  className={
+                  className={`flex justify-between p-1.5 text-[#b9bbbe] cursor-pointer hover:bg-[#3a3c43] hover:rounded-md ${
                     channel.id === selectedChatChannelId
-                      ? "textChannel textChannelSelected"
-                      : "textChannel"
-                  }
+                      ? "bg-[#3a3c43] rounded-md"
+                      : ""
+                  }`}
                   key={index}
                   onClick={() => setSelectedChatChannelId(channel.id)}
                 >
                   <p>{channel.name}</p>
+                  {channel.isPrivate && <PadlockIcon className="w-5 h-5" />}
                 </div>
               ))}
             </>
           )}
         </div>
 
-        <div className="voice-channels">
-          <div className="voice-channels-header">
-            <div className="channel-header-leftSide">
-              <div className="arrows">
+        <div className="w-full bg-[#212121] p-2.5">
+          <div className="flex p-1.5 text-[#87898b] cursor-pointer text-xs items-center">
+            <div className="flex flex-1">
+              <div className="flex items-center">
                 <div
                   className="next-arrow"
                   onClick={() => setVoiceChannelsVisible(!voiceChannelsVisible)}
                 >
                   {voiceChannelsVisible === false && (
-                    <Image
-                      src={icons.nextArrow}
-                      alt=""
-                      className="channel-arrow-down remove-selecting-text"
-                    />
+                    <ArrowRightIcon className="w-3 h-3" />
                   )}
                 </div>
                 <div
@@ -132,30 +114,20 @@ export const ChannelsList = ({ channels, groupId, setSelectedChatChannelId,selec
                   onClick={() => setVoiceChannelsVisible(!voiceChannelsVisible)}
                 >
                   {voiceChannelsVisible === true && (
-                    <Image
-                      src={icons.arrowDown}
-                      alt=""
-                      className="channel-image remove-selecting-text"
-                    />
+                    <ArrowDownIcon className="w-3 h-3" />
                   )}
                 </div>
               </div>
-
               <p
-                className="remove-selecting-text"
+                className="select-none"
                 onClick={() => setVoiceChannelsVisible(!voiceChannelsVisible)}
               >
                 VOICE
               </p>
             </div>
-
             <DialogTrigger>
               <div className="channel-header-rightSide">
-                <Image
-                  src={icons.plusSmall}
-                  alt=""
-                  className="channel-plus remove-selecting-text"
-                />
+                <PlusIcon className="w-5 h-5" />
               </div>
             </DialogTrigger>
           </div>
@@ -163,8 +135,12 @@ export const ChannelsList = ({ channels, groupId, setSelectedChatChannelId,selec
           {voiceChannelsVisible === true && (
             <>
               {voiceChannels.map((channel, index) => (
-                <div className="voiceChannel" key={index}>
+                <div
+                  className="flex justify-between p-1.5 text-[#b9bbbe] cursor-pointer hover:bg-[#3a3c43] hover:rounded-md"
+                  key={index}
+                >
                   <p>{channel.name}</p>
+                  {channel.isPrivate && <PadlockIcon className="w-5 h-5" />}
                 </div>
               ))}
             </>
@@ -180,3 +156,4 @@ export const ChannelsList = ({ channels, groupId, setSelectedChatChannelId,selec
     </Dialog>
   );
 };
+      

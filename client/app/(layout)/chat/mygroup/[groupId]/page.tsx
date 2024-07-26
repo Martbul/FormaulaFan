@@ -34,8 +34,11 @@ const Group: React.FC<GroupProps> = ({ params }) => {
     getGroupData();
   }, []);
 
-     if (loading) {
-       return <div>Loading...</div>;
+
+      if (loading) {
+       return <div className="flex items-center justify-center h-screen bg-zinc-800">
+        <div className="loader"></div>
+      </div>
      }
   return (
     <div className="discord-server">

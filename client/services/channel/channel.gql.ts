@@ -21,6 +21,7 @@ query getAllChannelMessages($channelId:String!){
         user{
           id
           username
+          email
         }
       }
     }

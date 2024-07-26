@@ -2,9 +2,20 @@ import { startDirectConversation } from "@/services/conversation/conversation.se
 import { ChannelsList } from "../channelsList/ChannelsList";
 import { MembersList } from "../MembersList/MembersList";
 import Image from "next/image";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useAuthContext } from "@/contexts/AuthContext2";
-import { useEffect , useState} from "react";
+import dynamic from "next/dynamic";
+import {
+  Popover,
+  PopoverTrigger,
+} from "@/components/ui/popover"
+
+const DynamicGroupQuickOptionsPopover = dynamic(
+  () => import("./GroupQuickOptionsPopover/GroupQuickOptionsPopover"),
+  {
+    ssr: false,
+  }
+);
 
 
 export const Sidebar = ({
@@ -33,31 +44,23 @@ export const Sidebar = ({
   };
 
 
-  // useEffect(() => {
-  //   if (pathname) {
-  //     // Check if the pathname starts with "/chat/mygroup/"
-  //     const urlBool = pathname.startsWith("/chat/mygroup/");
-  //     setIsMyGroup(urlBool);
-
-  //     // Optionally, you can log the pathname to debug
-  //     console.log("Current Pathname:", pathname);
-  //   }
-  // }, [pathname]); // Dependency array includes pathname
-
-  // useEffect(() => {
-  //   console.log("groupData", groupData);
-  // }, [groupData]);
-
   return (
     <div className="bg-neutral-900">
-      <div className="w-52 bg-zinc-950 p-2.5 border-b-2 border-black hover:bg-gray-600">
-        <div className="p-1.5 text-gray-400 cursor-pointer">
-          {name && (
-            <p className="select-none">{name}</p>
-          )}
-          {conversationUsers && <p className="select-none">Conversations</p>}
-        </div>
-      </div>
+      <Popover>
+        <PopoverTrigger>
+          
+          <div className="w-full bg-zinc-950 p-2.5 border-b-2 border-black hover:bg-gray-600  cursor-pointer">
+            <div className="p-1.5 text-gray-400">
+              {name && <p className="select-none">{name}</p>}
+              {conversationUsers && (
+                <p className="select-none">Conversations</p>
+              )}
+            </div>
+          </div>
+        </PopoverTrigger>
+
+        <DynamicGroupQuickOptionsPopover />
+      </Popover>
       <div className="rigthSide">
         {channels && (
           <ChannelsList
@@ -67,13 +70,11 @@ export const Sidebar = ({
             selectedChatChannelId={selectedChatChannelId}
           />
         )}
-        {members && (
-          <MembersList members={members} />
-        )}
+        {members && <MembersList members={members} />}
         <>
           {conversationUsers &&
             conversationUsers.map((conversationUser, index) => (
-              <div key={index} className="flex items-center">
+              <div key={index} className="flex items-center mb-2">
                 <Image
                   src={conversationUser.picture}
                   alt="pic"
@@ -83,7 +84,7 @@ export const Sidebar = ({
                 />
 
                 <div
-                  className="member"
+                  className="p-[5px] text-[#b9bbbe] cursor-pointer hover:bg-[#3a3c43] hover:rounded-[5px] ml-2"
                   onClick={() => handleStartConversation(conversationUser.id)}
                 >
                   {conversationUser.username}
