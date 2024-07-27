@@ -28,12 +28,8 @@ const Profile = () => {
   return (
     <div className="profile-page h-screen bg-[#1e1f22] text-white">
       <header className="profile-header relative text-center">
-        <div className="cover-photo">
-          <Image
-            src={images.f1Start}
-            alt="Cover"
-            className="w-full h-52 object-cover"
-          />
+<div className={`min-h-48 cover-photo bg-[${userProfileDetails?.cover}]`}>         
+          
         </div>
         <div className="profile-info absolute bottom-[-50px] left-1/2 transform -translate-x-1/2 text-center">
           <Image

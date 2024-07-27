@@ -10,15 +10,36 @@ import { addUserAsAMember } from "@/services/group/group.service";
 import { useRouter } from "next/navigation";
 import {  useState } from "react";
 import { AnimatedCircleIcon } from "@/utils/svgIcons";
-
+import { ToastAction } from "@/components/ui/toast"
+import { useToast } from "@/components/ui/use-toast"
 import type { User } from "@/utils/interfaces";
+import Link from "next/link";
 
 
 const JoinGroupModal:React.FC<{groupName:string, user:User, id:string}> = ({groupName, user, id}) => {
   const router = useRouter();
     const [loading, setLoading] = useState(false);
+     const { toast } = useToast()
+const dialogClose = () => {
+  document.getElementById('closeDialog')?.click();
+};
+  const showToast = () => {
+      toast({
+        variant: "bg-red-700",
+        title: "You must have an account to join a group",
+        // description: "There was a problem with your request.",
+        action: <ToastAction className="border-black bg-black text-white hover:bg-zinc-800" altText="Sign Up!">
+          <Link href="/signup">Sign Up!</Link>
+          </ToastAction>,
+      });
+  };
+  const handleUserJoinGroup = async () => {
+        if (user.email === undefined) {
+         dialogClose()
+          showToast();
 
-    const handleUserJoinGroup = async() => {
+      return;
+    }
       setLoading(true)
      const result = await addUserAsAMember(user.email, id);
    
@@ -57,6 +78,7 @@ const JoinGroupModal:React.FC<{groupName:string, user:User, id:string}> = ({grou
               </Button>
            
             </DialogFooter>
+               
           </DialogContent>
       )
 }

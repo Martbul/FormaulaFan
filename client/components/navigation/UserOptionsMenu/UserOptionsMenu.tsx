@@ -14,7 +14,7 @@ const DynamicUserOptionsPopover = dynamic(
 
 const UserOptionsMenu = ({ user , setUser}) => {
   return (
-    <div className="w-full mt-auto">
+    <div className="flex w-full justify-center mt-auto">
       <DropdownMenu>
         <DropdownMenuTrigger>
           <div className="flex items-center p-4">

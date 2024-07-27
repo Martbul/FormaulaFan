@@ -44,8 +44,6 @@ const QUERY_USER_ID = gql`
 `;
 
 
-
-
 export async function signIn(
   email: string,
   password: string,
@@ -64,16 +62,19 @@ export async function signIn(
     localStorage.setItem("refreshToken", refreshToken);
     localStorage.setItem('user', JSON.stringify(user))
 
-    return { user, accessToken, refreshToken };
+    return { user, accessToken, refreshToken, success: true };
   } catch (error) {
-    if (error instanceof ApolloError) {
-      console.error("GraphQL error details:", error.graphQLErrors);
-      console.error("Network error details:", error.networkError);
-    } else {
-      console.error("Unknown error:", error);
+   if (error instanceof ApolloError) {
+     console.error("GraphQL error details:", error.graphQLErrors);
+     console.error("Network error details:", error.networkError);
+     const message = error.graphQLErrors[0]?.message || "Unknown GraphQL error";
+     return { success: false, message };
+   } else {
+     console.error("Unknown error:", error);
+     return { success: false, message: "An unknown error occurred." };
+   }
     }
-    throw error;
-  }
+  
 }
 export async function signUp(
   username: string,
@@ -94,16 +95,17 @@ export async function signUp(
     localStorage.setItem("refreshToken", refreshToken);
     localStorage.setItem("user", JSON.stringify(user));
 
-    return { user, accessToken, refreshToken };
+    return { user, accessToken, refreshToken, success:true };
   } catch (error) {
-    console.log(error)
-      if (error instanceof ApolloError) {
-        console.error("GraphQL error details:", error.graphQLErrors);
-        console.error("Network error details:", error.networkError);
-      } else {
-        console.error("Unknown error:", error);
-      }
-      throw error;
+   if (error instanceof ApolloError) {
+     console.error("GraphQL error details:", error.graphQLErrors);
+     console.error("Network error details:", error.networkError);
+     const message = error.graphQLErrors[0]?.message || "Unknown GraphQL error";
+     return { success: false, message };
+   } else {
+     console.error("Unknown error:", error);
+     return { success: false, message: "An unknown error occurred." };
+   }
     }
   
 }

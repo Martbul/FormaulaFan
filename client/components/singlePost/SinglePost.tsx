@@ -8,8 +8,13 @@ import {
   CommentIcon,
   ShareIcon,
   SaveIcon,
+  OptionsIcon
 } from "@/utils/svgIcons";
 import { clickOnLike, getSinglePost } from "@/services/post/post.service";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 import dynamic from "next/dynamic";
 import { Dialog, DialogTrigger } from "../ui/dialog";
@@ -18,6 +23,13 @@ import type { PostInterface } from "@/utils/interfaces";
 
 const DynamicCreateCommentModal = dynamic(
   () => import("../posts/CreateCommentModal/CreateCommentModal"),
+  {
+    ssr: false,
+  }
+);
+
+const DynamicPostOptionsMenu = dynamic(
+  () => import("../post/PostOptionsMenu/PostOptionsMenu"),
   {
     ssr: false,
   }
@@ -64,8 +76,9 @@ const SinglePost = ({ postId, userId }) => {
   };
 
   return (
-    <div className="post bg-white p-4 rounded-lg shadow-md remove-selecting-text">
-      <div className="postHeader flex items-center mb-4">
+    <div className="post flex bg-white p-4 rounded-lg shadow-md remove-selecting-text">
+      <div className="flex flex-1 flex-col">
+          <div className="postHeader flex items-center mb-4">
         <Image
           src={post?.author?.picture}
           alt="pic"
@@ -127,8 +140,7 @@ const SinglePost = ({ postId, userId }) => {
         </div>
       </div>
 
-
-       <div className="comments mt-4">
+      <div className="comments mt-4">
         {post?.comments?.map((comment) => (
           <div
             key={comment.id}
@@ -144,7 +156,9 @@ const SinglePost = ({ postId, userId }) => {
               />
               <div className="commentInfo ml-2">
                 <div className="commenterData font-semibold text-sm">
-                  <span className="commenterName">{comment.author.username}</span>
+                  <span className="commenterName">
+                    {comment.author.username}
+                  </span>
                 </div>
                 <div className="commentTime text-gray-500 text-xs">
                   {new Date(comment.createdAt).toLocaleString()}
@@ -166,7 +180,15 @@ const SinglePost = ({ postId, userId }) => {
           </div>
         ))}
       </div>
+      </div>
     
+      <DropdownMenu>
+        <DropdownMenuTrigger className="flex-col h-full">
+          <OptionsIcon className="w-5 h-5 hover:opacity-70" />
+        </DropdownMenuTrigger>
+
+        <DynamicPostOptionsMenu />
+      </DropdownMenu>
     </div>
   );
 };

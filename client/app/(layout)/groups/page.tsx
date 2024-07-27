@@ -10,8 +10,7 @@ import { useState } from "react";
 import SearchGroups from "@/components/groups/searchGroups/SearchGroups";
 import { Input } from "@/components/ui/input";
 import images from "@/constants/images";
-import CreatePost from "@/components/createPost/CreatePost";
-import MiniPost from "@/components/miniPost/MiniPost";
+
 
 const Groups = () => {
   const { user } = useAuthContext();

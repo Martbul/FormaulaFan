@@ -41,18 +41,26 @@ const handleChange = (
   }));
 };
 
-  const handleSubmit = async(e:FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
      setLoading(true);
      e.preventDefault();
-    const result = await signIn(form.email, form.password, setUser)
-    if (result) {
-  
-      router.replace('/posts')  
-       setLoading(false);
-    }
+     setError(null);
+
+     const result = await signIn(
+       form.username,
+       form.email,
+       form.password,
+       setUser
+     );
+
+     if (result.success) {
+       router.replace("/posts");
+     } else {
+       setError(result.message || "An error occurred during signim.");
+     }
+
      setLoading(false);
-    setError("some error");
-  };
+   };
 
  return (
    <div className="grid grid-cols-1 md:grid-cols-2 w-full h-screen">
@@ -64,14 +72,15 @@ const handleChange = (
          </p>
          <div className="flex gap-4">
            <Button
+           onClick={() =>  router.replace("/posts")}
              variant="outline"
-             className="text-primary-foreground hover:bg-primary-foreground/10"
+             className="text-primary-foreground hover:bg-neutral-400"
            >
              Continue as Guest
            </Button>
 
            <Link
-             className="flex p-2 rounded-md text-sm font-medium items-center rounded bg-zinc-800 text-gray-200 hover:bg-primary-foreground/90"
+             className="flex p-2 rounded-md text-sm font-medium items-center rounded bg-zinc-800 text-gray-200 hover:bg-neutral-600"
              href="/signup"
            >
              Sign Up Now
@@ -79,7 +88,7 @@ const handleChange = (
          </div>
        </div>
      </div>
-     <div className="flex flex-col items-center justify-center p-8">
+     <div className="flex flex-col items-center justify-center p-8 bg-white">
        <Card className="w-full max-w-md shadow-lg">
          <CardHeader className="space-y-1">
            <CardTitle className="text-2xl">Sing In</CardTitle>
@@ -134,15 +143,22 @@ const handleChange = (
              />
            </div>
          </CardContent>
+            {error && (  <div className="flex justify-center text-red-600 font-bold mb-4 px-8"> 
+            <p>{error}</p>
+          </div>)}
          <CardFooter>
-            <Button
-                className="w-full bg-zinc-950 text-white hover:bg-zinc-700 border border-black"
-                onClick={handleSubmit}
-              >
-                  {loading === false ? "Sing In":  <AnimatedCircleIcon className="h-9 w-9" />}
-              </Button>
-          </CardFooter>
-     
+           <Button
+             className="w-full bg-zinc-950 text-white hover:bg-zinc-700 border border-black"
+             onClick={handleSubmit}
+           >
+             {loading === false ? (
+               "Sing In"
+             ) : (
+               <AnimatedCircleIcon className="h-9 w-9" />
+             )}
+           </Button>
+         </CardFooter>
+
          <div className="mb-4 text-center">
            <p className="text-sm text-muted-foreground">
              Don't have an account?{" "}

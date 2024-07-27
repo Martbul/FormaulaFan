@@ -6,8 +6,17 @@ import {
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
 import { logout } from "@/services/auth/auth.service";
+import { useRouter } from 'next/navigation'
+
+
 
 const UserOptionsPopover = ({setUser}) =>{
+  const router = useRouter()
+
+  const handleLogout = () => {
+   router.replace('/posts')
+  logout(setUser)
+}
    return (
      <DropdownMenuContent className="bg-zinc-900">
        <DropdownMenuLabel className="text-neutral-200">
@@ -25,7 +34,7 @@ const UserOptionsPopover = ({setUser}) =>{
        </DropdownMenuItem>
        <DropdownMenuItem
          className="text-red-700"
-         onClick={() => logout(setUser)}
+         onClick={handleLogout}
        >
          Log Out
        </DropdownMenuItem>

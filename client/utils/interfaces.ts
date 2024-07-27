@@ -4,6 +4,9 @@ export interface User {
   password: string; // Password of the user (consider security implications of exposing this field)
   email: string; // Email of the user
   picture?: string; // Optional profile picture URL of the user
+  cover: string;
+  bio?: string;
+  status?: string;
   hashedRefreshToken?: string; // Optional hashed refresh token for session management
   createdAt: Date; // Timestamp when the user was created
   updatedAt: Date; // Timestamp when the user was last updated

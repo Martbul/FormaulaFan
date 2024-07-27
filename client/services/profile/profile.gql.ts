@@ -8,6 +8,9 @@ export const QUERY_USER_PROFILE = gql`
       email
       picture
       createdAt
+      cover
+      bio
+      status
       posts {
         id
         textContent

@@ -1,19 +1,11 @@
 - Opravi createGroup graphql-a, trqbva ti samo id na grupata
-- fix group images
-
 - Napravi taka che findAllGroups i searchGroups da e edna funkciq i suchto funkciqta za vzimane na grupite v koit user e member(/chat/mygroups) moje da polzva sushtata funkciq s search queri negovoto id
-
 - add model Profile in prisma schema(1-to-1)
 - implement validation for creating user, creating group and creating new channels
 - make better error handlig
 - make better UX with loader and other UI elements
-- find how to change state based on the shadcn's switch
 - add route guards
-- add lazy loading and other optimizations
-- dont allow creating of channels with the same name
 - uploding to firebase strage from the client is not secure(make it secure or upload from the server)
-- must place navifgation in the layuot.tsx caouse now every component has <Navigation/> (optimization)
-- when user logouts redirect to login and clear all states
 - fix images of groups(also uploding to cloud )
 - add way creator of group to interact with settings
 - disply people a user has chatted with(conversations in /chat/mygroups -> <Sidebar/>)
@@ -24,19 +16,24 @@
 - add activty tab in user profile
 - kato user-a e ot mobile, skrivash lqvata navigaciq i i slagash hamburger menu icona
 - remove gif when typed
-- add emoji to text area(text state)
-- limitiraj tova koeto Guest move da vijda i pravi
 - auth error handling (user with this email already exists, wrong password or email, type longer password)
 - give every Guest id or some way to track them an their work
 - implement google and other sign in
-- make sidebar and conversationSidebar into 1 component
 - make conversationList and memberslsit into 1 compoennt
 - it is not okay to make new request every thime user come o chat for the conversation sidebar. Maybe put it in (conv-layout) or do some cashing or something like that
-- postovete se fetchtat 3 pati(opravi go(3 pati paginirani 20 posta - edi i sashti))\
 - send emails on sign in
 - kato user clickne na post da se pokazvat detaili za posta
 - if channel is private display lock svg
 - add funcionality to the UI you made for server options
+- use rect query(tanstack query)
+- working settings
+- delete post
+- edit post
+- update messages(group and direct)
+- delete messages(group and direct)
+
+
+
 PERFORMANCE:
    - .ong to .svg icons
    - rafactor functions -> se less sapce but more complex

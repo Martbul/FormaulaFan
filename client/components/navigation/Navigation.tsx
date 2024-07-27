@@ -129,7 +129,7 @@ const Navigation = () => {
       </div>
 
       {user && user.username === "Guest" && (
-        <div className="w-full mt-auto">
+        <div className="flex justify-center w-full mt-auto">
           <Link href="/signin">
             <div className="flex items-center p-4">
               <GuestProfileIcon className="w-12 h-12" />

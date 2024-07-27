@@ -8,11 +8,13 @@ import {
   CarouselNext,
 } from "@/components/ui/carousel";
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
+import "@/background.css"
+// import {PoduimLogoIcon } from "@/utils/svgIcons";
 
 export default function Home() {
   return (
-    <div className="flex flex-col">
-      <header className="px-4 lg:px-6 h-14 flex items-center bg-[#23272a] text-white shadow-md">
+    <div className="flex  h-screen  flex-col overflow-y-auto no-scrollbar">
+      <header className="px-4 lg:px-36 h-14 flex items-center bg-[#23272a] text-white shadow-md">
         <Sheet>
           <SheetTrigger asChild>
             <Button variant="ghost" size="icon" className="lg:hidden">
@@ -27,46 +29,82 @@ export default function Home() {
                 className="flex items-center justify-center"
                 prefetch={false}
               >
-                <MountainIcon className="h-6 w-6 text-primary" />
+                <PoduimLogoIcon className="h-8 w-8 " />
                 <span className="sr-only">Acme Inc</span>
               </Link>
               <nav className="flex flex-col gap-2">
-                {["Discover", "Nitro", "Safety", "Support"].map((item) => (
-                  <Link
-                    key={item}
-                    href="#"
-                    className="text-sm font-medium hover:underline underline-offset-4"
-                    prefetch={false}
-                  >
-                    {item}
-                  </Link>
-                ))}
+                <Link
+                  href="#"
+                  className="text-sm font-medium hover:underline underline-offset-4"
+                  prefetch={false}
+                >
+                  Discover
+                </Link>
+                <Link
+                  href="#"
+                  className="text-sm font-medium hover:underline underline-offset-4"
+                  prefetch={false}
+                >
+                  Nitro
+                </Link>
+                <Link
+                  href="#"
+                  className="text-sm font-medium hover:underline underline-offset-4"
+                  prefetch={false}
+                >
+                  Safety
+                </Link>
+                <Link
+                  href="#"
+                  className="text-sm font-medium hover:underline underline-offset-4"
+                  prefetch={false}
+                >
+                  Support
+                </Link>
               </nav>
             </div>
           </SheetContent>
         </Sheet>
-        <div className="flex-1 flex justify-center">
+        <div className="flex-1 flex justify-center lg:justify-between items-center">
           <Link
             href="#"
             className="flex items-center justify-center"
             prefetch={false}
           >
-            <MountainIcon className="h-6 w-6 text-primary" />
+            <PoduimLogoIcon className="h-8 w-8 " />
             <span className="sr-only">Acme Inc</span>
           </Link>
-        </div>
-        <nav className="hidden lg:flex items-center gap-4">
-          {["Discover", "Nitro", "Safety", "Support"].map((item) => (
+          <nav className="hidden lg:flex items-center gap-4">
             <Link
-              key={item}
               href="#"
               className="text-sm font-medium hover:underline underline-offset-4"
               prefetch={false}
             >
-              {item}
+              Discover
             </Link>
-          ))}
-        </nav>
+            <Link
+              href="#"
+              className="text-sm font-medium hover:underline underline-offset-4"
+              prefetch={false}
+            >
+              Nitro
+            </Link>
+            <Link
+              href="#"
+              className="text-sm font-medium hover:underline underline-offset-4"
+              prefetch={false}
+            >
+              Safety
+            </Link>
+            <Link
+              href="#"
+              className="text-sm font-medium hover:underline underline-offset-4"
+              prefetch={false}
+            >
+              Support
+            </Link>
+          </nav>
+        </div>
         <div className="ml-auto flex gap-4 sm:gap-6">
           <Button className="hidden min-[400px]:flex w-full min-[400px]:w-auto">
             Download for Windows
@@ -76,14 +114,13 @@ export default function Home() {
           </Button>
         </div>
       </header>
-      <main className="flex-1 bg-gradient-to-b from-[#36393f] to-[#23272a] text-white relative">
-        <div
-          className="absolute inset-0 bg-cover bg-center opacity-30"
-          style={{
-            backgroundImage: "url('/assets/images/backgroundImage.webp')",
-          }}
-        ></div>
-        <section className="relative w-full py-12 md:py-24 lg:py-32 xl:py-48 flex items-center justify-center text-center">
+
+      <main className="flex-1  bg-gradient-to-b from-[#36393f] to-[#23272a] text-white relative ">
+            {/* <Background/> */}
+
+
+
+        <section className="relative w-full py-12 md:py-24 lg:py-32 xl:py-48 flex items-center justify-center text-center h-screen">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center gap-4 text-center">
               <div className="space-y-2">
@@ -111,43 +148,36 @@ export default function Home() {
             </div>
           </div>
         </section>
-        {[
-          "from-[#23272a] to-[#36393f]",
-          "from-[#2e3136] to-[#23272a]",
-          "from-[#292b2f] to-[#2e3136]",
-          "from-[#25272b] to-[#292b2f]",
-          "from-[#23262a] to-[#25272b]",
-        ].map((gradient, index) => (
+        
           <section
-            key={index}
-            className={`relative w-full py-12 md:py-24 lg:py-32 xl:py-48 flex items-center justify-center text-center bg-gradient-to-b ${gradient}`}
+            className={`relative w-full py-12 md:py-24 lg:py-32 xl:py-48 flex items-center justify-center text-center bg-gradient-to-b`}
           >
             <div className="container px-4 md:px-6">
               <div className="flex flex-col items-center gap-4 text-center">
                 <div className="space-y-2">
                   <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl animate-fade-in-up">
-                    Section Heading {index + 1}
+                    Section Heading 
                   </h2>
                   <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl animate-fade-in">
-                    Section content for section {index + 1}. Discover the
+                    Section content for section . Discover the
                     endless possibilities and features of this platform.
                   </p>
                 </div>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
                   <Button className="w-full min-[400px]:w-auto">
-                    Button {index + 1}A
+                    Button A
                   </Button>
                   <Button
                     variant="outline"
                     className="w-full min-[400px]:w-auto"
                   >
-                    Button {index + 1}B
+                    Button B
                   </Button>
                 </div>
               </div>
             </div>
           </section>
-        ))}
+        
         <section className="relative w-full py-12 md:py-24 lg:py-32 xl:py-48 flex items-center justify-center text-center bg-gradient-to-b from-[#36393f] to-[#23272a]">
           <div className="container px-4 md:px-6">
             <Carousel className="w-full max-w-md">
@@ -187,33 +217,100 @@ export default function Home() {
           </div>
         </section>
       </main>
-      <footer className="bg-[#23272a] p-6 md:py-12 w-full text-white">
-        <div className="container max-w-7xl grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 text-sm">
-          {["Company", "Products", "Resources", "Policies", "Follow Us"].map(
-            (heading, index) => (
-              <div key={index} className="grid gap-1">
-                <h3 className="font-semibold">{heading}</h3>
-                {["About", "Careers", "Branding", "Newsroom"].map(
-                  (link, linkIndex) => (
-                    <Link
-                      key={linkIndex}
-                      href="#"
-                      className="hover:underline"
-                      prefetch={false}
-                    >
-                      {link}
-                    </Link>
-                  )
-                )}
-              </div>
-            )
-          )}
+      <footer className="bg-[#23272a] text-white py-8 md:py-12 w-full">
+        <div className="container max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-12 px-4">
+          {/* Company Section */}
+          <div className="flex flex-col gap-4">
+            <h3 className="text-lg font-semibold mb-2">Company</h3>
+            <Link href="#" className="hover:underline">
+              About
+            </Link>
+            <Link href="#" className="hover:underline">
+              Careers
+            </Link>
+            <Link href="#" className="hover:underline">
+              Branding
+            </Link>
+            <Link href="#" className="hover:underline">
+              Newsroom
+            </Link>
+          </div>
+
+          {/* Products Section */}
+          <div className="flex flex-col gap-4">
+            <h3 className="text-lg font-semibold mb-2">Products</h3>
+            <Link href="#" className="hover:underline">
+              Discovery
+            </Link>
+            <Link href="#" className="hover:underline">
+              Nitro
+            </Link>
+            <Link href="#" className="hover:underline">
+              Safety
+            </Link>
+            <Link href="#" className="hover:underline">
+              Support
+            </Link>
+          </div>
+
+          {/* Resources Section */}
+          <div className="flex flex-col gap-4">
+            <h3 className="text-lg font-semibold mb-2">Resources</h3>
+            <Link href="#" className="hover:underline">
+              Docs
+            </Link>
+            <Link href="#" className="hover:underline">
+              Community
+            </Link>
+            <Link href="#" className="hover:underline">
+              Blog
+            </Link>
+            <Link href="#" className="hover:underline">
+              Help Center
+            </Link>
+          </div>
+
+          {/* Policies Section */}
+          <div className="flex flex-col gap-4">
+            <h3 className="text-lg font-semibold mb-2">Policies</h3>
+            <Link href="#" className="hover:underline">
+              Privacy
+            </Link>
+            <Link href="#" className="hover:underline">
+              Terms of Service
+            </Link>
+            <Link href="#" className="hover:underline">
+              Cookie Policy
+            </Link>
+            <Link href="#" className="hover:underline">
+              Compliance
+            </Link>
+          </div>
+
+          {/* Follow Us Section */}
+          <div className="flex flex-col gap-4">
+            <h3 className="text-lg font-semibold mb-2">Follow Us</h3>
+            <Link href="#" className="hover:underline">
+              Twitter
+            </Link>
+            <Link href="#" className="hover:underline">
+              Facebook
+            </Link>
+            <Link href="#" className="hover:underline">
+              Instagram
+            </Link>
+            <Link href="#" className="hover:underline">
+              LinkedIn
+            </Link>
+          </div>
+        </div>
+
+        {/* Bottom Text */}
+        <div className="mt-12 text-center text-sm">
+          <p>&copy; 2024 Formula Fan. All rights reserved.</p>
         </div>
       </footer>
     </div>
-
-
-
   );
 }
 
@@ -237,22 +334,41 @@ function MenuIcon(props) {
     </svg>
   );
 }
-
-function MountainIcon(props) {
+const Background = () => {
   return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="m8 3 4 8 5-5 5 15H2L8 3z" />
-    </svg>
+    <div className="background">
+      {Array.from({ length: 30 }, (_, index) => (
+        <span key={index}></span>
+      ))}
+    </div>
   );
+};
+ function PoduimLogoIcon(props: SvgProps) {
+  return (
+ <svg
+    {...props}
+    fill="#000000"
+    viewBox="0 0 24 24"
+    id="podium"
+    data-name="Flat Color"
+    xmlns="http://www.w3.org/2000/svg"
+    className="icon flat-color"
+    stroke="#000000"
+    strokeWidth="0.00024"
+  >
+    <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+    <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
+    <g id="SVGRepo_iconCarrier">
+      <path
+        id="secondary"
+        d="M12.93,6.81a1,1,0,0,1-.47-.12L12,6.45l-.46.24a1,1,0,0,1-1.45-1.05l.09-.52L9.8,4.76a1,1,0,0,1,.56-1.7L10.87,3l.23-.47a1,1,0,0,1,1.8,0l.23.47.51.08a1,1,0,0,1,.56,1.7l-.38.36.09.52a1,1,0,0,1-.39,1A1.09,1.09,0,0,1,12.93,6.81Z"
+        style={{ fill: '#ff0000' }}
+      />
+      <path
+        id="primary"
+        d="M8,16v5a1,1,0,0,1-1,1H3a1,1,0,0,1-1-1V16a1,1,0,0,1,1-1H7A1,1,0,0,1,8,16Zm6-7H10a1,1,0,0,0-1,1V21a1,1,0,0,0,1,1h4a1,1,0,0,0,1-1V10A1,1,0,0,0,14,9Zm7,4H17a1,1,0,0,0-1,1v7a1,1,0,0,0,1,1h4a1,1,0,0,0,1-1V14A1,1,0,0,0,21,13Z"
+        style={{ fill: '#000000' }}
+      />
+    </g>
+  </svg>  );
 }

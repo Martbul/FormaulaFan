@@ -20,13 +20,22 @@ export class User {
   email: string;
 
   @Field({ nullable: true })
-  picture?: string; // Optional field, might not be set for all users
+  picture?: string;
+
+  @Field()
+  cover: string;
+
+  @Field({ nullable: true })
+  bio?: string;
+
+  @Field({ nullable: true })
+  status?: string; 
 
   @Field(() => String)
   password: string; // Consider the security implications of exposing this field
 
   @Field({ nullable: true })
-  hashedRefreshToken?: string; // Optional field
+  hashedRefreshToken?: string; 
 
   @Field(() => Date)
   createdAt: Date;

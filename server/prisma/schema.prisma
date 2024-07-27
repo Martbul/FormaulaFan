@@ -13,6 +13,9 @@ model User {
    password           String   @db.VarChar(1000)
    email              String   @unique @db.VarChar(255)
    picture            String?  @db.VarChar(255) @default("https://firebasestorage.googleapis.com/v0/b/formulafan-38467.appspot.com/o/helmet.png?alt=media&token=67b3e8bc-66a5-4161-a89d-f1e5e2a14535")
+   cover         String  @default("#393a3f")
+   bio              String? @db.VarChar(2550)
+   status         String?
    hashedRefreshToken String?
    createdAt          DateTime @default(now())
    updatedAt          DateTime @updatedAt
@@ -37,7 +40,7 @@ model User {
 model UserSettings {
    id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
 
-   theme         String  @default("NORMAL") @db.VarChar(50)
+  
    notifications Boolean @default(false)
 
    userId String @unique @db.Uuid

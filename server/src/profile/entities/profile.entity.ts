@@ -18,6 +18,15 @@ export class Profile {
   @Field({ nullable: true })
   picture?: string;
 
+  @Field()
+  cover: string;
+
+  @Field({ nullable: true })
+  bio?: string;
+
+  @Field({ nullable: true })
+  status?: string;
+
   @Field(() => Date)
   createdAt: Date;
 

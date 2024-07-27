@@ -178,8 +178,10 @@ type Post {
 }
 
 type Profile {
+  bio: String
   conversationsInitiated: [Conversation!]!
   conversationsReceived: [Conversation!]!
+  cover: String!
   createdAt: DateTime!
   createdGroups: [Group!]!
   email: String!
@@ -187,6 +189,7 @@ type Profile {
   members: [Member!]!
   picture: String
   posts: [Post!]!
+  status: String
   username: String!
 }
 
@@ -250,9 +253,11 @@ input UpdateGroupInput {
 }
 
 type User {
+  bio: String
   comments: [Comment!]!
   conversationsInitiated: [Conversation!]!
   conversationsReceived: [Conversation!]!
+  cover: String!
   createdAt: DateTime!
   createdGroups: [Group!]!
   directMessages: [DirectMessage!]!
@@ -267,6 +272,7 @@ type User {
   savedPosts: [Post!]!
   settings: UserSettings
   sharedPosts: [Post!]!
+  status: String
   updatedAt: DateTime!
   username: String!
 }

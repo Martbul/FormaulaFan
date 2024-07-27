@@ -32,17 +32,21 @@ export class AuthService {
         newUser.email,
       );
       await this.updateRefreshToken(newUser.id, refreshToken);
+      console.log("newUser",newUser);
+      
       return { accessToken, refreshToken, user: newUser };
     } catch (error) {
-      //   if (error instanceof PrismaClientKnownRequestError) {
-      //     if (error.code === 'P2002' && error.meta.target.includes('email')) {
-      //       throw new Error('Email already exists');
-      //     }
-      //   }
-      //   throw new Error('Internal server error');
-      // }
-      throw new Error("suuuuuuuuu")
-    }
+        if (error instanceof PrismaClientKnownRequestError) {
+          if (error.code === 'P2002') {
+            // throw new Error('Email already exists');
+            // console.log(error);
+            
+            throw new Error('Errow with data(prisma)');
+          }
+        }
+        throw new Error(error);
+      }
+    
   }
 
   async signIn(signInInput: SignInInput) {
