@@ -4,6 +4,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { CursorPaginationInput } from './dto/cursorPaginatedPost-input';
 import { LikeDislikePostInput } from './dto/like-dislike-post.input';
 import { AddCommentToPostInput } from './dto/add-comment-to-post.input';
+import { SaveUnsavePostInput } from './dto/save-unsave';
 
 @Injectable()
 export class PostService {
@@ -112,6 +113,34 @@ export class PostService {
     }
   }
 
+
+  async saveUnsave(saveUnsavePostInput: SaveUnsavePostInput) {
+    const { postId, userId, isSaved } = saveUnsavePostInput;
+
+    if (isSaved) {
+      await this.prisma.post.update({
+        where: { id: postId },
+        data: {
+          savedBy: {
+            disconnect: { id: userId },
+          },
+        },
+      });
+
+      return 'Post was unsaved';
+    } else {
+      await this.prisma.post.update({
+        where: { id: postId },
+        data: {
+          savedBy: {
+            connect: { id: userId },
+          },
+        },
+      });
+      return 'Post was saved';
+    }
+  }
+
   async addCommentToPost(addCommnetToPostInput: AddCommentToPostInput) {
     const { textContent, userEmail, postId, imageContentUrl } = addCommnetToPostInput;
     
@@ -153,5 +182,37 @@ export class PostService {
       },
     });
     return singlePost
+  }
+ 
+ 
+  async getUserSavedPosts(userEmail: string) {
+    const user = await this.prisma.user.findUnique({
+      where: { email: userEmail },
+    });
+
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+    const userSavedPosts = await this.prisma.user.findUnique({
+      where: {id:user.id},
+      include: {
+        savedPosts:{
+          include: {
+            author: true,
+            likedBy: true,
+            savedBy: true,
+            sharedBy: true,
+            comments: {
+                  include: {
+                    author: true,
+                    post: true,
+                  },
+                },
+          }
+        }
+      }
+    });
+    
+    return userSavedPosts.savedPosts
   }
 }

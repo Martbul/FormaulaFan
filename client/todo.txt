@@ -1,29 +1,24 @@
 - Opravi createGroup graphql-a, trqbva ti samo id na grupata
 - Napravi taka che findAllGroups i searchGroups da e edna funkciq i suchto funkciqta za vzimane na grupite v koit user e member(/chat/mygroups) moje da polzva sushtata funkciq s search queri negovoto id
-- add model Profile in prisma schema(1-to-1)
 - implement validation for creating user, creating group and creating new channels
 - make better error handlig
-- make better UX with loader and other UI elements
 - add route guards
 - uploding to firebase strage from the client is not secure(make it secure or upload from the server)
 - fix images of groups(also uploding to cloud )
 - add way creator of group to interact with settings
-- disply people a user has chatted with(conversations in /chat/mygroups -> <Sidebar/>)
 - if user has no group display some text of cool image
-- when 4 people chat(2 seperate groups of 2 people) ther messages mesh up
 - add pagination to querying(displaying) channel messages
 - diplay timestamp(created at) for the messages
 - add activty tab in user profile
 - kato user-a e ot mobile, skrivash lqvata navigaciq i i slagash hamburger menu icona
 - remove gif when typed
 - auth error handling (user with this email already exists, wrong password or email, type longer password)
-- give every Guest id or some way to track them an their work
 - implement google and other sign in
 - make conversationList and memberslsit into 1 compoennt
 - it is not okay to make new request every thime user come o chat for the conversation sidebar. Maybe put it in (conv-layout) or do some cashing or something like that
 - send emails on sign in
-- kato user clickne na post da se pokazvat detaili za posta
-- if channel is private display lock svg
+
+
 - add funcionality to the UI you made for server options
 - use rect query(tanstack query)
 - working settings
@@ -31,13 +26,12 @@
 - edit post
 - update messages(group and direct)
 - delete messages(group and direct)
-
+- use Map and Set for performance optimizations
+- fix likedFill and saveFill in Saves
 
 
 PERFORMANCE:
-   - .ong to .svg icons
    - rafactor functions -> se less sapce but more complex
    - refactor css -> use classes for more then 1 component
-   - implement lazy loading
    - deleted unused jsx
    - socket io -> learn about redis and scaling

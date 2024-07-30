@@ -15,7 +15,7 @@ import GifPicker from "gif-picker-react";
 import Image from "next/image";
 import { AddEmojiIcon, AddGifIcon, AddImageIcon } from "@/utils/svgIcons";
 
-const CreatePostModal = ({ postId }) => {
+const CreatePostModal = ({ postId,  setCommentCount}) => {
   const { user } = useAuthContext();
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [textContent, setTextContent] = useState<string>("");
@@ -85,8 +85,6 @@ const CreatePostModal = ({ postId }) => {
 
   const handleCommentCreation = async () => {
     try {
-      console.log(selectedFiles);
-
       const imageContentUrl = await uploadFileToCloud(selectedFiles[0]);
 
       const newComment = await createComment(
@@ -97,6 +95,7 @@ const CreatePostModal = ({ postId }) => {
         
       );
       if (!newComment) return;
+      setCommentCount(prevCount => prevCount + 1)
 
       setSelectedFiles([]);
       setTextContent("");

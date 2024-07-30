@@ -6,6 +6,7 @@ import { CursorPaginationInput } from './dto/cursorPaginatedPost-input';
 import { LikeDislikePostInput } from './dto/like-dislike-post.input';
 import { Comment } from './entities/comment.entity';
 import { AddCommentToPostInput } from './dto/add-comment-to-post.input';
+import { SaveUnsavePostInput } from './dto/save-unsave';
 
 @Resolver(() => Post)
 export class PostResolver {
@@ -22,6 +23,13 @@ export class PostResolver {
   ) {
     return this.postService.likeDislike(likeDislikePostInput);
   }
+  
+  @Mutation(() => String)
+  saveUnsave(
+    @Args('saveUnsavePostInput') saveUnsavePostInput: SaveUnsavePostInput,
+  ) {
+    return this.postService.saveUnsave(saveUnsavePostInput);
+  }
 
   @Mutation(() => Comment)
   addedComment(
@@ -37,12 +45,21 @@ export class PostResolver {
   ) {
     return this.postService.getPaginatedPosts(paginationInput);
   }
+
+
   @Query(() => Post)
   singlePost(
     @Args('id') id: string,
     
   ) {
     return this.postService.getSinglePost(id);
+  }
+  
+  
+  @Query(() => [Post])
+  userSavedPosts( @Args('userEmail') userEmail: string) {
+    console.log(userEmail) 
+    return this.postService.getUserSavedPosts(userEmail);
   }
 }
 

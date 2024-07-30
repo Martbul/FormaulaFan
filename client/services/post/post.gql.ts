@@ -83,6 +83,23 @@ export const LIKE_DISLIKE_POST = gql`
   }
 `;
 
+export const SAVE_UNSAVE_POST = gql`
+  mutation saveUnsavePost(
+    $postId: String!
+    $userId: String!
+    $isSaved: Boolean!
+  ) {
+    saveUnsave(
+      saveUnsavePostInput: {
+        postId: $postId
+        userId: $userId
+        isSaved: $isSaved
+      }
+    )
+  }
+`;
+//! frontend about save and unsave is ready(maybe ;D)
+
 export const Add_CCOMMENT_TO_POST = gql`
 mutation addCommentToPost( $textContent:String!,
         $userEmail:String!,
@@ -98,6 +115,50 @@ mutation addCommentToPost( $textContent:String!,
 export const GET_SINGLE_POST = gql`
  query getSingePost($postId: String!) {
     singlePost(id: $postId){
+        id
+      textContent
+      imageContentUrl
+      videoContent
+      createdAt
+      author {
+        username
+        picture
+      }
+      likedBy {
+        id
+      }
+      comments {
+        id
+        textContent
+        imageContentUrl
+        videoContent
+        createdAt
+        author {
+          username
+          picture
+        }
+        post {
+          id
+        }
+        likes
+        shares
+        views
+        saves
+      }
+      sharedBy {
+        id
+      }
+      savedBy {
+        id
+      }
+    }
+    }
+`
+
+
+export const GET_USER_SAVED_POSTS = gql`
+ query getUserSavedPosts($userEmail: String!) {
+    userSavedPosts(userEmail: $userEmail){
         id
       textContent
       imageContentUrl

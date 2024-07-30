@@ -12,6 +12,8 @@ import {
   ChatIconActive,
   BookmarksIcon,
   BookmarksIconActive,
+  FanZoneIcon,
+  FanZoneIconActive,
   SettingsIcon,
   SettingsIconActive,
   GuestProfileIcon,
@@ -78,9 +80,9 @@ const Navigation = () => {
         <Link className="flex items-center p-3 mb-5 cursor-pointer transition-colors duration-300" href="/alerts">
           <div className="mr-4">
             {getMenuItemActiveImage("/alerts") ? (
-              <AlertIconActive className="w-10 h-10" />
+              <AlertIconActive className="w-8 h-8" />
             ) : (
-              <AlertIcon className="w-10 h-10" />
+              <AlertIcon className="w-8 h-8" />
             )}
           </div>
           <div className={getMenuItemClass("/alerts")}>
@@ -88,7 +90,7 @@ const Navigation = () => {
           </div>
         </Link>
 
-        <Link className="flex items-center p-3 mb-5 cursor-pointer transition-colors duration-300" href="/chat/mygroups">
+        <Link className="flex items-center p-3 mb-5 cursor-pointer " href="/chat/mygroups">
           <div className="mr-4">
             {getMenuItemActiveImage("/chat/mygroups") ? (
               <ChatIconActive className="w-10 h-10" />
@@ -111,6 +113,20 @@ const Navigation = () => {
           </div>
           <div className={getMenuItemClass("/saves")}>
             <p className="text-lg">Saves</p>
+          </div>
+        </Link>
+        
+        
+        <Link className="flex items-center p-3 mb-5 cursor-pointer transition-colors duration-300" href="/saves">
+          <div className="mr-4">
+            {getMenuItemActiveImage("/fanzone") ? (
+              <FanZoneIconActive className="w-10 h-10" />
+            ) : (
+              <FanZoneIcon className="w-9 h-9" />
+            )}
+          </div>
+          <div className={getMenuItemClass("/fanzone")}>
+            <p className="text-lg">Fan Zone</p>
           </div>
         </Link>
 

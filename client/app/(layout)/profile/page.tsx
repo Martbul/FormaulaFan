@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { getUserPofileUtil } from "@/utils/getUserId";
 import Post from "@/components/post/Post";
 
+
 const Profile = () => {
   const { user } = useAuthContext();
   const [userProfileDetails, setUserProfileDetails] = useState(null);

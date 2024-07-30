@@ -155,6 +155,7 @@ type Mutation {
   removeAuth(id: Int!): Auth!
   removeChannel(id: Int!): Channel!
   removeGroup(id: Int!): Group!
+  saveUnsave(saveUnsavePostInput: SaveUnsavePostInput!): String!
   signIn(signInInput: SignInInput!): SignResponse!
   signUp(signUpInput: SignUpInput!): SignResponse!
   startDirectConversation(startConversationInput: StartConversationInput!): Conversation!
@@ -207,6 +208,13 @@ type Query {
   singlePost(id: String!): Post!
   user(email: String!): User!
   userProfileData(email: String!): Profile!
+  userSavedPosts(userEmail: String!): [Post!]!
+}
+
+input SaveUnsavePostInput {
+  isSaved: Boolean!
+  postId: String!
+  userId: String!
 }
 
 input SignInInput {

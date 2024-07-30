@@ -11,8 +11,9 @@ import {
   ShareIcon,
   SaveIcon,
   OptionsIcon,
+  SaveIconFill,
 } from "@/utils/svgIcons";
-import { clickOnLike } from "@/services/post/post.service";
+import { clickOnLike ,clickOnSave} from "@/services/post/post.service";
 import { useState } from "react";
 import dynamic from "next/dynamic";
 import { Dialog, DialogTrigger } from "../ui/dialog";
@@ -32,12 +33,25 @@ const DynamicPostOptionsMenu = dynamic(
   }
 );
 
+const DynamicSharePostModal = dynamic(
+  () => import("../posts/SharePostModal/SharePostModal"),
+  {
+    ssr: false,
+  }
+);
+
 const Post = ({ post, userId }) => {
   const router = useRouter();
   const [isLiked, setIsLiked] = useState<boolean>(
     post.likedBy.some((user) => user.id === userId)
   );
+ 
+  const [isSaved, setIsSaved] = useState<boolean>(
+    post.savedBy.some((user) => user.id === userId)
+  );
   const [likeCount, setLikeCount] = useState<number>(post.likedBy.length);
+  const [commentCount, setCommentCount] = useState<number>(post.comments.length);
+  const [savesCount, setSavesCount] = useState<number>(post.savedBy.length);
 
   const handleLike = async () => {
     const result = await clickOnLike(post.id, userId, isLiked);
@@ -50,8 +64,20 @@ const Post = ({ post, userId }) => {
     }
     console.log(result.data.likeDislike);
   };
+ 
+  const handleSave = async () => {
+    const result = await clickOnSave(post.id, userId, isSaved);
+    if (result.data.saveUnsave == "Post was saved") {
+      setIsSaved(true);
+      setSavesCount(savesCount + 1);
+    } else if (result.data.saveUnsave == "Post was unsaved") {
+      setIsSaved(false);
+      setSavesCount(savesCount - 1);
+    }
+    console.log(result.data.saveUnsave);
+  };
 
-  const handleComment = async () => {};
+  
   const handleRedirectToSinglePost = () => {
     router.push(`/posts/${post.id}`);
   };
@@ -110,24 +136,39 @@ const Post = ({ post, userId }) => {
               <DialogTrigger asChild>
                 <div className="comments flex items-center space-x-1 cursor-pointer">
                   <CommentIcon className="w-5 h-5" />
-                  <p className="text-sm">{post.comments.length}</p>
+                  <p className="text-sm">{commentCount}</p>
                 </div>
               </DialogTrigger>
-              <DynamicCreateCommentModal postId={post.id} />
+              <DynamicCreateCommentModal postId={post.id} setCommentCount={setCommentCount}   />
             </Dialog>
+
+
+            <Dialog>
+            <DialogTrigger asChild>
             <div
               className="shares flex items-center space-x-1 cursor-pointer"
-              onClick={handleComment}
             >
               <ShareIcon className="w-6 h-6" />
               <p className="text-sm">{post.shares}</p>
             </div>
+            </DialogTrigger>
+              <DynamicSharePostModal postId={post.id}/>
+            </Dialog>
+
+            
+
+          
+
             <div
-              className="saved flex items-center space-x-1 cursor-pointer"
-              onClick={handleComment}
+              className="likes flex items-center space-x-1 cursor-pointer"
+              onClick={handleSave}
             >
-              <SaveIcon className="w-6 h-6" />
-              <p className="text-sm">{post.saves}</p>
+              {isSaved ? (
+                <SaveIconFill className="w-6 h-6 text-red-500" />
+              ) : (
+                <SaveIcon className="w-6 h-6" />
+              )}
+              <p className="text-sm">{savesCount}</p>
             </div>
           </div>
         </div>

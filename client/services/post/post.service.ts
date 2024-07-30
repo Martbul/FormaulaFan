@@ -5,7 +5,9 @@ import {
   QUERY_POSTS_PAGGINATION,
   LIKE_DISLIKE_POST,
   Add_CCOMMENT_TO_POST,
-  GET_SINGLE_POST
+  GET_SINGLE_POST,
+  SAVE_UNSAVE_POST,
+  GET_USER_SAVED_POSTS
 } from "./post.gql";
 
 const client = createApolloClient();
@@ -84,6 +86,28 @@ export async function clickOnLike(postId: string, userId: string, isLiked: boole
   }
 }
 
+export async function clickOnSave(postId: string, userId: string, isSaved: boolean) {
+  try {
+    const result = await client.mutate({
+      mutation: SAVE_UNSAVE_POST,
+      variables: {
+        postId,
+        userId,
+        isSaved,
+      },
+    });
+    return result;
+  } catch (error) {
+    if (error instanceof ApolloError) {
+      console.error("GraphQL error details:", error.graphQLErrors);
+      console.error("Network error details:", error.networkError);
+    } else {
+      console.error("Unknown error:", error);
+    }
+    throw error;
+  }
+}
+
 export async function createComment(
   textContent: string,
   userEmail: string,
@@ -114,6 +138,28 @@ export async function createComment(
   }
 }
 
+export async function getUserSavePosts(userEmail:sting){
+  try {
+    const {data} = await client.query({
+      query: GET_USER_SAVED_POSTS,
+      variables: {
+        userEmail,
+      },
+    });
+
+       const result = data.userSavedPosts
+    console.log(result)
+    return result;
+  } catch (error) {
+    if (error instanceof ApolloError) {
+      console.error("GraphQL error details:", error.graphQLErrors);
+      console.error("Network error details:", error.networkError);
+    } else {
+      console.error("Unknown error:", error);
+    }
+    throw error;
+  }
+}
 
 export async function getSinglePost(postId:string){
      try {
