@@ -5,6 +5,10 @@ import {
 import Image from "next/image";
 import dynamic from "next/dynamic";
 
+import React, { Dispatch, SetStateAction } from "react";
+import type { User } from "@/services/auth/auth.interface";
+
+
 const DynamicUserOptionsPopover = dynamic(
   () => import("./UserOptionsPopover/UserOptionsPopover"),
   {
@@ -12,7 +16,7 @@ const DynamicUserOptionsPopover = dynamic(
   }
 );
 
-const UserOptionsMenu = ({ user , setUser}) => {
+const UserOptionsMenu:React.FC<{user:User, setUser: Dispatch<SetStateAction<User>>}> = ({ user, setUser }) => {
   return (
     <div className="flex w-full justify-center mt-auto remove-selecting-text">
       <DropdownMenu>
@@ -30,13 +34,11 @@ const UserOptionsMenu = ({ user , setUser}) => {
             </div>
           </div>
         </DropdownMenuTrigger>
-       
-<DynamicUserOptionsPopover setUser={setUser}/>
 
-
+        <DynamicUserOptionsPopover setUser={setUser} />
       </DropdownMenu>
     </div>
   );
 };
 
-export default UserOptionsMenu
+export default UserOptionsMenu;

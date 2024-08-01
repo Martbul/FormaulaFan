@@ -1,70 +1,55 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React from "react";
 import { Sidebar } from "@/components/chat/group/Sidebar/Sidebar";
 import { getConversationsByUserEmail, getConversationUsersByConvIdAndEmail } from "@/services/conversation/conversation.service";
 import { useAuthContext } from "@/contexts/AuthContext2";
 import { DirectChatArea } from "@/components/chat/directChat/directChatArea/DirectChatArea";
-import type { ChatPageProps, User } from "@/utils/interfaces";
+import type { ChatPageProps } from "@/utils/interfaces";
+import { useQuery } from "@tanstack/react-query";
 
 const ChatPage:React.FC<ChatPageProps> = ({ params }) => {
   const { user } = useAuthContext();
-  const [conversationData, setConversationData] = useState(null);
-  const [conversationUser, setConversationUser] = useState(null);
-  const [currentUser, setCurrentUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-   const [userConversatinos, setUserConversations] = useState<User[]>([]);
 
-useEffect(() => {
-    const getConversationUsers = async () => {
-      try {
-        if (!user || !user.email) {
-          console.log("User or user email is not defined");
-          return;
-        }
-        const { conversation, conversationUser, currentUser } =
+  const {data, isLoading, isError}  = useQuery({
+    queryKey: ["direct", user?.email],
+    queryFn: async () => {
+      if (!user || !user.email) {
+        throw new Error("User or user email is not here...");
+      }
+      const { conversation, conversationUser, currentUser } =
           await getConversationUsersByConvIdAndEmail(
             params.conversationId,
             user.email
           );
-        if (!conversation || !conversationUser || !currentUser) {
-          console.error("Something went wrong with conversation details");
-          return;
-        }
-        setConversationData(conversation);
-        setConversationUser(conversationUser);
-        setCurrentUser(currentUser);
-
-         const conversations = await getConversationsByUserEmail(user.email);
-         if (!conversations) {
-           console.log("The user has not started any conversations");
-         } else {
-           setUserConversations(conversations);
-         }
-      } catch (error) {
-        console.error("Error fetching user groups:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    getConversationUsers();
-  }, [user]);
+          const conversations = await getConversationsByUserEmail(user.email);
+      return { conversation, conversationUser,currentUser ,conversations};
+    },
+    enabled: !!user?.email, 
+  
+  })
   
    
-      if (loading) {
+      if (isLoading) {
        return <div className="flex items-center justify-center h-screen bg-zinc-800">
         <div className="loader"></div>
       </div>
      }
+     if (isError) {
+      return <div>Error loading data.</div>;
+    }
+
+    const {  conversation, conversationUser,currentUser ,conversations} = data || {};
+
   return (
     <div className="flex h-screen">
       <DirectChatArea
-        conversationData={conversationData}
+        conversationData={conversation}
         recipientUser={conversationUser}
         currentUser={currentUser}
       />
 
-      <Sidebar conversationUsers={userConversatinos} />
+      <Sidebar conversationUsers={conversations} />
     </div>
   );
 };

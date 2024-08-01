@@ -14,9 +14,9 @@ import {
   BookmarksIconActive,
   FanZoneIcon,
   FanZoneIconActive,
-  SettingsIcon,
-  SettingsIconActive,
   GuestProfileIcon,
+  CalendarIcon,
+  CalendarIconActive,
 } from "@/utils/svgIcons";
 import Link from "next/link";
 import Image from "next/image";
@@ -117,7 +117,7 @@ const Navigation = () => {
         </Link>
         
         
-        <Link className="flex items-center p-3 mb-5 cursor-pointer transition-colors duration-300" href="/saves">
+        <Link className="flex items-center p-3 mb-5 cursor-pointer transition-colors duration-300" href="/fanzone">
           <div className="mr-4">
             {getMenuItemActiveImage("/fanzone") ? (
               <FanZoneIconActive className="w-10 h-10" />
@@ -129,19 +129,20 @@ const Navigation = () => {
             <p className="text-lg">Fan Zone</p>
           </div>
         </Link>
-
-        <Link className="flex items-center p-3 mb-5 cursor-pointer transition-colors duration-300" href="/settings">
+        <Link className="flex items-center p-3 mb-5 cursor-pointer transition-colors duration-300" href="/challenges">
           <div className="mr-4">
-            {getMenuItemActiveImage("/settings") ? (
-              <SettingsIconActive className="w-10 h-10" />
+            {getMenuItemActiveImage("/challenges") ? (
+              <CalendarIconActive className="w-10 h-10" />
             ) : (
-              <SettingsIcon className="w-10 h-10" />
+              <CalendarIcon className="w-9 h-9" />
             )}
           </div>
-          <div className={getMenuItemClass("/settings")}>
-            <p className="text-lg">Settings</p>
+          <div className={getMenuItemClass("/challenges")}>
+            <p className="text-lg">Challenges</p>
           </div>
         </Link>
+
+
       </div>
 
       {user && user.username === "Guest" && (

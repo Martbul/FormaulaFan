@@ -4,44 +4,44 @@ import Image from "next/image";
 import "./Profile.css";
 import images from "@/constants/images";
 import { useAuthContext } from "@/contexts/AuthContext2";
-import { useEffect, useState } from "react";
+
 import { getUserPofileUtil } from "@/utils/getUserId";
 import Post from "@/components/post/Post";
+import { useQuery } from "@tanstack/react-query";
 
 
 const Profile = () => {
   const { user } = useAuthContext();
-  const [userProfileDetails, setUserProfileDetails] = useState(null);
 
-  useEffect(() => {
-    if (!user.email) return;
-
-    const getUser = async () => {
-      const result = await getUserPofileUtil(user.email);
-      console.log(result);
-
-      setUserProfileDetails(result);
-    };
-
-    getUser();
-  }, [user]);
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["profile", user.email],
+    queryFn: () => getUserPofileUtil(user.email)
+  });
+  if (isLoading) {
+    return <div className="flex items-center justify-center h-screen bg-zinc-800">
+     <div className="loader"></div>
+   </div>
+  }
+  if (isError) {
+   return <div>Error loading data.</div>;
+ }
 
   return (
     <div className="profile-page h-screen bg-[#1e1f22] text-white">
       <header className="profile-header relative text-center">
-<div className={`min-h-48 cover-photo bg-[${userProfileDetails?.cover}]`}>         
+<div className={`min-h-48 cover-photo bg-[${data?.cover}]`}>         
           
         </div>
         <div className="profile-info absolute bottom-[-50px] left-1/2 transform -translate-x-1/2 text-center">
           <Image
-            src={userProfileDetails?.picture}
+            src={data?.picture}
             alt="Profile"
             className="profile-pic mx-auto w-24 h-24 bg-[#2c2c2c] rounded-full"
             width={50}
             height={50}
           />
-          <h1>{userProfileDetails?.username}</h1>
-          <p>{userProfileDetails?.email}</p>
+          <h1>{data?.username}</h1>
+          <p>{data?.email}</p>
           <div className="actions space-x-2">
             <button className="px-4 py-2 rounded-full bg-blue-500 text-white">
               Add Friend
@@ -137,8 +137,8 @@ const Profile = () => {
         <main className="main-content flex-1 mx-2">
           <section className="posts h-full overflow-y-auto bg-[#2c2c2c]">
             <div className="post space-y-5">
-              {userProfileDetails?.posts.map((post, index) => (
-                <Post key={index} post={post} userId={userProfileDetails.id} />
+              {data?.posts.map((post, index) => (
+                <Post key={index} post={post} userId={data.id} />
               ))}
             </div>
           </section>

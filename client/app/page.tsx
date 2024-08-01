@@ -8,13 +8,15 @@ import {
   CarouselNext,
 } from "@/components/ui/carousel";
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
-import "@/background.css"
+import "../background.css";
 // import {PoduimLogoIcon } from "@/utils/svgIcons";
 
 export default function Home() {
   return (
-    <div className="flex  h-screen  flex-col overflow-y-auto no-scrollbar">
+    <div className="flex  h-screen  flex-col overflow-y-auto no-scrollbar ">
+      <Background />
       <header className="px-4 lg:px-36 h-14 flex items-center bg-[#23272a] text-white shadow-md">
+        <Background />
         <Sheet>
           <SheetTrigger asChild>
             <Button variant="ghost" size="icon" className="lg:hidden">
@@ -116,9 +118,7 @@ export default function Home() {
       </header>
 
       <main className="flex-1  bg-gradient-to-b from-[#36393f] to-[#23272a] text-white relative ">
-            {/* <Background/> */}
-
-
+        <Background />
 
         <section className="relative w-full py-12 md:py-24 lg:py-32 xl:py-48 flex items-center justify-center text-center h-screen">
           <div className="container px-4 md:px-6">
@@ -148,36 +148,31 @@ export default function Home() {
             </div>
           </div>
         </section>
-        
-          <section
-            className={`relative w-full py-12 md:py-24 lg:py-32 xl:py-48 flex items-center justify-center text-center bg-gradient-to-b`}
-          >
-            <div className="container px-4 md:px-6">
-              <div className="flex flex-col items-center gap-4 text-center">
-                <div className="space-y-2">
-                  <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl animate-fade-in-up">
-                    Section Heading 
-                  </h2>
-                  <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl animate-fade-in">
-                    Section content for section . Discover the
-                    endless possibilities and features of this platform.
-                  </p>
-                </div>
-                <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                  <Button className="w-full min-[400px]:w-auto">
-                    Button A
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className="w-full min-[400px]:w-auto"
-                  >
-                    Button B
-                  </Button>
-                </div>
+
+        <section
+          className={`relative w-full py-12 md:py-24 lg:py-32 xl:py-48 flex items-center justify-center text-center bg-gradient-to-b`}
+        >
+          <div className="container px-4 md:px-6">
+            <div className="flex flex-col items-center gap-4 text-center">
+              <div className="space-y-2">
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl animate-fade-in-up">
+                  Section Heading
+                </h2>
+                <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl animate-fade-in">
+                  Section content for section . Discover the endless
+                  possibilities and features of this platform.
+                </p>
+              </div>
+              <div className="flex flex-col gap-2 min-[400px]:flex-row">
+                <Button className="w-full min-[400px]:w-auto">Button A</Button>
+                <Button variant="outline" className="w-full min-[400px]:w-auto">
+                  Button B
+                </Button>
               </div>
             </div>
-          </section>
-        
+          </div>
+        </section>
+
         <section className="relative w-full py-12 md:py-24 lg:py-32 xl:py-48 flex items-center justify-center text-center bg-gradient-to-b from-[#36393f] to-[#23272a]">
           <div className="container px-4 md:px-6">
             <Carousel className="w-full max-w-md">
@@ -343,32 +338,37 @@ const Background = () => {
     </div>
   );
 };
- function PoduimLogoIcon(props: SvgProps) {
+function PoduimLogoIcon(props: SvgProps) {
   return (
- <svg
-    {...props}
-    fill="#000000"
-    viewBox="0 0 24 24"
-    id="podium"
-    data-name="Flat Color"
-    xmlns="http://www.w3.org/2000/svg"
-    className="icon flat-color"
-    stroke="#000000"
-    strokeWidth="0.00024"
-  >
-    <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-    <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
-    <g id="SVGRepo_iconCarrier">
-      <path
-        id="secondary"
-        d="M12.93,6.81a1,1,0,0,1-.47-.12L12,6.45l-.46.24a1,1,0,0,1-1.45-1.05l.09-.52L9.8,4.76a1,1,0,0,1,.56-1.7L10.87,3l.23-.47a1,1,0,0,1,1.8,0l.23.47.51.08a1,1,0,0,1,.56,1.7l-.38.36.09.52a1,1,0,0,1-.39,1A1.09,1.09,0,0,1,12.93,6.81Z"
-        style={{ fill: '#ff0000' }}
-      />
-      <path
-        id="primary"
-        d="M8,16v5a1,1,0,0,1-1,1H3a1,1,0,0,1-1-1V16a1,1,0,0,1,1-1H7A1,1,0,0,1,8,16Zm6-7H10a1,1,0,0,0-1,1V21a1,1,0,0,0,1,1h4a1,1,0,0,0,1-1V10A1,1,0,0,0,14,9Zm7,4H17a1,1,0,0,0-1,1v7a1,1,0,0,0,1,1h4a1,1,0,0,0,1-1V14A1,1,0,0,0,21,13Z"
-        style={{ fill: '#000000' }}
-      />
-    </g>
-  </svg>  );
+    <svg
+      {...props}
+      fill="#000000"
+      viewBox="0 0 24 24"
+      id="podium"
+      data-name="Flat Color"
+      xmlns="http://www.w3.org/2000/svg"
+      className="icon flat-color"
+      stroke="#000000"
+      strokeWidth="0.00024"
+    >
+      <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+      <g
+        id="SVGRepo_tracerCarrier"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      ></g>
+      <g id="SVGRepo_iconCarrier">
+        <path
+          id="secondary"
+          d="M12.93,6.81a1,1,0,0,1-.47-.12L12,6.45l-.46.24a1,1,0,0,1-1.45-1.05l.09-.52L9.8,4.76a1,1,0,0,1,.56-1.7L10.87,3l.23-.47a1,1,0,0,1,1.8,0l.23.47.51.08a1,1,0,0,1,.56,1.7l-.38.36.09.52a1,1,0,0,1-.39,1A1.09,1.09,0,0,1,12.93,6.81Z"
+          style={{ fill: "#ff0000" }}
+        />
+        <path
+          id="primary"
+          d="M8,16v5a1,1,0,0,1-1,1H3a1,1,0,0,1-1-1V16a1,1,0,0,1,1-1H7A1,1,0,0,1,8,16Zm6-7H10a1,1,0,0,0-1,1V21a1,1,0,0,0,1,1h4a1,1,0,0,0,1-1V10A1,1,0,0,0,14,9Zm7,4H17a1,1,0,0,0-1,1v7a1,1,0,0,0,1,1h4a1,1,0,0,0,1-1V14A1,1,0,0,0,21,13Z"
+          style={{ fill: "#000000" }}
+        />
+      </g>
+    </svg>
+  );
 }

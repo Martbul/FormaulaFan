@@ -7,10 +7,12 @@ import {
 import Link from "next/link";
 import { logout } from "@/services/auth/auth.service";
 import { useRouter } from 'next/navigation'
+import type { User } from "@/utils/interfaces";
+import React, { Dispatch, SetStateAction } from "react";
 
 
 
-const UserOptionsPopover = ({setUser}) =>{
+const UserOptionsPopover:React.FC<{user:User, setUser: Dispatch<SetStateAction<User>>}> = ({setUser}) =>{
   const router = useRouter()
 
   const handleLogout = () => {
@@ -30,7 +32,7 @@ const UserOptionsPopover = ({setUser}) =>{
 
        <DropdownMenuItem className="text-neutral-200 hover:cursor-pointer hover:text-white">Team</DropdownMenuItem>
        <DropdownMenuItem className="text-neutral-200 hover:cursor-pointer hover:text-white">
-         Subscription
+         <Link href="/settings">Settings</Link>
        </DropdownMenuItem>
        <DropdownMenuItem
          className="text-red-700"

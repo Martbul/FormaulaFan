@@ -18,6 +18,7 @@ import { signUp } from "@/services/auth/auth.service";
 
 import Link from "next/link";
 import { AnimatedCircleIcon, ChromeIcon, GithubIcon } from "@/utils/svgIcons";
+import { useMutation } from "@tanstack/react-query";
 
 const SignUp = () => {
   const router = useRouter();
@@ -61,6 +62,13 @@ const SignUp = () => {
 
      setLoading(false);
    };
+
+
+  // const {mutate:signUpMutation} = useMutation(({username, email,password}) => signUp(username, email, password),{
+  //   onSuccess:(data) =>{
+  //     router.replace("/posts");
+  //   },
+  // })
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 w-full h-screen">

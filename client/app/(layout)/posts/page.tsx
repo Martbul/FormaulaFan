@@ -51,28 +51,6 @@ const Posts = () => {
     }
   });
 
-
-//  const fetchMorePosts = async() =>{
-//     console.log('HERE');
-    
-//     let paginatedPosts;
-//     if (posts.length !== 0) {
-//       paginatedPosts = await getPaginatedPosts(posts[posts.length - 1].id);
-//     } else {
-//       paginatedPosts = await getPaginatedPosts();
-//     }
-
-//     if (paginatedPosts.length === 0) {
-//       setHasMore(false);
-//     } else {
-//       setPosts((prevPosts) => [...prevPosts, ...paginatedPosts]);
-//     }
-//  }
-  // useEffect(() => {
-    
-  //   fetchMorePosts();
-  // }, []);
-
   useEffect(() => {
     
     if (inView && hasMore) {

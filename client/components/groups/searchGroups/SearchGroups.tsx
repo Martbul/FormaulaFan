@@ -1,54 +1,20 @@
 "use client";
 
 import "./SearchGroups.css";
-import { useState, useEffect } from "react";
 import { getAllGroups } from "@/services/group/group.service";
 import SearchGroupCard from "./searchGroupCard/SearchGroupCard";
-
-interface Group {
-  id: string;
-  name: string;
-  imageUrl: string;
-  creator;
-  members;
-  channels;
-}
+import { useQuery } from "@tanstack/react-query";
 
 export default function SearchGroups() {
-  const [searchResult, setSearchResult] = useState<Group[]>([]);
-  const [error, setError] = useState<Error | null>(null);
-  const [loading, setLoading] = useState(true);
 
-  //! for now make 2 differnt function sor getting all groups initialy and serach, BUT you need to make one  function for bought
-  // const searchGroups = async() =>{
-  //   try {
+  const {data, isLoading, isError} = useQuery({
+    queryKey:["groups"],
+    queryFn:getAllGroups
+  })
 
-  //   } catch (error) {
 
-  //   }
-  // }
 
-  //! implement also pagination
-  const getGroups = async () => {
-    try {
-      const result: Group[] = await getAllGroups();
-      setSearchResult(result);
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-      setError(error);
-    }
-  };
-
-  useEffect(() => {
-    getGroups();
-    console.log("getting all groups from DB");
-  }, []);
-
-  useEffect(() => {
-    console.log(searchResult);
-  }, [searchResult]);
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="flex items-center justify-center h-2/6">
         <div className="loader"></div>
@@ -56,14 +22,14 @@ export default function SearchGroups() {
     );
   }
 
-  if (error) {
+  if (isError) {
     return <p>Error: {error.message}</p>;
   }
 
   return (
     <div className="searchChatResults">
       <div className="resultContainer">
-        {searchResult.map((group, index) => (
+        {data.map((group, index) => (
           <SearchGroupCard
             key={index}
             id={group.id}

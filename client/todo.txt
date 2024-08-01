@@ -17,6 +17,7 @@
 - make conversationList and memberslsit into 1 compoennt
 - it is not okay to make new request every thime user come o chat for the conversation sidebar. Maybe put it in (conv-layout) or do some cashing or something like that
 - send emails on sign in
+- write a good readme
 
 
 - add funcionality to the UI you made for server options

@@ -5,37 +5,43 @@ import { useAuthContext } from "@/contexts/AuthContext2";
 import { getUserSavePosts } from "@/services/post/post.service";
 import { useUserIdUtil } from "@/utils/getUserId";
 import type { PostInterface } from "@/utils/interfaces";
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+
 
 const Bookmarks = () => {
    const { user } = useAuthContext();
-   const [getUserSavedPosts, setUserSavedPosts] = useState<[PostInterface] | null>(null);
-   const [userId, setUserId] = useState<string | null>(null);
-
-   useEffect(() => {
-      if (!user.email) return;
   
-      const findUserSavedPosts = async () => {
+
+    const {data, isLoading, isError}  = useQuery({
+      queryKey: ["saved", user?.email],
+      queryFn: async () => {
+        if (!user || !user.email) {
+          throw new Error("User or user email is not here...");
+        }
         const posts = await getUserSavePosts(user.email);
-        console.log(posts);
+        const userId = await useUserIdUtil(user.email);
+        return { posts, userId};
+      },
+      enabled: !!user?.email, 
+    
+    })
+    if (isError) {
+      return <div>Error loading data.</div>;
+    }
   
-        setUserSavedPosts(posts);
+    if (isLoading) {
+      return (
+        <div className="flex items-center justify-center h-screen bg-zinc-800">
+          <div className="loader"></div>
+        </div>
+      );
+    }
+    const { posts, userId } = data || {};
 
-
-        const foundUserId = await useUserIdUtil(user.email);
-        console.log(foundUserId.id);
-        
-        setUserId(foundUserId.id)
-      };
-      
-      
-  
-      findUserSavedPosts();
-    }, [user]);
    return (
       <section className="posts h-full overflow-y-auto bg-[#2c2c2c]">
       <div className="post space-y-5">
-        {getUserSavedPosts?.map((post, index) => (
+        {posts?.map((post:PostInterface, index:number) => (
           <Post key={index} post={post} userId={userId} />
         ))}
       </div>
