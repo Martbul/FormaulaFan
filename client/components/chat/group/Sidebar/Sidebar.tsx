@@ -18,6 +18,7 @@ const DynamicGroupQuickOptionsPopover = dynamic(
 );
 
 
+
 export const Sidebar = ({
   groupId,
   name,

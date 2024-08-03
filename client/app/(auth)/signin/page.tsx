@@ -7,11 +7,9 @@ import {
   CardContent,
   CardFooter,
 } from "@/components/ui/card";
-
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-
 import { useAuthContext } from "@/contexts/AuthContext2";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -19,6 +17,8 @@ import { AnimatedCircleIcon, ChromeIcon, GithubIcon } from "@/utils/svgIcons";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { signIn } from "@/services/auth/auth.service";
+
+
 type SignInFormData = {
   email: string;
   password: string;

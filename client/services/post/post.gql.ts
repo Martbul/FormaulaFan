@@ -36,6 +36,7 @@ export const QUERY_POSTS_PAGGINATION = gql`
       author {
         username
         picture
+        email
       }
       likedBy {
         id

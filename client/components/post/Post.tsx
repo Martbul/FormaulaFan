@@ -18,6 +18,7 @@ import { useState } from "react";
 import dynamic from "next/dynamic";
 import { Dialog, DialogTrigger } from "../ui/dialog";
 import { useRouter } from "next/navigation";
+import { useAuthContext } from "@/contexts/AuthContext2";
 
 const DynamicCreateCommentModal = dynamic(
   () => import("../../components/posts/CreateCommentModal/CreateCommentModal"),
@@ -26,8 +27,14 @@ const DynamicCreateCommentModal = dynamic(
   }
 );
 
-const DynamicPostOptionsMenu = dynamic(
-  () => import("./PostOptionsMenu/PostOptionsMenu"),
+const DynamicAuthorPostOptionsMenu = dynamic(
+  () => import("./AuthorPostOptionsMenu/AuthorPostOptionsMenu"),
+  {
+    ssr: false,
+  }
+);
+const DynamicUserPostOptionsMenu = dynamic(
+  () => import("./UserPostOptionsMenu/UserPostOptionsMenu"),
   {
     ssr: false,
   }
@@ -41,10 +48,15 @@ const DynamicSharePostModal = dynamic(
 );
 
 const Post = ({ post, userId }) => {
+  const { user } = useAuthContext();
+
   const router = useRouter();
   const [isLiked, setIsLiked] = useState<boolean>(
     post.likedBy.some((user) => user.id === userId)
   );
+  const [isAuthor, setIsAuthor] = useState<boolean>(
+    post.author.email === user.email
+  )
  
   const [isSaved, setIsSaved] = useState<boolean>(
     post.savedBy.some((user) => user.id === userId)
@@ -173,12 +185,20 @@ const Post = ({ post, userId }) => {
           </div>
         </div>
       </div>
-      <DropdownMenu>
+      {isAuthor=== true && ( <DropdownMenu>
         <DropdownMenuTrigger className="flex-col h-full">
           <OptionsIcon className="w-5 h-5 hover:opacity-70" />
         </DropdownMenuTrigger>
-        <DynamicPostOptionsMenu />
-      </DropdownMenu>
+        <DynamicAuthorPostOptionsMenu />
+      </DropdownMenu>)}
+
+      {isAuthor===false && ( <DropdownMenu>
+        <DropdownMenuTrigger className="flex-col h-full">
+          <OptionsIcon className="w-5 h-5 hover:opacity-70" />
+        </DropdownMenuTrigger>
+        <DynamicUserPostOptionsMenu />
+      </DropdownMenu>)}
+     
     </div>
   );
 };

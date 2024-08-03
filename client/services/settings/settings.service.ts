@@ -6,15 +6,14 @@ const client = createApolloClient();
 
 
 export async function getUserSettings(userEmail: string) {
-  console.log(userEmail);
-  
+
   try {
     const { data } = await client.query({
       query: QUERY_USER_SETTINGS,
       variables: { userEmail },
     });
 
-    const result = data.userProfileData;
+    const result = data.userSettings;
 
     return result;
   } catch (error) {

@@ -24,6 +24,9 @@ export class AuthService {
           username: signUpInput.username,
           email: signUpInput.email,
           password: hashedPassword,
+          // settings:{
+            
+          // }
         },
       });
 

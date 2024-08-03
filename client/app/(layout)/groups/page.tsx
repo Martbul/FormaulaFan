@@ -1,31 +1,46 @@
 "use client";
-import "./Groups.css";
-import { Button } from "@/components/ui/button";
 
+import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { createGroup } from "@/services/group/group.service";
 import { useAuthContext } from "@/contexts/AuthContext2";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 import SearchGroups from "@/components/groups/searchGroups/SearchGroups";
 import { Input } from "@/components/ui/input";
 import images from "@/constants/images";
+import { useMutation } from "@tanstack/react-query";
 
+import "./Groups.css";
 
 const Groups = () => {
   const { user } = useAuthContext();
   const router = useRouter();
 
-  const [error, setError] = useState(null);
+  const { mutate, isPending, isError, error } = useMutation({
+    mutationFn: async () => {
+     
+      const result = await createGroup(user.username, user.email);
+      return result;
+    },
+    onSuccess: (result) => {
+      router.push(`/chat/mygroup/${result.id}`);
+    },
+  });
 
-  const handleCreateGroup = async () => {
-    const result = await createGroup(user.username, user.email);
-    if (!result) {
-      setError(result);
-    }
-
-    router.push(`/chat/mygroup/${result.id}`);
+  const onSubmit = () => {
+    mutate();
   };
+
+  
+  if (isPending) {
+    return <div className="flex items-center justify-center h-screen bg-zinc-800">
+     <div className="loader"></div>
+   </div>
+  }
+  if (isError) {
+   return <div>There was an error: {error.message}</div>;
+ }
+
 
   return (
     <>
@@ -40,7 +55,7 @@ const Groups = () => {
                 <div className="createGroup">
                   <button
                     className="groupBtn createBtn"
-                    onClick={handleCreateGroup}
+                    onClick={onSubmit}
                   >
                     {" "}
                     Create

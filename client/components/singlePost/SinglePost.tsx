@@ -29,7 +29,7 @@ const DynamicCreateCommentModal = dynamic(
 );
 
 const DynamicPostOptionsMenu = dynamic(
-  () => import("../post/PostOptionsMenu/PostOptionsMenu"),
+  () => import("../post/AuthorPostOptionsMenu/PostOptionsMenu"),
   {
     ssr: false,
   }
