@@ -14,7 +14,7 @@ import {
   AnalyticsIcon,
 } from "@/utils/svgIcons";
 
-const UserPostOptionsMenu = () => {
+const UserPostOptionsMenu = (post) => {
   return (
     <DropdownMenuContent className="bg-zinc-800 drop-shadow-xl ">
       <DropdownMenuItem className="text-neutral-200 mb-1 hover:bg-neutral-700 hover:rounded-md hover:cursor-pointer">

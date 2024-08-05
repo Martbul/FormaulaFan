@@ -36,7 +36,7 @@
 - start using DnD, D3, and Three.js
 - group owner and roles(based on the role users can do different things)
 - use UpStash
-
+- rerender after delete of a post(or show the deletion in some other way)
 PERFORMANCE:
    - rafactor functions -> se less sapce but more complex
    - refactor css -> use classes for more then 1 component

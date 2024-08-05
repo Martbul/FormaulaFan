@@ -113,7 +113,6 @@ export class PostService {
     }
   }
 
-
   async saveUnsave(saveUnsavePostInput: SaveUnsavePostInput) {
     const { postId, userId, isSaved } = saveUnsavePostInput;
 
@@ -142,8 +141,9 @@ export class PostService {
   }
 
   async addCommentToPost(addCommnetToPostInput: AddCommentToPostInput) {
-    const { textContent, userEmail, postId, imageContentUrl } = addCommnetToPostInput;
-    
+    const { textContent, userEmail, postId, imageContentUrl } =
+      addCommnetToPostInput;
+
     const user = await this.prisma.user.findUnique({
       where: { email: userEmail },
     });
@@ -158,12 +158,10 @@ export class PostService {
         imageContentUrl,
         authorId: user.id,
         postId,
-      }
-    })
-    return comment
-
-  };
-
+      },
+    });
+    return comment;
+  }
 
   async getSinglePost(id: string) {
     const singlePost = await this.prisma.post.findUnique({
@@ -181,10 +179,9 @@ export class PostService {
         },
       },
     });
-    return singlePost
+    return singlePost;
   }
- 
- 
+
   async getUserSavedPosts(userEmail: string) {
     const user = await this.prisma.user.findUnique({
       where: { email: userEmail },
@@ -194,25 +191,65 @@ export class PostService {
       throw new NotFoundException('User not found');
     }
     const userSavedPosts = await this.prisma.user.findUnique({
-      where: {id:user.id},
+      where: { id: user.id },
       include: {
-        savedPosts:{
+        savedPosts: {
           include: {
             author: true,
             likedBy: true,
             savedBy: true,
             sharedBy: true,
             comments: {
-                  include: {
-                    author: true,
-                    post: true,
-                  },
-                },
-          }
-        }
-      }
+              include: {
+                author: true,
+                post: true,
+              },
+            },
+          },
+        },
+      },
     });
+
+    return userSavedPosts.savedPosts;
+  }
+
+  async deletePost(userEmail: string, postId: string) {
+    console.log(userEmail, postId);
+
+    const user = await this.prisma.user.findUnique({
+      where: { email: userEmail },
+    });
+
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+
+    const post = await this.prisma.post.findUnique({
+      where: { id: postId },
+    });
+
+    if (!post) {
+      throw new NotFoundException('Post not found');
+    }
+
+    if (post.authorId !== user.id) {
+      throw new NotFoundException('User is not the author of the post');
+    }
     
-    return userSavedPosts.savedPosts
+      await this.prisma.comment.deleteMany({
+        where: { postId: postId },
+      });
+
+
+    const deletedPost = await this.prisma.post.delete({
+      where: { id: postId },
+    });
+
+    console.log(deletedPost);
+    if (deletedPost) {
+      return { success: true, message: 'Post was deleted successfully' };
+    } else {
+      return { success: false, message: 'Post was NOT deleted' };
+    }
   }
 }

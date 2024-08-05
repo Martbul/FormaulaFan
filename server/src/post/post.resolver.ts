@@ -7,6 +7,7 @@ import { LikeDislikePostInput } from './dto/like-dislike-post.input';
 import { Comment } from './entities/comment.entity';
 import { AddCommentToPostInput } from './dto/add-comment-to-post.input';
 import { SaveUnsavePostInput } from './dto/save-unsave';
+import { DeletePostResponse } from './entities/deletedPost.entity';
 
 @Resolver(() => Post)
 export class PostResolver {
@@ -23,7 +24,7 @@ export class PostResolver {
   ) {
     return this.postService.likeDislike(likeDislikePostInput);
   }
-  
+
   @Mutation(() => String)
   saveUnsave(
     @Args('saveUnsavePostInput') saveUnsavePostInput: SaveUnsavePostInput,
@@ -46,22 +47,26 @@ export class PostResolver {
     return this.postService.getPaginatedPosts(paginationInput);
   }
 
-
   @Query(() => Post)
-  singlePost(
-    @Args('id') id: string,
-    
-  ) {
+  singlePost(@Args('id') id: string) {
     return this.postService.getSinglePost(id);
   }
-  
-  
+
   @Query(() => [Post])
-  userSavedPosts( @Args('userEmail') userEmail: string) {
-    console.log(userEmail) 
+  userSavedPosts(@Args('userEmail') userEmail: string) {
+    console.log(userEmail);
     return this.postService.getUserSavedPosts(userEmail);
   }
-}
 
+  @Mutation(() => DeletePostResponse)
+  async deletedPost(
+    @Args('userEmail') userEmail: string,
+    @Args('postId') postId: string,
+  ) {
+    console.log(userEmail);
+
+    return this.postService.deletePost(userEmail, postId);
+  }
+}
 
 

@@ -8,6 +8,7 @@ import {
   GET_SINGLE_POST,
   SAVE_UNSAVE_POST,
   GET_USER_SAVED_POSTS,
+  DELETE_POST,
 } from "./post.gql";
 
 const client = createApolloClient();
@@ -148,7 +149,7 @@ export async function createComment(
   }
 }
 
-export async function getUserSavePosts(userEmail: sting) {
+export async function getUserSavePosts(userEmail: string) {
   try {
     const { data } = await client.query({
       query: GET_USER_SAVED_POSTS,
@@ -183,6 +184,31 @@ export async function getSinglePost(postId: string) {
     const result = data.singlePost;
     console.log(result);
     return result;
+  } catch (error) {
+    if (error instanceof ApolloError) {
+      console.error("GraphQL error details:", error.graphQLErrors);
+      console.error("Network error details:", error.networkError);
+    } else {
+      console.error("Unknown error:", error);
+    }
+    throw error;
+  }
+}
+
+
+export async function deletePost(userEmail:string, postId: string) {
+  try {
+      const { data } = await client.mutate({
+        mutation: DELETE_POST,
+        variables: {
+          userEmail,
+          postId,
+        },
+      });
+
+      const result = data.deletedPost;
+      console.log(result);
+      return result;
   } catch (error) {
     if (error instanceof ApolloError) {
       console.error("GraphQL error details:", error.graphQLErrors);

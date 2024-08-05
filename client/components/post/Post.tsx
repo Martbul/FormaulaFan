@@ -184,19 +184,19 @@ const Post = ({ post, userId }) => {
       </div>
       {isAuthor === true && (
         <DropdownMenu>
-          <DropdownMenuTrigger className="flex-col h-full">
-            <OptionsIcon className="w-5 h-5 hover:opacity-70" />
+          <DropdownMenuTrigger className="flex-col h-full hover:bg-gray-700 hover:opacity-70 hover:rounded-full">
+            <OptionsIcon className="w-5 h-5 " />
           </DropdownMenuTrigger>
-          <DynamicAuthorPostOptionsMenu />
+          <DynamicAuthorPostOptionsMenu post={post.id} />
         </DropdownMenu>
       )}
 
       {isAuthor === false && (
         <DropdownMenu>
-          <DropdownMenuTrigger className="flex-col h-full">
-            <OptionsIcon className="w-5 h-5 hover:opacity-70" />
+          <DropdownMenuTrigger className="flex-col h-full hover:bg-gray-700 hover:opacity-70 hover:rounded-full">
+            <OptionsIcon className="w-5 h-5 " />
           </DropdownMenuTrigger>
-          <DynamicUserPostOptionsMenu />
+          <DynamicUserPostOptionsMenu post={post.id} />
         </DropdownMenu>
       )}
     </div>

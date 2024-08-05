@@ -29,46 +29,28 @@ export class User {
   bio?: string;
 
   @Field({ nullable: true })
-  status?: string; 
-
-  @Field(() => String)
-  password: string; // Consider the security implications of exposing this field
-
-  @Field({ nullable: true })
-  hashedRefreshToken?: string; 
+  status?: string;
 
   @Field(() => Date)
   createdAt: Date;
-
-  @Field(() => Date)
-  updatedAt: Date;
 
   @Field(() => [Post])
   posts: Post[];
 
   @Field(() => [Post])
-  likedPosts: Post[];
+  favorites: Post[];
 
-  @Field(() => [Post])
-  sharedPosts: Post[];
+  @Field(() => [User])
+  followedBy: User[];
 
-  @Field(() => [Post])
-  savedPosts: Post[];
-
-  @Field(() => [Comment])
-  comments: Comment[];
+  @Field(() => [User])
+  following: User[];
 
   @Field(() => [Conversation])
   conversationsInitiated: Conversation[];
 
   @Field(() => [Conversation])
   conversationsReceived: Conversation[];
-
-  @Field(() => [DirectMessage])
-  directMessages: DirectMessage[];
-
-  @Field(() => UserSettings, { nullable: true })
-  settings?: UserSettings; // Optional field
 
   @Field(() => [Group])
   createdGroups: Group[];

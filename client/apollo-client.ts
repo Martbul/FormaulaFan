@@ -1,6 +1,5 @@
 import { ApolloClient, InMemoryCache, DefaultOptions } from "@apollo/client";
 
-// Define default options for the client
 const defaultOptions: DefaultOptions = {
   watchQuery: {
     fetchPolicy: "no-cache",
@@ -15,7 +14,7 @@ const defaultOptions: DefaultOptions = {
 
 const createApolloClient = () => {
   return new ApolloClient({
-    uri: "http://localhost:5000/graphql", // Replace with your GraphQL endpoint
+    uri: "http://localhost:5000/graphql",
     cache: new InMemoryCache(),
     defaultOptions: defaultOptions,
   });

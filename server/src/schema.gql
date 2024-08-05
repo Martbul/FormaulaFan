@@ -101,6 +101,11 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type DeletePostResponse {
+  message: String!
+  success: Boolean!
+}
+
 type DirectMessage {
   content: String!
   conversation: Conversation!
@@ -155,6 +160,7 @@ type Mutation {
   addedUserToGroup(addUserToGroupInput: AddUserToGroupInput!): Member!
   createGroup(createGroupInput: CreateGroupInput!): CreateGroupResponse!
   createSetting(createSettingInput: CreateSettingInput!): Setting!
+  deletedPost(postId: String!, userEmail: String!): DeletePostResponse!
   likeDislike(likeDislikePostInput: LikeDislikePostInput!): String!
   newChannel(createChannelInput: CreateChannelInput!): Channel!
   newPost(createPostInput: CreatePostInput!): Post!
@@ -193,6 +199,9 @@ type Profile {
   createdAt: DateTime!
   createdGroups: [Group!]!
   email: String!
+  favorites: [Post!]!
+  followedBy: [User!]!
+  following: [User!]!
   id: String!
   members: [Member!]!
   picture: String
@@ -281,33 +290,19 @@ input UpdateSettingInput {
 
 type User {
   bio: String
-  comments: [Comment!]!
   conversationsInitiated: [Conversation!]!
   conversationsReceived: [Conversation!]!
   cover: String!
   createdAt: DateTime!
   createdGroups: [Group!]!
-  directMessages: [DirectMessage!]!
   email: String!
-  hashedRefreshToken: String
+  favorites: [Post!]!
+  followedBy: [User!]!
+  following: [User!]!
   id: String!
-  likedPosts: [Post!]!
   members: [Member!]!
-  password: String!
   picture: String
   posts: [Post!]!
-  savedPosts: [Post!]!
-  settings: UserSettings
-  sharedPosts: [Post!]!
   status: String
-  updatedAt: DateTime!
   username: String!
-}
-
-type UserSettings {
-  id: String!
-  notifications: Boolean!
-  theme: String!
-  user: User!
-  userId: String!
 }

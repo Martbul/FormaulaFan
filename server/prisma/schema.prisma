@@ -8,23 +8,29 @@ datasource db {
 }
 
 model User {
-   id                 String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-   username           String   @db.VarChar(255)
-   password           String   @db.VarChar(1000)
-   email              String   @unique @db.VarChar(255)
-   picture            String?  @db.VarChar(255) @default("https://firebasestorage.googleapis.com/v0/b/formulafan-38467.appspot.com/o/helmet.png?alt=media&token=67b3e8bc-66a5-4161-a89d-f1e5e2a14535")
-   cover         String  @default("#393a3f")
-   bio              String? @db.VarChar(2550)
-   status         String?
+   id                 String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+   username           String    @db.VarChar(255)
+   password           String    @db.VarChar(1000)
+   email              String    @unique @db.VarChar(255)
+   picture            String?   @default("https://firebasestorage.googleapis.com/v0/b/formulafan-38467.appspot.com/o/helmet.png?alt=media&token=67b3e8bc-66a5-4161-a89d-f1e5e2a14535") @db.VarChar(255)
+   cover              String    @default("#393a3f")
+   bio                String?   @db.VarChar(2550)
+   status             String?
    hashedRefreshToken String?
-   createdAt          DateTime @default(now())
-   updatedAt          DateTime @updatedAt
-   posts    Post[]
-   likedPosts Post[] @relation("UserLikedPosts")
-   comments Comment[]
-   sharedPosts Post[] @relation("UserSharedPosts")
-   savedPosts Post[] @relation("UserSavedPosts")
-  
+   createdAt          DateTime  @default(now())
+   updatedAt          DateTime  @updatedAt
+   posts              Post[]
+   favorites          Post[]    @relation("UserFavoritePosts") 
+   likedPosts         Post[]    @relation("UserLikedPosts")
+   comments           Comment[]
+   sharedPosts        Post[]    @relation("UserSharedPosts")
+   savedPosts         Post[]    @relation("UserSavedPosts")
+
+   followedBy User[] @relation("UserFollows") 
+   following  User[] @relation("UserFollows") 
+
+   // blockedUsers User[] @relation("UserBlocked")
+   
 
    conversationsInitiated Conversation[] @relation("UserOne")
    conversationsReceived  Conversation[] @relation("UserTwo")
@@ -40,7 +46,6 @@ model User {
 model UserSettings {
    id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
 
-  
    notifications Boolean @default(false)
 
    userId String @unique @db.Uuid
@@ -48,46 +53,47 @@ model UserSettings {
 }
 
 model Post {
-   id           String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-   textContent  String   @db.VarChar(1000)
+   id              String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+   textContent     String   @db.VarChar(1000)
    imageContentUrl String?  @db.VarChar(1000)
-   videoContent String?  @db.VarChar(1000)
-   createdAt    DateTime @default(now())
-   updatedAt    DateTime @updatedAt
+   videoContent    String?  @db.VarChar(1000)
+   createdAt       DateTime @default(now())
+   updatedAt       DateTime @updatedAt
 
    authorId String @db.Uuid
-   author   User   @relation(fields: [authorId], references: [id])
+   author   User   @relation(fields: [authorId], references: [id], onDelete: Cascade)
 
-   likedBy   User[] @relation("UserLikedPosts") 
-   comments Comment[] @relation("PostComments")
-   sharedBy    User[]        @relation("UserSharedPosts")
-   savedBy   User[]      @relation("UserSavedPosts")
+   likedBy     User[]    @relation("UserLikedPosts")
+   favoritedBy User[]    @relation("UserFavoritePosts")
+   comments    Comment[] @relation("PostComments")
+   sharedBy    User[]    @relation("UserSharedPosts")
+   savedBy     User[]    @relation("UserSavedPosts")
 }
 
 model Comment {
-   id           String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-   textContent  String?  @db.VarChar(1000)
+   id              String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+   textContent     String?  @db.VarChar(1000)
    imageContentUrl String?  @db.VarChar(1000)
-   videoContent String?  @db.VarChar(1000)
-   createdAt    DateTime @default(now())
-   updatedAt    DateTime @updatedAt
+   videoContent    String?  @db.VarChar(1000)
+   createdAt       DateTime @default(now())
+   updatedAt       DateTime @updatedAt
 
    authorId String @db.Uuid
-   author   User   @relation(fields: [authorId], references: [id])
+   author   User   @relation(fields: [authorId], references: [id], onDelete: Cascade)
 
    postId String @db.Uuid
-   post   Post   @relation(fields: [postId], references: [id], name: "PostComments")
+   post   Post   @relation(fields: [postId], references: [id], name: "PostComments", onDelete: Cascade)
 
-   likes    Int       @default(0)
-   shares   Int       @default(0)
-   views    Int       @default(0)
-   saves    Int       @default(0)
+   likes  Int @default(0)
+   shares Int @default(0)
+   views  Int @default(0)
+   saves  Int @default(0)
 }
 
 model Group {
-   id         String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-   name       String @db.VarChar(100)
-   imageUrl   String? @db.VarChar(1000) @default("https://firebasestorage.googleapis.com/v0/b/formulafan-38467.appspot.com/o/racing-car.png?alt=media&token=ed7bb8b3-370f-4521-9ccb-b8cf42955271")
+   id         String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+   name       String  @db.VarChar(100)
+   imageUrl   String? @default("https://firebasestorage.googleapis.com/v0/b/formulafan-38467.appspot.com/o/racing-car.png?alt=media&token=ed7bb8b3-370f-4521-9ccb-b8cf42955271") @db.VarChar(1000)
    inviteCode String
 
    creatorId String @db.Uuid

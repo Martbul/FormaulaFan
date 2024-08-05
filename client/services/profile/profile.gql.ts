@@ -50,6 +50,55 @@ export const QUERY_USER_PROFILE = gql`
           picture
         }
       }
+      favorites{
+          id
+        textContent
+        imageContentUrl
+        videoContent
+        createdAt
+        createdAt
+        likedBy {
+          id
+        }
+        comments {
+          id
+          textContent
+          imageContentUrl
+          videoContent
+          createdAt
+          author {
+            username
+            picture
+          }
+          post {
+            id
+          }
+          likes
+          shares
+          views
+          saves
+        }
+        sharedBy {
+          id
+        }
+        savedBy {
+          id
+        }
+        author {
+          username
+          picture
+        }
+      }
+      followedBy{
+        id
+        username
+        email
+      }
+      following{
+        id
+        username
+        email
+      }
       conversationsInitiated {
         userOne {
           id

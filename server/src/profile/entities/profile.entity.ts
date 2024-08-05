@@ -1,4 +1,5 @@
 import { Field, ObjectType } from '@nestjs/graphql';
+import { User } from 'src/auth/entities/user.entity';
 import { Conversation } from 'src/conversation/entities/conversation.entity';
 import { Group } from 'src/group/entities/group.entity';
 import { Member } from 'src/group/entities/members.entity';
@@ -32,6 +33,15 @@ export class Profile {
 
   @Field(() => [Post])
   posts: Post[];
+
+  @Field(() => [Post])
+  favorites: Post[];
+
+  @Field(() => [User])
+  followedBy: User[];
+
+  @Field(() => [User])
+  following: User[];
 
   @Field(() => [Conversation])
   conversationsInitiated: Conversation[];

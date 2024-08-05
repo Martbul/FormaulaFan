@@ -22,6 +22,22 @@ export class ProfileService {
             author:true
           },
         },
+        favorites: {
+          include: {
+            comments: {
+              include: {
+                post: true,
+                author: true,
+              },
+            },
+            likedBy: true,
+            savedBy: true,
+            sharedBy: true,
+            author:true
+          },
+        },
+        following:true,
+        followedBy:true,
         conversationsInitiated: {
           include: {
             userOne: true,

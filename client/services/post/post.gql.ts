@@ -206,3 +206,12 @@ export const GET_USER_SAVED_POSTS = gql`
     }
   }
 `;
+
+export const DELETE_POST = gql`
+  mutation DeletePost($userEmail: String!, $postId: String!) {
+    deletedPost(userEmail: $userEmail, postId: $postId){
+      success
+      message
+    }
+  }
+`;
