@@ -18,7 +18,6 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { signIn } from "@/services/auth/auth.service";
 
-
 type SignInFormData = {
   email: string;
   password: string;
@@ -120,7 +119,7 @@ const Login = () => {
                     },
                   })}
                 />
-                 {errors.email && (
+                {errors.email && (
                   <span className="text-red-600">{errors.email.message}</span>
                 )}
               </div>
@@ -131,15 +130,15 @@ const Login = () => {
                   type="password"
                   placeholder="mysecretpass"
                   className="border border-gray-950 p-2"
-                 {...register("password", {
-                  required: "Password is required",
-                  minLength:{
-                    value:6,
-                    message:"Password must be at least 6 characters long"
-                  }
-                 })}
+                  {...register("password", {
+                    required: "Password is required",
+                    minLength: {
+                      value: 6,
+                      message: "Password must be at least 6 characters long",
+                    },
+                  })}
                 />
-                 {errors.password && (
+                {errors.password && (
                   <span className="text-red-600">
                     {errors.password.message}
                   </span>
@@ -153,13 +152,12 @@ const Login = () => {
             )}
             <CardFooter>
               <Button
-              type="submit"
+                type="submit"
                 className="w-full bg-zinc-950 text-white hover:bg-zinc-700 border border-black"
                 disabled={isPending}
               >
-                {isPending  ? (
-                   <AnimatedCircleIcon className="h-9 w-9" />
-                 
+                {isPending ? (
+                  <AnimatedCircleIcon className="h-9 w-9" />
                 ) : (
                   "Sing In"
                 )}

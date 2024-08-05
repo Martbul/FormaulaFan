@@ -1,18 +1,18 @@
-'use client'
+"use client";
 
-import { AuthContextType, User } from '@/services/auth/auth.interface';
-import React, { createContext, useContext, useEffect, useState } from 'react'
-
-
+import { AuthContextType, User } from "@/services/auth/auth.interface";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 const AuthContext = createContext<AuthContextType>({
-  user: {username:"Guest", email:undefined},
+  user: { username: "Guest", email: undefined },
   setUser: () => {},
 });
 
-
 export function AppWrapper({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User>({username:'Guest', email:undefined});
+  const [user, setUser] = useState<User>({
+    username: "Guest",
+    email: undefined,
+  });
 
   useEffect(() => {
     const user = localStorage.getItem("user");
@@ -33,8 +33,6 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
   );
 }
 
-
 export function useAuthContext() {
-   return useContext(AuthContext)
+  return useContext(AuthContext);
 }
-

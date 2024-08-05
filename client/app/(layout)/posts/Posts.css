@@ -8,8 +8,6 @@
     overflow: hidden;
   }
 
-
-
   .news {
     width: 17%;
     scrollbar-width: none;
@@ -17,7 +15,6 @@
     overflow-y: auto;
     max-height: 100vh;
     border-left: 1px solid #3a3a3a;
-    
   }
 
   .postContent {

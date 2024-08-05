@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/carousel";
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
 import "../background.css";
+import type { SvgProps } from "@/utils/interfaces";
 // import {PoduimLogoIcon } from "@/utils/svgIcons";
 
 export default function Home() {
@@ -309,7 +310,7 @@ export default function Home() {
   );
 }
 
-function MenuIcon(props) {
+function MenuIcon(props: SvgProps) {
   return (
     <svg
       {...props}

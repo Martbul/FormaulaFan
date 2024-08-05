@@ -27,7 +27,7 @@ const CreateChannelModal = ({ groupId, setTextChannels, setVoiceChannels }) => {
   };
 
   const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { value } = e.target;
     setNewChannelName((prevForm) => ({
@@ -48,7 +48,7 @@ const CreateChannelModal = ({ groupId, setTextChannels, setVoiceChannels }) => {
       selectedChannel,
       newChannelName.name,
       isPrivateChannel,
-      groupId
+      groupId,
     );
     if (newChannel) {
       if (newChannel.type == "TEXT") {
@@ -163,7 +163,7 @@ const CreateChannelModal = ({ groupId, setTextChannels, setVoiceChannels }) => {
         <div className="">
           <div className="flex items-center gap-1">
             <div className="p-r-image remove-selecting-text">
-          <PadlockIcon className="w-4 h-4"/>
+              <PadlockIcon className="w-4 h-4" />
             </div>
             <div className="p-r-title white-title-color remove-selecting-text">
               <p>Private Channel</p>
@@ -187,7 +187,12 @@ const CreateChannelModal = ({ groupId, setTextChannels, setVoiceChannels }) => {
 
       <DialogFooter>
         <DialogClose asChild>
-          <Button className="remove-selecting-text" onClick={handleChannelCreation}>Create Channel</Button>
+          <Button
+            className="remove-selecting-text"
+            onClick={handleChannelCreation}
+          >
+            Create Channel
+          </Button>
         </DialogClose>
       </DialogFooter>
     </DialogContent>

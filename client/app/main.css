@@ -1,30 +1,31 @@
 html {
   box-sizing: border-box;
-   background-color: #212121;
-    overflow: hidden;
+  background-color: #212121;
+  overflow: hidden;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: inherit;
   margin: 0;
   padding: 0;
 }
 
-  
-  html {
-    font: 14px/1.5 "Poppins-Thin", sans-serif;
-   
-  }
-  
-  img {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
- 
+html {
+  font:
+    14px/1.5 "Poppins-Thin",
+    sans-serif;
+}
 
-.remove-selecting-text { 
-    -webkit-user-select: none; /* Safari */
+img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.remove-selecting-text {
+  -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
 }
@@ -34,15 +35,14 @@ html {
   width: 50px;
   aspect-ratio: 1;
   border-radius: 50%;
-  background: 
-                radial-gradient(farthest-side,#6b7280 94%,#0000) top/8px 8px no-repeat,
-                conic-gradient(#0000 30%,#6b7280);
-            -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 8px),#000 0);
-            animation: l13 1s infinite linear;
+  background:
+    radial-gradient(farthest-side, #6b7280 94%, #0000) top/8px 8px no-repeat,
+    conic-gradient(#0000 30%, #6b7280);
+  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 8px), #000 0);
+  animation: l13 1s infinite linear;
 }
-@keyframes l13{ 
-  100%{transform: rotate(1turn)}
+@keyframes l13 {
+  100% {
+    transform: rotate(1turn);
+  }
 }
-
-
-

@@ -1,15 +1,21 @@
-"use client"
+"use client";
 
 import dynamic from "next/dynamic";
 import { useState } from "react";
 
-const DynamicAccountSettings = dynamic(() => import("../../../components/settings/AccountSettings/AccountSettings"), {
-  ssr:false
-})
+const DynamicAccountSettings = dynamic(
+  () => import("../../../components/settings/AccountSettings/AccountSettings"),
+  {
+    ssr: false,
+  },
+);
 
-const DynamicPrivacySafetySettings = dynamic(() => import("../../../components/settings/PrivacySafety/PrivacySafety"), {
-  ssr:false
-})
+const DynamicPrivacySafetySettings = dynamic(
+  () => import("../../../components/settings/PrivacySafety/PrivacySafety"),
+  {
+    ssr: false,
+  },
+);
 const DynamicNotificationSettings = dynamic(
   () =>
     import(
@@ -17,14 +23,13 @@ const DynamicNotificationSettings = dynamic(
     ),
   {
     ssr: false,
-  }
+  },
 );
 
 import { useAuthContext } from "@/contexts/AuthContext2";
 
-
 const Settings = () => {
-    const [selectedSettingMenu, setSelectedSettingMenu] = useState("account");
+  const [selectedSettingMenu, setSelectedSettingMenu] = useState("account");
   const { user } = useAuthContext();
 
   return (
@@ -84,7 +89,5 @@ const Settings = () => {
     </>
   );
 };
-
-
 
 export default Settings;

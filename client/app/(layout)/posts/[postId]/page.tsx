@@ -5,8 +5,7 @@ import { useAuthContext } from "@/contexts/AuthContext2";
 import { useUserIdUtil } from "@/utils/getUserId";
 import { useEffect, useState } from "react";
 
-
-const SinglePostPage = ({ params }) => {
+const SinglePostPage = ({ params }: { params: any }) => {
   const [userId, setUserId] = useState(null);
   const { user } = useAuthContext();
 
@@ -15,7 +14,7 @@ const SinglePostPage = ({ params }) => {
 
     const getUser = async () => {
       try {
-        const result = await useUserIdUtil(user.email);
+        const result = await useUserIdUtil(user.email as string);
         console.log(result);
         setUserId(result.id);
       } catch (error) {

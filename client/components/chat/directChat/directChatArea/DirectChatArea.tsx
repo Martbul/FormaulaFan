@@ -5,14 +5,10 @@ import { Input } from "@/components/ui/input";
 
 import { useWebsocketContext } from "@/contexts/WebsocketContext";
 
-
 import Image from "next/image";
 import { PlusCircleIcon } from "@/utils/svgIcons";
 import "./DirectChatArea.css";
-import {
-  Popover,
-  PopoverTrigger,
-} from "@/components/ui/popover"
+import { Popover, PopoverTrigger } from "@/components/ui/popover";
 
 import { DirectChatAreaProps, DirectMessage } from "@/utils/interfaces";
 import dynamic from "next/dynamic";
@@ -21,7 +17,7 @@ const DynamicUserInfoPopover = dynamic(
   () => import("../../group/ChatArea/UserPopover/UserPopover"),
   {
     ssr: false,
-  }
+  },
 );
 
 export const DirectChatArea: React.FC<DirectChatAreaProps> = ({

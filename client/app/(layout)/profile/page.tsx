@@ -8,30 +8,30 @@ import { useAuthContext } from "@/contexts/AuthContext2";
 import { getUserPofileUtil } from "@/utils/getUserId";
 import Post from "@/components/post/Post";
 import { useQuery } from "@tanstack/react-query";
-
+import type { PostInterface } from "@/utils/interfaces";
 
 const Profile = () => {
   const { user } = useAuthContext();
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["profile", user.email],
-    queryFn: () => getUserPofileUtil(user.email)
+    queryFn: () => getUserPofileUtil(user.email as string),
   });
   if (isLoading) {
-    return <div className="flex items-center justify-center h-screen bg-zinc-800">
-     <div className="loader"></div>
-   </div>
+    return (
+      <div className="flex items-center justify-center h-screen bg-zinc-800">
+        <div className="loader"></div>
+      </div>
+    );
   }
   if (isError) {
-   return <div>Error loading data.</div>;
- }
+    return <div>Error loading data.</div>;
+  }
 
   return (
     <div className="profile-page h-screen bg-[#1e1f22] text-white">
       <header className="profile-header relative text-center">
-<div className={`min-h-48 cover-photo bg-[${data?.cover}]`}>         
-          
-        </div>
+        <div className={`min-h-48 cover-photo bg-[${data?.cover}]`}></div>
         <div className="profile-info absolute bottom-[-50px] left-1/2 transform -translate-x-1/2 text-center">
           <Image
             src={data?.picture}
@@ -137,7 +137,7 @@ const Profile = () => {
         <main className="main-content flex-1 mx-2">
           <section className="posts h-full overflow-y-auto bg-[#2c2c2c]">
             <div className="post space-y-5">
-              {data?.posts.map((post, index) => (
+              {data?.posts.map((post: PostInterface, index: number) => (
                 <Post key={index} post={post} userId={data.id} />
               ))}
             </div>

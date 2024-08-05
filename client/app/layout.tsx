@@ -15,7 +15,9 @@ export const metadata: Metadata = {
   description: "New place for F1 Fans",
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <AppWrapper>
       <UserSettingsWrapper>

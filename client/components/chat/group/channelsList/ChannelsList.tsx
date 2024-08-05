@@ -12,7 +12,7 @@ const DynamicCreateChannelModal = dynamic(
   () => import("./CreateChannelModal/CreateChannelModal"),
   {
     ssr: false,
-  }
+  },
 );
 
 export const ChannelsList = ({
@@ -30,10 +30,10 @@ export const ChannelsList = ({
   useEffect(() => {
     if (channels && channels.length > 0) {
       const newTextChannels = channels.filter(
-        (channel) => channel.type === "TEXT"
+        (channel) => channel.type === "TEXT",
       );
       const newVoiceChannels = channels.filter(
-        (channel) => channel.type === "VOICE"
+        (channel) => channel.type === "VOICE",
       );
       setTextChannels(newTextChannels);
       setVoiceChannels(newVoiceChannels);
@@ -156,4 +156,3 @@ export const ChannelsList = ({
     </Dialog>
   );
 };
-      

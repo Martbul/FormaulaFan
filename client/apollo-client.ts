@@ -1,8 +1,4 @@
-import {
-  ApolloClient,
-  InMemoryCache,
-  DefaultOptions,
-} from "@apollo/client";
+import { ApolloClient, InMemoryCache, DefaultOptions } from "@apollo/client";
 
 // Define default options for the client
 const defaultOptions: DefaultOptions = {

@@ -1,9 +1,6 @@
 import { useState } from "react";
 import Image from "next/image";
-import {
-  Dialog,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { useRouter } from "next/navigation";
 import { useAuthContext } from "@/contexts/AuthContext2";
 import { startDirectConversation } from "@/services/conversation/conversation.service";
@@ -14,7 +11,7 @@ const DynamicInvitePopover = dynamic(
   () => import("../popovers/InvitePopover/InvitePopover"),
   {
     ssr: true,
-  }
+  },
 );
 export const MembersList: React.FC<{ members: Member[] }> = ({ members }) => {
   const { user } = useAuthContext();
@@ -30,8 +27,6 @@ export const MembersList: React.FC<{ members: Member[] }> = ({ members }) => {
     }
     router.push(`/chat/direct/${conversationId}`);
   };
-
-  
 
   return (
     <>

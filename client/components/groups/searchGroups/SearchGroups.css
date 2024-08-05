@@ -1,11 +1,10 @@
-
 .searchChatResults {
-  padding: 20px; 
+  padding: 20px;
 }
 
 .searchChatResults .resultContainer {
   display: flex;
-  flex-wrap: wrap; 
-  gap: 20px; 
-  cursor:pointer;
+  flex-wrap: wrap;
+  gap: 20px;
+  cursor: pointer;
 }

@@ -12,7 +12,6 @@
     height: 100vh;
   }
 
- 
   .main {
     flex: 2;
     padding: 20px;
@@ -26,7 +25,7 @@
     padding-top: 1em;
     overflow-y: auto;
     max-height: 100vh;
-      border-left: 1px solid #3a3a3a;
+    border-left: 1px solid #3a3a3a;
   }
 
   .feedContainer,
@@ -50,150 +49,142 @@
     margin-bottom: 3em;
   }
 
-
-
   /* main */
-  .main .feedContainer{
+  .main .feedContainer {
     display: flex;
     flex-direction: column;
     padding: 3em 10em;
-  } 
+  }
 
- .main .feedContainer .heading{
-  display: flex;
-  flex-direction: row;
- }
+  .main .feedContainer .heading {
+    display: flex;
+    flex-direction: row;
+  }
 
- .main .feedContainer .heading .sectionTitile{
-  display: flex;
-  flex:1;
-  font-size: 24px;
-  color: white;
- }
-.main .feedContainer .heading .groupsOperations{
-  display: flex;
-  flex-direction: row;
-  gap: 3em;
-}
+  .main .feedContainer .heading .sectionTitile {
+    display: flex;
+    flex: 1;
+    font-size: 24px;
+    color: white;
+  }
+  .main .feedContainer .heading .groupsOperations {
+    display: flex;
+    flex-direction: row;
+    gap: 3em;
+  }
 
-.addGroup{
-  background-color:none
-}
+  .addGroup {
+    background-color: none;
+  }
 
-.createBtn{
-    background-color:#FF1801
-}
+  .createBtn {
+    background-color: #ff1801;
+  }
 
-.groupBtn{
-  padding: 0.6em 2em;
-  border-radius: 10px;
-  border: 0px;
-}
+  .groupBtn {
+    padding: 0.6em 2em;
+    border-radius: 10px;
+    border: 0px;
+  }
 
+  .feedContainer .searchOperations {
+    display: flex;
+    flex-direction: row;
+    padding: 3em 0em;
+    margin-top: 2em;
+  }
 
-.feedContainer .searchOperations{
-  display: flex;
-  flex-direction: row;
-  padding: 3em 0em;
-  margin-top: 2em;
-}
+  .taskContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-.taskContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
- 
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
 
-.searchOperations {
-  display: flex;
-  align-items: center;
-  gap: 1em;
-  width: 100%;
-  margin-bottom: 1em;
-}
+  .searchOperations {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    width: 100%;
+    margin-bottom: 1em;
+  }
 
-.searchInput {
-  flex: 1;
-  padding: 0.7em;
-  border: 1px solid #000000;
-  border-radius: 5px;
-  font-size: 16px;
-  background-color: #181818;
-}
+  .searchInput {
+    flex: 1;
+    padding: 0.7em;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #181818;
+  }
 
-.moduleSelect,
-.sortSelect {
-  padding: 0.7em;
-  border: 1px solid #000000;
-  border-radius: 5px;
-  font-size: 16px;
-  background-color: #181818;
-}
+  .moduleSelect,
+  .sortSelect {
+    padding: 0.7em;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #181818;
+  }
 
-.taskCategories {
-  display: flex;
-  gap: 10px;
-  width: 100%;
-  justify-content: center;
-  
-}
+  .taskCategories {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    justify-content: center;
+  }
 
-.teams {
-  display: flex;
-  flex:1;
-  gap: 10px;
-  justify-content: center;
-}
+  .teams {
+    display: flex;
+    flex: 1;
+    gap: 10px;
+    justify-content: center;
+  }
 
-.teamBox {
-  width: 80px;  
-  height: 60px; 
-  display: flex ;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  overflow: hidden;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+  .teamBox {
+    width: 80px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
 
-.teamBox img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain; /* Ensure the whole image fits within the box */
-}
+  .teamBox img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Ensure the whole image fits within the box */
+  }
 
+  .teamBox:hover {
+    background-color: #f0f0f0;
+  }
 
-.teamBox:hover {
-  background-color: #f0f0f0;
-}
+  .teamBox.active {
+    background-color: #e0e0e0;
+    border-color: #ccc;
+  }
 
-.teamBox.active {
-  background-color: #e0e0e0;
-  border-color: #ccc;
-}
+  .redbull {
+    background-color: #121f45;
+  }
+  .ferrari {
+    background-color: #a60511;
+  }
+  .mclaren {
+    background-color: #ff8000;
+  }
+  .mercedes {
+    background-color: #c6c6c6;
+  }
 
-
-.redbull{
-  background-color: #121F45
-}
-.ferrari{
-background-color: #A60511
-}
-.mclaren{
-background-color: #FF8000
-}
-.mercedes{
-background-color: #C6C6C6
-}
-
-.searchChatResults{
-margin-top: 2em;
-}
-
-
+  .searchChatResults {
+    margin-top: 2em;
+  }
 }

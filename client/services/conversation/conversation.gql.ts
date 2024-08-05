@@ -16,7 +16,6 @@ export const START_DIRECT_CONVERATION = gql`
   }
 `;
 
-
 export const GET_CONVERSATION_USERS_DATA = gql`
   query getConversationData($conversationId: String!, $currUserEmail: String!) {
     conversationData(id: $conversationId, email: $currUserEmail) {
@@ -52,8 +51,8 @@ export const QUERY_ALL_USER_CONVERSATIONS = gql`
   query getAllUserConversations($userEmail: String!) {
     allUserConversations(email: $userEmail) {
       id
-     username
-     picture
+      username
+      picture
     }
   }
 `;

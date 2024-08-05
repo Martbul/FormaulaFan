@@ -49,7 +49,7 @@ export const uploadFileToCloud = async (file) => {
             console.error("Failed to get download URL:", error);
             reject(error);
           });
-      }
+      },
     );
   });
 };

@@ -1,18 +1,19 @@
 import React from "react";
-import { Dialog, DialogTrigger,} from "@/components/ui/dialog";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic";
 import { WriteIcon } from "@/utils/svgIcons";
-
 
 import "./PostsMenu.css";
 
-const DynamicCreatePostModal = dynamic(() => import("../../posts/CreatePostModal/CreatePostModal"), {
-  ssr:false
-})
-
+const DynamicCreatePostModal = dynamic(
+  () => import("../../posts/CreatePostModal/CreatePostModal"),
+  {
+    ssr: false,
+  },
+);
 
 export const PostsMenu = () => {
   return (

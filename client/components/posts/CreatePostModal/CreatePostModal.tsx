@@ -1,7 +1,13 @@
 "use client";
 
 import React, { useRef, useState } from "react";
-import { DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle} from "@/components/ui/dialog";
+import {
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -26,7 +32,7 @@ const CreateCommentModal = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handlePostTextChange = (
-    event: React.ChangeEvent<HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLTextAreaElement>,
   ) => {
     setTextContent(event.target.value);
   };
@@ -93,7 +99,7 @@ const CreateCommentModal = () => {
       const newPost = await createPost(
         textContent,
         user.email as string,
-        imageContentUrl
+        imageContentUrl,
       );
       if (!newPost) return;
 

@@ -7,12 +7,10 @@ import {
   CardContent,
   CardFooter,
 } from "@/components/ui/card";
-const NotificationsSettings = ({user}) => {
+const NotificationsSettings = ({ user }) => {
   return (
     <div className=" md:grid-cols-[180px_1fr] lg:grid-cols-[250px_1fr] items-start gap-6 max-w-6xl w-full mx-auto  ">
       <div className="grid gap-6 ">
-    
-
         <Card>
           <CardHeader>
             <CardTitle>Notifications</CardTitle>
@@ -50,9 +48,11 @@ const NotificationsSettings = ({user}) => {
             </div>
           </CardContent>
         </Card>
-    
+
         <CardFooter>
-          <Button className="bg-neutral-900 ml-auto text-neutral-200 hover:bg-neutral-950">Save Changes</Button>
+          <Button className="bg-neutral-900 ml-auto text-neutral-200 hover:bg-neutral-950">
+            Save Changes
+          </Button>
         </CardFooter>
       </div>
     </div>

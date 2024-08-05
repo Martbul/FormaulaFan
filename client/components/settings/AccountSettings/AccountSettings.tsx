@@ -17,24 +17,21 @@ import {
   SelectItem,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-const AccountSettings = ({user}) => {
+const AccountSettings = ({ user }) => {
   return (
     <div className=" md:grid-cols-[180px_1fr] lg:grid-cols-[250px_1fr] items-start gap-6 max-w-6xl w-full mx-auto  ">
       <div className="grid gap-6 ">
         <div className="grid auto-rows-max items-start gap-4 lg:gap-8">
           <Card>
-                 <CardHeader className="flex flex-row justify-between">
-                    <div>
-                        <CardTitle>User Avatar</CardTitle>
-              <CardDescription>Update your profile picture.</CardDescription>
-                    </div>
-                    <div>
-                       <CardTitle>User Cover</CardTitle>
-              <CardDescription>Update your profile cover.</CardDescription>
-                    </div>
-                  
-             
-              
+            <CardHeader className="flex flex-row justify-between">
+              <div>
+                <CardTitle>User Avatar</CardTitle>
+                <CardDescription>Update your profile picture.</CardDescription>
+              </div>
+              <div>
+                <CardTitle>User Cover</CardTitle>
+                <CardDescription>Update your profile cover.</CardDescription>
+              </div>
             </CardHeader>
             <CardContent>
               <div className="flex flex-row justify-between">
@@ -44,10 +41,8 @@ const AccountSettings = ({user}) => {
                   height="30"
                   src={user.picture}
                   width="30"
-                       />
-                       <div className="bg-green-900 w-56 h-56 ">
-                          
-                       </div>
+                />
+                <div className="bg-green-900 w-56 h-56 "></div>
                 {/* <div className="grid grid-cols-2 gap-2">
                   <Button variant="outline" size="sm">
                     <UploadIcon className="mr-2 h-4 w-4" />
@@ -107,12 +102,9 @@ const AccountSettings = ({user}) => {
                 </div>
               </div>
             </CardContent>
-          
           </Card>
-         
         </div>
 
-    
         <Card>
           <CardHeader>
             <CardTitle className="text-red-600">Danger Zone</CardTitle>
@@ -124,24 +116,26 @@ const AccountSettings = ({user}) => {
             <div className="flex flex-row items-center justify-between">
               <div>
                 <h3 className="text-lg font-semibold">Delete Account</h3>
-              <p className="text-muted-foreground">
-                This will permanently delete your project and all associated
-                data. This action cannot be undone.
-              </p>
+                <p className="text-muted-foreground">
+                  This will permanently delete your project and all associated
+                  data. This action cannot be undone.
+                </p>
               </div>
-              
-              <Button className="bg-red-700 hover:bg-red-800">Delete Project</Button>
+
+              <Button className="bg-red-700 hover:bg-red-800">
+                Delete Project
+              </Button>
             </div>
-            
           </CardContent>
         </Card>
         <CardFooter>
-          <Button className="bg-neutral-900 ml-auto text-neutral-200 hover:bg-neutral-950">Save Changes</Button>
+          <Button className="bg-neutral-900 ml-auto text-neutral-200 hover:bg-neutral-950">
+            Save Changes
+          </Button>
         </CardFooter>
       </div>
     </div>
   );
 };
-
 
 export default AccountSettings;

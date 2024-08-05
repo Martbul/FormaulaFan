@@ -4,28 +4,24 @@ import { useAuthContext } from "@/contexts/AuthContext2";
 import { useRouter } from "next/navigation";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import dynamic from "next/dynamic";
-import { Toaster } from "@/components/ui/toaster"
-
+import { Toaster } from "@/components/ui/toaster";
 
 const DynamicJoinGroupModal = dynamic(
   () => import("../JoinGroupModal/JoinGroupModal"),
   {
     ssr: false,
-  }
+  },
 );
 
 export default function SearchGroupCard({ id, imageUrl, groupName, members }) {
   const { user } = useAuthContext();
   const router = useRouter();
- 
+
   const isCurrentUserMemberOfClickedGroup = members.some(
-    (member) => member.user.email === user.email
+    (member) => member.user.email === user.email,
   );
 
-  
-  
   const handleGroupClick = () => {
-  
     if (isCurrentUserMemberOfClickedGroup) {
       router.push(`/chat/mygroup/${id}`);
     }
@@ -51,7 +47,7 @@ export default function SearchGroupCard({ id, imageUrl, groupName, members }) {
       {!isCurrentUserMemberOfClickedGroup && (
         <DynamicJoinGroupModal groupName={groupName} user={user} id={id} />
       )}
-        <Toaster className="bg-red-700"   />
+      <Toaster className="bg-red-700" />
     </Dialog>
   );
 }

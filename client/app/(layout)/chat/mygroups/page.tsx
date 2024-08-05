@@ -21,7 +21,7 @@ const MyGroups = () => {
       const userConversations = await getConversationsByUserEmail(user.email);
       return { userGroups, userConversations };
     },
-    enabled: !!user?.email, 
+    enabled: !!user?.email,
   });
 
   if (isLoading) {
@@ -32,12 +32,10 @@ const MyGroups = () => {
     );
   }
 
- 
   if (isError) {
     return <div>Error loading data.</div>;
   }
 
- 
   const { userGroups, userConversations } = data || {};
 
   return (

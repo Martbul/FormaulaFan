@@ -5,21 +5,27 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useAuthContext } from "@/contexts/AuthContext2";
 import dynamic from "next/dynamic";
-import {
-  Popover,
-  PopoverTrigger,
-} from "@/components/ui/popover"
+import { Popover, PopoverTrigger } from "@/components/ui/popover";
 
 const DynamicGroupQuickOptionsPopover = dynamic(
   () => import("./GroupQuickOptionsPopover/GroupQuickOptionsPopover"),
   {
     ssr: true,
-  }
+  },
 );
 
+//! FIX LATER
+type SidebarProps = {
+  groupId?: any;
+  name?: any;
+  channels?: any;
+  members?: any;
+  setSelectedChatChannelId?: any;
+  selectedChatChannelId?: any;
+  conversationUsers?: any;
+};
 
-
-export const Sidebar = ({
+export const Sidebar: React.FC<SidebarProps> = ({
   groupId,
   name,
   channels,
@@ -44,12 +50,10 @@ export const Sidebar = ({
     router.push(`/chat/direct/${conversationId}`);
   };
 
-
   return (
     <div className="bg-neutral-900">
       <Popover>
         <PopoverTrigger>
-          
           <div className="w-full bg-zinc-950 p-2.5 border-b-2 border-black hover:bg-gray-600  cursor-pointer">
             <div className="p-1.5 text-gray-400">
               {name && <p className="select-none">{name}</p>}
@@ -60,7 +64,7 @@ export const Sidebar = ({
           </div>
         </PopoverTrigger>
 
-        <DynamicGroupQuickOptionsPopover   />
+        <DynamicGroupQuickOptionsPopover />
       </Popover>
       <div className="rigthSide">
         {channels && (

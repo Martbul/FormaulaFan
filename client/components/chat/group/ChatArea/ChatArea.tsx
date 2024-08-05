@@ -5,10 +5,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useWebsocketContext } from "@/contexts/WebsocketContext";
 import { useAuthContext } from "@/contexts/AuthContext2";
 import { getAllTextChannelMessagesByChannelId } from "@/services/channel/channel.service";
-import {
-  Popover,
-  PopoverTrigger,
-} from "@/components/ui/popover"
+import { Popover, PopoverTrigger } from "@/components/ui/popover";
 
 import dynamic from "next/dynamic";
 import { PlusCircleIcon } from "@/utils/svgIcons";
@@ -24,17 +21,17 @@ interface Message {
   };
 }
 
-
 const DynamicUserInfoPopover = dynamic(
   () => import("./UserPopover/UserPopover"),
   {
     ssr: false,
-  }
+  },
 );
 
-
-
-export const ChatArea: React.FC<{ selectedChatChannelId: string, groupId: string }> = ({ selectedChatChannelId, groupId }) => {
+export const ChatArea: React.FC<{
+  selectedChatChannelId: string;
+  groupId: string;
+}> = ({ selectedChatChannelId, groupId }) => {
   const socket = useWebsocketContext();
   const { user } = useAuthContext();
   const [messages, setMessages] = useState<Message[]>([]);
@@ -45,7 +42,7 @@ export const ChatArea: React.FC<{ selectedChatChannelId: string, groupId: string
     const fetchInitialMessages = async () => {
       try {
         const channel = await getAllTextChannelMessagesByChannelId(
-          selectedChatChannelId
+          selectedChatChannelId,
         );
         const messages = channel.messages;
         setMessages(messages);
@@ -106,8 +103,6 @@ export const ChatArea: React.FC<{ selectedChatChannelId: string, groupId: string
     return null;
   }
 
- 
-
   return (
     <div className="chat-area remove-selecting-text">
       <div className="other-groups">
@@ -158,7 +153,7 @@ export const ChatArea: React.FC<{ selectedChatChannelId: string, groupId: string
 
       <div className="chat-input-layout flex align-center">
         <div className="plus-icon flex align-center">
-          <PlusCircleIcon  className="w-7 h-7"/>
+          <PlusCircleIcon className="w-7 h-7" />
         </div>
         <Input
           value={newMessage}

@@ -19,7 +19,6 @@ import Link from "next/link";
 import { AnimatedCircleIcon, ChromeIcon, GithubIcon } from "@/utils/svgIcons";
 import { useAuthContext } from "@/contexts/AuthContext2";
 
-
 type SignUpFormData = {
   username: string;
   email: string;
@@ -35,9 +34,9 @@ const SignUp = () => {
   } = useForm<SignUpFormData>();
 
   const { mutate, isPending, isError, error } = useMutation({
-    mutationFn: async (data:SignUpFormData) => {
+    mutationFn: async (data: SignUpFormData) => {
       const { username, email, password } = data;
-      const response = await signUp(username, email, password,setUser);
+      const response = await signUp(username, email, password, setUser);
       return response;
     },
     onSuccess: () => {
@@ -45,7 +44,7 @@ const SignUp = () => {
     },
   });
 
-  const onSubmit = (data:SignUpFormData) => {
+  const onSubmit = (data: SignUpFormData) => {
     mutate(data);
   };
 
@@ -88,7 +87,9 @@ const SignUp = () => {
                   type="text"
                   placeholder="John Doe"
                   className="border border-gray-950 p-2"
-                  {...register("username", { required: "Username is required" })}
+                  {...register("username", {
+                    required: "Username is required",
+                  })}
                 />
                 {errors.username && (
                   <span className="text-red-600">

@@ -1,11 +1,8 @@
 import { ApolloError } from "@apollo/client";
 import createApolloClient from "../../apollo-client";
-import {
-QUERY_USER_PROFILE
-} from "./profile.gql";
+import { QUERY_USER_PROFILE } from "./profile.gql";
 
 const client = createApolloClient();
-
 
 export async function getUserProfile(userEmail: string) {
   try {

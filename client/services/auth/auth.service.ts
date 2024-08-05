@@ -34,20 +34,18 @@ const SIGN_UP_MUTATION = gql`
   }
 `;
 
-
 const QUERY_USER_ID = gql`
   query getUserId($userEmail: String!) {
-    user(email: $userEmail){
+    user(email: $userEmail) {
       id
     }
   }
 `;
 
-
 export async function signIn(
   email: string,
   password: string,
-  setUser:Dispatch<SetStateAction<User>>
+  setUser: Dispatch<SetStateAction<User>>,
 ) {
   try {
     const { data } = await client.mutate({
@@ -60,27 +58,27 @@ export async function signIn(
     setUser(user);
     localStorage.setItem("accessToken", accessToken);
     localStorage.setItem("refreshToken", refreshToken);
-    localStorage.setItem('user', JSON.stringify(user))
+    localStorage.setItem("user", JSON.stringify(user));
 
     return { user, accessToken, refreshToken, success: true };
   } catch (error) {
-   if (error instanceof ApolloError) {
-     console.error("GraphQL error details:", error.graphQLErrors);
-     console.error("Network error details:", error.networkError);
-     const message = error.graphQLErrors[0]?.message || "Unknown GraphQL error";
-     return { success: false, message };
-   } else {
-     console.error("Unknown error:", error);
-     return { success: false, message: "An unknown error occurred." };
-   }
+    if (error instanceof ApolloError) {
+      console.error("GraphQL error details:", error.graphQLErrors);
+      console.error("Network error details:", error.networkError);
+      const message =
+        error.graphQLErrors[0]?.message || "Unknown GraphQL error";
+      return { success: false, message };
+    } else {
+      console.error("Unknown error:", error);
+      return { success: false, message: "An unknown error occurred." };
     }
-  
+  }
 }
 export async function signUp(
   username: string,
   email: string,
   password: string,
-  setUser: Dispatch<SetStateAction<User>>
+  setUser: Dispatch<SetStateAction<User>>,
 ) {
   try {
     const { data } = await client.mutate({
@@ -95,26 +93,25 @@ export async function signUp(
     localStorage.setItem("refreshToken", refreshToken);
     localStorage.setItem("user", JSON.stringify(user));
 
-    return { user, accessToken, refreshToken, success:true };
+    return { user, accessToken, refreshToken, success: true };
   } catch (error) {
-   if (error instanceof ApolloError) {
-     console.error("GraphQL error details:", error.graphQLErrors);
-     console.error("Network error details:", error.networkError);
-     const message = error.graphQLErrors[0]?.message || "Unknown GraphQL error";
-     return { success: false, message };
-   } else {
-     console.error("Unknown error:", error);
-     return { success: false, message: "An unknown error occurred." };
-   }
+    if (error instanceof ApolloError) {
+      console.error("GraphQL error details:", error.graphQLErrors);
+      console.error("Network error details:", error.networkError);
+      const message =
+        error.graphQLErrors[0]?.message || "Unknown GraphQL error";
+      return { success: false, message };
+    } else {
+      console.error("Unknown error:", error);
+      return { success: false, message: "An unknown error occurred." };
     }
-  
+  }
 }
 
-export function logout(setUser:Dispatch<SetStateAction<User>>) {
+export function logout(setUser: Dispatch<SetStateAction<User>>) {
   localStorage.clear();
-  setUser({ username: "Guest", email: undefined, picture:"" });
+  setUser({ username: "Guest", email: undefined, picture: "" });
 }
-
 
 export async function getUserId(userEmail: string) {
   try {
@@ -137,4 +134,3 @@ export async function getUserId(userEmail: string) {
     throw error;
   }
 }
-

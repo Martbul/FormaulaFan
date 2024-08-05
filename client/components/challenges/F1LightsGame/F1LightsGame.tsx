@@ -97,7 +97,7 @@ const F1LightsGame = () => {
           ))}
         </div>
         <div style={{ marginTop: "20px", textAlign: "center" }}>
-          <h1>{timer} seconds</h1>
+          <h1 className="text-xl text-neutral-200">{timer} seconds</h1>
           {timerHasStarted ? (
             <Button
               className="outline-1 bg-neutral-950 text-neutral-200 hover:bg-zinc-800"

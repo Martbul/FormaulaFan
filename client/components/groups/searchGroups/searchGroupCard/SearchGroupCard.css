@@ -1,4 +1,3 @@
-
 .searchChatResults .resultContainer .chatView {
   flex: 1 1 300px; /* Flexbox to ensure each column has equal width */
   background-color: #181818;
@@ -36,7 +35,7 @@
   color: #fff; /* Text color */
 }
 
- .participats{
+.participats {
   margin: 0; /* Remove default margin */
   color: #000000;
 }

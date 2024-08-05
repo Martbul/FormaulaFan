@@ -23,9 +23,6 @@ const ChatSettings = ({ user }) => {
   return (
     <div className=" md:grid-cols-[180px_1fr] lg:grid-cols-[250px_1fr] items-start gap-6 max-w-6xl w-full mx-auto  ">
       <div className="grid gap-6 ">
-       
-          
-
         <Card>
           <CardHeader>
             <CardTitle>How we can use your data</CardTitle>

@@ -26,12 +26,11 @@ import { useAuthContext } from "@/contexts/AuthContext2";
 
 import images from "../../constants/images";
 
-
 const Navigation = () => {
   const { user, setUser } = useAuthContext();
   const pathname = usePathname();
 
-  const getMenuItemClass = (path:string) => {
+  const getMenuItemClass = (path: string) => {
     if (pathname.includes(path)) {
       return "font-bold text-white";
     } else {
@@ -39,10 +38,9 @@ const Navigation = () => {
     }
   };
 
-  const getMenuItemActiveImage = (path:string) => pathname.includes(path);
+  const getMenuItemActiveImage = (path: string) => pathname.includes(path);
 
   return (
-   
     <div className="flex flex-col items-center h-screen bg-zinc-950 w-60">
       <div className="flex flex-col items-center w-full">
         <div className="flex items-center py-3 mb-5 cursor-pointer">
@@ -51,7 +49,10 @@ const Navigation = () => {
           </Link>
         </div>
 
-        <Link className="flex items-center p-4 mb-5 cursor-pointer transition-colors duration-300" href="/posts">
+        <Link
+          className="flex items-center p-4 mb-5 cursor-pointer transition-colors duration-300"
+          href="/posts"
+        >
           <div className="mr-5">
             {getMenuItemActiveImage("/posts") ? (
               <HomeIconActive className="w-10 h-10" />
@@ -64,7 +65,10 @@ const Navigation = () => {
           </div>
         </Link>
 
-        <Link className="flex items-center p-3 mb-5 cursor-pointer transition-colors duration-300" href="/groups">
+        <Link
+          className="flex items-center p-3 mb-5 cursor-pointer transition-colors duration-300"
+          href="/groups"
+        >
           <div className="mr-4">
             {getMenuItemActiveImage("/groups") ? (
               <GroupsIconActive className="w-10 h-10" />
@@ -77,7 +81,10 @@ const Navigation = () => {
           </div>
         </Link>
 
-        <Link className="flex items-center p-3 mb-5 cursor-pointer transition-colors duration-300" href="/alerts">
+        <Link
+          className="flex items-center p-3 mb-5 cursor-pointer transition-colors duration-300"
+          href="/alerts"
+        >
           <div className="mr-4">
             {getMenuItemActiveImage("/alerts") ? (
               <AlertIconActive className="w-8 h-8" />
@@ -90,7 +97,10 @@ const Navigation = () => {
           </div>
         </Link>
 
-        <Link className="flex items-center p-3 mb-5 cursor-pointer " href="/chat/mygroups">
+        <Link
+          className="flex items-center p-3 mb-5 cursor-pointer "
+          href="/chat/mygroups"
+        >
           <div className="mr-4">
             {getMenuItemActiveImage("/chat/mygroups") ? (
               <ChatIconActive className="w-10 h-10" />
@@ -103,7 +113,10 @@ const Navigation = () => {
           </div>
         </Link>
 
-        <Link className="flex items-center p-3 mb-5 cursor-pointer transition-colors duration-300" href="/saves">
+        <Link
+          className="flex items-center p-3 mb-5 cursor-pointer transition-colors duration-300"
+          href="/saves"
+        >
           <div className="mr-4">
             {getMenuItemActiveImage("/saves") ? (
               <BookmarksIconActive className="w-10 h-10" />
@@ -115,9 +128,11 @@ const Navigation = () => {
             <p className="text-lg">Saves</p>
           </div>
         </Link>
-        
-        
-        <Link className="flex items-center p-3 mb-5 cursor-pointer transition-colors duration-300" href="/fanzone">
+
+        <Link
+          className="flex items-center p-3 mb-5 cursor-pointer transition-colors duration-300"
+          href="/fanzone"
+        >
           <div className="mr-4">
             {getMenuItemActiveImage("/fanzone") ? (
               <FanZoneIconActive className="w-10 h-10" />
@@ -129,7 +144,10 @@ const Navigation = () => {
             <p className="text-lg">Fan Zone</p>
           </div>
         </Link>
-        <Link className="flex items-center p-3 mb-5 cursor-pointer transition-colors duration-300" href="/challenges">
+        <Link
+          className="flex items-center p-3 mb-5 cursor-pointer transition-colors duration-300"
+          href="/challenges"
+        >
           <div className="mr-4">
             {getMenuItemActiveImage("/challenges") ? (
               <CalendarIconActive className="w-10 h-10" />
@@ -141,8 +159,6 @@ const Navigation = () => {
             <p className="text-lg">Challenges</p>
           </div>
         </Link>
-
-
       </div>
 
       {user && user.username === "Guest" && (
@@ -158,11 +174,11 @@ const Navigation = () => {
         </div>
       )}
 
-      {user && user.username !== "Guest" && <UserOptionsMenu user={user} setUser={setUser} />}
+      {user && user.username !== "Guest" && (
+        <UserOptionsMenu user={user} setUser={setUser} />
+      )}
     </div>
   );
 };
 
-
 export default Navigation;
-

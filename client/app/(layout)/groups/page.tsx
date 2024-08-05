@@ -18,7 +18,6 @@ const Groups = () => {
 
   const { mutate, isPending, isError, error } = useMutation({
     mutationFn: async () => {
-     
       const result = await createGroup(user.username, user.email);
       return result;
     },
@@ -31,16 +30,16 @@ const Groups = () => {
     mutate();
   };
 
-  
   if (isPending) {
-    return <div className="flex items-center justify-center h-screen bg-zinc-800">
-     <div className="loader"></div>
-   </div>
+    return (
+      <div className="flex items-center justify-center h-screen bg-zinc-800">
+        <div className="loader"></div>
+      </div>
+    );
   }
   if (isError) {
-   return <div>There was an error: {error.message}</div>;
- }
-
+    return <div>There was an error: {error.message}</div>;
+  }
 
   return (
     <>
@@ -53,10 +52,7 @@ const Groups = () => {
               </div>
               <div className="groupsOperations">
                 <div className="createGroup">
-                  <button
-                    className="groupBtn createBtn"
-                    onClick={onSubmit}
-                  >
+                  <button className="groupBtn createBtn" onClick={onSubmit}>
                     {" "}
                     Create
                   </button>

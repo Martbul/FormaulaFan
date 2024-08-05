@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 
 import {
@@ -16,27 +15,22 @@ const DynamicF1LightsGame = dynamic(
   () => import("@/components/challenges/F1LightsGame/F1LightsGame"),
   {
     ssr: false,
-  }
+  },
 );
 
 const DynamicCalendarComponent = dynamic(
-  () => import(
-    "@/components/challenges/calendar/Calendar"
-  ),
+  () => import("@/components/challenges/calendar/Calendar"),
   {
     ssr: false,
-  }
+  },
 );
 
 const Challenges = () => {
-
   return (
     <div className="bg-zinc-900 min-h-screen flex  items-center">
       <div className="flex flex-1 justify-center ">
-         <DynamicF1LightsGame />
+        <DynamicF1LightsGame />
       </div>
-    
-    
 
       <div className="relative">
         <div className="absolute right-0 transform translate-y-1/2">
@@ -46,7 +40,7 @@ const Challenges = () => {
                 <CalendarIconActive className="w-8 h-8" />
               </Button>
             </SheetTrigger>
-            <SheetContent >
+            <SheetContent>
               <SheetHeader className="mb-6">
                 <SheetTitle className="text-neutral-200">Schedule</SheetTitle>
                 <SheetDescription className="text-neutral-300">

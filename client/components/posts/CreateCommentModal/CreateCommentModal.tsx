@@ -1,7 +1,13 @@
 "use client";
 
 import React, { useRef, useState } from "react";
-import { DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle} from "@/components/ui/dialog";
+import {
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -15,7 +21,7 @@ import GifPicker from "gif-picker-react";
 import Image from "next/image";
 import { AddEmojiIcon, AddGifIcon, AddImageIcon } from "@/utils/svgIcons";
 
-const CreatePostModal = ({ postId,  setCommentCount}) => {
+const CreatePostModal = ({ postId, setCommentCount }) => {
   const { user } = useAuthContext();
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [textContent, setTextContent] = useState<string>("");
@@ -25,7 +31,7 @@ const CreatePostModal = ({ postId,  setCommentCount}) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleCommentTextChange = (
-    event: React.ChangeEvent<HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLTextAreaElement>,
   ) => {
     setTextContent(event.target.value);
   };
@@ -92,10 +98,9 @@ const CreatePostModal = ({ postId,  setCommentCount}) => {
         user.email as string,
         postId,
         imageContentUrl,
-        
       );
       if (!newComment) return;
-      setCommentCount(prevCount => prevCount + 1)
+      setCommentCount((prevCount) => prevCount + 1);
 
       setSelectedFiles([]);
       setTextContent("");

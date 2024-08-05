@@ -3,14 +3,14 @@ import createApolloClient from "../../apollo-client";
 import {
   START_DIRECT_CONVERATION,
   GET_CONVERSATION_USERS_DATA,
-  QUERY_ALL_USER_CONVERSATIONS
+  QUERY_ALL_USER_CONVERSATIONS,
 } from "./conversation.gql";
 
 const client = createApolloClient();
 
 export async function startDirectConversation(
   userOneEmail: string,
-  userTwoId: string
+  userTwoId: string,
 ) {
   try {
     const { data } = await client.mutate({
@@ -34,7 +34,7 @@ export async function startDirectConversation(
 
 export async function getConversationUsersByConvIdAndEmail(
   conversationId: string,
-  currUserEmail: string
+  currUserEmail: string,
 ) {
   console.log(currUserEmail);
 
@@ -59,21 +59,18 @@ export async function getConversationUsersByConvIdAndEmail(
   }
 }
 
+export async function getConversationsByUserEmail(userEmail: string) {
+  try {
+    const { data } = await client.query({
+      query: QUERY_ALL_USER_CONVERSATIONS,
+      variables: { userEmail },
+    });
 
-export async function getConversationsByUserEmail(userEmail:string){
-  try{
+    const result = data.allUserConversations;
+    console.log(result);
 
-       const { data } = await client.query({
-         query: QUERY_ALL_USER_CONVERSATIONS,
-         variables: {userEmail },
-       });
-
-       const result = data.allUserConversations;
-       console.log(result);
-
-       return result;
-
-  }catch(error){
+    return result;
+  } catch (error) {
     if (error instanceof ApolloError) {
       console.error("GraphQL error details:", error.graphQLErrors);
       console.error("Network error details:", error.networkError);

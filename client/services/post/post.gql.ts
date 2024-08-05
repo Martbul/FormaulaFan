@@ -102,21 +102,29 @@ export const SAVE_UNSAVE_POST = gql`
 //! frontend about save and unsave is ready(maybe ;D)
 
 export const Add_CCOMMENT_TO_POST = gql`
-mutation addCommentToPost( $textContent:String!,
-        $userEmail:String!,
-        $postId:String!,
-        $imageContentUrl:String){
-          addedComment(addCommnetToPostInput:{textContent:$textContent, userEmail:$userEmail,postId:$postId,imageContentUrl:$imageContentUrl}){
-            id
-          }
-        }
+  mutation addCommentToPost(
+    $textContent: String!
+    $userEmail: String!
+    $postId: String!
+    $imageContentUrl: String
+  ) {
+    addedComment(
+      addCommnetToPostInput: {
+        textContent: $textContent
+        userEmail: $userEmail
+        postId: $postId
+        imageContentUrl: $imageContentUrl
+      }
+    ) {
+      id
+    }
+  }
 `;
 
-
 export const GET_SINGLE_POST = gql`
- query getSingePost($postId: String!) {
-    singlePost(id: $postId){
-        id
+  query getSingePost($postId: String!) {
+    singlePost(id: $postId) {
+      id
       textContent
       imageContentUrl
       videoContent
@@ -153,14 +161,13 @@ export const GET_SINGLE_POST = gql`
         id
       }
     }
-    }
-`
-
+  }
+`;
 
 export const GET_USER_SAVED_POSTS = gql`
- query getUserSavedPosts($userEmail: String!) {
-    userSavedPosts(userEmail: $userEmail){
-        id
+  query getUserSavedPosts($userEmail: String!) {
+    userSavedPosts(userEmail: $userEmail) {
+      id
       textContent
       imageContentUrl
       videoContent
@@ -197,5 +204,5 @@ export const GET_USER_SAVED_POSTS = gql`
         id
       }
     }
-    }
-`
+  }
+`;

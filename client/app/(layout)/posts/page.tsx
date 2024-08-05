@@ -14,7 +14,7 @@ import "./Posts.css";
 
 import type { PostInterface } from "@/utils/interfaces";
 import { useAuthContext } from "@/contexts/AuthContext2";
-import {useUserIdUtil} from "@/utils/getUserId";
+import { useUserIdUtil } from "@/utils/getUserId";
 import { useQuery } from "@tanstack/react-query";
 
 const Posts = () => {
@@ -26,23 +26,24 @@ const Posts = () => {
 
   const { data, isLoading, isError, refetch } = useQuery({
     queryKey: ["posts", user.email],
-    queryFn: async() => {
-      const result = await useUserIdUtil(user.email);
+    queryFn: async () => {
+      const result = await useUserIdUtil(user.email as string);
       setUserId(result.id);
-      
+
       if (posts.length === 0) {
-         const paginatedPosts = await getPaginatedPosts();
-         console.log('paginatedPosts',paginatedPosts);
-         
-         setPosts((prevPosts) => [...prevPosts, ...paginatedPosts])
-         return paginatedPosts
+        const paginatedPosts = await getPaginatedPosts();
+        console.log("paginatedPosts", paginatedPosts);
+
+        setPosts((prevPosts) => [...prevPosts, ...paginatedPosts]);
+        return paginatedPosts;
       } else {
-        const  paginatedPosts = await getPaginatedPosts(posts[posts.length - 1].id);
-        setPosts((prevPosts) => [...prevPosts, ...paginatedPosts])
-        return paginatedPosts
+        const paginatedPosts = await getPaginatedPosts(
+          posts[posts.length - 1].id,
+        );
+        setPosts((prevPosts) => [...prevPosts, ...paginatedPosts]);
+        return paginatedPosts;
       }
-      
-    }
+    },
   });
 
   useEffect(() => {
@@ -59,20 +60,20 @@ const Posts = () => {
           <div className="feedContainer no-scrollbar">
             {posts?.map((post, index) => (
               <Post key={index} post={post} userId={userId} />
-            ))} 
-           {hasMore && (
-              <div ref={ref} >
+            ))}
+            {hasMore && (
+              <div ref={ref}>
                 <div className="flex items-center justify-center h-screen">
                   <div className="loader"></div>
                 </div>
               </div>
-            )} 
+            )}
           </div>
         </div>
 
         <div className="news">
           <div className="searchContainer">
-             Example of a news item 
+            Example of a news item
             <div className="newsItem">
               <div className="newsImage">
                 <Image src={images.f1RaceCalendar} alt="News" />

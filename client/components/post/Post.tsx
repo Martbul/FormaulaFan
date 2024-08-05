@@ -13,7 +13,7 @@ import {
   OptionsIcon,
   SaveIconFill,
 } from "@/utils/svgIcons";
-import { clickOnLike ,clickOnSave} from "@/services/post/post.service";
+import { clickOnLike, clickOnSave } from "@/services/post/post.service";
 import { useState } from "react";
 import dynamic from "next/dynamic";
 import { Dialog, DialogTrigger } from "../ui/dialog";
@@ -24,27 +24,27 @@ const DynamicCreateCommentModal = dynamic(
   () => import("../../components/posts/CreateCommentModal/CreateCommentModal"),
   {
     ssr: false,
-  }
+  },
 );
 
 const DynamicAuthorPostOptionsMenu = dynamic(
   () => import("./AuthorPostOptionsMenu/AuthorPostOptionsMenu"),
   {
     ssr: false,
-  }
+  },
 );
 const DynamicUserPostOptionsMenu = dynamic(
   () => import("./UserPostOptionsMenu/UserPostOptionsMenu"),
   {
     ssr: false,
-  }
+  },
 );
 
 const DynamicSharePostModal = dynamic(
   () => import("../posts/SharePostModal/SharePostModal"),
   {
     ssr: false,
-  }
+  },
 );
 
 const Post = ({ post, userId }) => {
@@ -52,17 +52,19 @@ const Post = ({ post, userId }) => {
 
   const router = useRouter();
   const [isLiked, setIsLiked] = useState<boolean>(
-    post.likedBy.some((user) => user.id === userId)
+    post.likedBy.some((user) => user.id === userId),
   );
   const [isAuthor, setIsAuthor] = useState<boolean>(
-    post.author.email === user.email
-  )
- 
+    post.author.email === user.email,
+  );
+
   const [isSaved, setIsSaved] = useState<boolean>(
-    post.savedBy.some((user) => user.id === userId)
+    post.savedBy.some((user) => user.id === userId),
   );
   const [likeCount, setLikeCount] = useState<number>(post.likedBy.length);
-  const [commentCount, setCommentCount] = useState<number>(post.comments.length);
+  const [commentCount, setCommentCount] = useState<number>(
+    post.comments.length,
+  );
   const [savesCount, setSavesCount] = useState<number>(post.savedBy.length);
 
   const handleLike = async () => {
@@ -76,7 +78,7 @@ const Post = ({ post, userId }) => {
     }
     console.log(result.data.likeDislike);
   };
- 
+
   const handleSave = async () => {
     const result = await clickOnSave(post.id, userId, isSaved);
     if (result.data.saveUnsave == "Post was saved") {
@@ -89,7 +91,6 @@ const Post = ({ post, userId }) => {
     console.log(result.data.saveUnsave);
   };
 
-  
   const handleRedirectToSinglePost = () => {
     router.push(`/posts/${post.id}`);
   };
@@ -151,25 +152,21 @@ const Post = ({ post, userId }) => {
                   <p className="text-sm">{commentCount}</p>
                 </div>
               </DialogTrigger>
-              <DynamicCreateCommentModal postId={post.id} setCommentCount={setCommentCount}   />
+              <DynamicCreateCommentModal
+                postId={post.id}
+                setCommentCount={setCommentCount}
+              />
             </Dialog>
-
 
             <Dialog>
-            <DialogTrigger asChild>
-            <div
-              className="shares flex items-center space-x-1 cursor-pointer"
-            >
-              <ShareIcon className="w-6 h-6" />
-              <p className="text-sm">{post.shares}</p>
-            </div>
-            </DialogTrigger>
-              <DynamicSharePostModal postId={post.id}/>
+              <DialogTrigger asChild>
+                <div className="shares flex items-center space-x-1 cursor-pointer">
+                  <ShareIcon className="w-6 h-6" />
+                  <p className="text-sm">{post.shares}</p>
+                </div>
+              </DialogTrigger>
+              <DynamicSharePostModal postId={post.id} />
             </Dialog>
-
-            
-
-          
 
             <div
               className="likes flex items-center space-x-1 cursor-pointer"
@@ -185,20 +182,23 @@ const Post = ({ post, userId }) => {
           </div>
         </div>
       </div>
-      {isAuthor=== true && ( <DropdownMenu>
-        <DropdownMenuTrigger className="flex-col h-full">
-          <OptionsIcon className="w-5 h-5 hover:opacity-70" />
-        </DropdownMenuTrigger>
-        <DynamicAuthorPostOptionsMenu />
-      </DropdownMenu>)}
+      {isAuthor === true && (
+        <DropdownMenu>
+          <DropdownMenuTrigger className="flex-col h-full">
+            <OptionsIcon className="w-5 h-5 hover:opacity-70" />
+          </DropdownMenuTrigger>
+          <DynamicAuthorPostOptionsMenu />
+        </DropdownMenu>
+      )}
 
-      {isAuthor===false && ( <DropdownMenu>
-        <DropdownMenuTrigger className="flex-col h-full">
-          <OptionsIcon className="w-5 h-5 hover:opacity-70" />
-        </DropdownMenuTrigger>
-        <DynamicUserPostOptionsMenu />
-      </DropdownMenu>)}
-     
+      {isAuthor === false && (
+        <DropdownMenu>
+          <DropdownMenuTrigger className="flex-col h-full">
+            <OptionsIcon className="w-5 h-5 hover:opacity-70" />
+          </DropdownMenuTrigger>
+          <DynamicUserPostOptionsMenu />
+        </DropdownMenu>
+      )}
     </div>
   );
 };

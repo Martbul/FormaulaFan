@@ -60,7 +60,6 @@ export const QUERY_ALL_GROUPS = gql`
   }
 `;
 
-
 export const QUERY_GROUPS_BY_USER_EMAIL = gql`
   query getGroupsByUserEmail($email: String!) {
     groupsUserIsMember(email: $email) {

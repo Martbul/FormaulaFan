@@ -13,15 +13,14 @@ const Group: React.FC<GroupProps> = ({ params }) => {
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["myGroup", params.groupId],
-    queryFn: () => getGroupById(params.groupId)
+    queryFn: () => getGroupById(params.groupId),
   });
-
 
   useEffect(() => {
     if (data) {
-      setSelectedChatChannelId(data.channels[0].id)
+      setSelectedChatChannelId(data.channels[0].id);
     }
-  }, [data])
+  }, [data]);
 
   if (isError) {
     return <div>Error loading data.</div>;

@@ -4,9 +4,7 @@ import { QUERY_USER_SETTINGS } from "./settings.gql";
 
 const client = createApolloClient();
 
-
 export async function getUserSettings(userEmail: string) {
-
   try {
     const { data } = await client.query({
       query: QUERY_USER_SETTINGS,
@@ -28,8 +26,7 @@ export async function getUserSettings(userEmail: string) {
   }
 }
 
-
-export async function updateUserSettings(userEmail: string, newSettings:{}) {
+export async function updateUserSettings(userEmail: string, newSettings: {}) {
   try {
     const { data } = await client.query({
       query: QUERY_USER_SETTINGS,

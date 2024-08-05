@@ -36,11 +36,8 @@
   color: #b9bbbe;
   cursor: pointer;
 }
-   
+
 .channel:hover {
   background-color: #3a3c43;
   border-radius: 5px;
 }
-
-
-

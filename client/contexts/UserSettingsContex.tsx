@@ -1,6 +1,9 @@
 "use client";
 
-import { getUserSettings, updateUserSettings } from "@/services/settings/settings.service";
+import {
+  getUserSettings,
+  updateUserSettings,
+} from "@/services/settings/settings.service";
 import React, { createContext, useContext, useEffect, useState } from "react";
 
 const UserSettingsContext = createContext({});
@@ -15,8 +18,8 @@ export function UserSettingsWrapper({
   useEffect(() => {
     const user = localStorage.getItem("user");
     console.log(user);
-    if(!user){
-      return
+    if (!user) {
+      return;
     }
 
     const getSettings = async () => {
@@ -30,7 +33,7 @@ export function UserSettingsWrapper({
     getSettings();
   }, []);
 
-  const updateSettings = async (userEmail:string, newSettings) => {
+  const updateSettings = async (userEmail: string, newSettings) => {
     try {
       const updatedSettings = await updateUserSettings(userEmail, newSettings);
       setSettings(updatedSettings);

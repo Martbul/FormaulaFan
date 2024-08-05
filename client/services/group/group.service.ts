@@ -1,21 +1,23 @@
 import { ApolloError } from "@apollo/client";
 import createApolloClient from "../../apollo-client";
-import { CREATE_GROUP_MUTATION,QUERY_GROUP_BY_ID, QUERY_ALL_GROUPS,QUERY_GROUPS_BY_USER_EMAIL, ADD_USER_TO_GROUP_MUTATION} from "./group.gql";
+import {
+  CREATE_GROUP_MUTATION,
+  QUERY_GROUP_BY_ID,
+  QUERY_ALL_GROUPS,
+  QUERY_GROUPS_BY_USER_EMAIL,
+  ADD_USER_TO_GROUP_MUTATION,
+} from "./group.gql";
 
 const client = createApolloClient();
 
-
-export async function createGroup(
- username:string,
- email:string | undefined
-) {
-   try {
+export async function createGroup(username: string, email: string | undefined) {
+  try {
     const { data } = await client.mutate({
       mutation: CREATE_GROUP_MUTATION,
       variables: { username, email },
     });
-     
-    const {id, name, imageUrl, creator, members, channels} = data.createGroup;
+
+    const { id, name, imageUrl, creator, members, channels } = data.createGroup;
 
     return { id, name, imageUrl, creator, members, channels };
   } catch (error) {
@@ -29,8 +31,6 @@ export async function createGroup(
   }
 }
 
-
-
 export async function getGroupById(id: string) {
   try {
     const { data } = await client.query({
@@ -41,10 +41,9 @@ export async function getGroupById(id: string) {
     const result = data.singleGroup;
     const group = {
       id,
-      ...result
-    }
- 
-  
+      ...result,
+    };
+
     return group;
   } catch (error) {
     if (error instanceof ApolloError) {
@@ -55,18 +54,16 @@ export async function getGroupById(id: string) {
     }
     throw error;
   }
-
 }
 
 export async function getAllGroups() {
-  try{
-    const {data} = await client.query({
-      query: QUERY_ALL_GROUPS
-    })
+  try {
+    const { data } = await client.query({
+      query: QUERY_ALL_GROUPS,
+    });
 
     const groups = data.allGroups;
-    console.log('aaaaaaaaaa',groups);
-    
+    console.log("aaaaaaaaaa", groups);
 
     return groups;
   } catch (error) {
@@ -80,26 +77,23 @@ export async function getAllGroups() {
   }
 }
 
-
 export async function getGroupByUserEmail(email: string) {
   console.log(email);
-  
-   try {
+
+  try {
     const { data } = await client.query({
       query: QUERY_GROUPS_BY_USER_EMAIL,
-   variables:{email}
+      variables: { email },
     });
 
-     const result = data.groupsUserIsMember;
-     console.log('result',result);
-     
-     const userGroups = []
-     result.members.map((member) => {
-       userGroups.push(member.group)
-     })
-   
- 
-  
+    const result = data.groupsUserIsMember;
+    console.log("result", result);
+
+    const userGroups = [];
+    result.members.map((member) => {
+      userGroups.push(member.group);
+    });
+
     return userGroups;
   } catch (error) {
     if (error instanceof ApolloError) {
@@ -112,16 +106,13 @@ export async function getGroupByUserEmail(email: string) {
   }
 }
 
-
 export async function addUserAsAMember(email: string, groupId: string) {
-
-  
-   try {
+  try {
     const { data } = await client.mutate({
       mutation: ADD_USER_TO_GROUP_MUTATION,
-      variables: {  email ,groupId},
+      variables: { email, groupId },
     });
-     
+
     const result = data.addedUserToGroup;
 
     return result;
