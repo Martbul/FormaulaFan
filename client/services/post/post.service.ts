@@ -9,6 +9,7 @@ import {
   SAVE_UNSAVE_POST,
   GET_USER_SAVED_POSTS,
   DELETE_POST,
+  EDIT_POST,
 } from "./post.gql";
 
 const client = createApolloClient();
@@ -16,7 +17,7 @@ const client = createApolloClient();
 export async function createPost(
   textContent: string,
   userEmail: string,
-  imageContentUrl?: string,
+  imageContentUrl?: any,
 ) {
   try {
     const { data } = await client.mutate({
@@ -123,7 +124,7 @@ export async function createComment(
   textContent: string,
   userEmail: string,
   postId: string,
-  imageContentUrl?: string,
+  imageContentUrl?: any,
 ) {
   try {
     const result = await client.mutate({
@@ -195,20 +196,50 @@ export async function getSinglePost(postId: string) {
   }
 }
 
-
-export async function deletePost(userEmail:string, postId: string) {
+export async function deletePost(userEmail: string, postId: string) {
   try {
-      const { data } = await client.mutate({
-        mutation: DELETE_POST,
-        variables: {
-          userEmail,
-          postId,
-        },
-      });
+    const { data } = await client.mutate({
+      mutation: DELETE_POST,
+      variables: {
+        userEmail,
+        postId,
+      },
+    });
 
-      const result = data.deletedPost;
-      console.log(result);
-      return result;
+    const result = data.deletedPost;
+    console.log(result);
+    return result;
+  } catch (error) {
+    if (error instanceof ApolloError) {
+      console.error("GraphQL error details:", error.graphQLErrors);
+      console.error("Network error details:", error.networkError);
+    } else {
+      console.error("Unknown error:", error);
+    }
+    throw error;
+  }
+}
+
+export async function editPost(
+  textContent: string,
+  userEmail: string,
+  postId: string,
+) {
+  try {
+    console.log(textContent, userEmail, postId);
+
+    const { data } = await client.mutate({
+      mutation: EDIT_POST,
+      variables: {
+        textContent,
+        userEmail,
+        postId,
+      },
+    });
+
+    const result = data.editedPost;
+    console.log(result);
+    return result;
   } catch (error) {
     if (error instanceof ApolloError) {
       console.error("GraphQL error details:", error.graphQLErrors);

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { PostsMenu } from "@/components/posts/postsMenu/PostsMenu";
 import Post from "@/components/post/Post";
@@ -16,6 +16,7 @@ import type { PostInterface } from "@/utils/interfaces";
 import { useAuthContext } from "@/contexts/AuthContext2";
 import { useUserIdUtil } from "@/utils/getUserId";
 import { useQuery } from "@tanstack/react-query";
+import { Toaster } from "@/components/ui/toaster";
 
 const Posts = () => {
   const [posts, setPosts] = useState<PostInterface[]>([]);
@@ -27,20 +28,23 @@ const Posts = () => {
   const { data, isLoading, isError, refetch } = useQuery({
     queryKey: ["posts", user.email],
     queryFn: async () => {
-      const result = await useUserIdUtil(user.email as string);
-      setUserId(result.id);
+      if (user.email) {
+        const result = await useUserIdUtil(user.email as string);
+        setUserId(result.id);
+      }
 
       if (posts.length === 0) {
         const paginatedPosts = await getPaginatedPosts();
-        console.log("paginatedPosts", paginatedPosts);
 
         setPosts((prevPosts) => [...prevPosts, ...paginatedPosts]);
+
         return paginatedPosts;
       } else {
         const paginatedPosts = await getPaginatedPosts(
           posts[posts.length - 1].id,
         );
         setPosts((prevPosts) => [...prevPosts, ...paginatedPosts]);
+
         return paginatedPosts;
       }
     },
@@ -71,7 +75,7 @@ const Posts = () => {
           </div>
         </div>
 
-        <div className="news">
+        <div className="news md:w-2/5 sm:w-1/5">
           <div className="searchContainer">
             Example of a news item
             <div className="newsItem">
@@ -106,6 +110,7 @@ const Posts = () => {
             </div>
           </div>
         </div>
+        <Toaster />
       </div>
     </>
   );

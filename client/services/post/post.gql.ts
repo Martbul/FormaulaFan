@@ -209,9 +209,25 @@ export const GET_USER_SAVED_POSTS = gql`
 
 export const DELETE_POST = gql`
   mutation DeletePost($userEmail: String!, $postId: String!) {
-    deletedPost(userEmail: $userEmail, postId: $postId){
+    deletedPost(userEmail: $userEmail, postId: $postId) {
       success
       message
+    }
+  }
+`;
+
+export const EDIT_POST = gql`
+  mutation editPost(
+    $textContent: String!
+    $userEmail: String!
+    $postId: String!
+  ) {
+    editedPost(
+      textContent: $textContent
+      userEmail: $userEmail
+      postId: $postId
+    ) {
+      success
     }
   }
 `;

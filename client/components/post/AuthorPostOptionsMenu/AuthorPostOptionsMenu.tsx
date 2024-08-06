@@ -1,24 +1,20 @@
 import {
-  DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
+  DropdownMenuContent,
+  DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 
 import {
   DeleteIcon,
   EditGroupProfileIcon,
   PinIcon,
-  NotInterestedIcon,
-  FollowIcon,
-  BlockIcon,
   AnalyticsIcon,
 } from "@/utils/svgIcons";
 import { Button } from "@/components/ui/button";
 
 import {
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogClose,
@@ -28,17 +24,21 @@ import {
 } from "@/components/ui/dialog";
 import { useAuthContext } from "@/contexts/AuthContext2";
 import { deletePost } from "@/services/post/post.service";
+import dynamic from "next/dynamic";
 
+const DynamicAuthorEditPostModal = dynamic(
+  () => import("./AuthorPostEdit/AuthorPostEdit"),
+  {
+    ssr: false,
+  },
+);
 
-const AuthorPostOptionsMenu = (post) => {
-    const { user } = useAuthContext();
+const AuthorPostOptionsMenu = ({ post }) => {
+  const { user } = useAuthContext();
 
   const handleDeletePost = async () => {
-    console.log(user.email, post.postId);
-    
-    await deletePost(user.email, post.postId);
-    
-  }
+    await deletePost(user.email, post.id);
+  };
 
   return (
     <DropdownMenuContent className="bg-zinc-800 drop-shadow-xl ">
@@ -71,12 +71,23 @@ const AuthorPostOptionsMenu = (post) => {
       </Dialog>
 
       <DropdownMenuSeparator className="bg-white" />
-      <DropdownMenuItem className="text-neutral-200 mb-1 hover:bg-neutral-700 hover:rounded-md hover:cursor-pointer">
-        <div className="flex items-center">
-          <EditGroupProfileIcon className="w-5 h-5 inline-block mr-2" />
-          Edit
-        </div>
-      </DropdownMenuItem>
+
+      <Dialog>
+        <DialogTrigger className="w-full">
+          <DropdownMenuLabel className="text-neutral-200 mb-1 hover:bg-neutral-700 hover:rounded-md hover:cursor-pointer">
+            <div className="flex items-center">
+              <EditGroupProfileIcon className="w-5 h-5 inline-block mr-2" />
+              Edit
+            </div>
+          </DropdownMenuLabel>
+        </DialogTrigger>
+
+        <DynamicAuthorEditPostModal
+          textContent={post.textContent}
+          postId={post.id}
+        />
+      </Dialog>
+
       <DropdownMenuItem className="text-neutral-200 mb-1 hover:bg-neutral-700 hover:rounded-md hover:cursor-pointer">
         <div className="flex items-center">
           <PinIcon className="w-5 h-5 inline-block mr-2" />

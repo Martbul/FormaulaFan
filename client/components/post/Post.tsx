@@ -1,3 +1,5 @@
+"use client";
+
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -14,11 +16,12 @@ import {
   SaveIconFill,
 } from "@/utils/svgIcons";
 import { clickOnLike, clickOnSave } from "@/services/post/post.service";
-import { useState } from "react";
+import { useState, useOptimistic, startTransition } from "react";
 import dynamic from "next/dynamic";
 import { Dialog, DialogTrigger } from "../ui/dialog";
 import { useRouter } from "next/navigation";
 import { useAuthContext } from "@/contexts/AuthContext2";
+import moment from "moment";
 
 const DynamicCreateCommentModal = dynamic(
   () => import("../../components/posts/CreateCommentModal/CreateCommentModal"),
@@ -67,33 +70,65 @@ const Post = ({ post, userId }) => {
   );
   const [savesCount, setSavesCount] = useState<number>(post.savedBy.length);
 
+  const [optimisticLikes, setOptimisticLikes] = useOptimistic(likeCount);
+  const [optimisticSaves, setOptimisticSaves] = useOptimistic(savesCount);
+
   const handleLike = async () => {
-    const result = await clickOnLike(post.id, userId, isLiked);
-    if (result.data.likeDislike == "Post was liked") {
-      setIsLiked(true);
-      setLikeCount(likeCount + 1);
-    } else if (result.data.likeDislike == "Post was disliked") {
-      setIsLiked(false);
-      setLikeCount(likeCount - 1);
+    
+      const newLikeCount = optimisticLikes + (isLiked ? -1 : 1);
+      setOptimisticLikes(newLikeCount);
+      setIsLiked(!isLiked);
+  
+
+    try {
+      const result = await clickOnLike(post.id, userId, isLiked);
+      if (result.data.likeDislike === "Post was liked") {
+        setIsLiked(true);
+        setLikeCount(likeCount + 1);
+      } else if (result.data.likeDislike === "Post was disliked") {
+        setIsLiked(false);
+        setLikeCount(likeCount - 1);
+      }
+      console.log(result.data.likeDislike);
+    } catch (error) {
+      startTransition(() => {
+        setOptimisticLikes(optimisticLikes);
+        setIsLiked(!isLiked);
+      });
+      console.error("Failed to update like status:", error);
     }
-    console.log(result.data.likeDislike);
   };
 
   const handleSave = async () => {
-    const result = await clickOnSave(post.id, userId, isSaved);
-    if (result.data.saveUnsave == "Post was saved") {
-      setIsSaved(true);
-      setSavesCount(savesCount + 1);
-    } else if (result.data.saveUnsave == "Post was unsaved") {
-      setIsSaved(false);
-      setSavesCount(savesCount - 1);
-    }
-    console.log(result.data.saveUnsave);
-  };
+    startTransition(() => {
+      const newSaveCount = optimisticSaves + (isSaved ? -1 : 1);
+      setOptimisticSaves(newSaveCount);
+      setIsSaved(!isSaved);
+    });
 
+    try {
+      const result = await clickOnSave(post.id, userId, isSaved);
+      if (result.data.saveUnsave === "Post was saved") {
+        setIsSaved(true);
+        setSavesCount(savesCount + 1);
+      } else if (result.data.saveUnsave === "Post was unsaved") {
+        setIsSaved(false);
+        setSavesCount(savesCount - 1);
+      }
+      console.log(result.data.saveUnsave);
+    } catch (error) {
+      startTransition(() => {
+        setOptimisticSaves(optimisticSaves);
+        setIsSaved(!isSaved);
+      });
+      console.error("Failed to update save status:", error);
+    }
+  };
   const handleRedirectToSinglePost = () => {
     router.push(`/posts/${post.id}`);
   };
+
+  const formattedTimestamp = moment(post.createdAt).fromNow();
 
   return (
     <div className="bg-[#1c1c1c] border border-[#3a3a3a] rounded-lg p-4 mb-4 text-gray-300 flex">
@@ -107,14 +142,14 @@ const Post = ({ post, userId }) => {
               width={40}
               height={40}
             />
-            <div className="postInfo ml-4 flex flex-col gap-2">
+            <div className="postInfo ml-4 flex flex-col gap-1">
               <div className="userData flex flex-col">
                 <span className="username font-bold">
                   {post.author.username}
                 </span>
               </div>
               <div className="text-sm text-gray-500">
-                <span className="timestamp">· 2h</span>
+                <span className="timestamp">{formattedTimestamp}</span>
               </div>
             </div>
           </div>
@@ -143,7 +178,7 @@ const Post = ({ post, userId }) => {
               ) : (
                 <Heart className="w-6 h-6" />
               )}
-              <p className="text-sm">{likeCount}</p>
+              <p className="text-sm">{optimisticLikes}</p>
             </div>
             <Dialog>
               <DialogTrigger asChild>
@@ -169,7 +204,7 @@ const Post = ({ post, userId }) => {
             </Dialog>
 
             <div
-              className="likes flex items-center space-x-1 cursor-pointer"
+              className="saves flex items-center space-x-1 cursor-pointer"
               onClick={handleSave}
             >
               {isSaved ? (
@@ -177,7 +212,7 @@ const Post = ({ post, userId }) => {
               ) : (
                 <SaveIcon className="w-6 h-6" />
               )}
-              <p className="text-sm">{savesCount}</p>
+              <p className="text-sm">{optimisticSaves}</p>
             </div>
           </div>
         </div>
@@ -187,7 +222,7 @@ const Post = ({ post, userId }) => {
           <DropdownMenuTrigger className="flex-col h-full hover:bg-gray-700 hover:opacity-70 hover:rounded-full">
             <OptionsIcon className="w-5 h-5 " />
           </DropdownMenuTrigger>
-          <DynamicAuthorPostOptionsMenu post={post.id} />
+          <DynamicAuthorPostOptionsMenu post={post} />
         </DropdownMenu>
       )}
 

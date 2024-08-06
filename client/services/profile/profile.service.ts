@@ -13,7 +13,6 @@ export async function getUserProfile(userEmail: string) {
 
     const result = data.userProfileData;
     console.log(result);
-    
 
     return result;
   } catch (error) {

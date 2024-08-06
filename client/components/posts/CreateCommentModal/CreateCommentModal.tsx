@@ -21,7 +21,7 @@ import GifPicker from "gif-picker-react";
 import Image from "next/image";
 import { AddEmojiIcon, AddGifIcon, AddImageIcon } from "@/utils/svgIcons";
 
-const CreatePostModal = ({ postId, setCommentCount }) => {
+const CreatePostModal = ({ postId, setCommentCount }: {postId:string, setCommentCount?:any}) => {
   const { user } = useAuthContext();
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [textContent, setTextContent] = useState<string>("");

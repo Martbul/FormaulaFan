@@ -19,7 +19,7 @@ export function AnimatedCircleIcon(props: SvgProps) {
         <stop offset="1" stopColor="#FFFFFF" stopOpacity="0"></stop>
       </radialGradient>
       <circle
-        transformOrigin="center"
+        // transformOrigin="center"
         fill="none"
         stroke="url(#a9)"
         strokeWidth="10"
@@ -42,7 +42,7 @@ export function AnimatedCircleIcon(props: SvgProps) {
         ></animateTransform>
       </circle>
       <circle
-        transformOrigin="center"
+        // transformOrigin="center"
         fill="none"
         opacity=".2"
         stroke="#FFFFFF"
@@ -987,7 +987,7 @@ export function AddEmojiIcon(props: SvgProps) {
           d="M15 11V10"
           stroke="#ebedf0"
           strokeWidth="1.5"
-          strokeWinecap="round"
+          strokeLinecap="round"
         ></path>{" "}
       </g>
     </svg>
@@ -1299,7 +1299,7 @@ export function OnlineIcon(props: SvgProps) {
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
       role="img"
-      class="iconify iconify--twemoji"
+      className="iconify iconify--twemoji"
       preserveAspectRatio="xMidYMid meet"
       fill="#000000"
     >

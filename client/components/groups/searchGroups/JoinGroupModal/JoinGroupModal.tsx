@@ -12,12 +12,12 @@ import { useState } from "react";
 import { AnimatedCircleIcon } from "@/utils/svgIcons";
 import { ToastAction } from "@/components/ui/toast";
 import { useToast } from "@/components/ui/use-toast";
-import type { User } from "@/utils/interfaces";
+// import type { User } from "@/utils/interfaces";
 import Link from "next/link";
 
 const JoinGroupModal: React.FC<{
   groupName: string;
-  user: User;
+  user: any;
   id: string;
 }> = ({ groupName, user, id }) => {
   const router = useRouter();
@@ -28,7 +28,7 @@ const JoinGroupModal: React.FC<{
   };
   const showToast = () => {
     toast({
-      variant: "bg-red-700",
+      variant: "destructive",
       title: "You must have an account to join a group",
       // description: "There was a problem with your request.",
       action: (

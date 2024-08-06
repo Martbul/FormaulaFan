@@ -37,7 +37,7 @@ const UserOptionsMenu: React.FC<{
           </div>
         </DropdownMenuTrigger>
 
-        <DynamicUserOptionsPopover setUser={setUser} />
+        <DynamicUserOptionsPopover user={user} setUser={setUser} />
       </DropdownMenu>
     </div>
   );

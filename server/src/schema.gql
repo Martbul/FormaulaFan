@@ -117,6 +117,10 @@ type DirectMessage {
   user: User!
 }
 
+type EditPostResponse {
+  success: Boolean!
+}
+
 type Group {
   channels: [Channel!]
   createdAt: DateTime!
@@ -161,6 +165,7 @@ type Mutation {
   createGroup(createGroupInput: CreateGroupInput!): CreateGroupResponse!
   createSetting(createSettingInput: CreateSettingInput!): Setting!
   deletedPost(postId: String!, userEmail: String!): DeletePostResponse!
+  editedPost(postId: String!, textContent: String!, userEmail: String!): EditPostResponse!
   likeDislike(likeDislikePostInput: LikeDislikePostInput!): String!
   newChannel(createChannelInput: CreateChannelInput!): Channel!
   newPost(createPostInput: CreatePostInput!): Post!

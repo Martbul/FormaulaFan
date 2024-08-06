@@ -17,57 +17,6 @@
     border-left: 1px solid #3a3a3a;
   }
 
-  .postContent {
-    margin-top: 10px;
-  }
-
-  .postActions {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-  }
-
-  .data {
-    display: flex;
-    justify-content: space-between;
-    width: 80%;
-  }
-
-  .data > div {
-    display: flex;
-    align-items: center;
-    margin-right: 15px;
-  }
-
-  .data img {
-    width: 18px;
-    height: 18px;
-    margin-right: 5px;
-  }
-
-  .sharings {
-    display: flex;
-    flex-direction: row;
-  }
-
-  .postShareings {
-    gap: 1.4em;
-  }
-
-  .postShareings img {
-    width: 18px;
-    height: 18px;
-  }
-
-  .action {
-    color: #a1a1a1;
-    cursor: pointer;
-  }
-
-  .action:hover {
-    color: #1da1f2;
-  }
-
   .searchContainer .newsItem {
     position: relative;
     margin-bottom: 15px;

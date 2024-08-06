@@ -214,7 +214,6 @@ export class PostService {
   }
 
   async deletePost(userEmail: string, postId: string) {
-    console.log(userEmail, postId);
 
     const user = await this.prisma.user.findUnique({
       where: { email: userEmail },
@@ -235,11 +234,10 @@ export class PostService {
     if (post.authorId !== user.id) {
       throw new NotFoundException('User is not the author of the post');
     }
-    
-      await this.prisma.comment.deleteMany({
-        where: { postId: postId },
-      });
 
+    await this.prisma.comment.deleteMany({
+      where: { postId: postId },
+    });
 
     const deletedPost = await this.prisma.post.delete({
       where: { id: postId },
@@ -250,6 +248,32 @@ export class PostService {
       return { success: true, message: 'Post was deleted successfully' };
     } else {
       return { success: false, message: 'Post was NOT deleted' };
+    }
+  }
+
+  async editPost(textContent:string, userEmail: string, postId: string) {
+console.log(textContent);
+
+    const user = await this.prisma.user.findUnique({
+      where: { email: userEmail },
+    });
+
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+
+    const updatePost = await this.prisma.post.update({
+      where: { id: postId },
+      data: {
+        textContent
+      }
+    });
+  
+    
+    if (updatePost) {
+      return { success: true};
+    } else {
+      return { success: false};
     }
   }
 }

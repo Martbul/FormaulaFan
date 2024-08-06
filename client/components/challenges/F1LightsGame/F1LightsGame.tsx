@@ -5,18 +5,24 @@ import { Button } from "@/components/ui/button";
 
 const F1LightsGame = () => {
   const [lights, setLights] = useState([false, false, false, false, false]);
-  const [greenLights, setGreenLights] = useState([false, false, false, false, false]);
+  const [greenLights, setGreenLights] = useState([
+    false,
+    false,
+    false,
+    false,
+    false,
+  ]);
   const [timer, setTimer] = useState(0);
   const [intervalId, setIntervalId] = useState(null);
   const [timerHasStarted, setTimerHasStarted] = useState(false);
 
+  //! use useRef to chack if the game is started ex:(https://react.dev/reference/react/forwardRef)
   const startTimer = () => {
-    // Clear any existing interval before starting a new one
     if (intervalId) clearInterval(intervalId);
 
     const start = Date.now();
     const id = setInterval(() => {
-      setTimer(((Date.now() - start) / 1000).toFixed(3));
+      setTimer(Number(((Date.now() - start) / 1000).toFixed(3)));
     });
 
     setIntervalId(id);
@@ -55,7 +61,7 @@ const F1LightsGame = () => {
       } else {
         clearInterval(lightInterval);
         setLights([false, false, false, false, false]);
-        startTimer(); // Start the timer after lights turn off
+        startTimer();
       }
     }, lightIntervalMilliseconds);
 
@@ -82,8 +88,8 @@ const F1LightsGame = () => {
               }}
             ></div>
           ))}
-          </div>
-           <div style={{ display: "flex", justifyContent: "center", gap: "10px" }}>
+        </div>
+        <div style={{ display: "flex", justifyContent: "center", gap: "10px" }}>
           {greenLights.map((light, index) => (
             <div
               key={index}

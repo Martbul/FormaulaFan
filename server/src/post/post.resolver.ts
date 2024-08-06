@@ -8,6 +8,7 @@ import { Comment } from './entities/comment.entity';
 import { AddCommentToPostInput } from './dto/add-comment-to-post.input';
 import { SaveUnsavePostInput } from './dto/save-unsave';
 import { DeletePostResponse } from './entities/deletedPost.entity';
+import { EditPostResponse } from './entities/editPost.entity';
 
 @Resolver(() => Post)
 export class PostResolver {
@@ -66,6 +67,17 @@ export class PostResolver {
     console.log(userEmail);
 
     return this.postService.deletePost(userEmail, postId);
+  }
+
+  @Mutation(() => EditPostResponse)
+  async editedPost(
+    @Args('textContent') textContent: string,
+    @Args('userEmail') userEmail: string,
+    @Args('postId') postId: string,
+  ) {
+    console.log(userEmail);
+
+    return this.postService.editPost(textContent, userEmail, postId);
   }
 }
 

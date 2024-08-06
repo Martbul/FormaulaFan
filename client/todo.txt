@@ -1,8 +1,7 @@
 - Opravi createGroup graphql-a, trqbva ti samo id na grupata
 - Napravi taka che findAllGroups i searchGroups da e edna funkciq i suchto funkciqta za vzimane na grupite v koit user e member(/chat/mygroups) moje da polzva sushtata funkciq s search queri negovoto id
 - implement validation for creating user, creating group and creating new channels
-- make better error handlig
-- add route guards
+- add route guards(guest cannot access profile, etc...)
 - uploding to firebase strage from the client is not secure(make it secure or upload from the server)
 - fix images of groups(also uploding to cloud )
 - add way creator of group to interact with settings
@@ -21,7 +20,6 @@
 - add funcionality to the UI you made for server options
 - use rect query(tanstack query)
 - working settings
-- delete post
 - edit post
 - update messages(group and direct)
 - delete messages(group and direct)
@@ -37,8 +35,11 @@
 - group owner and roles(based on the role users can do different things)
 - use UpStash
 - rerender after delete of a post(or show the deletion in some other way)
-PERFORMANCE:
-   - rafactor functions -> se less sapce but more complex
-   - refactor css -> use classes for more then 1 component
-   - deleted unused jsx
-   - socket io -> learn about redis and scaling
+- make functionality like (like post, save, comment, chat - instant(increment the like count and show the like then add the like in the server(optimistic behavior)))
+- use components instead of ternaries(https://www.youtube.com/watch?v=mOwZhb9bZ5s&list=PLnIeRKWXg2guy4LNaiy0sVJr5CQBwOptV&index=40)
+- edit only works for textContent(add for images, emojis, gifs, ...)
+- block guest from trying to like, comment,share, or save post
+- use memo hook
+- use startTransition hook - it makes a state change low priority
+- use errorBoundary hook
+- learnabout action

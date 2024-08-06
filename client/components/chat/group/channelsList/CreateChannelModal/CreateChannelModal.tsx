@@ -15,7 +15,9 @@ import { PadlockIcon } from "@/utils/svgIcons";
 
 import { createChannel } from "@/services/channel/channel.service";
 const CreateChannelModal = ({ groupId, setTextChannels, setVoiceChannels }) => {
-  const [selectedChannel, setSelectedChannel] = useState("TEXT");
+  const [selectedChannel, setSelectedChannel] = useState<"TEXT" | "VOICE">(
+    "TEXT",
+  );
   const [newChannelName, setNewChannelName] = useState({
     name: "",
   });

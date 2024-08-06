@@ -47,7 +47,7 @@ export default function SearchGroupCard({ id, imageUrl, groupName, members }) {
       {!isCurrentUserMemberOfClickedGroup && (
         <DynamicJoinGroupModal groupName={groupName} user={user} id={id} />
       )}
-      <Toaster className="bg-red-700" />
+      <Toaster />
     </Dialog>
   );
 }

@@ -6,7 +6,7 @@ import SearchGroupCard from "./searchGroupCard/SearchGroupCard";
 import { useQuery } from "@tanstack/react-query";
 
 export default function SearchGroups() {
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading, isError, error } = useQuery({
     queryKey: ["groups"],
     queryFn: getAllGroups,
   });

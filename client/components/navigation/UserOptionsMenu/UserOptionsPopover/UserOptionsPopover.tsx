@@ -11,8 +11,8 @@ import type { User } from "@/utils/interfaces";
 import React, { Dispatch, SetStateAction } from "react";
 
 const UserOptionsPopover: React.FC<{
-  user: User;
-  setUser: Dispatch<SetStateAction<User>>;
+  user: any;
+  setUser: any;
 }> = ({ setUser }) => {
   const router = useRouter();
 

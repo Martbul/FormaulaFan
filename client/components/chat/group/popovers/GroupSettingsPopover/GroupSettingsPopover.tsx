@@ -99,7 +99,7 @@ const GroupSettingsPopover = () => {
                   </div>
                   <div className="grid grid-cols-[150px_1fr] items-center gap-4">
                     <Label htmlFor="server-region">Server Region</Label>
-                    <Select id="server-region">
+                    <Select >
                       <SelectTrigger className="w-full">
                         <SelectValue placeholder="Select region" />
                       </SelectTrigger>

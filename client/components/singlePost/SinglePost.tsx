@@ -131,11 +131,11 @@ const SinglePost = ({ postId, userId }) => {
             </Dialog>
             <div className="shares flex items-center space-x-1 cursor-pointer">
               <ShareIcon className="w-6 h-6" />
-              <p className="text-sm">{post?.shares}</p>
+              {/* <p className="text-sm">{post?.sharedBy}</p> */}
             </div>
             <div className="saved flex items-center space-x-1 cursor-pointer">
               <SaveIcon className="w-6 h-6" />
-              <p className="text-sm">{post?.saves}</p>
+              {/* <p className="text-sm">{post?.savedBy}</p> */}
             </div>
           </div>
         </div>
@@ -187,7 +187,7 @@ const SinglePost = ({ postId, userId }) => {
           <OptionsIcon className="w-5 h-5 hover:opacity-70" />
         </DropdownMenuTrigger>
 
-        <DynamicPostOptionsMenu />
+        <DynamicPostOptionsMenu post={post} />
       </DropdownMenu>
     </div>
   );

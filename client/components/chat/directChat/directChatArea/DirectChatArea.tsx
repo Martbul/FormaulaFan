@@ -26,7 +26,7 @@ export const DirectChatArea: React.FC<DirectChatAreaProps> = ({
   currentUser,
 }) => {
   const socket = useWebsocketContext();
-  const [messages, setMessages] = useState<DirectMessage[]>([]);
+  const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState<string>("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
 

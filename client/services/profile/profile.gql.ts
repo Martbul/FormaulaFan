@@ -50,8 +50,8 @@ export const QUERY_USER_PROFILE = gql`
           picture
         }
       }
-      favorites{
-          id
+      favorites {
+        id
         textContent
         imageContentUrl
         videoContent
@@ -89,12 +89,12 @@ export const QUERY_USER_PROFILE = gql`
           picture
         }
       }
-      followedBy{
+      followedBy {
         id
         username
         email
       }
-      following{
+      following {
         id
         username
         email

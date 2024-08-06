@@ -17,14 +17,15 @@ export function UserSettingsWrapper({
 
   useEffect(() => {
     const user = localStorage.getItem("user");
-    console.log(user);
+    
     if (!user) {
       return;
     }
+    const parsedUser = JSON.parse(user);
 
     const getSettings = async () => {
       try {
-        const result = await getUserSettings(JSON.parse(user.email));
+        const result = await getUserSettings(JSON.parse(parsedUser.email));
         setSettings(result);
       } catch (error) {
         console.error("Failed to fetch settings:", error);

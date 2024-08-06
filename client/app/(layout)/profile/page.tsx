@@ -173,18 +173,17 @@
 
 // export default Profile;
 
-
-
-
-
-
-
-"use client"
+"use client";
 
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card";
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
 import { getUserPofileUtil } from "@/utils/getUserId";
 import { useAuthContext } from "@/contexts/AuthContext2";
 import { useQuery } from "@tanstack/react-query";
@@ -193,7 +192,7 @@ import Image from "next/image";
 import Post from "@/components/post/Post";
 
 export default function Profile() {
-   const { user } = useAuthContext();
+  const { user } = useAuthContext();
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["profile", user.email],
@@ -239,12 +238,13 @@ export default function Profile() {
               3.4K <span className="text-sm text-muted-foreground">Likes</span>
             </div>
             <div className="text-2xl font-bold">
-                 {data?.posts.length}{" "} <span className="text-sm text-muted-foreground">Posts</span>
+              {data?.posts.length}{" "}
+              <span className="text-sm text-muted-foreground">Posts</span>
             </div>
           </div>
           <div className="flex gap-2 mt-4">
-            <Button  className="flex-1 bg-zinc-900 hover:bg-zinc-800">
-             Follow
+            <Button className="flex-1 bg-zinc-900 hover:bg-zinc-800">
+              Follow
             </Button>
             <Button className="flex-1 bg-zinc-900 hover:bg-zinc-800">
               Send Message
@@ -267,10 +267,9 @@ export default function Profile() {
         </div>
         <ScrollArea className="flex-1">
           <div className="grid gap-6">
-             {data?.posts.map((post: PostInterface, index: number) => (
-                <Post key={index} post={post} userId={data.id} />
-              ))}
-           
+            {data?.posts.map((post: PostInterface, index: number) => (
+              <Post key={index} post={post} userId={data.id} />
+            ))}
           </div>
         </ScrollArea>
       </main>
@@ -374,5 +373,4 @@ export default function Profile() {
       </aside>
     </div>
   );
-
 }
