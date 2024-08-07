@@ -159,6 +159,23 @@ const Navigation = () => {
             <p className="text-lg">Challenges</p>
           </div>
         </Link>
+       
+       
+        <Link
+          className="flex items-center p-3 mb-5 cursor-pointer transition-colors duration-300"
+          href="/achievements"
+        >
+          <div className="mr-4">
+            {getMenuItemActiveImage("/achievements") ? (
+              <CalendarIconActive className="w-10 h-10" />
+            ) : (
+              <CalendarIcon className="w-9 h-9" />
+            )}
+          </div>
+          <div className={getMenuItemClass("/achievements")}>
+            <p className="text-lg">Achievements</p>
+          </div>
+        </Link>
       </div>
 
       {user && user.username === "Guest" && (
