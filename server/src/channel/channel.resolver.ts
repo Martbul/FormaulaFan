@@ -12,8 +12,6 @@ export class ChannelResolver {
   newChannel(
     @Args('createChannelInput') createChannelInput: CreateChannelInput,
   ) {
-    console.log(createChannelInput);
-
     return this.channelService.create(createChannelInput);
   }
 
@@ -25,9 +23,7 @@ export class ChannelResolver {
   
 
   @Query(() => Channel)
-  singleChannel(@Args('id') id: string) {
-    console.log(id);
-    
+  singleChannel(@Args('id') id: string) {    
     return this.channelService.findOne(id);
   }
 

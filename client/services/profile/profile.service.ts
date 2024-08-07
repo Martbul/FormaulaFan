@@ -12,11 +12,8 @@ export async function getUserProfile(userEmail: string) {
     });
 
     const result = data.userProfileData;
-    console.log(result);
-
     return result;
   } catch (error) {
-    console.log(error);
     if (error instanceof ApolloError) {
       console.error("GraphQL error details:", error.graphQLErrors);
       console.error("Network error details:", error.networkError);

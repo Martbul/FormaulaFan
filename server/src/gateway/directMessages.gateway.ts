@@ -80,8 +80,6 @@ export class DirectMessagesGateway
       recipientId,
     } = message;
 
-    console.log('MESSAGE', message);
-    // console.log('CLIENT', client);
 
     try {
       const createMessageDto = {
@@ -96,8 +94,6 @@ export class DirectMessagesGateway
       //! and use Redis
       const newDirectChatMessage =
         await this.directMessagesService.create(createMessageDto);
-
-      console.log('newMessage', newDirectChatMessage);
 
       // Emit the new message to all clients in the channel
       this.server

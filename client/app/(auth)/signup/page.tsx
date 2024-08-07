@@ -50,9 +50,9 @@ const SignUp = () => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 w-full h-screen">
-      <div className="flex flex-col items-center justify-center p-8 bg-white">
-        <Card className="w-full max-w-md shadow-lg">
-          <CardHeader className="space-y-1">
+      <div className="flex flex-col items-center justify-center p-8 bg-zinc-800">
+        <Card className="w-full max-w-md shadow-lg bg-zinc-900 gradborder ">
+          <CardHeader className="space-y-1 text-neutral-200">
             <CardTitle className="text-2xl">Sign Up</CardTitle>
             <CardDescription>
               Start exploring our Formula 1 world today!
@@ -75,7 +75,7 @@ const SignUp = () => {
                   <span className="w-full border-t" />
                 </div>
                 <div className="relative flex justify-center text-xs uppercase">
-                  <span className="bg-background px-2 text-muted-foreground">
+                  <span className="bg-zinc-900 px-2 text-neutral-200">
                     Or continue with email
                   </span>
                 </div>
@@ -158,7 +158,7 @@ const SignUp = () => {
             </CardFooter>
           </form>
           <div className="mb-4 text-center">
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-muted-foreground text-neutral-200">
               Already have an account?{" "}
               <Link
                 href="/signin"

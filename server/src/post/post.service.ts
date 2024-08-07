@@ -243,7 +243,6 @@ export class PostService {
       where: { id: postId },
     });
 
-    console.log(deletedPost);
     if (deletedPost) {
       return { success: true, message: 'Post was deleted successfully' };
     } else {
@@ -252,7 +251,6 @@ export class PostService {
   }
 
   async editPost(textContent:string, userEmail: string, postId: string) {
-console.log(textContent);
 
     const user = await this.prisma.user.findUnique({
       where: { email: userEmail },

@@ -13,7 +13,6 @@ export class AuthResolver {
 
   @Mutation(() => SignResponse)
   signUp(@Args('signUpInput') signUpInput: SignUpInput) {
-    console.log(signUpInput);
     
     return this.authService.signUp(signUpInput);
   }

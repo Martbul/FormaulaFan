@@ -4,6 +4,7 @@ import mclaren from "../public/assets/images/mclaren.png";
 import mercedes from "../public/assets/images/mercedes.png";
 import f1Start from "../public/assets/images/f1Start.jpg";
 import logo from "../public/assets/images/logo.png";
+import racingFans from "../public/assets/images/racingFans.png";
 import madridNews from "../public/assets/images/madridNews.jpg";
 import f1RaceCalendar from "../public/assets/images/f1RaceCalendar.jpg";
 import crashLanceStroll from "../public/assets/images/crashLanceStroll.jpg";
@@ -20,4 +21,5 @@ export default {
   f1RaceCalendar,
   crashLanceStroll,
   backgroundImage,
+  racingFans,
 };

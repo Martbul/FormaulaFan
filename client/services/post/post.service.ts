@@ -55,7 +55,6 @@ export async function getPaginatedPosts(lastPostId?: string) {
     });
 
     const posts = data.paginatedPosts;
-    console.log(posts);
     return posts;
   } catch (error) {
     if (error instanceof ApolloError) {
@@ -137,7 +136,6 @@ export async function createComment(
       },
     });
 
-    console.log(result);
     return result;
   } catch (error) {
     if (error instanceof ApolloError) {
@@ -160,7 +158,6 @@ export async function getUserSavePosts(userEmail: string) {
     });
 
     const result = data.userSavedPosts;
-    console.log(result);
     return result;
   } catch (error) {
     if (error instanceof ApolloError) {
@@ -183,7 +180,6 @@ export async function getSinglePost(postId: string) {
     });
 
     const result = data.singlePost;
-    console.log(result);
     return result;
   } catch (error) {
     if (error instanceof ApolloError) {
@@ -207,7 +203,6 @@ export async function deletePost(userEmail: string, postId: string) {
     });
 
     const result = data.deletedPost;
-    console.log(result);
     return result;
   } catch (error) {
     if (error instanceof ApolloError) {
@@ -226,7 +221,6 @@ export async function editPost(
   postId: string,
 ) {
   try {
-    console.log(textContent, userEmail, postId);
 
     const { data } = await client.mutate({
       mutation: EDIT_POST,
@@ -238,7 +232,6 @@ export async function editPost(
     });
 
     const result = data.editedPost;
-    console.log(result);
     return result;
   } catch (error) {
     if (error instanceof ApolloError) {

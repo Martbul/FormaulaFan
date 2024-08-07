@@ -9,7 +9,6 @@ export class ProfileResolver {
 
   @Query(() => Profile)
   async userProfileData(@Args('email') email: string) {
-    console.log(email);
 
      const user = await this.profileService.findOne(email);
      console.log(`Found user: ${JSON.stringify(user)}`);

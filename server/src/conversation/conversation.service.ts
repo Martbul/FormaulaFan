@@ -20,7 +20,6 @@ export class ConversationService {
       throw new BadRequestException('cannot message yourself');
     }
 
-    console.log(memberOne.id, startConversationInput.userTwoId);
 
     let existingConversation = await this.prisma.conversation.findUnique({
       where: {
@@ -50,7 +49,6 @@ export class ConversationService {
       });
     }
     if (existingConversation) {
-      console.log(existingConversation);
       console.log('Conversation already exists');
       return existingConversation;
     }
@@ -66,7 +64,6 @@ export class ConversationService {
       },
     });
 
-    console.log('createConversation', createConversation);
 
     return createConversation;
   }
@@ -146,9 +143,6 @@ export class ConversationService {
       }
     })
     
-
-
-    console.log(allConversationUsers);
     return allConversationUsers;
     
   }

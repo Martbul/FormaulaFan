@@ -44,7 +44,6 @@ export class ChannelService {
         }
       }
     })
-    console.log(channel);
     
    return channel
   }

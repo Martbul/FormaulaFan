@@ -45,8 +45,7 @@ const Groups = () => {
 
   return (
     <>
-      //! suspense does nothing here
-      <Suspense fallback={<Loader />}>
+      {/* //! suspense does nothing here */}
         <div className="layout remove-selecting-text">
           <div className="main">
             <div className="feedContainer">
@@ -56,7 +55,7 @@ const Groups = () => {
                 </div>
                 <div className="groupsOperations">
                   <div className="createGroup">
-                    <button className="groupBtn createBtn" onClick={onSubmit}>
+                    <button className="groupBtn createBtn grad gradHover" onClick={onSubmit}>
                       {" "}
                       Create
                     </button>
@@ -119,7 +118,6 @@ const Groups = () => {
             </div>
           </div>
         </div>
-      </Suspense>
     </>
   );
 };

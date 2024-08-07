@@ -55,7 +55,6 @@ export class PostResolver {
 
   @Query(() => [Post])
   userSavedPosts(@Args('userEmail') userEmail: string) {
-    console.log(userEmail);
     return this.postService.getUserSavedPosts(userEmail);
   }
 
@@ -64,7 +63,6 @@ export class PostResolver {
     @Args('userEmail') userEmail: string,
     @Args('postId') postId: string,
   ) {
-    console.log(userEmail);
 
     return this.postService.deletePost(userEmail, postId);
   }
@@ -75,7 +73,6 @@ export class PostResolver {
     @Args('userEmail') userEmail: string,
     @Args('postId') postId: string,
   ) {
-    console.log(userEmail);
 
     return this.postService.editPost(textContent, userEmail, postId);
   }

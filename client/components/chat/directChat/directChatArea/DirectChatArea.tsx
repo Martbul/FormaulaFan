@@ -35,7 +35,6 @@ export const DirectChatArea: React.FC<DirectChatAreaProps> = ({
     if (!conversationData) return;
     if (!currentUser) return;
 
-    console.log("conversationData", conversationData);
     setMessages(conversationData.directMessages);
 
     if (socket) {

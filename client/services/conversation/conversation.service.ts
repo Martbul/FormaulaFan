@@ -36,7 +36,6 @@ export async function getConversationUsersByConvIdAndEmail(
   conversationId: string,
   currUserEmail: string,
 ) {
-  console.log(currUserEmail);
 
   try {
     const { data } = await client.query({
@@ -45,7 +44,6 @@ export async function getConversationUsersByConvIdAndEmail(
     });
 
     const result = data.conversationData;
-    console.log(result);
 
     return result;
   } catch (error) {
@@ -67,7 +65,6 @@ export async function getConversationsByUserEmail(userEmail: string) {
     });
 
     const result = data.allUserConversations;
-    console.log(result);
 
     return result;
   } catch (error) {

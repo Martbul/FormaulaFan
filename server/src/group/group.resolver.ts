@@ -15,8 +15,6 @@ export class GroupResolver {
 
   @Mutation(() => CreateGroupResponse)
   createGroup(@Args('createGroupInput') createGroupInput: CreateGroupInput) {
-    console.log(createGroupInput);
-
     return this.groupService.createGroup(createGroupInput);
   }
 
@@ -31,9 +29,7 @@ export class GroupResolver {
   }
 
   @Query(() => User)
-  groupsUserIsMember(@Args('email') email: string) {
-    console.log(email);
-    
+  groupsUserIsMember(@Args('email') email: string) {    
     return this.groupService.findgroupsUserIsMember(email);
   }
 
@@ -41,8 +37,6 @@ export class GroupResolver {
   addedUserToGroup(
     @Args('addUserToGroupInput') addUserToGroupInput: AddUserToGroupInput,
   ) {
-    console.log(addUserToGroupInput);
-
     return this.groupService.addUserToGroup(addUserToGroupInput);
   }
 

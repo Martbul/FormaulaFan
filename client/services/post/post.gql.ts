@@ -132,6 +132,7 @@ export const GET_SINGLE_POST = gql`
       author {
         username
         picture
+        email
       }
       likedBy {
         id

@@ -35,7 +35,6 @@ export class AuthService {
         newUser.email,
       );
       await this.updateRefreshToken(newUser.id, refreshToken);
-      console.log("newUser",newUser);
       
       return { accessToken, refreshToken, user: newUser };
     } catch (error) {

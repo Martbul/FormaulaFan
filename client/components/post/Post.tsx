@@ -22,6 +22,7 @@ import { Dialog, DialogTrigger } from "../ui/dialog";
 import { useRouter } from "next/navigation";
 import { useAuthContext } from "@/contexts/AuthContext2";
 import moment from "moment";
+import { Toaster } from "@/components/ui/toaster";
 
 const DynamicCreateCommentModal = dynamic(
   () => import("../../components/posts/CreateCommentModal/CreateCommentModal"),
@@ -55,20 +56,20 @@ const Post = ({ post, userId }) => {
 
   const router = useRouter();
   const [isLiked, setIsLiked] = useState<boolean>(
-    post.likedBy.some((user) => user.id === userId),
+    post?.likedBy.some((user) => user.id === userId),
   );
   const [isAuthor, setIsAuthor] = useState<boolean>(
-    post.author.email === user.email,
+    post?.author.email === user.email,
   );
 
   const [isSaved, setIsSaved] = useState<boolean>(
-    post.savedBy.some((user) => user.id === userId),
+    post?.savedBy.some((user) => user.id === userId),
   );
-  const [likeCount, setLikeCount] = useState<number>(post.likedBy.length);
+  const [likeCount, setLikeCount] = useState<number>(post?.likedBy.length);
   const [commentCount, setCommentCount] = useState<number>(
-    post.comments.length,
+    post?.comments.length,
   );
-  const [savesCount, setSavesCount] = useState<number>(post.savedBy.length);
+  const [savesCount, setSavesCount] = useState<number>(post?.savedBy.length);
 
   const [optimisticLikes, setOptimisticLikes] = useOptimistic(likeCount);
   const [optimisticSaves, setOptimisticSaves] = useOptimistic(savesCount);
@@ -89,7 +90,6 @@ const Post = ({ post, userId }) => {
         setIsLiked(false);
         setLikeCount(likeCount - 1);
       }
-      console.log(result.data.likeDislike);
     } catch (error) {
       startTransition(() => {
         setOptimisticLikes(optimisticLikes);
@@ -115,7 +115,6 @@ const Post = ({ post, userId }) => {
         setIsSaved(false);
         setSavesCount(savesCount - 1);
       }
-      console.log(result.data.saveUnsave);
     } catch (error) {
       startTransition(() => {
         setOptimisticSaves(optimisticSaves);
@@ -128,7 +127,7 @@ const Post = ({ post, userId }) => {
     router.push(`/posts/${post.id}`);
   };
 
-  const formattedTimestamp = moment(post.createdAt).fromNow();
+  const formattedTimestamp = moment(post?.createdAt).fromNow();
 
   return (
     <div className="bg-[#1c1c1c] border border-[#3a3a3a] rounded-lg p-4 mb-4 text-gray-300 flex">
@@ -136,7 +135,7 @@ const Post = ({ post, userId }) => {
         <div onClick={handleRedirectToSinglePost}>
           <div className="postHeader flex items-center mb-4">
             <Image
-              src={post.author.picture}
+              src={post?.author.picture}
               alt="pic"
               className="profilePic w-12 h-12"
               width={40}
@@ -145,7 +144,7 @@ const Post = ({ post, userId }) => {
             <div className="postInfo ml-4 flex flex-col gap-1">
               <div className="userData flex flex-col">
                 <span className="username font-bold">
-                  {post.author.username}
+                  {post?.author.username}
                 </span>
               </div>
               <div className="text-sm text-gray-500">
@@ -154,10 +153,10 @@ const Post = ({ post, userId }) => {
             </div>
           </div>
           <div className="postContent mb-4 text-gray-300">
-            {post.textContent}
-            {post.imageContentUrl && (
+            {post?.textContent}
+            {post?.imageContentUrl && (
               <Image
-                src={post.imageContentUrl}
+                src={post?.imageContentUrl}
                 alt="pic"
                 className="w-36 h-36 mt-2 rounded-lg"
                 width={144}
@@ -188,7 +187,7 @@ const Post = ({ post, userId }) => {
                 </div>
               </DialogTrigger>
               <DynamicCreateCommentModal
-                postId={post.id}
+                postId={post?.id}
                 setCommentCount={setCommentCount}
               />
             </Dialog>
@@ -197,10 +196,10 @@ const Post = ({ post, userId }) => {
               <DialogTrigger asChild>
                 <div className="shares flex items-center space-x-1 cursor-pointer">
                   <ShareIcon className="w-6 h-6" />
-                  <p className="text-sm">{post.shares}</p>
+                  <p className="text-sm">{post?.shares}</p>
                 </div>
               </DialogTrigger>
-              <DynamicSharePostModal postId={post.id} />
+              <DynamicSharePostModal postId={post?.id} />
             </Dialog>
 
             <div
@@ -234,6 +233,8 @@ const Post = ({ post, userId }) => {
           <DynamicUserPostOptionsMenu post={post.id} />
         </DropdownMenu>
       )}
+              <Toaster />
+
     </div>
   );
 };

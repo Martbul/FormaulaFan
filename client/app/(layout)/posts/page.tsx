@@ -16,7 +16,6 @@ import type { PostInterface } from "@/utils/interfaces";
 import { useAuthContext } from "@/contexts/AuthContext2";
 import { useUserIdUtil } from "@/utils/getUserId";
 import { useQuery } from "@tanstack/react-query";
-import { Toaster } from "@/components/ui/toaster";
 
 const Posts = () => {
   const [posts, setPosts] = useState<PostInterface[]>([]);
@@ -110,7 +109,6 @@ const Posts = () => {
             </div>
           </div>
         </div>
-        <Toaster />
       </div>
     </>
   );

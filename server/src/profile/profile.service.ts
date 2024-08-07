@@ -63,7 +63,6 @@ export class ProfileService {
       throw new NotFoundException('User not found');
     }
 
-    console.log(userProfile);
     return userProfile;
   }
 }

@@ -72,7 +72,6 @@ export class GroupMessagesGateWay
   ) {
     const { senderUsername, senderEmail, channelId, content, groupId } =
       message;
-    console.log(message);
 
     try {
       const createMessageDto = {
@@ -87,7 +86,6 @@ export class GroupMessagesGateWay
       const newMessage =
         await this.groupMessagesService.create(createMessageDto);
 
-      console.log('newMessage', newMessage);
 
       // Emit the new message to all clients in the channel
       this.server.to(channelId).emit('message', newMessage);

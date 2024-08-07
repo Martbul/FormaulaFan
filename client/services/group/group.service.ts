@@ -63,7 +63,6 @@ export async function getAllGroups() {
     });
 
     const groups = data.allGroups;
-    console.log("aaaaaaaaaa", groups);
 
     return groups;
   } catch (error) {
@@ -78,7 +77,6 @@ export async function getAllGroups() {
 }
 
 export async function getGroupByUserEmail(email: string) {
-  console.log(email);
 
   try {
     const { data } = await client.query({
@@ -87,7 +85,6 @@ export async function getGroupByUserEmail(email: string) {
     });
 
     const result = data.groupsUserIsMember;
-    console.log("result", result);
 
     const userGroups = [];
     result.members.map((member) => {

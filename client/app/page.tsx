@@ -10,7 +10,8 @@ import {
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
 import "../background.css";
 import type { SvgProps } from "@/utils/interfaces";
-// import {PoduimLogoIcon } from "@/utils/svgIcons";
+import images from "@/constants/images";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -122,30 +123,34 @@ export default function Home() {
         <Background />
 
         <section className="relative w-full py-12 md:py-24 lg:py-32 xl:py-48 flex items-center justify-center text-center h-screen">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center gap-4 text-center">
-              <div className="space-y-2">
-                <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl">
-                  BEST PLACE FOR FORMULA 1 FANS
-                </h1>
-                <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl animate-fade-in">
-                  FormulaFans is great for sharing race thoughts, emotions and
-                  having good time with friends
-                </p>
-              </div>
-              <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                <Button className="w-full min-[400px]:w-auto animate-bounce">
-                  FormulaFans for Windows
-                </Button>
-                <Link href="/posts">
-                  <Button
-                    variant="outline"
-                    className="w-full min-[400px]:w-auto"
-                  >
-                    Open FormulaFans in your browser
+          <div className="flex flex-row items-center lg:px-10">
+            <div className="container px-4  lg:max-w-[650px] md:px-6">
+              <div className="flex flex-col items-center gap-4 text-center">
+                <div className="space-y-2">
+                  <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl">
+                    BEST PLACE FOR FORMULA 1 FANS
+                  </h1>
+                  <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl animate-fade-in">
+                    FormulaFans is great for sharing race thoughts, emotions and
+                    having good time with friends
+                  </p>
+                </div>
+                <div className="flex flex-col gap-2 min-[400px]:flex-row">
+                  <Button className="w-full min-[400px]:w-auto">
+                    FormulaFans for Windows
                   </Button>
-                </Link>
+                  <Link href="/posts">
+                    <Button
+                      className="w-full min-[400px]:w-auto grad gradHover animate-pulse	"
+                    >
+                      Open FormulaFans in your browser
+                    </Button>
+                  </Link>
+                </div>
               </div>
+            </div>
+            <div className="lg:max-w-[700px]"> 
+              <Image src={ images.racingFans} alt="landing-image"/>
             </div>
           </div>
         </section>

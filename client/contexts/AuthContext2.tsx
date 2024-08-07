@@ -17,7 +17,6 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const user = localStorage.getItem("user");
-    // console.log(user);
 
     if (user) {
       setUser(JSON.parse(user));

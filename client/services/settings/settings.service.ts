@@ -15,7 +15,6 @@ export async function getUserSettings(userEmail: string) {
 
     return result;
   } catch (error) {
-    console.log(error);
     if (error instanceof ApolloError) {
       console.error("GraphQL error details:", error.graphQLErrors);
       console.error("Network error details:", error.networkError);
@@ -37,7 +36,6 @@ export async function updateUserSettings(userEmail: string, newSettings: {}) {
 
     return result;
   } catch (error) {
-    console.log(error);
     if (error instanceof ApolloError) {
       console.error("GraphQL error details:", error.graphQLErrors);
       console.error("Network error details:", error.networkError);

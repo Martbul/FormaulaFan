@@ -30,7 +30,7 @@ export default function SearchGroupCard({ id, imageUrl, groupName, members }) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <div className="chatView" onClick={handleGroupClick}>
+        <div className="chatView gradHoverBorder" onClick={handleGroupClick}>
           <div className="media">
             <Image src={imageUrl} alt="" width={100} height={100} />
           </div>

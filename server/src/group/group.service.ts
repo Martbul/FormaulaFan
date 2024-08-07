@@ -9,7 +9,6 @@ export class GroupService {
   constructor(private prisma: PrismaService) {}
 
   async createGroup(createGroupInput: CreateGroupInput) {
-    console.log(createGroupInput);
 
     const user = await this.prisma.user.findUnique({
       where: { email: createGroupInput.email },

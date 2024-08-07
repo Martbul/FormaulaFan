@@ -44,7 +44,7 @@ const AuthorPostOptionsMenu = ({ post }) => {
     <DropdownMenuContent className="bg-zinc-800 drop-shadow-xl ">
       <Dialog>
         <DialogTrigger className="w-full">
-          <DropdownMenuLabel className="text-red-600 hover:bg-neutral-700 hover:rounded-md hover:cursor-pointer">
+          <DropdownMenuLabel className="text-red-600  hover:bg-red-700 hover:rounded-md hover:cursor-pointer hover:text-neutral-900">
             <div className="flex items-center">
               <DeleteIcon className="w-5 h-5 inline-block mr-2" />
               Delete
