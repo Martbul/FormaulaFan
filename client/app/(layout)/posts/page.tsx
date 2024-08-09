@@ -16,6 +16,7 @@ import type { PostInterface } from "@/utils/interfaces";
 import { useAuthContext } from "@/contexts/AuthContext2";
 import { useUserIdUtil } from "@/utils/getUserId";
 import { useQuery } from "@tanstack/react-query";
+import Badge from "./../../../components/achievements/Badge.";
 
 const Posts = () => {
   const [posts, setPosts] = useState<PostInterface[]>([]);
@@ -30,21 +31,21 @@ const Posts = () => {
       if (user.email) {
         const result = await useUserIdUtil(user.email as string);
         setUserId(result.id);
-      }
 
-      if (posts.length === 0) {
-        const paginatedPosts = await getPaginatedPosts();
+        if (posts.length === 0) {
+          const paginatedPosts = await getPaginatedPosts();
 
-        setPosts((prevPosts) => [...prevPosts, ...paginatedPosts]);
+          setPosts((prevPosts) => [...prevPosts, ...paginatedPosts]);
 
-        return paginatedPosts;
-      } else {
-        const paginatedPosts = await getPaginatedPosts(
-          posts[posts.length - 1].id,
-        );
-        setPosts((prevPosts) => [...prevPosts, ...paginatedPosts]);
+          return paginatedPosts;
+        } else {
+          const paginatedPosts = await getPaginatedPosts(
+            posts[posts.length - 1].id,
+          );
+          setPosts((prevPosts) => [...prevPosts, ...paginatedPosts]);
 
-        return paginatedPosts;
+          return paginatedPosts;
+        }
       }
     },
   });
@@ -58,7 +59,7 @@ const Posts = () => {
   return (
     <>
       <div className="flex h-screen">
-        <div className="flex-grow p-5 overflow-y-auto custom-scrollbar no-scrollbar">
+        <div className="custom-scrollbar no-scrollbar flex-grow overflow-y-auto p-5">
           <PostsMenu />
           <div className="feedContainer no-scrollbar">
             {posts?.map((post, index) => (
@@ -66,7 +67,7 @@ const Posts = () => {
             ))}
             {hasMore && (
               <div ref={ref}>
-                <div className="flex items-center justify-center h-screen">
+                <div className="flex h-screen items-center justify-center">
                   <div className="loader"></div>
                 </div>
               </div>
@@ -74,7 +75,7 @@ const Posts = () => {
           </div>
         </div>
 
-        <div className="news md:w-2/5 sm:w-1/5">
+        <div className="news sm:w-1/5 md:w-2/5">
           <div className="searchContainer">
             Example of a news item
             <div className="newsItem">
@@ -108,6 +109,9 @@ const Posts = () => {
               </div>
             </div>
           </div>
+        </div>
+        <div>
+          <Badge />
         </div>
       </div>
     </>

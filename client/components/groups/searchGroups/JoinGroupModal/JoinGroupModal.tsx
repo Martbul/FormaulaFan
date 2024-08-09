@@ -57,7 +57,7 @@ const JoinGroupModal: React.FC<{
 
   return (
     <DialogContent
-      className="sm:max-w-[425px] remove-selecting-text"
+      className="remove-selecting-text sm:max-w-[425px]"
       style={{ backgroundColor: "#1e1f22", border: "none" }}
     >
       <DialogHeader>
@@ -72,7 +72,7 @@ const JoinGroupModal: React.FC<{
         <Button
           type="submit"
           style={{ backgroundColor: "#43434b" }}
-          className=" bg-zinc-950 text-white hover:bg-zinc-700 border border-black"
+          className="border border-black bg-zinc-950 text-white hover:bg-zinc-700"
           onClick={handleUserJoinGroup}
         >
           {loading === false ? (

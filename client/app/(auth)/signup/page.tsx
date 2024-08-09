@@ -49,9 +49,9 @@ const SignUp = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 w-full h-screen">
-      <div className="flex flex-col items-center justify-center p-8 bg-zinc-800">
-        <Card className="w-full max-w-md shadow-lg bg-zinc-900 gradborder ">
+    <div className="grid h-screen w-full grid-cols-1 md:grid-cols-2">
+      <div className="flex flex-col items-center justify-center bg-zinc-800 p-8">
+        <Card className="gradborder w-full max-w-md bg-zinc-900 shadow-lg">
           <CardHeader className="space-y-1 text-neutral-200">
             <CardTitle className="text-2xl">Sign Up</CardTitle>
             <CardDescription>
@@ -139,14 +139,14 @@ const SignUp = () => {
               </div>
             </CardContent>
             {isError && (
-              <div className="flex justify-center text-red-600 font-bold mb-4 px-8">
+              <div className="mb-4 flex justify-center px-8 font-bold text-red-600">
                 <p>{error.message}</p>
               </div>
             )}
             <CardFooter>
               <Button
                 type="submit"
-                className="w-full bg-zinc-950 text-white hover:bg-zinc-700 border border-black"
+                className="w-full border border-black bg-zinc-950 text-white hover:bg-zinc-700"
                 disabled={isPending}
               >
                 {isPending ? (
@@ -171,7 +171,7 @@ const SignUp = () => {
           </div>
         </Card>
       </div>
-      <div className="bg-zinc-950 flex flex-col items-center justify-center p-8">
+      <div className="flex flex-col items-center justify-center bg-zinc-950 p-8">
         <div className="max-w-md space-y-4">
           <h1 className="text-4xl font-bold text-zinc-200">Formula Fan</h1>
           <p className="text-lg text-gray-300">
@@ -187,7 +187,7 @@ const SignUp = () => {
             </Button>
 
             <Link
-              className="flex p-2 rounded-md text-sm font-medium items-center bg-zinc-800 text-gray-200 hover:bg-neutral-600"
+              className="flex items-center rounded-md bg-zinc-800 p-2 text-sm font-medium text-gray-200 hover:bg-neutral-600"
               href="/signin"
             >
               Sign In Now

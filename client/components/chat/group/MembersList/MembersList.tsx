@@ -31,8 +31,8 @@ export const MembersList: React.FC<{ members: Member[] }> = ({ members }) => {
   return (
     <>
       <Dialog>
-        <div className="flex flex-col gap-[1em] w-[200px] bg-[#212121] p-2.5 remove-selecting-text">
-          <div className="flex justify-between items-center text-[#87898b] text-xs">
+        <div className="remove-selecting-text flex w-[200px] flex-col gap-[1em] bg-[#212121] p-2.5">
+          <div className="flex items-center justify-between text-xs text-[#87898b]">
             <div className="flex items-center">
               <div className="flex items-center">
                 <div
@@ -40,15 +40,15 @@ export const MembersList: React.FC<{ members: Member[] }> = ({ members }) => {
                   onClick={() => setMembersListVisible(!membersListVisible)}
                 >
                   {membersListVisible === false && (
-                    <ArrowRightIcon className="w-3 h-3" />
+                    <ArrowRightIcon className="h-3 w-3" />
                   )}
                   {membersListVisible === true && (
-                    <ArrowDownIcon className="w-3 h-3" />
+                    <ArrowDownIcon className="h-3 w-3" />
                   )}
                 </div>
               </div>
               <p
-                className="cursor-pointer ml-2"
+                className="ml-2 cursor-pointer"
                 onClick={() => setMembersListVisible(!membersListVisible)}
               >
                 MEMBERS
@@ -56,7 +56,7 @@ export const MembersList: React.FC<{ members: Member[] }> = ({ members }) => {
             </div>
             <DialogTrigger asChild>
               <div className="cursor-pointer">
-                <InviteIcon className="w-5 h-5" />
+                <InviteIcon className="h-5 w-5" />
               </div>
             </DialogTrigger>
           </div>
@@ -65,16 +65,16 @@ export const MembersList: React.FC<{ members: Member[] }> = ({ members }) => {
             <div>
               {members &&
                 members.map((member, index) => (
-                  <div key={index} className="flex items-center mb-2">
+                  <div key={index} className="mb-2 flex items-center">
                     <Image
                       src={user.picture}
                       alt="pic"
-                      className="w-10 h-10"
+                      className="h-10 w-10"
                       width={50}
                       height={50}
                     />
                     <div
-                      className="p-[5px] text-[#b9bbbe] cursor-pointer hover:bg-[#3a3c43] hover:rounded-[5px] ml-2"
+                      className="ml-2 cursor-pointer p-[5px] text-[#b9bbbe] hover:rounded-[5px] hover:bg-[#3a3c43]"
                       onClick={() => handleStartConversation(member.user.id)}
                     >
                       {member.user.username}

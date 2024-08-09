@@ -48,29 +48,47 @@ img {
 }
 
 .grad {
-  background: linear-gradient(to right, rgba(249, 212, 35, 1) 30%, rgba(255, 97, 76, 1) 70%);
-  transition: background 0.3s ease; 
+  background: linear-gradient(
+    to right,
+    rgba(249, 212, 35, 1) 30%,
+    rgba(255, 97, 76, 1) 70%
+  );
+  transition: background 0.3s ease;
 }
 
 .gradHover:hover {
-  background: linear-gradient(to right, rgba(255, 97, 76, 1) 0%, rgba(249, 212, 35, 1) 100%);
+  background: linear-gradient(
+    to right,
+    rgba(255, 97, 76, 1) 0%,
+    rgba(249, 212, 35, 1) 100%
+  );
 }
 
-  .gradborder {
-            padding: 5px;
-            border-width: 3px;
-            border-style: solid;
-             border-image: linear-gradient(to right, rgba(255, 97, 76, 1) 0%, rgba(249, 212, 35, 1) 100%) 1;
-            transition: border-image 0.3s ease;
-        }
-  .gradHoverBorder {
-            padding: 5px;
-            border-radius: 5px;
-            border-width: 2px;
-            border-style: solid;
-            border-color: transparent;
-            transition: border-image 0.3s ease;
-        }
-        .gradHoverBorder:hover {
-            border-image: linear-gradient(to right, rgba(255, 97, 76, 1) 0%, rgba(249, 212, 35, 1) 100%) 1;
-        }
+.gradborder {
+  padding: 5px;
+  border-width: 3px;
+  border-style: solid;
+  border-image: linear-gradient(
+      to right,
+      rgba(255, 97, 76, 1) 0%,
+      rgba(249, 212, 35, 1) 100%
+    )
+    1;
+  transition: border-image 0.3s ease;
+}
+.gradHoverBorder {
+  padding: 5px;
+  border-radius: 5px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: transparent;
+  transition: border-image 0.3s ease;
+}
+.gradHoverBorder:hover {
+  border-image: linear-gradient(
+      to right,
+      rgba(255, 97, 76, 1) 0%,
+      rgba(249, 212, 35, 1) 100%
+    )
+    1;
+}

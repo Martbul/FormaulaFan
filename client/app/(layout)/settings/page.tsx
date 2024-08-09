@@ -34,9 +34,9 @@ const Settings = () => {
 
   return (
     <>
-      <div className="layout flex remove-selecting-text ">
-        <div className="flex flex-col flex-1 h-screen settings bg-zinc-800 p-8 settings">
-          <div className="flex w-full min-h-[calc(100vh_-_theme(spacing.16))] flex-1 flex-col gap-4  overflow-y-auto no-scrollbar">
+      <div className="layout remove-selecting-text flex">
+        <div className="settings settings flex h-screen flex-1 flex-col bg-zinc-800 p-8">
+          <div className="no-scrollbar flex min-h-[calc(100vh_-_theme(spacing.16))] w-full flex-1 flex-col gap-4 overflow-y-auto">
             {selectedSettingMenu === "account" && (
               <DynamicAccountSettings user={user} />
             )}
@@ -50,37 +50,37 @@ const Settings = () => {
         </div>
 
         <div className="flex bg-neutral-800">
-          <div className="flex flex-col	content-center text-neutral-200">
-            <div className="font-semibold p-2 my-2">User Settings </div>
+          <div className="flex flex-col content-center text-neutral-200">
+            <div className="my-2 p-2 font-semibold">User Settings </div>
             <div
-              className=" p-2 text-[#b9bbbe] cursor-pointer hover:bg-[#3a3c43] hover:rounded-[5px] ml-2 {}"
+              className="{} ml-2 cursor-pointer p-2 text-[#b9bbbe] hover:rounded-[5px] hover:bg-[#3a3c43]"
               onClick={() => setSelectedSettingMenu("account")}
             >
               Account
             </div>
             <div
-              className=" p-2 text-[#b9bbbe] cursor-pointer hover:bg-[#3a3c43] hover:rounded-[5px] ml-2"
+              className="ml-2 cursor-pointer p-2 text-[#b9bbbe] hover:rounded-[5px] hover:bg-[#3a3c43]"
               onClick={() => setSelectedSettingMenu("privacySafety")}
             >
               Privacy & Safety
             </div>
 
-            <div className=" p-2 text-[#b9bbbe] cursor-pointer hover:bg-[#3a3c43] hover:rounded-[5px] ml-2">
+            <div className="ml-2 cursor-pointer p-2 text-[#b9bbbe] hover:rounded-[5px] hover:bg-[#3a3c43]">
               Chat
             </div>
-            <div className="p-2 text-[#b9bbbe] cursor-pointer hover:bg-[#3a3c43] hover:rounded-[5px] ml-2">
+            <div className="ml-2 cursor-pointer p-2 text-[#b9bbbe] hover:rounded-[5px] hover:bg-[#3a3c43]">
               Vice & Video
             </div>
             <div
-              className=" p-2 text-[#b9bbbe] cursor-pointer hover:bg-[#3a3c43] hover:rounded-[5px] ml-2"
+              className="ml-2 cursor-pointer p-2 text-[#b9bbbe] hover:rounded-[5px] hover:bg-[#3a3c43]"
               onClick={() => setSelectedSettingMenu("notification")}
             >
               Notifications
             </div>
-            <div className=" p-2 text-[#b9bbbe] cursor-pointer hover:bg-[#3a3c43] hover:rounded-[5px] ml-2">
+            <div className="ml-2 cursor-pointer p-2 text-[#b9bbbe] hover:rounded-[5px] hover:bg-[#3a3c43]">
               Language
             </div>
-            <div className=" p-2 text-[#b9bbbe] cursor-pointer hover:bg-[#3a3c43] hover:rounded-[5px] ml-2">
+            <div className="ml-2 cursor-pointer p-2 text-[#b9bbbe] hover:rounded-[5px] hover:bg-[#3a3c43]">
               Activity Privacy
             </div>
           </div>

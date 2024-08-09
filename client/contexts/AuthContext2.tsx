@@ -4,7 +4,7 @@ import { AuthContextType, User } from "@/services/auth/auth.interface";
 import React, { createContext, useContext, useEffect, useState } from "react";
 
 const AuthContext = createContext<AuthContextType>({
-  user: { username: "Guest", email: undefined, picture:"" },
+  user: { username: "Guest", email: undefined, picture: "" },
   setUser: () => {},
 });
 

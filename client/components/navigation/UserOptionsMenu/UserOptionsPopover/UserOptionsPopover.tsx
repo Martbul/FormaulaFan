@@ -20,7 +20,6 @@ const UserOptionsPopover: React.FC<{
     logout(setUser);
   };
 
-
   return (
     <DropdownMenuContent className="bg-zinc-900">
       <DropdownMenuLabel className="text-neutral-200">
@@ -28,17 +27,24 @@ const UserOptionsPopover: React.FC<{
       </DropdownMenuLabel>
       <DropdownMenuSeparator className="bg-neutral-200" />
 
-      <DropdownMenuItem className="text-neutral-200 hover:bg-neutral-700 hover:rounded-md hover:cursor-pointer">
+      <DropdownMenuItem className="text-neutral-200 hover:cursor-pointer hover:rounded-md hover:bg-neutral-700">
         <Link href="/profile">Profile</Link>
       </DropdownMenuItem>
+      
+      <DropdownMenuItem className="text-neutral-200 hover:cursor-pointer hover:rounded-md hover:bg-neutral-700">
+        <Link href="/profile3d">Profile3D</Link>
+      </DropdownMenuItem>
 
-      <DropdownMenuItem className="text-neutral-200 hover:bg-neutral-700 hover:rounded-md hover:cursor-pointer">
+      <DropdownMenuItem className="text-neutral-200 hover:cursor-pointer hover:rounded-md hover:bg-neutral-700">
         Team
       </DropdownMenuItem>
-      <DropdownMenuItem className="text-neutral-200 hover:bg-neutral-700 hover:rounded-md hover:cursor-pointer">
+      <DropdownMenuItem className="text-neutral-200 hover:cursor-pointer hover:rounded-md hover:bg-neutral-700">
         <Link href="/settings">Settings</Link>
       </DropdownMenuItem>
-      <DropdownMenuItem  className="text-red-600 hover:bg-red-700 hover:rounded-md hover:cursor-pointer hover:text-neutral-900" onClick={handleLogout}>
+      <DropdownMenuItem
+        className="text-red-600 hover:cursor-pointer hover:rounded-md hover:bg-red-700 hover:text-neutral-900"
+        onClick={handleLogout}
+      >
         Log Out
       </DropdownMenuItem>
     </DropdownMenuContent>

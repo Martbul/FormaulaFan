@@ -20,7 +20,7 @@ const InvitePopover = () => {
   };
 
   return (
-    <DialogContent className="sm:max-w-md bg-[#393a3f] border-none">
+    <DialogContent className="border-none bg-[#393a3f] sm:max-w-md">
       <DialogHeader>
         <DialogTitle className="text-[#ebedf0]">Invite Link</DialogTitle>
         <DialogDescription>
@@ -28,12 +28,12 @@ const InvitePopover = () => {
         </DialogDescription>
       </DialogHeader>
       <div className="flex items-center space-x-2">
-        <div className="flex-1 grid gap-2">
+        <div className="grid flex-1 gap-2">
           <Label htmlFor="link" className="sr-only">
             Link
           </Label>
           <Input
-            className="bg-[#2c2d30] border-none text-[#ebedf0] outline-none"
+            className="border-none bg-[#2c2d30] text-[#ebedf0] outline-none"
             id="link"
             defaultValue="https://ui.shadcn.com/docs/installation"
             readOnly
@@ -49,7 +49,7 @@ const InvitePopover = () => {
           <Button
             type="button"
             variant="secondary"
-            className="bg-[#2f2f2f] border-none text-[#ebedf0] outline-none"
+            className="border-none bg-[#2f2f2f] text-[#ebedf0] outline-none"
           >
             Close
           </Button>

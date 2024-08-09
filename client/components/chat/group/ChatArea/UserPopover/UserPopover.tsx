@@ -27,11 +27,11 @@ const UserPopover = ({ chatUser }) => {
   };
 
   return (
-    <PopoverContent className="max-w-[400px] rounded-2xl w-full overflow-hidden border-0 bg-zinc-900">
-      <CardHeader className="bg-[#393a3f] py-0 px-4 h-24 relative">
+    <PopoverContent className="w-full max-w-[400px] overflow-hidden rounded-2xl border-0 bg-zinc-900">
+      <CardHeader className="relative h-24 bg-[#393a3f] px-4 py-0">
         <div className="absolute translate-y-[40%]">
           <div
-            className="rounded-full w-24 h-24 bg-[#446844] text-6xl border-[6px] flex items-center justify-center hover:cursor-pointer hover:opacity-85	"
+            className="flex h-24 w-24 items-center justify-center rounded-full border-[6px] bg-[#446844] text-6xl hover:cursor-pointer hover:opacity-85"
             onClick={() => handleStartConversation(idMemberTwo)}
           >
             <Avatar className="h-full w-full">
@@ -39,20 +39,20 @@ const UserPopover = ({ chatUser }) => {
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
           </div>
-          <div className="absolute bottom-0 right-0 flex items-center justify-center rounded-full w-7 h-7 bg-muted">
-            <div className="rounded-full w-4 h-4 bg-[#00b894]" />
+          <div className="absolute bottom-0 right-0 flex h-7 w-7 items-center justify-center rounded-full bg-muted">
+            <div className="h-4 w-4 rounded-full bg-[#00b894]" />
           </div>
         </div>
       </CardHeader>
-      <CardContent className="flex flex-col gap-3 p-4 bg-muted text-muted-foreground">
+      <CardContent className="flex flex-col gap-3 bg-muted p-4 text-muted-foreground">
         <div className="flex items-center gap-2">
-          <div className="flex items-center gap-2 ml-auto text-[1.2rem] px-2 py-0.5 rounded-lg bg-[#393a3f]">
+          <div className="ml-auto flex items-center gap-2 rounded-lg bg-[#393a3f] px-2 py-0.5 text-[1.2rem]">
             <div>🤖</div>
             <div>🧠</div>
             <div>👻</div>
           </div>
         </div>
-        <div className="grid gap-4 px-4 py-3 rounded-lg bg-[#393a3f]">
+        <div className="grid gap-4 rounded-lg bg-[#393a3f] px-4 py-3">
           <div className="grid gap-0.5">
             <div className="text-xl font-bold text-foreground">
               {chatUser.username}

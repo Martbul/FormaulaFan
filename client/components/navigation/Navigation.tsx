@@ -41,39 +41,56 @@ const Navigation = () => {
   const getMenuItemActiveImage = (path: string) => pathname.includes(path);
 
   return (
-    <div className="flex flex-col items-center h-screen bg-zinc-950 w-60">
-      <div className="flex flex-col items-center w-full">
-        <div className="flex items-center py-3 mb-5 cursor-pointer">
+    <div className="flex h-screen w-60 flex-col items-center bg-zinc-950">
+      <div className="flex w-full flex-col items-center">
+        <div className="mb-5 flex cursor-pointer items-center py-3">
           <Link href="/">
-            <Image src={images.logo} alt="logo" className="w-24 h-16 mr-2" />
+            <Image src={images.logo} alt="logo" className="mr-2 h-16 w-24" />
           </Link>
         </div>
 
         <Link
-          className="flex items-center p-4 mb-5 cursor-pointer transition-colors duration-300"
+          className="mb-5 flex cursor-pointer items-center p-4 transition-colors duration-300"
           href="/posts"
         >
           <div className="mr-5">
             {getMenuItemActiveImage("/posts") ? (
-              <HomeIconActive className="w-10 h-10" />
+              <HomeIconActive className="h-10 w-10" />
             ) : (
-              <HomeIcon className="w-10 h-10" />
+              <HomeIcon className="h-10 w-10" />
             )}
           </div>
           <div className={getMenuItemClass("/posts")}>
             <p className="text-lg">Home</p>
           </div>
         </Link>
+        
+        
+        <Link
+          className="mb-5 flex cursor-pointer items-center p-4 transition-colors duration-300"
+          href="/posts3d"
+        >
+          <div className="mr-5">
+            {getMenuItemActiveImage("/posts3d") ? (
+              <HomeIconActive className="h-10 w-10" />
+            ) : (
+              <HomeIcon className="h-10 w-10" />
+            )}
+          </div>
+          <div className={getMenuItemClass("/posts3d")}>
+            <p className="text-lg">Home3D</p>
+          </div>
+        </Link>
 
         <Link
-          className="flex items-center p-3 mb-5 cursor-pointer transition-colors duration-300"
+          className="mb-5 flex cursor-pointer items-center p-3 transition-colors duration-300"
           href="/groups"
         >
           <div className="mr-4">
             {getMenuItemActiveImage("/groups") ? (
-              <GroupsIconActive className="w-10 h-10" />
+              <GroupsIconActive className="h-10 w-10" />
             ) : (
-              <GroupsIcon className="w-10 h-10" />
+              <GroupsIcon className="h-10 w-10" />
             )}
           </div>
           <div className={getMenuItemClass("/groups")}>
@@ -82,14 +99,14 @@ const Navigation = () => {
         </Link>
 
         <Link
-          className="flex items-center p-3 mb-5 cursor-pointer transition-colors duration-300"
+          className="mb-5 flex cursor-pointer items-center p-3 transition-colors duration-300"
           href="/alerts"
         >
           <div className="mr-4">
             {getMenuItemActiveImage("/alerts") ? (
-              <AlertIconActive className="w-8 h-8" />
+              <AlertIconActive className="h-8 w-8" />
             ) : (
-              <AlertIcon className="w-8 h-8" />
+              <AlertIcon className="h-8 w-8" />
             )}
           </div>
           <div className={getMenuItemClass("/alerts")}>
@@ -98,14 +115,14 @@ const Navigation = () => {
         </Link>
 
         <Link
-          className="flex items-center p-3 mb-5 cursor-pointer "
+          className="mb-5 flex cursor-pointer items-center p-3"
           href="/chat/mygroups"
         >
           <div className="mr-4">
             {getMenuItemActiveImage("/chat/mygroups") ? (
-              <ChatIconActive className="w-10 h-10" />
+              <ChatIconActive className="h-10 w-10" />
             ) : (
-              <ChatIcon className="w-10 h-10" />
+              <ChatIcon className="h-10 w-10" />
             )}
           </div>
           <div className={getMenuItemClass("/chat/mygroups")}>
@@ -114,14 +131,14 @@ const Navigation = () => {
         </Link>
 
         <Link
-          className="flex items-center p-3 mb-5 cursor-pointer transition-colors duration-300"
+          className="mb-5 flex cursor-pointer items-center p-3 transition-colors duration-300"
           href="/saves"
         >
           <div className="mr-4">
             {getMenuItemActiveImage("/saves") ? (
-              <BookmarksIconActive className="w-10 h-10" />
+              <BookmarksIconActive className="h-10 w-10" />
             ) : (
-              <BookmarksIcon className="w-10 h-10" />
+              <BookmarksIcon className="h-10 w-10" />
             )}
           </div>
           <div className={getMenuItemClass("/saves")}>
@@ -130,14 +147,14 @@ const Navigation = () => {
         </Link>
 
         <Link
-          className="flex items-center p-3 mb-5 cursor-pointer transition-colors duration-300"
+          className="mb-5 flex cursor-pointer items-center p-3 transition-colors duration-300"
           href="/fanzone"
         >
           <div className="mr-4">
             {getMenuItemActiveImage("/fanzone") ? (
-              <FanZoneIconActive className="w-10 h-10" />
+              <FanZoneIconActive className="h-10 w-10" />
             ) : (
-              <FanZoneIcon className="w-9 h-9" />
+              <FanZoneIcon className="h-9 w-9" />
             )}
           </div>
           <div className={getMenuItemClass("/fanzone")}>
@@ -145,31 +162,30 @@ const Navigation = () => {
           </div>
         </Link>
         <Link
-          className="flex items-center p-3 mb-5 cursor-pointer transition-colors duration-300"
+          className="mb-5 flex cursor-pointer items-center p-3 transition-colors duration-300"
           href="/challenges"
         >
           <div className="mr-4">
             {getMenuItemActiveImage("/challenges") ? (
-              <CalendarIconActive className="w-10 h-10" />
+              <CalendarIconActive className="h-10 w-10" />
             ) : (
-              <CalendarIcon className="w-9 h-9" />
+              <CalendarIcon className="h-9 w-9" />
             )}
           </div>
           <div className={getMenuItemClass("/challenges")}>
             <p className="text-lg">Challenges</p>
           </div>
         </Link>
-       
-       
+
         <Link
-          className="flex items-center p-3 mb-5 cursor-pointer transition-colors duration-300"
+          className="mb-5 flex cursor-pointer items-center p-3 transition-colors duration-300"
           href="/achievements"
         >
           <div className="mr-4">
             {getMenuItemActiveImage("/achievements") ? (
-              <CalendarIconActive className="w-10 h-10" />
+              <CalendarIconActive className="h-10 w-10" />
             ) : (
-              <CalendarIcon className="w-9 h-9" />
+              <CalendarIcon className="h-9 w-9" />
             )}
           </div>
           <div className={getMenuItemClass("/achievements")}>
@@ -179,12 +195,12 @@ const Navigation = () => {
       </div>
 
       {user && user.username === "Guest" && (
-        <div className="flex justify-center w-full mt-auto">
+        <div className="mt-auto flex w-full justify-center">
           <Link href="/signin">
             <div className="flex items-center p-4">
-              <GuestProfileIcon className="w-12 h-12" />
+              <GuestProfileIcon className="h-12 w-12" />
               <div className="ml-3">
-                <div className="text-gray-500 text-lg">Guest</div>
+                <div className="text-lg text-gray-500">Guest</div>
               </div>
             </div>
           </Link>

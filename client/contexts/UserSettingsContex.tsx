@@ -17,7 +17,7 @@ export function UserSettingsWrapper({
 
   useEffect(() => {
     const user = localStorage.getItem("user");
-    
+
     if (!user) {
       return;
     }

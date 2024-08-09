@@ -81,14 +81,14 @@ const CreateChannelModal = ({ groupId, setTextChannels, setVoiceChannels }) => {
       <div className="flex flex-col space-y-2">
         <div
           onClick={() => setSelectedChannel("TEXT")}
-          className={`p-4 rounded-lg`}
+          className={`rounded-lg p-4`}
           style={{
             backgroundColor: selectedChannel === "TEXT" ? "#43434b" : "#2c2d30",
           }}
         >
           <label
             htmlFor="text"
-            className="flex items-center space-x-2 text-white cursor-pointer"
+            className="flex cursor-pointer items-center space-x-2 text-white"
           >
             <input
               type="radio"
@@ -99,16 +99,16 @@ const CreateChannelModal = ({ groupId, setTextChannels, setVoiceChannels }) => {
               onChange={handleSelection}
               className="form-radio h-4 w-4 text-blue-600"
             />
-            <span className="text-lg remove-selecting-text">#</span>
+            <span className="remove-selecting-text text-lg">#</span>
             <span className="remove-selecting-text">Text</span>
           </label>
-          <p className="text-gray-400 mt-1 remove-selecting-text">
+          <p className="remove-selecting-text mt-1 text-gray-400">
             Send messages, images, GIFs, emoji, opinions, and puns
           </p>
         </div>
         <div
           onClick={() => setSelectedChannel("VOICE")}
-          className={`p-4 rounded-lg`}
+          className={`rounded-lg p-4`}
           style={{
             backgroundColor:
               selectedChannel === "VOICE" ? "#43434b" : "#2c2d30",
@@ -116,7 +116,7 @@ const CreateChannelModal = ({ groupId, setTextChannels, setVoiceChannels }) => {
         >
           <label
             htmlFor="voice"
-            className="flex items-center space-x-2 text-white cursor-pointer"
+            className="flex cursor-pointer items-center space-x-2 text-white"
           >
             <input
               type="radio"
@@ -127,10 +127,10 @@ const CreateChannelModal = ({ groupId, setTextChannels, setVoiceChannels }) => {
               onChange={handleSelection}
               className="form-radio h-4 w-4 text-blue-600"
             />
-            <span className="text-lg remove-selecting-text">🔊</span>
+            <span className="remove-selecting-text text-lg">🔊</span>
             <span className="remove-selecting-text">Voice</span>
           </label>
-          <p className="text-gray-400 mt-1 remove-selecting-text">
+          <p className="remove-selecting-text mt-1 text-gray-400">
             Hang out together with voice, video, and screen share
           </p>
         </div>
@@ -161,11 +161,11 @@ const CreateChannelModal = ({ groupId, setTextChannels, setVoiceChannels }) => {
         />
       </div>
 
-      <div className=" flex items-center">
+      <div className="flex items-center">
         <div className="">
           <div className="flex items-center gap-1">
             <div className="p-r-image remove-selecting-text">
-              <PadlockIcon className="w-4 h-4" />
+              <PadlockIcon className="h-4 w-4" />
             </div>
             <div className="p-r-title white-title-color remove-selecting-text">
               <p>Private Channel</p>

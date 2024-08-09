@@ -33,7 +33,7 @@ const SharePostModal = ({ postId }) => {
     }
   };
   return (
-    <DialogContent className="sm:max-w-[425px] remove-selecting-text bg-[#393a3f] border-none">
+    <DialogContent className="remove-selecting-text border-none bg-[#393a3f] sm:max-w-[425px]">
       <DialogHeader className="mb-4">
         <div>
           <DialogTitle className="bg-[ebedf0] text-neutral-200">
@@ -41,8 +41,8 @@ const SharePostModal = ({ postId }) => {
           </DialogTitle>
         </div>
       </DialogHeader>
-      <div className="w-full flex flex-col gap-6">
-        <div className="flex flex-row gap-1 rounded-xl w-full justify-between">
+      <div className="flex w-full flex-col gap-6">
+        <div className="flex w-full flex-row justify-between gap-1 rounded-xl">
           <FacebookShareButton url={url} title="Facebook">
             <FacebookIcon className="rounded-full" size={40} />
           </FacebookShareButton>
@@ -63,12 +63,12 @@ const SharePostModal = ({ postId }) => {
           </ViberShareButton>
         </div>
         <div className="flex items-center space-x-2">
-          <div className="flex-1 grid gap-2">
+          <div className="grid flex-1 gap-2">
             <Label htmlFor="link" className="sr-only">
               Link
             </Label>
             <Input
-              className="bg-[#2c2d30] border-none text-[#ebedf0] outline-none"
+              className="border-none bg-[#2c2d30] text-[#ebedf0] outline-none"
               id="link"
               defaultValue={url}
               readOnly

@@ -113,7 +113,7 @@ const CreateCommentModal = () => {
 
   return (
     <DialogContent
-      className="sm:max-w-[425px] remove-selecting-text"
+      className="remove-selecting-text sm:max-w-[425px]"
       style={{ backgroundColor: "#393a3f", border: "none" }}
     >
       <DialogHeader>
@@ -121,7 +121,7 @@ const CreateCommentModal = () => {
           <Image
             src={user.picture}
             alt="profilePic"
-            className="w-14 h-14"
+            className="h-14 w-14"
             width={50}
             height={50}
           />
@@ -138,7 +138,7 @@ const CreateCommentModal = () => {
             Share your thoughts...
           </Label>
           <div
-            className=" w-full bg-zinc-800 outline-none text-gray-300 "
+            className="w-full bg-zinc-800 text-gray-300 outline-none"
             style={{ height: "150px" }}
           >
             <Textarea
@@ -155,7 +155,7 @@ const CreateCommentModal = () => {
             />
 
             <div
-              className="flex gap-x-6 w-48 h-48 render-giv "
+              className="render-giv flex h-48 w-48 gap-x-6"
               onClick={() => setSelectedGifs([])}
             >
               {renderGifPreview()}
@@ -169,7 +169,7 @@ const CreateCommentModal = () => {
             <div className="icons">
               <div>
                 <button onClick={handleButtonClick}>
-                  <AddImageIcon className="w-5 h-5" />
+                  <AddImageIcon className="h-5 w-5" />
                 </button>
                 <input
                   type="file"
@@ -181,14 +181,14 @@ const CreateCommentModal = () => {
               </div>
 
               <AddGifIcon
-                className="w-6 h-6"
+                className="h-6 w-6"
                 onClick={() => {
                   setGifPickerOpen(!isGifPickerOper);
                   setEmojiPickerOpen(false);
                 }}
               />
               <AddEmojiIcon
-                className="w-8 h-8"
+                className="h-8 w-8"
                 onClick={() => {
                   setEmojiPickerOpen(!isEmojiPickerOpen);
                   setGifPickerOpen(false);

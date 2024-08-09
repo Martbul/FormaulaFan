@@ -13,7 +13,7 @@ export default function SearchGroups() {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center h-2/6">
+      <div className="flex h-2/6 items-center justify-center">
         <div className="loader"></div>
       </div>
     );

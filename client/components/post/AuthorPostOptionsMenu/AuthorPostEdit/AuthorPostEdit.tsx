@@ -26,7 +26,7 @@ const AuthorPostEdit = ({ textContent, postId }) => {
   const { user } = useAuthContext();
   const router = useRouter();
 
-   const {
+  const {
     register,
     handleSubmit,
     formState: { errors },
@@ -60,7 +60,7 @@ const AuthorPostEdit = ({ textContent, postId }) => {
   };
 
   return (
-    <DialogContent className="bg-zinc-800 outline-none border-none text-neutral-200">
+    <DialogContent className="border-none bg-zinc-800 text-neutral-200 outline-none">
       <form onSubmit={handleSubmit(onSubmit)}>
         <DialogHeader>
           <DialogTitle>Edit Post</DialogTitle>
@@ -70,8 +70,7 @@ const AuthorPostEdit = ({ textContent, postId }) => {
             <Input
               id="textContent"
               type="text"
-              className="bg-neutral-800 p-4 my-4"
-            
+              className="my-4 bg-neutral-800 p-4"
               {...register("textContent", {})}
             />
             {errors.textContent && (

@@ -10,7 +10,7 @@ const CalendarComponent = () => {
         mode="single"
         selected={date}
         onSelect={setDate}
-        className="rounded-md text-neutral-200 "
+        className="rounded-md text-neutral-200"
       />
     </div>
   );

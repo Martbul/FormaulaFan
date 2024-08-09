@@ -75,11 +75,9 @@ const Post = ({ post, userId }) => {
   const [optimisticSaves, setOptimisticSaves] = useOptimistic(savesCount);
 
   const handleLike = async () => {
-    
-      const newLikeCount = optimisticLikes + (isLiked ? -1 : 1);
-      setOptimisticLikes(newLikeCount);
-      setIsLiked(!isLiked);
-  
+    const newLikeCount = optimisticLikes + (isLiked ? -1 : 1);
+    setOptimisticLikes(newLikeCount);
+    setIsLiked(!isLiked);
 
     try {
       const result = await clickOnLike(post.id, userId, isLiked);
@@ -130,14 +128,14 @@ const Post = ({ post, userId }) => {
   const formattedTimestamp = moment(post?.createdAt).fromNow();
 
   return (
-    <div className="bg-[#1c1c1c] border border-[#3a3a3a] rounded-lg p-4 mb-4 text-gray-300 flex">
-      <div className="flex flex-col flex-1">
+    <div className="mb-4 flex rounded-lg border border-[#3a3a3a] bg-[#1c1c1c] p-4 text-gray-300">
+      <div className="flex flex-1 flex-col">
         <div onClick={handleRedirectToSinglePost}>
-          <div className="postHeader flex items-center mb-4">
+          <div className="postHeader mb-4 flex items-center">
             <Image
               src={post?.author.picture}
               alt="pic"
-              className="profilePic w-12 h-12"
+              className="profilePic h-12 w-12"
               width={40}
               height={40}
             />
@@ -158,7 +156,7 @@ const Post = ({ post, userId }) => {
               <Image
                 src={post?.imageContentUrl}
                 alt="pic"
-                className="w-36 h-36 mt-2 rounded-lg"
+                className="mt-2 h-36 w-36 rounded-lg"
                 width={144}
                 height={144}
               />
@@ -166,23 +164,23 @@ const Post = ({ post, userId }) => {
           </div>
         </div>
 
-        <div className="postActions flex justify-between items-center border-t border-gray-600 pt-2 mt-2 text-gray-400">
+        <div className="postActions mt-2 flex items-center justify-between border-t border-gray-600 pt-2 text-gray-400">
           <div className="flex items-center space-x-4">
             <div
-              className="likes flex items-center space-x-1 cursor-pointer"
+              className="likes flex cursor-pointer items-center space-x-1"
               onClick={handleLike}
             >
               {isLiked ? (
-                <HeartFilled className="w-6 h-6 text-red-500" />
+                <HeartFilled className="h-6 w-6 text-red-500" />
               ) : (
-                <Heart className="w-6 h-6" />
+                <Heart className="h-6 w-6" />
               )}
               <p className="text-sm">{optimisticLikes}</p>
             </div>
             <Dialog>
               <DialogTrigger asChild>
-                <div className="comments flex items-center space-x-1 cursor-pointer">
-                  <CommentIcon className="w-5 h-5" />
+                <div className="comments flex cursor-pointer items-center space-x-1">
+                  <CommentIcon className="h-5 w-5" />
                   <p className="text-sm">{commentCount}</p>
                 </div>
               </DialogTrigger>
@@ -194,8 +192,8 @@ const Post = ({ post, userId }) => {
 
             <Dialog>
               <DialogTrigger asChild>
-                <div className="shares flex items-center space-x-1 cursor-pointer">
-                  <ShareIcon className="w-6 h-6" />
+                <div className="shares flex cursor-pointer items-center space-x-1">
+                  <ShareIcon className="h-6 w-6" />
                   <p className="text-sm">{post?.shares}</p>
                 </div>
               </DialogTrigger>
@@ -203,13 +201,13 @@ const Post = ({ post, userId }) => {
             </Dialog>
 
             <div
-              className="saves flex items-center space-x-1 cursor-pointer"
+              className="saves flex cursor-pointer items-center space-x-1"
               onClick={handleSave}
             >
               {isSaved ? (
-                <SaveIconFill className="w-6 h-6 text-red-500" />
+                <SaveIconFill className="h-6 w-6 text-red-500" />
               ) : (
-                <SaveIcon className="w-6 h-6" />
+                <SaveIcon className="h-6 w-6" />
               )}
               <p className="text-sm">{optimisticSaves}</p>
             </div>
@@ -218,8 +216,8 @@ const Post = ({ post, userId }) => {
       </div>
       {isAuthor === true && (
         <DropdownMenu>
-          <DropdownMenuTrigger className="flex-col h-full hover:bg-gray-700 hover:opacity-70 hover:rounded-full">
-            <OptionsIcon className="w-5 h-5 " />
+          <DropdownMenuTrigger className="h-full flex-col hover:rounded-full hover:bg-gray-700 hover:opacity-70">
+            <OptionsIcon className="h-5 w-5" />
           </DropdownMenuTrigger>
           <DynamicAuthorPostOptionsMenu post={post} />
         </DropdownMenu>
@@ -227,14 +225,13 @@ const Post = ({ post, userId }) => {
 
       {isAuthor === false && (
         <DropdownMenu>
-          <DropdownMenuTrigger className="flex-col h-full hover:bg-gray-700 hover:opacity-70 hover:rounded-full">
-            <OptionsIcon className="w-5 h-5 " />
+          <DropdownMenuTrigger className="h-full flex-col hover:rounded-full hover:bg-gray-700 hover:opacity-70">
+            <OptionsIcon className="h-5 w-5" />
           </DropdownMenuTrigger>
           <DynamicUserPostOptionsMenu post={post.id} />
         </DropdownMenu>
       )}
-              <Toaster />
-
+      <Toaster />
     </div>
   );
 };

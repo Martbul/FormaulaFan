@@ -71,7 +71,7 @@ const F1LightsGame = () => {
   return (
     <div className="flex flex-col gap-20">
       <div className="flex justify-center">
-        <p className="text-6xl font-bold	text-neutral-100 font-mono">
+        <p className="font-mono text-6xl font-bold text-neutral-100">
           F1 Race Start
         </p>
       </div>
@@ -106,7 +106,7 @@ const F1LightsGame = () => {
           <h1 className="text-xl text-neutral-200">{timer} seconds</h1>
           {timerHasStarted ? (
             <Button
-              className="outline-1 bg-neutral-950 text-neutral-200 hover:bg-zinc-800"
+              className="bg-neutral-950 text-neutral-200 outline-1 hover:bg-zinc-800"
               onClick={handleStopF1Lights}
             >
               Stop{" "}

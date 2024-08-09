@@ -77,7 +77,6 @@ export async function getAllGroups() {
 }
 
 export async function getGroupByUserEmail(email: string) {
-
   try {
     const { data } = await client.query({
       query: QUERY_GROUPS_BY_USER_EMAIL,

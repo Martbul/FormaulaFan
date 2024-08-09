@@ -41,17 +41,17 @@ const AuthorPostOptionsMenu = ({ post }) => {
   };
 
   return (
-    <DropdownMenuContent className="bg-zinc-800 drop-shadow-xl ">
+    <DropdownMenuContent className="bg-zinc-800 drop-shadow-xl">
       <Dialog>
         <DialogTrigger className="w-full">
-          <DropdownMenuLabel className="text-red-600  hover:bg-red-700 hover:rounded-md hover:cursor-pointer hover:text-neutral-900">
+          <DropdownMenuLabel className="text-red-600 hover:cursor-pointer hover:rounded-md hover:bg-red-700 hover:text-neutral-900">
             <div className="flex items-center">
-              <DeleteIcon className="w-5 h-5 inline-block mr-2" />
+              <DeleteIcon className="mr-2 inline-block h-5 w-5" />
               Delete
             </div>
           </DropdownMenuLabel>
         </DialogTrigger>
-        <DialogContent className="bg-zinc-800 outline-none border-none text-neutral-200">
+        <DialogContent className="border-none bg-zinc-800 text-neutral-200 outline-none">
           <DialogHeader>
             <DialogTitle>
               Are you sure you want to delete this post?
@@ -60,7 +60,7 @@ const AuthorPostOptionsMenu = ({ post }) => {
           <DialogFooter>
             <DialogClose asChild>
               <Button
-                className="bg-red-700 text-neutral-800 hover:bg-red-900 "
+                className="bg-red-700 text-neutral-800 hover:bg-red-900"
                 onClick={handleDeletePost}
               >
                 Delete
@@ -74,9 +74,9 @@ const AuthorPostOptionsMenu = ({ post }) => {
 
       <Dialog>
         <DialogTrigger className="w-full">
-          <DropdownMenuLabel className="text-neutral-200 mb-1 hover:bg-neutral-700 hover:rounded-md hover:cursor-pointer">
+          <DropdownMenuLabel className="mb-1 text-neutral-200 hover:cursor-pointer hover:rounded-md hover:bg-neutral-700">
             <div className="flex items-center">
-              <EditGroupProfileIcon className="w-5 h-5 inline-block mr-2" />
+              <EditGroupProfileIcon className="mr-2 inline-block h-5 w-5" />
               Edit
             </div>
           </DropdownMenuLabel>
@@ -88,16 +88,16 @@ const AuthorPostOptionsMenu = ({ post }) => {
         />
       </Dialog>
 
-      <DropdownMenuItem className="text-neutral-200 mb-1 hover:bg-neutral-700 hover:rounded-md hover:cursor-pointer">
+      <DropdownMenuItem className="mb-1 text-neutral-200 hover:cursor-pointer hover:rounded-md hover:bg-neutral-700">
         <div className="flex items-center">
-          <PinIcon className="w-5 h-5 inline-block mr-2" />
+          <PinIcon className="mr-2 inline-block h-5 w-5" />
           Pin to your profile
         </div>
       </DropdownMenuItem>
 
-      <DropdownMenuItem className="text-neutral-200  hover:bg-neutral-700 hover:rounded-md hover:cursor-pointer">
+      <DropdownMenuItem className="text-neutral-200 hover:cursor-pointer hover:rounded-md hover:bg-neutral-700">
         <div className="flex items-center">
-          <AnalyticsIcon className="w-5 h-5 inline-block mr-2" />
+          <AnalyticsIcon className="mr-2 inline-block h-5 w-5" />
           Post analytics
         </div>
       </DropdownMenuItem>

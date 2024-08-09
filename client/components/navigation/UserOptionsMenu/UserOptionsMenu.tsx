@@ -20,19 +20,19 @@ const UserOptionsMenu: React.FC<{
   setUser: Dispatch<SetStateAction<User>>;
 }> = ({ user, setUser }) => {
   return (
-    <div className="flex w-full justify-center mt-auto remove-selecting-text">
+    <div className="remove-selecting-text mt-auto flex w-full justify-center">
       <DropdownMenu>
         <DropdownMenuTrigger>
           <div className="flex items-center p-4">
             <Image
               src={user.picture}
               alt="pic"
-              className="w-12 h-12"
+              className="h-12 w-12"
               width={50}
               height={50}
             />{" "}
             <div className="ml-3">
-              <div className="text-gray-500 text-lg">{user.username}</div>
+              <div className="text-lg text-gray-500">{user.username}</div>
             </div>
           </div>
         </DropdownMenuTrigger>

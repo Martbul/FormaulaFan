@@ -36,7 +36,6 @@ export async function getConversationUsersByConvIdAndEmail(
   conversationId: string,
   currUserEmail: string,
 ) {
-
   try {
     const { data } = await client.query({
       query: GET_CONVERSATION_USERS_DATA,

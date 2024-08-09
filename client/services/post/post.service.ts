@@ -221,7 +221,6 @@ export async function editPost(
   postId: string,
 ) {
   try {
-
     const { data } = await client.mutate({
       mutation: EDIT_POST,
       variables: {

@@ -27,7 +27,7 @@ export const CREATE_POST_MUTATION = gql`
 
 export const QUERY_POSTS_PAGGINATION = gql`
   query getPaginatedPosts($lastPostId: String) {
-    paginatedPosts(paginationInput: { cursor: $lastPostId, limit: 20 }) {
+    paginatedPosts(paginationInput: { cursor: $lastPostId, limit: 5 }) {
       id
       textContent
       imageContentUrl

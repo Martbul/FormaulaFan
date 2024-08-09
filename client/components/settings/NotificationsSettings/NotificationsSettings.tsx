@@ -9,8 +9,8 @@ import {
 } from "@/components/ui/card";
 const NotificationsSettings = ({ user }) => {
   return (
-    <div className=" md:grid-cols-[180px_1fr] lg:grid-cols-[250px_1fr] items-start gap-6 max-w-6xl w-full mx-auto  ">
-      <div className="grid gap-6 ">
+    <div className="mx-auto w-full max-w-6xl items-start gap-6 md:grid-cols-[180px_1fr] lg:grid-cols-[250px_1fr]">
+      <div className="grid gap-6">
         <Card>
           <CardHeader>
             <CardTitle>Notifications</CardTitle>
@@ -19,7 +19,7 @@ const NotificationsSettings = ({ user }) => {
             </CardDescription>
           </CardHeader>
           <CardContent className="grid gap-1">
-            <div className="-mx-2 flex items-start gap-4 rounded-md p-2 transition-all hover:bg-accent hover:text-accent-foreground cursor-pointer">
+            <div className="-mx-2 flex cursor-pointer items-start gap-4 rounded-md p-2 transition-all hover:bg-accent hover:text-accent-foreground">
               <BellIcon className="mt-px h-5 w-5" />
               <div className="space-y-1">
                 <p className="text-sm font-medium leading-none">Everything</p>
@@ -28,7 +28,7 @@ const NotificationsSettings = ({ user }) => {
                 </p>
               </div>
             </div>
-            <div className="-mx-2 flex items-start gap-4 rounded-md bg-accent p-2 text-accent-foreground transition-all cursor-pointer">
+            <div className="-mx-2 flex cursor-pointer items-start gap-4 rounded-md bg-accent p-2 text-accent-foreground transition-all">
               <AtSignIcon className="mt-px h-5 w-5" />
               <div className="space-y-1">
                 <p className="text-sm font-medium leading-none">Available</p>
@@ -37,7 +37,7 @@ const NotificationsSettings = ({ user }) => {
                 </p>
               </div>
             </div>
-            <div className="-mx-2 flex items-start gap-4 rounded-md p-2 transition-all hover:bg-accent hover:text-accent-foreground cursor-pointer">
+            <div className="-mx-2 flex cursor-pointer items-start gap-4 rounded-md p-2 transition-all hover:bg-accent hover:text-accent-foreground">
               <EyeOffIcon className="mt-px h-5 w-5" />
               <div className="space-y-1">
                 <p className="text-sm font-medium leading-none">Ignoring</p>
@@ -50,7 +50,7 @@ const NotificationsSettings = ({ user }) => {
         </Card>
 
         <CardFooter>
-          <Button className="bg-neutral-900 ml-auto text-neutral-200 hover:bg-neutral-950">
+          <Button className="ml-auto bg-neutral-900 text-neutral-200 hover:bg-neutral-950">
             Save Changes
           </Button>
         </CardFooter>

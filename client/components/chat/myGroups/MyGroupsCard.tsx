@@ -22,11 +22,11 @@ const MyGroupCard: React.FC<{
   return (
     <Link href={`/chat/mygroup/${groupId}`}>
       <Card
-        className="w-full max-w-md m-5 group"
+        className="group m-5 w-full max-w-md"
         style={{ backgroundColor: "#1e1f22" }}
       >
         <CardHeader className="flex items-center gap-4">
-          <GroupDefaultIcon className="w-24 h-24" />
+          <GroupDefaultIcon className="h-24 w-24" />
           <div className="space-y-1">
             <CardTitle style={{ color: "#ebedf0" }}>{groupName}</CardTitle>
             {/* <CardDescription className="flex justify-center text-muted-foreground">
@@ -37,13 +37,13 @@ const MyGroupCard: React.FC<{
         <CardContent className="grid gap-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <GroupMembersIcon className="w-4 h-4" />
+              <GroupMembersIcon className="h-4 w-4" />
               <span className="text-muted-foreground">
                 {groupMembersCount} members
               </span>
             </div>
             <div className="flex items-center gap-2">
-              <OnlineIcon className="w-4 h-4" />
+              <OnlineIcon className="h-4 w-4" />
               <span className="text-muted-foreground">4 online</span>
             </div>
           </div>

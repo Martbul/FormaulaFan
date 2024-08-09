@@ -26,7 +26,7 @@ const DynamicGroupSettingsPopover = dynamic(
 
 const GroupQuickOptionsPopover = () => {
   return (
-    <PopoverContent className="w-[180px] p-1 rounded-md bg-neutral-800  shadow-lg">
+    <PopoverContent className="w-[180px] rounded-md bg-neutral-800 p-1 shadow-lg">
       <div className="grid gap-2">
         <Dialog>
           <DialogTrigger asChild>
@@ -34,7 +34,7 @@ const GroupQuickOptionsPopover = () => {
               variant="ghost"
               className="justify-start text-zinc-300 hover:bg-stone-900 hover:text-white"
             >
-              <InviteIcon className="h-5 w-5 mr-2 " />
+              <InviteIcon className="mr-2 h-5 w-5" />
               Invite People
             </Button>
           </DialogTrigger>
@@ -47,7 +47,7 @@ const GroupQuickOptionsPopover = () => {
               variant="ghost"
               className="justify-start text-zinc-300 hover:bg-stone-900 hover:text-white"
             >
-              <GroupSettingsIcon className="h-5 w-5 mr-2" />
+              <GroupSettingsIcon className="mr-2 h-5 w-5" />
               Group Settings
             </Button>
           </DialogTrigger>
@@ -58,7 +58,7 @@ const GroupQuickOptionsPopover = () => {
           variant="ghost"
           className="justify-start text-zinc-300 hover:bg-stone-900 hover:text-white"
         >
-          <GroupAddEventIcon className="h-5 w-5 mr-2" />
+          <GroupAddEventIcon className="mr-2 h-5 w-5" />
           Create Event
         </Button>
 
@@ -66,12 +66,12 @@ const GroupQuickOptionsPopover = () => {
           variant="ghost"
           className="justify-start text-zinc-300 hover:bg-stone-900 hover:text-white"
         >
-          <EditGroupProfileIcon className="h-5 w-5 mr-2" />
+          <EditGroupProfileIcon className="mr-2 h-5 w-5" />
           Edit Group Profile
         </Button>
         <Separator className="bg-[#ebedf0]" />
         <Button variant="ghost" className="justify-start text-red-600">
-          <LeaveroupIconIcon className="h-6 w-6 mr-2" />
+          <LeaveroupIconIcon className="mr-2 h-6 w-6" />
           Leave Server
         </Button>
       </div>

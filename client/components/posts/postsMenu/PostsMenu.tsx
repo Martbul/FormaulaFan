@@ -21,7 +21,7 @@ export const PostsMenu = () => {
       <Dialog>
         <div className="create-post">
           <DialogTrigger asChild>
-            <WriteIcon className="w-8 h-8" />
+            <WriteIcon className="h-8 w-8" />
           </DialogTrigger>
         </div>
         <div className="select-feed">
@@ -34,17 +34,17 @@ export const PostsMenu = () => {
           </div>
         </div>
         <div className="search-posts">
-          <div className="flex items-center w-full max-w-md mx-auto">
+          <div className="mx-auto flex w-full max-w-md items-center">
             <div className="relative w-full">
               <Input
                 type="text"
                 placeholder="Search"
-                className="bg-[#f5f8fa] border-none rounded-full pr-10 pl-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary w-full"
+                className="w-full rounded-full border-none bg-[#f5f8fa] py-2 pl-4 pr-10 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary"
               />
               <Button
                 variant="ghost"
                 size="icon"
-                className="absolute top-1/2 right-2 -translate-y-1/2 text-muted-foreground hover:bg-muted"
+                className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:bg-muted"
               ></Button>
             </div>
           </div>

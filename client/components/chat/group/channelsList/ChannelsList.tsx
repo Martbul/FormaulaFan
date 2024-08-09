@@ -15,8 +15,12 @@ const DynamicCreateChannelModal = dynamic(
   },
 );
 
-export const ChannelsList = ({ channels, groupId, setSelectedChatChannelId, selectedChatChannelId,}) => {
-     
+export const ChannelsList = ({
+  channels,
+  groupId,
+  setSelectedChatChannelId,
+  selectedChatChannelId,
+}) => {
   const [textChannels, setTextChannels] = useState([]);
   const [voiceChannels, setVoiceChannels] = useState([]);
 
@@ -40,7 +44,7 @@ export const ChannelsList = ({ channels, groupId, setSelectedChatChannelId, sele
     <Dialog>
       <div className="wrapper select-none">
         <div className="w-full bg-[#212121] p-2.5">
-          <div className="flex p-1.5 text-[#87898b] cursor-pointer text-xs items-center">
+          <div className="flex cursor-pointer items-center p-1.5 text-xs text-[#87898b]">
             <div className="flex flex-1">
               <div className="flex items-center">
                 <div
@@ -48,7 +52,7 @@ export const ChannelsList = ({ channels, groupId, setSelectedChatChannelId, sele
                   onClick={() => setTextChannelsVisible(!textChannelsVisible)}
                 >
                   {textChannelsVisible === false && (
-                    <ArrowRightIcon className="w-3 h-3" />
+                    <ArrowRightIcon className="h-3 w-3" />
                   )}
                 </div>
                 <div
@@ -56,7 +60,7 @@ export const ChannelsList = ({ channels, groupId, setSelectedChatChannelId, sele
                   onClick={() => setTextChannelsVisible(!textChannelsVisible)}
                 >
                   {textChannelsVisible === true && (
-                    <ArrowDownIcon className="w-3 h-3" />
+                    <ArrowDownIcon className="h-3 w-3" />
                   )}
                 </div>
               </div>
@@ -69,7 +73,7 @@ export const ChannelsList = ({ channels, groupId, setSelectedChatChannelId, sele
             </div>
             <DialogTrigger>
               <div className="channel-header-rightSide">
-                <PlusIcon className="w-5 h-5" />
+                <PlusIcon className="h-5 w-5" />
               </div>
             </DialogTrigger>
           </div>
@@ -77,16 +81,16 @@ export const ChannelsList = ({ channels, groupId, setSelectedChatChannelId, sele
             <>
               {textChannels.map((channel, index) => (
                 <div
-                  className={`flex justify-between p-1.5 text-[#b9bbbe] cursor-pointer hover:bg-[#3a3c43] hover:rounded-md ${
+                  className={`flex cursor-pointer justify-between p-1.5 text-[#b9bbbe] hover:rounded-md hover:bg-[#3a3c43] ${
                     channel.id === selectedChatChannelId
-                      ? "bg-[#3a3c43] rounded-md"
+                      ? "rounded-md bg-[#3a3c43]"
                       : ""
                   }`}
                   key={index}
                   onClick={() => setSelectedChatChannelId(channel.id)}
                 >
                   <p>{channel.name}</p>
-                  {channel.isPrivate && <PadlockIcon className="w-5 h-5" />}
+                  {channel.isPrivate && <PadlockIcon className="h-5 w-5" />}
                 </div>
               ))}
             </>
@@ -94,7 +98,7 @@ export const ChannelsList = ({ channels, groupId, setSelectedChatChannelId, sele
         </div>
 
         <div className="w-full bg-[#212121] p-2.5">
-          <div className="flex p-1.5 text-[#87898b] cursor-pointer text-xs items-center">
+          <div className="flex cursor-pointer items-center p-1.5 text-xs text-[#87898b]">
             <div className="flex flex-1">
               <div className="flex items-center">
                 <div
@@ -102,7 +106,7 @@ export const ChannelsList = ({ channels, groupId, setSelectedChatChannelId, sele
                   onClick={() => setVoiceChannelsVisible(!voiceChannelsVisible)}
                 >
                   {voiceChannelsVisible === false && (
-                    <ArrowRightIcon className="w-3 h-3" />
+                    <ArrowRightIcon className="h-3 w-3" />
                   )}
                 </div>
                 <div
@@ -110,7 +114,7 @@ export const ChannelsList = ({ channels, groupId, setSelectedChatChannelId, sele
                   onClick={() => setVoiceChannelsVisible(!voiceChannelsVisible)}
                 >
                   {voiceChannelsVisible === true && (
-                    <ArrowDownIcon className="w-3 h-3" />
+                    <ArrowDownIcon className="h-3 w-3" />
                   )}
                 </div>
               </div>
@@ -123,7 +127,7 @@ export const ChannelsList = ({ channels, groupId, setSelectedChatChannelId, sele
             </div>
             <DialogTrigger>
               <div className="channel-header-rightSide">
-                <PlusIcon className="w-5 h-5" />
+                <PlusIcon className="h-5 w-5" />
               </div>
             </DialogTrigger>
           </div>
@@ -132,11 +136,11 @@ export const ChannelsList = ({ channels, groupId, setSelectedChatChannelId, sele
             <>
               {voiceChannels.map((channel, index) => (
                 <div
-                  className="flex justify-between p-1.5 text-[#b9bbbe] cursor-pointer hover:bg-[#3a3c43] hover:rounded-md"
+                  className="flex cursor-pointer justify-between p-1.5 text-[#b9bbbe] hover:rounded-md hover:bg-[#3a3c43]"
                   key={index}
                 >
                   <p>{channel.name}</p>
-                  {channel.isPrivate && <PadlockIcon className="w-5 h-5" />}
+                  {channel.isPrivate && <PadlockIcon className="h-5 w-5" />}
                 </div>
               ))}
             </>

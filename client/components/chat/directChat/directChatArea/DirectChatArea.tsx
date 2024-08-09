@@ -86,7 +86,7 @@ export const DirectChatArea: React.FC<DirectChatAreaProps> = ({
   return (
     <div className="chat-area flex">
       <div
-        className="text-md font-semibold px-3 items-center h-14 border-zinc-800 border-b-2"
+        className="text-md h-14 items-center border-b-2 border-zinc-800 px-3 font-semibold"
         style={{
           display: "flex",
           gap: "1em",
@@ -95,7 +95,7 @@ export const DirectChatArea: React.FC<DirectChatAreaProps> = ({
         }}
       >
         {recipientUser && (
-          <p className="font-semibold text-xl text-white dark:text-white">
+          <p className="text-xl font-semibold text-white dark:text-white">
             {recipientUser.username}
           </p>
         )}
@@ -113,7 +113,7 @@ export const DirectChatArea: React.FC<DirectChatAreaProps> = ({
                     <Image
                       src={msg.member?.user.picture || currentUser.picture}
                       alt="chat user picture"
-                      className="w-10 h-10"
+                      className="h-10 w-10"
                       width={50}
                       height={50}
                     />
@@ -137,7 +137,7 @@ export const DirectChatArea: React.FC<DirectChatAreaProps> = ({
 
       <div className="chat-input-layout">
         <div className="plus-icon">
-          <PlusCircleIcon className="w-7 h-7" />
+          <PlusCircleIcon className="h-7 w-7" />
         </div>
         <Input
           value={newMessage}

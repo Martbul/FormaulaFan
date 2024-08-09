@@ -27,17 +27,17 @@ const DynamicCalendarComponent = dynamic(
 
 const Challenges = () => {
   return (
-    <div className="bg-zinc-900 min-h-screen flex  items-center">
-      <div className="flex flex-1 justify-center ">
+    <div className="flex min-h-screen items-center bg-zinc-900">
+      <div className="flex flex-1 justify-center">
         <DynamicF1LightsGame />
       </div>
 
       <div className="relative">
-        <div className="absolute right-0 transform translate-y-1/2">
+        <div className="absolute right-0 translate-y-1/2 transform">
           <Sheet>
             <SheetTrigger asChild>
-              <Button className="bg-neutral-700 w-min hover:bg-neutral-800">
-                <CalendarIconActive className="w-8 h-8" />
+              <Button className="w-min bg-neutral-700 hover:bg-neutral-800">
+                <CalendarIconActive className="h-8 w-8" />
               </Button>
             </SheetTrigger>
             <SheetContent>

@@ -200,7 +200,7 @@ export default function Profile() {
   });
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center h-screen bg-zinc-800">
+      <div className="flex h-screen items-center justify-center bg-zinc-800">
         <div className="loader"></div>
       </div>
     );
@@ -209,23 +209,23 @@ export default function Profile() {
     return <div>Error loading data.</div>;
   }
   return (
-    <div className="flex flex-col lg:flex-row bg-[#1e1f22] text-white w-full h-screen md:overflow-y-auto sm:overflow-y-auto no-scrollbar">
-      <aside className="bg-neutral-800 rounded-xl p-6 flex flex-col items-center lg:w-1/4 lg:mr-4 lg:mb-0 mb-4 lg:mb-0">
-        <Avatar className="w-24 h-24">
+    <div className="no-scrollbar flex h-screen w-full flex-col bg-[#1e1f22] text-white sm:overflow-y-auto md:overflow-y-auto lg:flex-row">
+      <aside className="mb-4 flex flex-col items-center rounded-xl bg-neutral-800 p-6 lg:mb-0 lg:mr-4 lg:w-1/4">
+        <Avatar className="h-24 w-24">
           {/* <AvatarImage src="/placeholder-user.jpg" alt="@user" /> */}
           <Image
             src={data?.picture}
             alt="Profile"
-            className="profile-pic mx-auto w-24 h-24 bg-[#2c2c2c] rounded-full"
+            className="profile-pic mx-auto h-24 w-24 rounded-full bg-[#2c2c2c]"
             width={50}
             height={50}
           />
           <AvatarFallback>AC</AvatarFallback>
         </Avatar>
-        <div className="text-center mt-4">
+        <div className="mt-4 text-center">
           <h3 className="text-xl font-bold">{data?.username}</h3>
           <p className="text-muted-foreground">{data?.bio}</p>
-          <div className="flex flex-col gap-2 mt-4">
+          <div className="mt-4 flex flex-col gap-2">
             <div className="text-2xl font-bold">
               {data?.followedBy.length}{" "}
               <span className="text-sm text-muted-foreground">Followers</span>
@@ -242,7 +242,7 @@ export default function Profile() {
               <span className="text-sm text-muted-foreground">Posts</span>
             </div>
           </div>
-          <div className="flex gap-2 mt-4">
+          <div className="mt-4 flex gap-2">
             <Button className="flex-1 bg-zinc-900 hover:bg-zinc-800">
               Follow
             </Button>
@@ -253,8 +253,8 @@ export default function Profile() {
         </div>
       </aside>
 
-      <main className="flex-1 lg:flex lg:flex-col lg:gap-4 p-4 lg:p-6">
-        <div className="flex gap-4 mb-4">
+      <main className="flex-1 p-4 lg:flex lg:flex-col lg:gap-4 lg:p-6">
+        <div className="mb-4 flex gap-4">
           <Button variant="ghost" className="flex-1">
             Posts
           </Button>
@@ -274,12 +274,12 @@ export default function Profile() {
         </ScrollArea>
       </main>
 
-      <aside className="bg-neutral-900 rounded-lg p-6 lg:w-1/4 lg:ml-4 lg:mb-0 mb-4 h-[600px] lg:h-screen overflow-auto no-scrollbar">
-        <h3 className="text-xl font-bold mb-4">Groups</h3>
-        <div className="grid gap-4 mb-4">
+      <aside className="no-scrollbar mb-4 h-[600px] overflow-auto rounded-lg bg-neutral-900 p-6 lg:mb-0 lg:ml-4 lg:h-screen lg:w-1/4">
+        <h3 className="mb-4 text-xl font-bold">Groups</h3>
+        <div className="mb-4 grid gap-4">
           <Card>
             <CardHeader className="flex items-center gap-4">
-              <Avatar className="w-10 h-10">
+              <Avatar className="h-10 w-10">
                 <AvatarImage src="/placeholder-user.jpg" alt="@user" />
                 <AvatarFallback>AC</AvatarFallback>
               </Avatar>
@@ -297,7 +297,7 @@ export default function Profile() {
           </Card>
           <Card>
             <CardHeader className="flex items-center gap-4">
-              <Avatar className="w-10 h-10">
+              <Avatar className="h-10 w-10">
                 <AvatarImage src="/placeholder-user.jpg" alt="@user" />
                 <AvatarFallback>AC</AvatarFallback>
               </Avatar>
@@ -315,7 +315,7 @@ export default function Profile() {
           </Card>
           <Card>
             <CardHeader className="flex items-center gap-4">
-              <Avatar className="w-10 h-10">
+              <Avatar className="h-10 w-10">
                 <AvatarImage src="/placeholder-user.jpg" alt="@user" />
                 <AvatarFallback>AC</AvatarFallback>
               </Avatar>
@@ -332,11 +332,11 @@ export default function Profile() {
             </CardContent>
           </Card>
         </div>
-        <h3 className="text-xl font-bold mt-8 mb-4">Chats</h3>
+        <h3 className="mb-4 mt-8 text-xl font-bold">Chats</h3>
         <div className="grid gap-4">
           <Card>
             <CardHeader className="flex items-center gap-4">
-              <Avatar className="w-10 h-10">
+              <Avatar className="h-10 w-10">
                 <AvatarImage src="/placeholder-user.jpg" alt="@user" />
                 <AvatarFallback>AC</AvatarFallback>
               </Avatar>
@@ -353,7 +353,7 @@ export default function Profile() {
           </Card>
           <Card>
             <CardHeader className="flex items-center gap-4">
-              <Avatar className="w-10 h-10">
+              <Avatar className="h-10 w-10">
                 <AvatarImage src="/placeholder-user.jpg" alt="@user" />
                 <AvatarFallback>AC</AvatarFallback>
               </Avatar>

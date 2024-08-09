@@ -16,34 +16,34 @@ import {
 
 const UserPostOptionsMenu = (post) => {
   return (
-    <DropdownMenuContent className="bg-zinc-800 drop-shadow-xl ">
-      <DropdownMenuItem className="text-neutral-200 mb-1 hover:bg-neutral-700 hover:rounded-md hover:cursor-pointer">
+    <DropdownMenuContent className="bg-zinc-800 drop-shadow-xl">
+      <DropdownMenuItem className="mb-1 text-neutral-200 hover:cursor-pointer hover:rounded-md hover:bg-neutral-700">
         <div className="flex items-center">
-          <PinIcon className="w-5 h-5 inline-block mr-2" />
+          <PinIcon className="mr-2 inline-block h-5 w-5" />
           Add to favorites
         </div>
       </DropdownMenuItem>
-      <DropdownMenuItem className="text-neutral-200 mb-1 hover:bg-neutral-700 hover:rounded-md hover:cursor-pointer">
+      <DropdownMenuItem className="mb-1 text-neutral-200 hover:cursor-pointer hover:rounded-md hover:bg-neutral-700">
         <div className="flex items-center">
-          <NotInterestedIcon className="w-5 h-5 inline-block mr-2" />
+          <NotInterestedIcon className="mr-2 inline-block h-5 w-5" />
           Not interested in this post
         </div>
       </DropdownMenuItem>
-      <DropdownMenuItem className="text-neutral-200 mb-1  hover:bg-neutral-700 hover:rounded-md hover:cursor-pointer">
+      <DropdownMenuItem className="mb-1 text-neutral-200 hover:cursor-pointer hover:rounded-md hover:bg-neutral-700">
         <div className="flex items-center">
-          <FollowIcon className="w-5 h-5 inline-block mr-2" />
+          <FollowIcon className="mr-2 inline-block h-5 w-5" />
           Follow @USER
         </div>
       </DropdownMenuItem>
-      <DropdownMenuItem className="text-neutral-200 mb-1  hover:bg-neutral-700 hover:rounded-md hover:cursor-pointer">
+      <DropdownMenuItem className="mb-1 text-neutral-200 hover:cursor-pointer hover:rounded-md hover:bg-neutral-700">
         <div className="flex items-center">
-          <BlockIcon className="w-5 h-5 inline-block mr-2" />
+          <BlockIcon className="mr-2 inline-block h-5 w-5" />
           Block @USER
         </div>
       </DropdownMenuItem>
-      <DropdownMenuItem className="text-neutral-200  hover:bg-neutral-700 hover:rounded-md hover:cursor-pointer">
+      <DropdownMenuItem className="text-neutral-200 hover:cursor-pointer hover:rounded-md hover:bg-neutral-700">
         <div className="flex items-center">
-          <AnalyticsIcon className="w-5 h-5 inline-block mr-2" />
+          <AnalyticsIcon className="mr-2 inline-block h-5 w-5" />
           Post analytics
         </div>
       </DropdownMenuItem>

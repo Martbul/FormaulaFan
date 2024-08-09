@@ -15,9 +15,9 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="flex  h-screen  flex-col overflow-y-auto no-scrollbar ">
+    <div className="no-scrollbar flex h-screen flex-col overflow-y-auto">
       <Background />
-      <header className="px-4 lg:px-36 h-14 flex items-center bg-[#23272a] text-white shadow-md">
+      <header className="flex h-14 items-center bg-[#23272a] px-4 text-white shadow-md lg:px-36">
         <Background />
         <Sheet>
           <SheetTrigger asChild>
@@ -33,34 +33,34 @@ export default function Home() {
                 className="flex items-center justify-center"
                 prefetch={false}
               >
-                <PoduimLogoIcon className="h-8 w-8 " />
+                <PoduimLogoIcon className="h-8 w-8" />
                 <span className="sr-only">Acme Inc</span>
               </Link>
               <nav className="flex flex-col gap-2">
                 <Link
                   href="#"
-                  className="text-sm font-medium hover:underline underline-offset-4"
+                  className="text-sm font-medium underline-offset-4 hover:underline"
                   prefetch={false}
                 >
                   Discover
                 </Link>
                 <Link
                   href="#"
-                  className="text-sm font-medium hover:underline underline-offset-4"
+                  className="text-sm font-medium underline-offset-4 hover:underline"
                   prefetch={false}
                 >
                   Nitro
                 </Link>
                 <Link
                   href="#"
-                  className="text-sm font-medium hover:underline underline-offset-4"
+                  className="text-sm font-medium underline-offset-4 hover:underline"
                   prefetch={false}
                 >
                   Safety
                 </Link>
                 <Link
                   href="#"
-                  className="text-sm font-medium hover:underline underline-offset-4"
+                  className="text-sm font-medium underline-offset-4 hover:underline"
                   prefetch={false}
                 >
                   Support
@@ -69,40 +69,40 @@ export default function Home() {
             </div>
           </SheetContent>
         </Sheet>
-        <div className="flex-1 flex justify-center lg:justify-between items-center">
+        <div className="flex flex-1 items-center justify-center lg:justify-between">
           <Link
             href="#"
             className="flex items-center justify-center"
             prefetch={false}
           >
-            <PoduimLogoIcon className="h-8 w-8 " />
+            <PoduimLogoIcon className="h-8 w-8" />
             <span className="sr-only">Acme Inc</span>
           </Link>
-          <nav className="hidden lg:flex items-center gap-4">
+          <nav className="hidden items-center gap-4 lg:flex">
             <Link
               href="#"
-              className="text-sm font-medium hover:underline underline-offset-4"
+              className="text-sm font-medium underline-offset-4 hover:underline"
               prefetch={false}
             >
               Discover
             </Link>
             <Link
               href="#"
-              className="text-sm font-medium hover:underline underline-offset-4"
+              className="text-sm font-medium underline-offset-4 hover:underline"
               prefetch={false}
             >
               Nitro
             </Link>
             <Link
               href="#"
-              className="text-sm font-medium hover:underline underline-offset-4"
+              className="text-sm font-medium underline-offset-4 hover:underline"
               prefetch={false}
             >
               Safety
             </Link>
             <Link
               href="#"
-              className="text-sm font-medium hover:underline underline-offset-4"
+              className="text-sm font-medium underline-offset-4 hover:underline"
               prefetch={false}
             >
               Support
@@ -110,7 +110,7 @@ export default function Home() {
           </nav>
         </div>
         <div className="ml-auto flex gap-4 sm:gap-6">
-          <Button className="hidden min-[400px]:flex w-full min-[400px]:w-auto">
+          <Button className="hidden w-full min-[400px]:flex min-[400px]:w-auto">
             Download for Windows
           </Button>
           <Button variant="outline" className="min-[400px]:hidden">
@@ -119,18 +119,18 @@ export default function Home() {
         </div>
       </header>
 
-      <main className="flex-1  bg-gradient-to-b from-[#36393f] to-[#23272a] text-white relative ">
+      <main className="relative flex-1 bg-gradient-to-b from-[#36393f] to-[#23272a] text-white">
         <Background />
 
-        <section className="relative w-full py-12 md:py-24 lg:py-32 xl:py-48 flex items-center justify-center text-center h-screen">
+        <section className="relative flex h-screen w-full items-center justify-center py-12 text-center md:py-24 lg:py-32 xl:py-48">
           <div className="flex flex-row items-center lg:px-10">
-            <div className="container px-4  lg:max-w-[650px] md:px-6">
+            <div className="container px-4 md:px-6 lg:max-w-[650px]">
               <div className="flex flex-col items-center gap-4 text-center">
                 <div className="space-y-2">
                   <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl">
                     BEST PLACE FOR FORMULA 1 FANS
                   </h1>
-                  <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl animate-fade-in">
+                  <p className="animate-fade-in mx-auto max-w-[700px] text-muted-foreground md:text-xl">
                     FormulaFans is great for sharing race thoughts, emotions and
                     having good time with friends
                   </p>
@@ -140,31 +140,29 @@ export default function Home() {
                     FormulaFans for Windows
                   </Button>
                   <Link href="/posts">
-                    <Button
-                      className="w-full min-[400px]:w-auto grad gradHover animate-pulse	"
-                    >
+                    <Button className="grad gradHover w-full animate-pulse min-[400px]:w-auto">
                       Open FormulaFans in your browser
                     </Button>
                   </Link>
                 </div>
               </div>
             </div>
-            <div className="lg:max-w-[700px]"> 
-              <Image src={ images.racingFans} alt="landing-image"/>
+            <div className="lg:max-w-[700px]">
+              <Image src={images.racingFans} alt="landing-image" />
             </div>
           </div>
         </section>
 
         <section
-          className={`relative w-full py-12 md:py-24 lg:py-32 xl:py-48 flex items-center justify-center text-center bg-gradient-to-b`}
+          className={`relative flex w-full items-center justify-center bg-gradient-to-b py-12 text-center md:py-24 lg:py-32 xl:py-48`}
         >
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center gap-4 text-center">
               <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl animate-fade-in-up">
+                <h2 className="animate-fade-in-up text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl">
                   Section Heading
                 </h2>
-                <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl animate-fade-in">
+                <p className="animate-fade-in mx-auto max-w-[700px] text-muted-foreground md:text-xl">
                   Section content for section . Discover the endless
                   possibilities and features of this platform.
                 </p>
@@ -179,7 +177,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="relative w-full py-12 md:py-24 lg:py-32 xl:py-48 flex items-center justify-center text-center bg-gradient-to-b from-[#36393f] to-[#23272a]">
+        <section className="relative flex w-full items-center justify-center bg-gradient-to-b from-[#36393f] to-[#23272a] py-12 text-center md:py-24 lg:py-32 xl:py-48">
           <div className="container px-4 md:px-6">
             <Carousel className="w-full max-w-md">
               <CarouselContent>
@@ -190,7 +188,7 @@ export default function Home() {
                       width={448}
                       height={252}
                       alt={`Carousel Image ${index + 1}`}
-                      className="aspect-video object-cover rounded-md shadow-md transition-opacity duration-500 hover:opacity-80"
+                      className="aspect-video rounded-md object-cover shadow-md transition-opacity duration-500 hover:opacity-80"
                     />
                   </CarouselItem>
                 ))}
@@ -200,9 +198,9 @@ export default function Home() {
             </Carousel>
           </div>
         </section>
-        <section className="relative w-full py-12 md:py-24 lg:py-32 xl:py-48 flex items-center justify-center text-center bg-gradient-to-b from-[#23272a] to-[#36393f]">
+        <section className="relative flex w-full items-center justify-center bg-gradient-to-b from-[#23272a] to-[#36393f] py-12 text-center md:py-24 lg:py-32 xl:py-48">
           <div className="container px-4 md:px-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
               {["Discord Image 1", "Discord Image 2"].map((alt, index) => (
                 <div key={index}>
                   <img
@@ -218,11 +216,11 @@ export default function Home() {
           </div>
         </section>
       </main>
-      <footer className="bg-[#23272a] text-white py-8 md:py-12 w-full">
-        <div className="container max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-12 px-4">
+      <footer className="w-full bg-[#23272a] py-8 text-white md:py-12">
+        <div className="container mx-auto grid max-w-7xl grid-cols-1 gap-12 px-4 md:grid-cols-3 lg:grid-cols-5">
           {/* Company Section */}
           <div className="flex flex-col gap-4">
-            <h3 className="text-lg font-semibold mb-2">Company</h3>
+            <h3 className="mb-2 text-lg font-semibold">Company</h3>
             <Link href="#" className="hover:underline">
               About
             </Link>
@@ -239,7 +237,7 @@ export default function Home() {
 
           {/* Products Section */}
           <div className="flex flex-col gap-4">
-            <h3 className="text-lg font-semibold mb-2">Products</h3>
+            <h3 className="mb-2 text-lg font-semibold">Products</h3>
             <Link href="#" className="hover:underline">
               Discovery
             </Link>
@@ -256,7 +254,7 @@ export default function Home() {
 
           {/* Resources Section */}
           <div className="flex flex-col gap-4">
-            <h3 className="text-lg font-semibold mb-2">Resources</h3>
+            <h3 className="mb-2 text-lg font-semibold">Resources</h3>
             <Link href="#" className="hover:underline">
               Docs
             </Link>
@@ -273,7 +271,7 @@ export default function Home() {
 
           {/* Policies Section */}
           <div className="flex flex-col gap-4">
-            <h3 className="text-lg font-semibold mb-2">Policies</h3>
+            <h3 className="mb-2 text-lg font-semibold">Policies</h3>
             <Link href="#" className="hover:underline">
               Privacy
             </Link>
@@ -290,7 +288,7 @@ export default function Home() {
 
           {/* Follow Us Section */}
           <div className="flex flex-col gap-4">
-            <h3 className="text-lg font-semibold mb-2">Follow Us</h3>
+            <h3 className="mb-2 text-lg font-semibold">Follow Us</h3>
             <Link href="#" className="hover:underline">
               Twitter
             </Link>

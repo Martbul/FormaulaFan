@@ -19,9 +19,9 @@ import { Textarea } from "@/components/ui/textarea";
 
 const GroupSettingsPopover = () => {
   return (
-    <DialogContent className="w-full h-full max-w-none max-h-none justify-center bg-zinc-900 outline-none border-none remove-selecting-text">
+    <DialogContent className="remove-selecting-text h-full max-h-none w-full max-w-none justify-center border-none bg-zinc-900 outline-none">
       <div className="flex h-full">
-        <div className="bg-muted border-r p-6 flex flex-col gap-4 w-[240px]">
+        <div className="flex w-[240px] flex-col gap-4 border-r bg-muted p-6">
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-semibold">Server Settings</h2>
             <div></div>
@@ -29,7 +29,7 @@ const GroupSettingsPopover = () => {
           <nav className="flex flex-col gap-2">
             <Link
               href="#"
-              className="text-primary font-medium"
+              className="font-medium text-primary"
               prefetch={false}
             >
               General
@@ -71,15 +71,15 @@ const GroupSettingsPopover = () => {
             </Link>
           </nav>
         </div>
-        <div className="flex flex-row w-full ">
-          <div className=" p-8 overflow-y-auto">
+        <div className="flex w-full flex-row">
+          <div className="overflow-y-auto p-8">
             <div className="grid gap-6">
               <div>
                 <h3 className="text-lg font-semibold">General</h3>
                 <p className="text-muted-foreground">
                   Configure your server's basic settings.
                 </p>
-                <div className="grid gap-4 mt-4">
+                <div className="mt-4 grid gap-4">
                   <div className="grid grid-cols-[150px_1fr] items-center gap-4">
                     <Label htmlFor="server-name">Server Name</Label>
                     <Input id="server-name" defaultValue="My Discord Server" />
@@ -99,7 +99,7 @@ const GroupSettingsPopover = () => {
                   </div>
                   <div className="grid grid-cols-[150px_1fr] items-center gap-4">
                     <Label htmlFor="server-region">Server Region</Label>
-                    <Select >
+                    <Select>
                       <SelectTrigger className="w-full">
                         <SelectValue placeholder="Select region" />
                       </SelectTrigger>
@@ -134,10 +134,10 @@ const GroupSettingsPopover = () => {
                 <p className="text-muted-foreground">
                   Manage the roles and permissions in your server.
                 </p>
-                <div className="grid gap-4 mt-4">
+                <div className="mt-4 grid gap-4">
                   <div className="grid grid-cols-[1fr_auto] items-center gap-4">
                     <div className="flex items-center gap-4">
-                      <div className="rounded-full bg-primary w-8 h-8 flex items-center justify-center text-primary-foreground font-bold">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary font-bold text-primary-foreground">
                         A
                       </div>
                       <div>
@@ -158,7 +158,7 @@ const GroupSettingsPopover = () => {
                   </div>
                   <div className="grid grid-cols-[1fr_auto] items-center gap-4">
                     <div className="flex items-center gap-4">
-                      <div className="rounded-full bg-secondary w-8 h-8 flex items-center justify-center text-secondary-foreground font-bold">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-secondary font-bold text-secondary-foreground">
                         M
                       </div>
                       <div>
@@ -179,7 +179,7 @@ const GroupSettingsPopover = () => {
                   </div>
                   <div className="grid grid-cols-[1fr_auto] items-center gap-4">
                     <div className="flex items-center gap-4">
-                      <div className="rounded-full bg-muted w-8 h-8 flex items-center justify-center text-muted-foreground font-bold">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-muted font-bold text-muted-foreground">
                         U
                       </div>
                       <div>
@@ -206,7 +206,7 @@ const GroupSettingsPopover = () => {
                 <p className="text-muted-foreground">
                   Manage the text and voice channels in your server.
                 </p>
-                <div className="grid gap-4 mt-4">
+                <div className="mt-4 grid gap-4">
                   <div className="grid grid-cols-[1fr_auto] items-center gap-4">
                     <div className="flex items-center gap-4">
                       <HashIcon className="h-5 w-5 text-muted-foreground" />

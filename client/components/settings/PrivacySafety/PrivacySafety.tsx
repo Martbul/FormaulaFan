@@ -22,8 +22,8 @@ import { PadlockIcon } from "@/utils/svgIcons";
 
 const PrivacySafety = ({ user }) => {
   return (
-    <div className=" md:grid-cols-[180px_1fr] lg:grid-cols-[250px_1fr] items-start gap-6 max-w-6xl w-full mx-auto  ">
-      <div className="grid gap-6 ">
+    <div className="mx-auto w-full max-w-6xl items-start gap-6 md:grid-cols-[180px_1fr] lg:grid-cols-[250px_1fr]">
+      <div className="grid gap-6">
         <div className="grid auto-rows-max items-start gap-4 lg:gap-8">
           <Card>
             <CardHeader>
@@ -82,11 +82,11 @@ const PrivacySafety = ({ user }) => {
             </CardDescription>
           </CardHeader>
           <CardContent className="grid gap-1">
-            <div className=" flex items-center justify-between">
+            <div className="flex items-center justify-between">
               <div className="">
                 <div className="flex items-center gap-1">
                   <div className="p-r-image remove-selecting-text">
-                    <PadlockIcon className="w-4 h-4" />
+                    <PadlockIcon className="h-4 w-4" />
                   </div>
                   <div className="p-r-title white-title-color remove-selecting-text">
                     <p>Private Channel</p>
@@ -107,11 +107,11 @@ const PrivacySafety = ({ user }) => {
                 />
               </div>
             </div>
-            <div className=" flex items-center justify-between">
+            <div className="flex items-center justify-between">
               <div className="">
                 <div className="flex items-center gap-1">
                   <div className="p-r-image remove-selecting-text">
-                    <PadlockIcon className="w-4 h-4" />
+                    <PadlockIcon className="h-4 w-4" />
                   </div>
                   <div className="p-r-title white-title-color remove-selecting-text">
                     <p>Private Channel</p>
@@ -132,11 +132,11 @@ const PrivacySafety = ({ user }) => {
                 />
               </div>
             </div>
-            <div className=" flex items-center justify-between">
+            <div className="flex items-center justify-between">
               <div className="">
                 <div className="flex items-center gap-1">
                   <div className="p-r-image remove-selecting-text">
-                    <PadlockIcon className="w-4 h-4" />
+                    <PadlockIcon className="h-4 w-4" />
                   </div>
                   <div className="p-r-title white-title-color remove-selecting-text">
                     <p>Private Channel</p>
@@ -157,11 +157,11 @@ const PrivacySafety = ({ user }) => {
                 />
               </div>
             </div>
-            <div className=" flex items-center justify-between">
+            <div className="flex items-center justify-between">
               <div className="">
                 <div className="flex items-center gap-1">
                   <div className="p-r-image remove-selecting-text">
-                    <PadlockIcon className="w-4 h-4" />
+                    <PadlockIcon className="h-4 w-4" />
                   </div>
                   <div className="p-r-title white-title-color remove-selecting-text">
                     <p>Private Channel</p>
@@ -186,7 +186,7 @@ const PrivacySafety = ({ user }) => {
         </Card>
 
         <CardFooter>
-          <Button className="bg-neutral-900 ml-auto text-neutral-200">
+          <Button className="ml-auto bg-neutral-900 text-neutral-200">
             Save Changes
           </Button>
         </CardFooter>

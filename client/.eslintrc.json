@@ -20,7 +20,7 @@
     "plugin:jsx-a11y/recommended",
     "plugin:prettier/recommended",
     "plugin:@next/next/recommended",
-    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended"
   ],
   "plugins": [
     "react",

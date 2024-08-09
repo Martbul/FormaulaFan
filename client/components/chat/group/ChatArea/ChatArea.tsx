@@ -124,13 +124,13 @@ export const ChatArea: React.FC<{
 
           return (
             <div key={index} className="message">
-              <div className="user-profile-pic flex bg-gray-600 rounded-full p-1 align-items">
+              <div className="user-profile-pic align-items flex rounded-full bg-gray-600 p-1">
                 <Popover>
                   <PopoverTrigger>
                     <Image
                       src={user.picture}
                       alt="pic"
-                      className="w-10 h-10"
+                      className="h-10 w-10"
                       width={40} // specify the width in pixels
                       height={40} // specify the height in pixels
                     />
@@ -151,9 +151,9 @@ export const ChatArea: React.FC<{
         <div ref={messagesEndRef} />
       </div>
 
-      <div className="chat-input-layout flex align-center">
-        <div className="plus-icon flex align-center">
-          <PlusCircleIcon className="w-7 h-7" />
+      <div className="chat-input-layout align-center flex">
+        <div className="plus-icon align-center flex">
+          <PlusCircleIcon className="h-7 w-7" />
         </div>
         <Input
           value={newMessage}

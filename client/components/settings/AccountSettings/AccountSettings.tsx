@@ -19,8 +19,8 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 const AccountSettings = ({ user }) => {
   return (
-    <div className=" md:grid-cols-[180px_1fr] lg:grid-cols-[250px_1fr] items-start gap-6 max-w-6xl w-full mx-auto  ">
-      <div className="grid gap-6 ">
+    <div className="mx-auto w-full max-w-6xl items-start gap-6 md:grid-cols-[180px_1fr] lg:grid-cols-[250px_1fr]">
+      <div className="grid gap-6">
         <div className="grid auto-rows-max items-start gap-4 lg:gap-8">
           <Card>
             <CardHeader className="flex flex-row justify-between">
@@ -42,7 +42,7 @@ const AccountSettings = ({ user }) => {
                   src={user.picture}
                   width="30"
                 />
-                <div className="bg-green-900 w-56 h-56 "></div>
+                <div className="h-56 w-56 bg-green-900"></div>
                 {/* <div className="grid grid-cols-2 gap-2">
                   <Button variant="outline" size="sm">
                     <UploadIcon className="mr-2 h-4 w-4" />
@@ -129,7 +129,7 @@ const AccountSettings = ({ user }) => {
           </CardContent>
         </Card>
         <CardFooter>
-          <Button className="bg-neutral-900 ml-auto text-neutral-200 hover:bg-neutral-950">
+          <Button className="ml-auto bg-neutral-900 text-neutral-200 hover:bg-neutral-950">
             Save Changes
           </Button>
         </CardFooter>

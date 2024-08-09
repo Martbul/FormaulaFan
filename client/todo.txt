@@ -43,3 +43,8 @@
 - use startTransition hook - it makes a state change low priority
 - use errorBoundary hook
 - learnabout action
+- MAYBE, in order for useOptimistic hook to work you need to install next.js with react 19 not just react 19() and maybe because of that there are the errors in the terminal you are experianceing
+- use prettier write in order to prettie and tailwing sort classes to work
+- 3D andphisics libraries: Three.js, Meshline, React-three-rapier, React-three-fiber, Drei
+- make a full 3d game is SUPER HARD. Maybe try to think how to incorporate 3d evelemts in the website in a cool and interactive way(maybe in profile page(вместо потребителя да въвежда данните ци в сеттинг и да ги вижда в профил, може двете да са на евдно място и самия профил да бъде 3д ф1 пилот , ппотрбителя може да къстамизира как изглежа, ръкавици, бакгроунд кола, каска, лице и тн. В сичко се пази в дб-то под формата на йсон(зависи от json-на какво ще лоаднеш на фронт енда)))
+- onclick the f1PaddockClucb badge turns 180 deg and at its back you can see likes, comment, share ...

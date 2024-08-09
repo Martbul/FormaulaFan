@@ -54,7 +54,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
     <div className="bg-neutral-900">
       <Popover>
         <PopoverTrigger>
-          <div className="w-full bg-zinc-950 p-2.5 border-b-2 border-black hover:bg-gray-600  cursor-pointer">
+          <div className="w-full cursor-pointer border-b-2 border-black bg-zinc-950 p-2.5 hover:bg-gray-600">
             <div className="p-1.5 text-gray-400">
               {name && <p className="select-none">{name}</p>}
               {conversationUsers && (
@@ -79,17 +79,17 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <>
           {conversationUsers &&
             conversationUsers.map((conversationUser, index) => (
-              <div key={index} className="flex items-center mb-2">
+              <div key={index} className="mb-2 flex items-center">
                 <Image
                   src={conversationUser.picture}
                   alt="pic"
-                  className="w-10 h-10"
+                  className="h-10 w-10"
                   width={50}
                   height={50}
                 />
 
                 <div
-                  className="p-[5px] text-[#b9bbbe] cursor-pointer hover:bg-[#3a3c43] hover:rounded-[5px] ml-2"
+                  className="ml-2 cursor-pointer p-[5px] text-[#b9bbbe] hover:rounded-[5px] hover:bg-[#3a3c43]"
                   onClick={() => handleStartConversation(conversationUser.id)}
                 >
                   {conversationUser.username}

@@ -11,11 +11,11 @@ export default function MainLayout({
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <section className="flex flex-col md:flex-row min-h-screen">
+    <section className="flex min-h-screen flex-col md:flex-row">
       <div className="w-full md:w-auto">
-        <button className="md:hidden p-4" onClick={() => setIsOpen(!isOpen)}>
+        <button className="p-4 md:hidden" onClick={() => setIsOpen(!isOpen)}>
           <svg
-            className="w-6 h-6"
+            className="h-6 w-6"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
