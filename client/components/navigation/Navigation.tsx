@@ -64,23 +64,6 @@ const Navigation = () => {
             <p className="text-lg">Home</p>
           </div>
         </Link>
-        
-        
-        <Link
-          className="mb-5 flex cursor-pointer items-center p-4 transition-colors duration-300"
-          href="/posts3d"
-        >
-          <div className="mr-5">
-            {getMenuItemActiveImage("/posts3d") ? (
-              <HomeIconActive className="h-10 w-10" />
-            ) : (
-              <HomeIcon className="h-10 w-10" />
-            )}
-          </div>
-          <div className={getMenuItemClass("/posts3d")}>
-            <p className="text-lg">Home3D</p>
-          </div>
-        </Link>
 
         <Link
           className="mb-5 flex cursor-pointer items-center p-3 transition-colors duration-300"

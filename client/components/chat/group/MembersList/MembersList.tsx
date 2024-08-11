@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, memo } from "react";
 import Image from "next/image";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { useRouter } from "next/navigation";
@@ -13,7 +13,7 @@ const DynamicInvitePopover = dynamic(
     ssr: true,
   },
 );
-export const MembersList: React.FC<{ members: Member[] }> = ({ members }) => {
+const MembersListMemo: React.FC<{ members: Member[] }> = ({ members }) => {
   const { user } = useAuthContext();
   const router = useRouter();
   const [membersListVisible, setMembersListVisible] = useState(true);
@@ -89,3 +89,4 @@ export const MembersList: React.FC<{ members: Member[] }> = ({ members }) => {
     </>
   );
 };
+export const MembersList = memo(MembersListMemo);

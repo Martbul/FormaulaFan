@@ -10,6 +10,7 @@ import {
   GET_USER_SAVED_POSTS,
   DELETE_POST,
   EDIT_POST,
+  GET_SEARCH_POSTS
 } from "./post.gql";
 
 const client = createApolloClient();
@@ -154,6 +155,30 @@ export async function getUserSavePosts(userEmail: string) {
       query: GET_USER_SAVED_POSTS,
       variables: {
         userEmail,
+      },
+    });
+
+    const result = data.userSavedPosts;
+    return result;
+  } catch (error) {
+    if (error instanceof ApolloError) {
+      console.error("GraphQL error details:", error.graphQLErrors);
+      console.error("Network error details:", error.networkError);
+    } else {
+      console.error("Unknown error:", error);
+    }
+    throw error;
+  }
+}
+
+
+export async function getSearchResultsPosts(searchPostsQuery: string) {
+  console.log("searchPostsQuery",searchPostsQuery);
+  try {
+    const { data } = await client.query({
+      query: GET_SEARCH_POSTS,
+      variables: {
+        searchPostsQuery,
       },
     });
 

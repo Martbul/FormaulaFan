@@ -38,9 +38,20 @@ model User {
    direcetMessages DirectMessage[]
 
    settings UserSettings?
+   avatar3D UserAvatar3D?
 
    createdGroups Group[]
    members       Member[]
+}
+
+model UserAvatar3D {
+   id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+helmetColor String
+suitColor String
+glovesColor String
+  userId String @unique @db.Uuid
+   user   User   @relation(fields: [userId], references: [id])
+
 }
 
 model UserSettings {

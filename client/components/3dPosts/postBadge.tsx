@@ -7,7 +7,7 @@ import {
   Environment,
   Lightformer,
   Text,
-  Image
+  Image,
 } from "@react-three/drei";
 import {
   BallCollider,
@@ -24,28 +24,48 @@ extend({ MeshLineGeometry, MeshLineMaterial });
 useGLTF.preload("/models/f1PaddockPass/PaddockPassF1.glb");
 useTexture.preload("/assets/images/F1PaddockPass.png");
 
-export default function PostBadge({post,userId,fixedStart}) {
-   console.log(post)
-     const formattedTimestamp = moment(post?.createdAt).fromNow();
+export default function PostBadge({ post, userId, fixedStart }) {
+  console.log(post);
+  const formattedTimestamp = moment(post?.createdAt).fromNow();
 
   return (
-    
-        <Band post={post} fixedStart={fixedStart} formattedTimestamp={formattedTimestamp}/>
-   
+    <Band
+      post={post}
+      fixedStart={fixedStart}
+      formattedTimestamp={formattedTimestamp}
+    />
   );
 }
 
-function Band({ maxSpeed = 50, minSpeed = 10, post, fixedStart ,formattedTimestamp}) {
-  const band = useRef(), fixed = useRef(), j1 = useRef(), j2 = useRef(), j3 = useRef(), card = useRef() // prettier-ignore
-  const vec = new THREE.Vector3(), ang = new THREE.Vector3(), rot = new THREE.Vector3(), dir = new THREE.Vector3() // prettier-ignore
+function Band({
+  maxSpeed = 50,
+  minSpeed = 10,
+  post,
+  fixedStart,
+  formattedTimestamp,
+}) {
+  const band = useRef(),
+    fixed = useRef(),
+    j1 = useRef(),
+    j2 = useRef(),
+    j3 = useRef(),
+    card = useRef();
+  const vec = new THREE.Vector3(),
+    ang = new THREE.Vector3(),
+    rot = new THREE.Vector3(),
+    dir = new THREE.Vector3();
+
   const segmentProps = {
     type: "dynamic",
-    canSleep: true,
+    canSleep: false,
     colliders: false,
     angularDamping: 2,
     linearDamping: 2,
+    mass: 1,
+    restitution: 1.5,
   };
-   const { nodes, materials } = useGLTF(
+
+  const { nodes, materials } = useGLTF(
     "/models/f1PaddockPass/PaddockPassF1.glb",
   );
   const texture = useTexture("/assets/images/F1PaddockPass.png");
@@ -59,13 +79,17 @@ function Band({ maxSpeed = 50, minSpeed = 10, post, fixedStart ,formattedTimesta
         new THREE.Vector3(),
       ]),
   );
+
   const [dragged, drag] = useState(false);
   const [hovered, hover] = useState(false);
 
-  useRopeJoint(fixed, j1, [[fixedStart, 0, 0], [0, 0, 0], 1]); // prettier-ignore
-  useRopeJoint(j1, j2, [[0, 0, 0], [0, 0, 0], 1]) // prettier-ignore
-  useRopeJoint(j2, j3, [[0, 0, 0], [0, 0, 0], 1]) // prettier-ignore
-  useSphericalJoint(j3, card, [[0, 0, 0], [0, 1.45, 0]]) // prettier-ignore
+  useRopeJoint(fixed, j1, [[fixedStart, 0, 5], [0, 0, 0], 1]);
+  useRopeJoint(j1, j2, [[0, 0, 0], [0, 0, 0], 1]);
+  useRopeJoint(j2, j3, [[0, 0, 0], [0, 0, 0], 1]);
+  useSphericalJoint(j3, card, [
+    [0, 0, 0],
+    [0, 1.45, 0],
+  ]);
 
   useEffect(() => {
     if (hovered) {
@@ -87,7 +111,6 @@ function Band({ maxSpeed = 50, minSpeed = 10, post, fixedStart ,formattedTimesta
       });
     }
     if (fixed.current) {
-      // Fix most of the jitter when over pulling the card
       [j1, j2].forEach((ref) => {
         if (!ref.current.lerped)
           ref.current.lerped = new THREE.Vector3().copy(
@@ -102,13 +125,11 @@ function Band({ maxSpeed = 50, minSpeed = 10, post, fixedStart ,formattedTimesta
           delta * (minSpeed + clampedDistance * (maxSpeed - minSpeed)),
         );
       });
-      // Calculate catmul curve
       curve.points[0].copy(j3.current.translation());
       curve.points[1].copy(j2.current.lerped);
       curve.points[2].copy(j1.current.lerped);
       curve.points[3].copy(fixed.current.translation());
       band.current.geometry.setPoints(curve.getPoints(32));
-      // Tilt it back towards the screen
       ang.copy(card.current.angvel());
       rot.copy(card.current.rotation());
       card.current.setAngvel({ x: ang.x, y: ang.y - rot.y * 0.25, z: ang.z });
@@ -120,15 +141,30 @@ function Band({ maxSpeed = 50, minSpeed = 10, post, fixedStart ,formattedTimesta
 
   return (
     <>
-      <group position={[0, 4, 0]}>
+      <group position={[0, 4, 0]} scale={0.5}>
         <RigidBody ref={fixed} {...segmentProps} type="fixed" />
-        <RigidBody position={[0.5, 0, 0]} ref={j1} {...segmentProps}>
+        <RigidBody
+          position={[0.5, 0, 0]}
+          ref={j1}
+          {...segmentProps}
+          onCollisionEnter={(event) => handleCollision(event)}
+        >
           <BallCollider args={[0.1]} />
         </RigidBody>
-        <RigidBody position={[1, 0, 0]} ref={j2} {...segmentProps}>
+        <RigidBody
+          position={[1, 0, 0]}
+          ref={j2}
+          {...segmentProps}
+          onCollisionEnter={(event) => handleCollision(event)}
+        >
           <BallCollider args={[0.1]} />
         </RigidBody>
-        <RigidBody position={[1.5, 0, 0]} ref={j3} {...segmentProps}>
+        <RigidBody
+          position={[1.5, 0, 0]}
+          ref={j3}
+          {...segmentProps}
+          onCollisionEnter={(event) => handleCollision(event)}
+        >
           <BallCollider args={[0.1]} />
         </RigidBody>
         <RigidBody
@@ -136,11 +172,12 @@ function Band({ maxSpeed = 50, minSpeed = 10, post, fixedStart ,formattedTimesta
           ref={card}
           {...segmentProps}
           type={dragged ? "kinematicPosition" : "dynamic"}
+          onCollisionEnter={(event) => handleCollision(event)}
         >
           <CuboidCollider args={[0.8, 1.125, 0.01]} />
           <group
             scale={2.25}
-            position={[0, -1.2, -0.05]}
+            position={[0, 0.2, -0.05]}
             onPointerOver={() => hover(true)}
             onPointerOut={() => hover(false)}
             onPointerUp={(e) => (
@@ -173,14 +210,8 @@ function Band({ maxSpeed = 50, minSpeed = 10, post, fixedStart ,formattedTimesta
             <mesh geometry={nodes.clamp.geometry} material={materials.metal} />
           </group>
 
-          {/* <mesh position={[0, 0, 0]}>
-              <planeGeometry args={[1, 1]} />
-              <meshStandardMaterial>
-                <Image url={post?.author.picture} />
-              </meshStandardMaterial>
-           </mesh>  */}
           <Text
-            position={[0.3, -0.75, 0.01]}
+            position={[0.3, 0.55, 0.01]}
             fontSize={0.12}
             color="white"
             anchorX="center"
@@ -190,7 +221,7 @@ function Band({ maxSpeed = 50, minSpeed = 10, post, fixedStart ,formattedTimesta
           </Text>
 
           <Text
-            position={[0, 0.6, 0.01]}
+            position={[0, 1.8, 0.01]}
             fontSize={0.09}
             color="white"
             anchorX="center"
@@ -198,9 +229,9 @@ function Band({ maxSpeed = 50, minSpeed = 10, post, fixedStart ,formattedTimesta
           >
             {post?.textContent}
           </Text>
-          
+
           <Text
-            position={[0.4, 0.96, 0.01]}
+            position={[0.4, 2.34, 0.01]}
             fontSize={0.09}
             color="white"
             anchorX="center"
@@ -219,7 +250,7 @@ function Band({ maxSpeed = 50, minSpeed = 10, post, fixedStart ,formattedTimesta
           useMap
           map={texture}
           repeat={[-3, 1]}
-          lineWidth={1}
+          lineWidth={0.7}
         />
       </mesh>
     </>

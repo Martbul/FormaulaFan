@@ -232,3 +232,46 @@ export const EDIT_POST = gql`
     }
   }
 `;
+
+export const GET_SEARCH_POSTS = gql`
+  query getUserSavedPosts($userEmail: String!) {
+    userSavedPosts(userEmail: $userEmail) {
+      id
+      textContent
+      imageContentUrl
+      videoContent
+      createdAt
+      author {
+        username
+        picture
+      }
+      likedBy {
+        id
+      }
+      comments {
+        id
+        textContent
+        imageContentUrl
+        videoContent
+        createdAt
+        author {
+          username
+          picture
+        }
+        post {
+          id
+        }
+        likes
+        shares
+        views
+        saves
+      }
+      sharedBy {
+        id
+      }
+      savedBy {
+        id
+      }
+    }
+  }
+`;

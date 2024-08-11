@@ -135,3 +135,37 @@ export const QUERY_USER_PROFILE = gql`
     }
   }
 `;
+
+export const QUERY_USER_3DAVATAR = gql`
+  query getUser3dAvatar($userEmail: String!) {
+    avatarQuery3d(userEmail: $userEmail) {
+      id
+      suitColor
+      helmetColor
+      glovesColor
+    }
+  }
+`;
+
+export const UPDATE_3D_AVATAR = gql`
+  mutation update3DProfile(
+    $suitColor: String!
+    $helmetColor: String!
+    $glovesColor: String!
+    $userEmail: String!
+  ) {
+    avatar3d(
+      update3dAvatar: {
+        suitColor: $suitColor
+        helmetColor: $helmetColor
+        glovesColor: $glovesColor
+        userEmail: $userEmail
+      }
+    ) {
+      id
+      suitColor
+      helmetColor
+      glovesColor
+    }
+  }
+`;

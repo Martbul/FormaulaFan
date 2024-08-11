@@ -114,6 +114,24 @@ const Groups = () => {
                 <div className="teamBox mercedes">
                   <Image src={images.mercedes} alt="Mercedes" />
                 </div>
+                <div className="teamBox astonMartin">
+                  <Image src={images.AstonMartinF1Logo} alt="astonMartin" />
+                </div>
+                <div className="teamBox vicarb">
+                  <Image src={images.vcarb} alt="vicarb" />
+                </div>
+                <div className="teamBox williams">
+                  <Image src={images.WilliamsF1Logo} alt="williams" />
+                </div>
+                <div className="teamBox alpine">
+                  <Image src={images.AlpineF1Logo} alt="alpine" />
+                </div>
+                <div className="teamBox haas">
+                  <Image src={images.HaasF1Logo} alt="haas" />
+                </div>
+                <div className="teamBox stakeF1">
+                  <Image src={images.StakeF1Logo} alt="stakeF1" />
+                </div>
               </div>
             </div>
 

@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useAuthContext } from "@/contexts/AuthContext2";
 import dynamic from "next/dynamic";
 import { Popover, PopoverTrigger } from "@/components/ui/popover";
+import { memo } from "react"; // Import memo
 
 const DynamicGroupQuickOptionsPopover = dynamic(
   () => import("./GroupQuickOptionsPopover/GroupQuickOptionsPopover"),
@@ -25,7 +26,7 @@ type SidebarProps = {
   conversationUsers?: any;
 };
 
-export const Sidebar: React.FC<SidebarProps> = ({
+const SidebarMemo: React.FC<SidebarProps> = ({
   groupId,
   name,
   channels,
@@ -36,8 +37,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
 }) => {
   const { user } = useAuthContext();
   const router = useRouter();
-  // const [isMyGroup, setIsMyGroup] = useState(false);
-  // const pathname = usePathname(); // Get the current pathname
 
   const handleStartConversation = async (memberTwoId: string) => {
     const memberOneEmail = user.email as string;
@@ -94,7 +93,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 >
                   {conversationUser.username}
                 </div>
-                {/* {onlineUsers && (<p>{onlineUsers[0]}</p>)} */}
               </div>
             ))}
         </>
@@ -102,3 +100,5 @@ export const Sidebar: React.FC<SidebarProps> = ({
     </div>
   );
 };
+
+export const Sidebar = memo(SidebarMemo); // Memoize and export the component using the same name

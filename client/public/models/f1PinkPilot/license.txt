@@ -1,0 +1,11 @@
+Model Information:
+* title:	Race Car Driver - Low Poly
+* source:	https://sketchfab.com/3d-models/race-car-driver-low-poly-0fedfae53537473ba2ee3d9b722e0c66
+* author:	tomkart (https://sketchfab.com/tomkart)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Race Car Driver - Low Poly" (https://sketchfab.com/3d-models/race-car-driver-low-poly-0fedfae53537473ba2ee3d9b722e0c66) by tomkart (https://sketchfab.com/tomkart) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

@@ -5,26 +5,26 @@ import {
   Environment,
   OrbitControls,
   PerspectiveCamera,
+  Lightformer,
 } from "@react-three/drei";
-import { useEffect, useRef, Suspense } from "react";
+import { useRef, Suspense } from "react";
 import * as THREE from "three";
-import gsap from "gsap";
-import { F1McLarenModel } from "../3dModels/F1McLarenModel";
+
 import { F1Pilot } from "../3dModels/F1Pilot";
 
 extend({ MeshLineGeometry, MeshLineMaterial });
 
-export default function F1PilotAvatar() {
+export default function F1PilotAvatar({ avatarColors }) {
   return (
     <Canvas className="bg-black" shadows>
       <Suspense>
-        <F1PilotAvata/>
+        <F1PilotAvata avatarColors={avatarColors} />
       </Suspense>
     </Canvas>
   );
 }
 
-function F1PilotAvata() {
+function F1PilotAvata({ avatarColors }) {
   const orbitControlsRef = useRef(null);
 
   // executed 60times per second
@@ -32,9 +32,7 @@ function F1PilotAvata() {
     if (!!orbitControlsRef.current) {
       const { x, y } = state.mouse;
       orbitControlsRef.current.setAzimuthalAngle(-x * angleToRadians(90));
-      orbitControlsRef.current.setPolarAngle(
-        (y + 1) * angleToRadians(100)
-      );
+      orbitControlsRef.current.setPolarAngle((y + 1) * angleToRadians(100));
       orbitControlsRef.current.update();
     }
   });
@@ -48,21 +46,44 @@ function F1PilotAvata() {
         minPolarAngle={angleToRadians(30)}
         maxPolarAngle={angleToRadians(100)}
       />
-     
-      <F1Pilot position={[0, -1, -2]} castShadow ref={orbitControlsRef}/>
 
-      <ambientLight args={["#ffffff", 0.25]} />
-      {/* Spot light */}
-      <spotLight
-        args={["#ffffff", 30, 20, angleToRadians(60), 0.2]}
-        position={[-3, 1, 0]}
+      <F1Pilot
+        position={[0, -1, -2]}
         castShadow
+        ref={orbitControlsRef}
+        avatarColors={avatarColors}
       />
-      <Environment background>
-        <mesh scale={100}>
-          <sphereGeometry args={[1, 64, 64]} />
-          <meshBasicMaterial side={THREE.BackSide} color="#9556c7" />
-        </mesh>
+
+      <Environment background blur={0.75}>
+        <color attach="background" args={["#2f2f2f"]} />
+        <Lightformer
+          intensity={20}
+          color="white"
+          position={[0, -1, 60]}
+          rotation={[0, 0, Math.PI / 3]}
+          scale={[100, 0.1, 1]}
+        />
+        <Lightformer
+          intensity={30}
+          color="white"
+          position={[-1, -1, 70]}
+          rotation={[0, 0, Math.PI / 3]}
+          scale={[100, 0.1, 1]}
+        />
+        <Lightformer
+          intensity={300}
+          color="white"
+          position={[1, 1, 70]}
+          rotation={[0, 0, Math.PI / 3]}
+          scale={[100, 0.1, 1]}
+        />
+        <Lightformer
+          intensity={20}
+          color="white"
+          position={[-10, 0, 45]}
+          rotation={[0, Math.PI / 2, Math.PI / 3]}
+          scale={[100, 10, 1]}
+        />
       </Environment>
     </>
   );

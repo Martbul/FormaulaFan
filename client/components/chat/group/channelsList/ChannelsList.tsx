@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import dynamic from "next/dynamic";
 import {
@@ -15,12 +15,13 @@ const DynamicCreateChannelModal = dynamic(
   },
 );
 
-export const ChannelsList = ({
+const ChannelsListMemo = ({
   channels,
   groupId,
   setSelectedChatChannelId,
   selectedChatChannelId,
 }) => {
+  console.log("RENDER CHANNELLIST");
   const [textChannels, setTextChannels] = useState([]);
   const [voiceChannels, setVoiceChannels] = useState([]);
 
@@ -156,3 +157,4 @@ export const ChannelsList = ({
     </Dialog>
   );
 };
+export const ChannelsList = memo(ChannelsListMemo);

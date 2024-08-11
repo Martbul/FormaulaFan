@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import Post from "@/components/post/Post";
 import { getSinglePost } from "@/services/post/post.service";
 
-const SinglePostPage = ({ params }: { params: any }) => {
+const SinglePostPage = ({ params }: { params: unknown }) => {
   const { user } = useAuthContext();
 
   const { data, isLoading, isError } = useQuery({

@@ -24,8 +24,15 @@ export class AuthService {
           username: signUpInput.username,
           email: signUpInput.email,
           password: hashedPassword,
+          avatar3D: {
+            create: {
+              helmetColor:  'Red',
+              suitColor:  'Red',
+              glovesColor:  'Red',
+            },
+          },
           // settings:{
-            
+
           // }
         },
       });

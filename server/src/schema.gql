@@ -162,6 +162,7 @@ type Message {
 type Mutation {
   addedComment(addCommnetToPostInput: AddCommentToPostInput!): Comment!
   addedUserToGroup(addUserToGroupInput: AddUserToGroupInput!): Member!
+  avatar3d(update3dAvatar: Update3dAvatar!): Update3dAvatarResponse!
   createGroup(createGroupInput: CreateGroupInput!): CreateGroupResponse!
   createSetting(createSettingInput: CreateSettingInput!): Setting!
   deletedPost(postId: String!, userEmail: String!): DeletePostResponse!
@@ -219,6 +220,7 @@ type Query {
   allGroups: [Group!]!
   allUserConversations(email: String!): [User!]!
   auth(id: Int!): Auth!
+  avatarQuery3d(userEmail: String!): Update3dAvatarResponse!
   channel: [Channel!]!
   conversation: [Conversation!]!
   conversationData(email: String!, id: String!): ConversationData!
@@ -264,6 +266,20 @@ input SignUpInput {
 input StartConversationInput {
   userOneEmail: String!
   userTwoId: String!
+}
+
+input Update3dAvatar {
+  glovesColor: String!
+  helmetColor: String!
+  suitColor: String!
+  userEmail: String!
+}
+
+type Update3dAvatarResponse {
+  glovesColor: String!
+  helmetColor: String!
+  id: String!
+  suitColor: String!
 }
 
 input UpdateAuthInput {
