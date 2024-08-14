@@ -32,7 +32,7 @@
 The following prerequisites are required in order to be able to run the project:
 
 - [Node.js v20](https://nodejs.org/en/download/)
-- [Yarn v3.x](https://yarnpkg.com/getting-started/install)
+- [Npm]
 - [Docker](https://www.docker.com/get-started) with [Docker Compose](https://docs.docker.com/compose/) (to easily run a local database instance)
 
 
