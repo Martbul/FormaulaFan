@@ -29,6 +29,7 @@ const ChannelsListMemo = ({
   const [voiceChannelsVisible, setVoiceChannelsVisible] = useState(true);
 
   useEffect(() => {
+    // console.log("useEffect setting channels")
     if (channels && channels.length > 0) {
       const newTextChannels = channels.filter(
         (channel) => channel.type === "TEXT",
@@ -39,6 +40,12 @@ const ChannelsListMemo = ({
       setTextChannels(newTextChannels);
       setVoiceChannels(newVoiceChannels);
     }
+    // Cleanup function
+    return () => {
+      console.log("Cleaning up channels");
+      setTextChannels([]);  
+      setVoiceChannels([]); 
+    };
   }, [channels]);
 
   return (

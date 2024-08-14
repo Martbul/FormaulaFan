@@ -17,6 +17,7 @@ const Group: React.FC<GroupProps> = ({ params }) => {
   });
 
   useEffect(() => {
+    console.log("GROUP ID useEffect")
     if (data) {
       setSelectedChatChannelId(data.channels[0].id);
     }
