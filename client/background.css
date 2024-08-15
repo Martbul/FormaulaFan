@@ -1,4 +1,4 @@
-@keyframes move {
+/* @keyframes move {
   100% {
     transform: translate3d(0, 0, 1px) rotate(360deg);
   }
@@ -296,4 +296,63 @@
   animation-delay: -106s;
   transform-origin: -20vw 24vh;
   box-shadow: -2vmin 0 0.30592965277433337vmin currentColor;
+} */
+@keyframes comet {
+  0% {
+    transform: translateX(-100vw) translateY(-100vh);
+    opacity: 0;
+  }
+  50% {
+    transform: translateX(50vw) translateY(50vh);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(100vw) translateY(100vh);
+    opacity: 0;
+  }
+}
+
+.comet {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, red, yellow);
+  opacity: 0;
+  animation: comet 5s linear infinite;
+  pointer-events: none;
+}
+
+.comet:nth-child(1) {
+  background: linear-gradient(45deg, blue, cyan);
+  animation-duration: 6s;
+  animation-delay: 0s;
+}
+
+.comet:nth-child(2) {
+  background: linear-gradient(45deg, green, lime);
+  animation-duration: 7s;
+  animation-delay: 1s;
+}
+
+.comet:nth-child(3) {
+  background: linear-gradient(45deg, orange, yellow);
+  animation-duration: 8s;
+  animation-delay: 2s;
+}
+
+.comet:nth-child(4) {
+  background: linear-gradient(45deg, purple, pink);
+  animation-duration: 9s;
+  animation-delay: 3s;
+}
+
+.comet:nth-child(5) {
+  background: linear-gradient(45deg, white, lightblue);
+  animation-duration: 10s;
+  animation-delay: 4s;
+}
+
+body {
+  overflow: hidden;
 }
