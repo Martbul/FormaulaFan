@@ -297,6 +297,23 @@
   transform-origin: -20vw 24vh;
   box-shadow: -2vmin 0 0.30592965277433337vmin currentColor;
 } */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
 @keyframes comet {
   0% {
     transform: translateX(-100vw) translateY(-100vh);
@@ -355,4 +372,14 @@
 
 body {
   overflow: hidden;
+} */
+
+
+.bg-image {
+  background-image: url(./public/assets/images/output-onlinepngtools\ \(2\).png);
+  background-repeat: no-repeat; 
+  background-size: cover; 
+  background-position: center top; 
+  background-attachment: scroll; 
+  
 }

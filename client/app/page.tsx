@@ -13,28 +13,15 @@ import "../background.css";
 import type { SvgProps } from "@/utils/interfaces";
 import images from "@/constants/images";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useState , Suspense} from "react";
+import { Canvas, extend, useThree, useFrame } from "@react-three/fiber";
+import { F1McLarenModel } from "@/components/3dModels/F1McLarenModel";
+import F1McLrean from "@/components/3dHome/F1McLaren";
 
 export default function Home() {
-  const [comets, setComets] = useState<number[]>([]);
-
-  useEffect(() => {
-    const addComet = () => {
-      setComets(prevComets => [...prevComets, Date.now()]); // Use timestamp as unique key
-    };
-
-    // Add a comet every 500ms
-    const intervalId = setInterval(addComet, 500);
-
-    return () => clearInterval(intervalId); // Cleanup interval on component unmount
-  }, []);
-
-
   return (
     <div className="no-scrollbar relative flex h-screen flex-col overflow-y-auto">
-      {/* Background Comets */}
-
-      <header className="flex h-14 items-center bg-[#23272a] px-4 text-white shadow-md lg:px-36">
+      {/* <header className="flex h-14 items-center bg-[#23272a] px-4 text-white shadow-md lg:px-36">
         <Sheet>
           <SheetTrigger asChild>
             <Button variant="ghost" size="icon" className="lg:hidden">
@@ -133,112 +120,183 @@ export default function Home() {
             Download
           </Button>
         </div>
-      </header>
+      </header> */}
 
-      <main className="relative flex-1 bg-gradient-to-b from-[#36393f] to-[#23272a] text-white">
-        <section className="relative flex h-screen w-full">
-          <div className="pointer-events-none left-0 top-0 flex h-full w-full items-center justify-center py-12 text-center md:py-24 lg:py-32 xl:py-48">
-            {/* Comets will be dynamically created here */}
-            {comets.map((key) => (
-              <div
-                key={key}
-                className="comet"
-                style={{
-                  left: `${Math.random() * 100}vw`,
-                  top: `${Math.random() * 100}vh`,
-                  height: `${Math.random() * 10 + 5}px`, // Randomize height for more variation
-                }}
-              />
-            ))}
-            <div className="flex flex-row items-center lg:px-10">
-              <div className="container px-4 md:px-6 lg:max-w-[650px]">
-                <div className="flex flex-col items-center gap-4 text-center">
-                  <div className="space-y-2">
-                    <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl">
-                      BEST PLACE FOR FORMULA 1 FANS
-                    </h1>
-                    <p className="animate-fade-in mx-auto max-w-[700px] text-muted-foreground md:text-xl">
-                      FormulaFans is great for sharing race thoughts, emotions
-                      and having good time with friends
-                    </p>
-                  </div>
-                  <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                    <Button className="w-full min-[400px]:w-auto">
-                      FormulaFans for Windows
+      <main className="bg-image relative flex-1 bg-gradient-to-b from-[#36393f] to-[#23272a] text-white">
+        {/* First Section */}
+        <section className="relative flex h-screen w-full items-center justify-center py-12 text-center md:py-24 lg:py-32 xl:py-48">
+          <div className="flex flex-row items-center lg:px-10">
+            <div className="container px-4 md:px-6 lg:max-w-[650px]">
+              <div className="flex flex-col items-center gap-4 text-center">
+                <div className="space-y-2">
+                  <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl">
+                    BEST PLACE FOR FORMULA 1 FANS
+                  </h1>
+                  <p className="animate-fade-in mx-auto max-w-[700px] text-muted-foreground md:text-xl">
+                    FormulaFans is great for sharing race thoughts, emotions,
+                    and having good time with friends.
+                  </p>
+                </div>
+                <div className="flex flex-col gap-2 min-[400px]:flex-row">
+                  {/* <Button className="w-full min-[400px]:w-auto">
+                    FormulaFans for Windows
+                  </Button> */}
+                  <Link href="/posts">
+                    <Button className="grad gradHover w-full animate-pulse min-[400px]:w-auto">
+                      Open FormulaFans in your browser
                     </Button>
-                    <Link href="/posts">
-                      <Button className="grad gradHover w-full animate-pulse min-[400px]:w-auto">
-                        Open FormulaFans in your browser
-                      </Button>
-                    </Link>
-                  </div>
+                  </Link>
                 </div>
               </div>
-              <div className="lg:max-w-[700px]">
-                <Image src={images.racingFans} alt="landing-image" />
-              </div>
+            </div>
+            <div className="lg:max-w-[700px]">
+              <Image src={images.racingFans} alt="landing-image" />
             </div>
           </div>
         </section>
 
-        <section className="relative flex w-full items-center justify-center bg-gradient-to-b from-[#36393f] to-[#23272a] py-12 text-center md:py-24 lg:py-32 xl:py-48">
+        {/* Second Section */}
+        <section className="relative flex w-full items-center justify-center py-12 text-center md:py-24 lg:py-32 xl:py-48">
           <div className="container px-4 md:px-6">
-            <Carousel className="w-full max-w-md">
-              <CarouselContent>
-                {[...Array(3)].map((_, index) => (
-                  <CarouselItem key={index}>
-                    <img
-                      src={`/placeholder${index + 1}.svg`}
-                      width={448}
-                      height={252}
-                      alt={`Carousel Image ${index + 1}`}
-                      className="aspect-video rounded-md object-cover shadow-md transition-opacity duration-500 hover:opacity-80"
-                    />
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <CarouselPrevious />
-              <CarouselNext />
-            </Carousel>
+            <h2>Explore endles opportunies</h2>
+          </div>
+        </section>
+
+        <section className="relative flex w-full items-center justify-center py-12 text-center md:py-24 lg:py-32 xl:py-48">
+          <div className="flex rounded-2xl border-4 border-white justify-evenly	 border-opacity-30 bg-neutral-200 bg-opacity-30 lg:px-36 lg:py-36 ">
+            {/* Car section with flex-basis and fixed height */}
+            <div className="flex lg:h-[500px] flex-1 basis-2/3 transform rounded-xl bg-orange-300">
+              {" "}
+              <F1McLrean scale={8} /> 
+            </div>
+
+            <div className="container flex flex-col basis-1/3 items-center justify-center px-4 md:px-6 lg:gap-2">
+              <h1 className="text-bold text-2xl md:text-xl lg:text-5xl">
+                Dive into the 3D world
+              </h1>
+              <p className="lg:text-md">Push the boundaries of what is possible</p>
+            </div>
           </div>
         </section>
 
         <section className="relative flex w-full items-center justify-center py-12 text-center md:py-24 lg:py-32 xl:py-48">
           <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center gap-4 text-center">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl">
-                  Check Our Discord
-                </h2>
-                <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
-                  Join the conversation and stay updated with our community on
-                  Discord.
-                </p>
-              </div>
-              <div className="flex flex-col gap-4">
-                {[...Array(5)].map((_, index) => (
-                  <div key={index} className="flex items-center justify-center">
-                    <img
-                      src={`/discord-placeholder${index + 1}.svg`}
-                      alt={`Discord Placeholder ${index + 1}`}
-                      className="aspect-video rounded-md object-cover shadow-md"
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
+            <p>Some text</p>
+          </div>
+        </section>
+        <section className="relative flex w-full items-center justify-center py-12 text-center md:py-24 lg:py-32 xl:py-48">
+          <div className="container px-4 md:px-6">
+            <p>Some text</p>
+          </div>
+        </section>
+        <section className="relative flex w-full items-center justify-center py-12 text-center md:py-24 lg:py-32 xl:py-48">
+          <div className="container px-4 md:px-6">
+            <p>Some text</p>
+          </div>
+        </section>
+        <section className="relative flex w-full items-center justify-center py-12 text-center md:py-24 lg:py-32 xl:py-48">
+          <div className="container px-4 md:px-6">
+            <p>Some text</p>
+          </div>
+        </section>
+        <section className="relative flex w-full items-center justify-center py-12 text-center md:py-24 lg:py-32 xl:py-48">
+          <div className="container px-4 md:px-6">
+            <p>Some text</p>
           </div>
         </section>
       </main>
 
       <footer className="w-full bg-[#23272a] py-8 text-white md:py-12">
-        <div className="container px-4 md:px-6">
-          <div className="flex flex-col items-center gap-4 text-center">
-            <p className="text-sm font-medium">
-              &copy; {new Date().getFullYear()} FormulaFans. All rights
-              reserved.
-            </p>
+        <div className="container mx-auto grid max-w-7xl grid-cols-1 gap-12 px-4 md:grid-cols-3 lg:grid-cols-5">
+          {/* Company Section */}
+          <div className="flex flex-col gap-4">
+            <h3 className="mb-2 text-lg font-semibold">Company</h3>
+            <Link href="#" className="hover:underline">
+              About
+            </Link>
+            <Link href="#" className="hover:underline">
+              Careers
+            </Link>
+            <Link href="#" className="hover:underline">
+              Branding
+            </Link>
+            <Link href="#" className="hover:underline">
+              Newsroom
+            </Link>
           </div>
+
+          {/* Products Section */}
+          <div className="flex flex-col gap-4">
+            <h3 className="mb-2 text-lg font-semibold">Products</h3>
+            <Link href="#" className="hover:underline">
+              Discovery
+            </Link>
+            <Link href="#" className="hover:underline">
+              Nitro
+            </Link>
+            <Link href="#" className="hover:underline">
+              Safety
+            </Link>
+            <Link href="#" className="hover:underline">
+              Support
+            </Link>
+          </div>
+
+          {/* Resources Section */}
+          <div className="flex flex-col gap-4">
+            <h3 className="mb-2 text-lg font-semibold">Resources</h3>
+            <Link href="#" className="hover:underline">
+              Docs
+            </Link>
+            <Link href="#" className="hover:underline">
+              Community
+            </Link>
+            <Link href="#" className="hover:underline">
+              Blog
+            </Link>
+            <Link href="#" className="hover:underline">
+              Help Center
+            </Link>
+          </div>
+
+          {/* Policies Section */}
+          <div className="flex flex-col gap-4">
+            <h3 className="mb-2 text-lg font-semibold">Policies</h3>
+            <Link href="#" className="hover:underline">
+              Privacy
+            </Link>
+            <Link href="#" className="hover:underline">
+              Terms of Service
+            </Link>
+            <Link href="#" className="hover:underline">
+              Cookie Policy
+            </Link>
+            <Link href="#" className="hover:underline">
+              Compliance
+            </Link>
+          </div>
+
+          {/* Follow Us Section */}
+          <div className="flex flex-col gap-4">
+            <h3 className="mb-2 text-lg font-semibold">Follow Us</h3>
+            <Link href="#" className="hover:underline">
+              Twitter
+            </Link>
+            <Link href="#" className="hover:underline">
+              Facebook
+            </Link>
+            <Link href="#" className="hover:underline">
+              Instagram
+            </Link>
+            <Link href="#" className="hover:underline">
+              LinkedIn
+            </Link>
+          </div>
+        </div>
+
+        {/* Bottom Text */}
+        <div className="mt-12 text-center text-sm">
+          <p>&copy; 2024 Formula Fan. All rights reserved.</p>
         </div>
       </footer>
     </div>

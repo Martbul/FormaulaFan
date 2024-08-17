@@ -13,7 +13,6 @@ import f1RaceCalendar from "../public/assets/images/f1RaceCalendar.jpg";
 import crashLanceStroll from "../public/assets/images/crashLanceStroll.jpg";
 import StakeF1Logo from "../public/assets/images/StakeF1Logo.png";
 import vcarb from "../public/assets/images/vcarb.png";
-import backgroundImage from "../public/assets/images/backgroundImage.webp";
 import HaasF1Logo from "../public/assets/images/HaasF1Logo.webp";
 
 export default {
@@ -27,7 +26,6 @@ export default {
   madridNews,
   f1RaceCalendar,
   crashLanceStroll,
-  backgroundImage,
   racingFans,
   AstonMartinF1Logo,
   HaasF1Logo,

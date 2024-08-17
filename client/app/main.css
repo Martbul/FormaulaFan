@@ -59,7 +59,7 @@ img {
 .gradHover:hover {
   background: linear-gradient(
     to right,
-    rgba(255, 97, 76, 1) 0%,
+    #ff614c 0%,
     rgba(249, 212, 35, 1) 100%
   );
 }
@@ -70,7 +70,7 @@ img {
   border-style: solid;
   border-image: linear-gradient(
       to right,
-      rgba(255, 97, 76, 1) 0%,
+      #ff614c 0%,
       rgba(249, 212, 35, 1) 100%
     )
     1;
