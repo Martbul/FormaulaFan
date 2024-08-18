@@ -27,17 +27,12 @@ const UserOptionsPopover: React.FC<{
       </DropdownMenuLabel>
       <DropdownMenuSeparator className="bg-neutral-200" />
 
-      <DropdownMenuItem className="text-neutral-200 hover:cursor-pointer hover:rounded-md hover:bg-neutral-700">
-        <Link href="/profile">Profile</Link>
-      </DropdownMenuItem>
 
       <DropdownMenuItem className="text-neutral-200 hover:cursor-pointer hover:rounded-md hover:bg-neutral-700">
         <Link href="/profile3d">Profile3D</Link>
       </DropdownMenuItem>
 
-      <DropdownMenuItem className="text-neutral-200 hover:cursor-pointer hover:rounded-md hover:bg-neutral-700">
-        Team
-      </DropdownMenuItem>
+  
       <DropdownMenuItem className="text-neutral-200 hover:cursor-pointer hover:rounded-md hover:bg-neutral-700">
         <Link href="/settings">Settings</Link>
       </DropdownMenuItem>

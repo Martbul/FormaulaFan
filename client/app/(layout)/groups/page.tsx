@@ -49,9 +49,31 @@ const Groups = () => {
       <div className="layout remove-selecting-text">
         <div className="main">
           <div className="feedContainer">
-            <div className="heading">
-              <div className="sectionTitile">
+            <div className="flex items-center justify-evenly">
+              <div className="text-3xl font-extrabold text-neutral-100">
                 <p>Groups</p>
+              </div>
+              <div className="search-posts">
+                <div className="mx-auto flex w-full max-w-md items-center">
+                  <div className="relative w-full">
+                    <Input
+                      type="text"
+                      placeholder="Find The Perfect Group"
+                      className="w-full rounded-full border-none bg-[#f5f8fa] py-2 pl-4 pr-10 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary"
+                    />
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:bg-muted"
+                    >
+                      {/* <Image
+                          src={icons.searchWhite}
+                          alt="Search"
+                          className="w-5 h-5"
+                        /> */}
+                    </Button>
+                  </div>
+                </div>
               </div>
               <div className="groupsOperations">
                 <div className="createGroup">
@@ -68,34 +90,11 @@ const Groups = () => {
 
             <div className="taskContainer">
               <div className="searchOperations">
-                <div className="search-posts">
-                  <div className="mx-auto flex w-full max-w-md items-center">
-                    <div className="relative w-full">
-                      <Input
-                        type="text"
-                        placeholder="Search Twitter"
-                        className="w-full rounded-full border-none bg-[#f5f8fa] py-2 pl-4 pr-10 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary"
-                      />
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:bg-muted"
-                      >
-                        {/* <Image
-                          src={icons.searchWhite}
-                          alt="Search"
-                          className="w-5 h-5"
-                        /> */}
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-
-                <select className="sortSelect">
+                {/* <select className="sortSelect">
                   <option value="default">Sort by:</option>
                   <option value="default">Most members</option>
                   <option value="default">Least members</option>
-                </select>
+                </select> */}
                 {/* <div className="group-search">
                   <buttton>Search</buttton>
                 </div> */}

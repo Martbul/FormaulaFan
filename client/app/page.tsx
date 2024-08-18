@@ -1,13 +1,7 @@
 "use client"
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselPrevious,
-  CarouselNext,
-} from "@/components/ui/carousel";
+
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
 import "../background.css";
 import type { SvgProps } from "@/utils/interfaces";
@@ -17,8 +11,68 @@ import { useEffect, useState , Suspense} from "react";
 import { Canvas, extend, useThree, useFrame } from "@react-three/fiber";
 import { F1McLarenModel } from "@/components/3dModels/F1McLarenModel";
 import F1McLrean from "@/components/3dHome/F1McLaren";
+import Carousel from "@/components/3dHome/Carousel";
 
 export default function Home() {
+ const logos = [
+   {
+     text: "Logo 1",
+     svg: (
+       <svg
+         xmlns="http://www.w3.org/2000/svg"
+         viewBox="0 0 24 24"
+         className="h-12 w-12"
+       >
+         <path d="M12 2L1 21h22L12 2z" fill="currentColor" />
+       </svg>
+     ),
+   },
+   {
+     text: "Logo 2",
+     svg: (
+       <svg
+        
+         xmlns="http://www.w3.org/2000/svg"
+         width="24"
+         height="24"
+         viewBox="0 0 24 24"
+         fill="none"
+         stroke="currentColor"
+         strokeWidth="2"
+         strokeLinecap="round"
+         strokeLinejoin="round"
+       >
+         <line x1="4" x2="20" y1="12" y2="12" />
+         <line x1="4" x2="20" y1="6" y2="6" />
+         <line x1="4" x2="20" y1="18" y2="18" />
+       </svg>
+     ),
+   },
+   {
+     text: "Logo 3",
+     svg: (
+       <svg
+         xmlns="http://www.w3.org/2000/svg"
+         viewBox="0 0 24 24"
+         className="h-12 w-12"
+       >
+         <rect x="4" y="4" width="16" height="16" fill="currentColor" />
+       </svg>
+     ),
+   },
+   {
+     text: "Logo 4",
+     svg: (
+       <svg
+         xmlns="http://www.w3.org/2000/svg"
+         viewBox="0 0 24 24"
+         className="h-12 w-12"
+       >
+         <path d="M12 2L2 12l10 10 10-10L12 2z" fill="currentColor" />
+       </svg>
+     ),
+   },
+ ];
   return (
     <div className="no-scrollbar relative flex h-screen flex-col overflow-y-auto">
       {/* <header className="flex h-14 items-center bg-[#23272a] px-4 text-white shadow-md lg:px-36">
@@ -163,26 +217,26 @@ export default function Home() {
         </section>
 
         <section className="relative flex w-full items-center justify-center py-12 text-center md:py-24 lg:py-32 xl:py-48">
-          <div className="flex rounded-2xl border-4 border-white justify-evenly	 border-opacity-30 bg-neutral-200 bg-opacity-30 lg:px-36 lg:py-36 ">
+          <div className="flex justify-evenly rounded-2xl border-4 border-white border-opacity-30 bg-neutral-200 bg-opacity-30 lg:px-36 lg:py-36">
             {/* Car section with flex-basis and fixed height */}
-            <div className="flex lg:h-[500px] flex-1 basis-2/3 transform rounded-xl bg-orange-300">
+            <div className="flex flex-1 basis-2/3 transform rounded-xl bg-orange-300 lg:h-[500px]">
               {" "}
-              <F1McLrean scale={8} /> 
+              <F1McLrean scale={8} />
             </div>
 
-            <div className="container flex flex-col basis-1/3 items-center justify-center px-4 md:px-6 lg:gap-2">
+            <div className="container flex basis-1/3 flex-col items-center justify-center px-4 md:px-6 lg:gap-2">
               <h1 className="text-bold text-2xl md:text-xl lg:text-5xl">
                 Dive into the 3D world
               </h1>
-              <p className="lg:text-md">Push the boundaries of what is possible</p>
+              <p className="lg:text-md">
+                Push the boundaries of what is possible
+              </p>
             </div>
           </div>
         </section>
 
         <section className="relative flex w-full items-center justify-center py-12 text-center md:py-24 lg:py-32 xl:py-48">
-          <div className="container px-4 md:px-6">
-            <p>Some text</p>
-          </div>
+          <Carousel items={logos} />
         </section>
         <section className="relative flex w-full items-center justify-center py-12 text-center md:py-24 lg:py-32 xl:py-48">
           <div className="container px-4 md:px-6">

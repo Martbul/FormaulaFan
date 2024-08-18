@@ -26,10 +26,14 @@ const Posts = () => {
 
   const { data, isLoading, isError, refetch } = useQuery({
     queryKey: ["posts", user.email],
-    queryFn: async () => {
+    queryFn: async (props) => {
       if (user.email) {
         const result = await useUserIdUtil(user.email as string);
         setUserId(result.id);
+        
+        if (props){
+          console.log(props)
+        }
 
         if (posts.length === 0) {
           const paginatedPosts = await getPaginatedPosts();
@@ -58,10 +62,11 @@ const Posts = () => {
   return (
     <>
       <div className="flex h-screen">
-        <div className="flex-grow">
+        <div className="relative h-screen w-full">
           <PostsMenu />
-          <div className="flex h-screen w-full overflow-x-auto">
-            <div className="w-full">
+
+          <div className="flex h-full w-full">
+            <div className="h-full w-full">
               <Canvas camera={{ position: [0, 0, 13], fov: 25 }}>
                 <ambientLight intensity={Math.PI} />
                 <Physics interpolate gravity={[0, -30, 0]} timeStep={1 / 60}>
@@ -75,7 +80,6 @@ const Posts = () => {
                   ))}
                 </Physics>
                 <Environment background blur={0.75}>
-                  <color attach="background" args={["#2f2f2f"]} />
                   <Lightformer
                     intensity={2}
                     color="white"
@@ -108,12 +112,14 @@ const Posts = () => {
               </Canvas>
             </div>
 
-            <div className="mx-2 flex items-center bg-transparent">
-              <ArrowRightIconBig
-                className="h-10 w-10 hover:cursor-pointer"
-                onClick={() => refetch()}
-              />
-            </div>
+            <div className="mx-2 flex items-center bg-transparent"></div>
+          </div>
+
+          <div className="absolute bottom-10 left-1/2 flex -translate-x-1/2 transform items-center">
+            <ArrowRightIconBig
+              className="h-10 w-10 hover:cursor-pointer"
+              onClick={() => refetch({"sample":"next"})}
+            />
           </div>
         </div>
 

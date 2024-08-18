@@ -81,21 +81,7 @@ const Navigation = () => {
           </div>
         </Link>
 
-        <Link
-          className="mb-5 flex cursor-pointer items-center p-3 transition-colors duration-300"
-          href="/alerts"
-        >
-          <div className="mr-4">
-            {getMenuItemActiveImage("/alerts") ? (
-              <AlertIconActive className="h-8 w-8" />
-            ) : (
-              <AlertIcon className="h-8 w-8" />
-            )}
-          </div>
-          <div className={getMenuItemClass("/alerts")}>
-            <p className="text-lg">Alerts</p>
-          </div>
-        </Link>
+      
 
         <Link
           className="mb-5 flex cursor-pointer items-center p-3"
@@ -172,7 +158,7 @@ const Navigation = () => {
             )}
           </div>
           <div className={getMenuItemClass("/achievements")}>
-            <p className="text-lg">Achievements</p>
+            <p className="text-lg">Have fun</p>
           </div>
         </Link>
       </div>
